@@ -1,0 +1,58 @@
+  0%|                           | 0/32 [00:00<?, ?it/s]Traceback (most recent call last):
+[21:47:09] [CACHE] Loaded cache for the-emperors-new-mind-by-roger-penrose.txt
+[21:47:09] [CACHE] Loaded cache for synthesized_knowledge.txt
+  File "/Users/kurultai/Downloads/projects/llmtraining/llmtraining.py", line 169, in <module>
+    main()
+    ~~~~^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/llmtraining.py", line 166, in main
+    trainer.train()
+    ~~~~~~~~~~~~~^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 2171, in train
+    return inner_training_loop(
+        args=args,
+    ...<2 lines>...
+        ignore_keys_for_eval=ignore_keys_for_eval,
+    )
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 2531, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 3675, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 3731, in compute_loss
+    outputs = model(**inputs)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 1061, in forward
+    transformer_outputs = self.transformer(
+        input_ids,
+    ...<11 lines>...
+        return_dict=return_dict,
+    )
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/models/gpt2/modeling_gpt2.py", line 819, in forward
+    inputs_embeds = self.wte(input_ids)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/nn/modules/sparse.py", line 190, in forward
+    return F.embedding(
+           ~~~~~~~~~~~^
+        input,
+        ^^^^^^
+    ...<5 lines>...
+        self.sparse,
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/nn/functional.py", line 2551, in embedding
+    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: index out of range in self

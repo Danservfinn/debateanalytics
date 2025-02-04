@@ -1,0 +1,193 @@
+[STEP 1][W&B INIT] W&B initialized successfully.
+[STEP 2][MODEL CONFIG] Loading configuration for model: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B...
+[STEP 2][TOKENIZER LOAD] Loading tokenizer for model: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B...
+[STEP 2][MODEL LOAD] Loading model: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B...
+Loading checkpoint shards: 100%|█| 2/2 [00:33<00:00, 16.87s/i
+[STEP 2][MODEL USAGE] Using model: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+[STEP 2][MODEL CHECKPOINT] Enabling gradient checkpointing to reduce memory usage.
+[STEP 2][MODEL CHECKPOINT] Disabling use_cache for compatibility with gradient checkpointing.
+[STEP 3][LORA CONFIG] Configuring LoRA adapter via PEFT...
+trainable params: 2,523,136 || all params: 7,618,139,648 || trainable%: 0.0331
+[STEP 3][LORA CONFIG] LoRA adapter configured successfully.
+[STEP 4][FILE CHECK] Verifying training folder: /Users/kurultai/Downloads/projects/llmtraining/train
+[STEP 4][FILE CHECK] Verifying validation folder: /Users/kurultai/Downloads/projects/llmtraining/validation
+[STEP 4][DATASET LOAD] Loading training dataset...
+[19:34:31] [DATASET INIT] Initializing dataset from folder: /Users/kurultai/Downloads/projects/llmtraining/train
+[19:34:31] [DATASET SCAN] Found 32 file(s) in folder: /Users/kurultai/Downloads/projects/llmtraining/train
+[STEP 4][DATASET LOAD] Loading validation dataset...
+[19:34:31] [DATASET INIT] Initializing dataset from folder: /Users/kurultai/Downloads/projects/llmtraining/validation
+[19:34:31] [DATASET SCAN] Found 2 file(s) in folder: /Users/kurultai/Downloads/projects/llmtraining/validation
+[STEP 4][DATASET LOAD] Datasets loaded successfully.
+[STEP 5][TRAINING ARGS] Setting up training arguments...
+/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/training_args.py:1575: FutureWarning: `evaluation_strategy` is deprecated and will be removed in version 4.46 of 🤗 Transformers. Use `eval_strategy` instead
+  warnings.warn(
+[STEP 5][TRAINING ARGS] Training arguments defined successfully.
+[STEP 6][TRAINER INIT] Creating the Trainer instance...
+/Users/kurultai/Downloads/projects/llmtraining/llmtraining.py:333: FutureWarning: `tokenizer` is deprecated and will be removed in version 5.0.0 for `OffloadedTrainer.__init__`. Use `processing_class` instead.
+  trainer = OffloadedTrainer(
+[STEP 6][TRAINER DEVICE] Skipping explicit move of the model to device: cpu
+[STEP 6][TRAINER INIT] Trainer instance created. Beginning training...
+[34m[1mwandb[0m: [33mWARNING[0m The `run_name` is currently set to the same value as `TrainingArguments.output_dir`. If this was not intended, please specify a different run name by setting the `TrainingArguments.run_name` parameter.
+ 12%|██▉                    | 1/8 [11:37<1:21:24, 697.75s/it]
+[19:34:31] [READ] Processing: the-emperors-new-mind-by-roger-penrose.txt
+[19:34:32] [DEBUG] Text length for the-emperors-new-mind-by-roger-penrose.txt: 1219555 chars
+[19:34:32] [DEBUG] Successfully encoded 512 tokens
+[19:34:32] [DEBUG] Final tokenized shape: 512 tokens
+[19:34:32] [CACHE] Saved: the-emperors-new-mind-by-roger-penrose.txt
+[19:34:32] [READ] Processing: synthesized_knowledge.txt
+[19:34:32] [DEBUG] Text length for synthesized_knowledge.txt: 705497 chars
+[19:34:33] [DEBUG] Successfully encoded 512 tokens
+[19:34:33] [DEBUG] Final tokenized shape: 512 tokens
+[19:34:33] [CACHE] Saved: synthesized_knowledge.txt
+[19:34:33] [READ] Processing: Paths to god _ living the Bhagavad Gita ( PDFDrive ).txt
+[19:34:33] [DEBUG] Text length for Paths to god _ living the Bhagavad Gita ( PDFDrive ).txt: 195422 chars
+[19:34:33] [DEBUG] Successfully encoded 512 tokens
+[19:34:33] [DEBUG] Final tokenized shape: 512 tokens
+[19:34:33] [CACHE] Saved: Paths to god _ living the Bhagavad Gita ( PDFDrive ).txt
+[19:34:33] [READ] Processing: the_law_of_one_book_3.txt
+[19:34:33] [DEBUG] Text length for the_law_of_one_book_3.txt: 389688 chars
+[19:34:33] [DEBUG] Successfully encoded 512 tokens
+[19:34:33] [DEBUG] Final tokenized shape: 512 tokens
+[19:34:33] [CACHE] Saved: the_law_of_one_book_3.txt
+[19:34:33] [READ] Processing: the_law_of_one_book_2.txt
+[19:34:33] [DEBUG] Text length for the_law_of_one_book_2.txt: 270796 chars
+[19:34:33] [DEBUG] Successfully encoded 512 tokens
+[19:34:33] [DEBUG] Final tokenized shape: 512 tokens
+[19:34:33] [CACHE] Saved: the_law_of_one_book_2.txt
+[19:46:09] [READ] Processing: modernquantummechanics.txt
+[19:46:09] [DEBUG] Text length for modernquantummechanics.txt: 1118860 chars
+[19:46:10] [DEBUG] Successfully encoded 512 tokens
+[19:46:10] [DEBUG] Final tokenized shape: 512 tokens
+[19:46:10] [CACHE] Saved: modernquantummechanics.txt
+[19:46:10] [READ] Processing: 5740-pdf.txt
+[19:46:10] [DEBUG] Text length for 5740-pdf.txt: 332943 chars
+[19:46:10] [DEBUG] Successfully encoded 512 tokens
+[19:46:10] [DEBUG] Final tokenized shape: 512 tokens
+[19:46:10] [CACHE] Saved: 5740-pdf.txt
+[19:46:10] [READ] Processing: Fingerprints of the Gods by Graham Hancock.txt
+[19:46:10] [DEBUG] Text length for Fingerprints of the Gods by Graham Hancock.txt: 1142586 chars
+[19:46:11] [DEBUG] Successfully encoded 512 tokens
+[19:46:11] [DEBUG] Final tokenized shape: 512 tokens
+[19:46:11] [CACHE] Saved: Fingerprints of the Gods by Graham Hancock.txt
+[19:46:11] [READ] Processing: Superintelligence_ Paths, Dangers, Strategies - PDF Room.txt
+[19:46:11] [DEBUG] Text length for Superintelligence_ Paths, Dangers, Strategies - PDF Room.txt: 1067174 chars
+[19:46:12] [DEBUG] Successfully encoded 512 tokens
+[19:46:12] [DEBUG] Final tokenized shape: 512 tokens
+[19:46:12] [CACHE] Saved: Superintelligence_ Paths, Dangers, Strategies - PDF Room.txt
+[19:57:33] [READ] Processing: 1908kybalion.txt
+[19:57:33] [DEBUG] Text length for 1908kybalion.txt: 201315 chars
+[19:57:33] [DEBUG] Successfully encoded 512 tokens
+[19:57:33] [DEBUG] Final tokenized shape: 512 tokens
+[19:57:33] [CACHE] Saved: 1908kybalion.txt
+[19:57:33] [READ] Processing: Capra-1975 The Tao of Physics.txt
+[19:57:33] [DEBUG] Text length for Capra-1975 The Tao of Physics.txt: 562742 chars
+[19:57:34] [DEBUG] Successfully encoded 512 tokens
+[19:57:34] [DEBUG] Final tokenized shape: 512 tokens
+[19:57:34] [CACHE] Saved: Capra-1975 The Tao of Physics.txt
+[19:57:34] [READ] Processing: nononsensequantummechanics.txt
+[19:57:34] [DEBUG] Text length for nononsensequantummechanics.txt: 357367 chars
+[19:57:34] [DEBUG] Successfully encoded 512 tokens
+[19:57:34] [DEBUG] Final tokenized shape: 512 tokens
+[19:57:34] [CACHE] Saved: nononsensequantummechanics.txt
+[19:57:34] [READ] Processing: quantumreality.txt
+[19:57:34] [DEBUG] Text length for quantumreality.txt: 228 chars
+[19:57:34] [DEBUG] Successfully encoded 75 tokens
+[19:57:34] [DEBUG] Final tokenized shape: 512 tokens
+[19:57:34] [CACHE] Saved: quantumreality.txt
+[20:08:46] [READ] Processing: Georg Wilhelm Friedrich Hegel - The Phenomenology of Spirit (Terry Pinkard Translation).txt
+[20:08:46] [DEBUG] Text length for Georg Wilhelm Friedrich Hegel - The Phenomenology of Spirit (Terry Pinkard Translation).txt: 1351484 chars
+[20:08:47] [DEBUG] Successfully encoded 512 tokens
+[20:08:47] [DEBUG] Final tokenized shape: 512 tokens
+[20:08:47] [CACHE] Saved: Georg Wilhelm Friedrich Hegel - The Phenomenology of Spirit (Terry Pinkard Translation).txt
+[20:08:47] [READ] Processing: askanditisgiven.txt
+[20:08:47] [DEBUG] Text length for askanditisgiven.txt: 55787 chars
+[20:08:47] [DEBUG] Successfully encoded 512 tokens
+[20:08:47] [DEBUG] Final tokenized shape: 512 tokens
+[20:08:47] [CACHE] Saved: askanditisgiven.txt
+[20:08:47] [READ] Processing: I_Am_a_Strange_Loop--Douglas_Hofstadter.txt
+[20:08:48] [DEBUG] Text length for I_Am_a_Strange_Loop--Douglas_Hofstadter.txt: 1116044 chars
+[20:08:48] [DEBUG] Successfully encoded 512 tokens
+[20:08:48] [DEBUG] Final tokenized shape: 512 tokens
+[20:08:48] [CACHE] Saved: I_Am_a_Strange_Loop--Douglas_Hofstadter.txt
+[20:08:48] [READ] Processing: The-order-of-time-Carlo-Rovelli.txt
+[20:08:48] [DEBUG] Text length for The-order-of-time-Carlo-Rovelli.txt: 259086 chars
+[20:08:48] [DEBUG] Successfully encoded 512 tokens
+[20:08:48] [DEBUG] Final tokenized shape: 512 tokens
+[20:08:48] [CACHE] Saved: The-order-of-time-Carlo-Rovelli.txt
+[20:20:10] [READ] Processing: Rudolf-Steiner-Cosmic-Memory.txt
+[20:20:10] [DEBUG] Text length for Rudolf-Steiner-Cosmic-Memory.txt: 377481 chars
+[20:20:10] [DEBUG] Successfully encoded 512 tokens
+[20:20:10] [DEBUG] Final tokenized shape: 512 tokens
+[20:20:10] [CACHE] Saved: Rudolf-Steiner-Cosmic-Memory.txt
+[20:20:10] [READ] Processing: the_law_of_one_book_1.txt
+[20:20:10] [DEBUG] Text length for the_law_of_one_book_1.txt: 489435 chars
+[20:20:11] [DEBUG] Successfully encoded 512 tokens
+[20:20:11] [DEBUG] Final tokenized shape: 512 tokens
+[20:20:11] [CACHE] Saved: the_law_of_one_book_1.txt
+[20:20:11] [READ] Processing: Shankar - Principles of quantum mechanics.txt
+[20:20:11] [DEBUG] Text length for Shankar - Principles of quantum mechanics.txt: 763031 chars
+[20:20:11] [DEBUG] Successfully encoded 512 tokens
+[20:20:11] [DEBUG] Final tokenized shape: 512 tokens
+[20:20:11] [CACHE] Saved: Shankar - Principles of quantum mechanics.txt
+[20:20:11] [READ] Processing: [Ray_Kurzweil]_How_to_Create_a_Mind_The_Secret_of(b-ok.xyz).txt
+[20:20:11] [DEBUG] Text length for [Ray_Kurzweil]_How_to_Create_a_Mind_The_Secret_of(b-ok.xyz).txt: 624013 chars
+[20:20:12] [DEBUG] Successfully encoded 512 tokens
+[20:20:12] [DEBUG] Final tokenized shape: 512 tokens
+[20:20:12] [CACHE] Saved: [Ray_Kurzweil]_How_to_Create_a_Mind_The_Secret_of(b-ok.xyz).txt
+[20:31:33] [READ] Processing: Magicians Of The Gods [The Forgotten Wisdom Of Earth's Lost Civilization].txt
+[20:31:33] [DEBUG] Text length for Magicians Of The Gods [The Forgotten Wisdom Of Earth's Lost Civilization].txt: 957040 chars
+[20:31:34] [DEBUG] Successfully encoded 512 tokens
+[20:31:34] [DEBUG] Final tokenized shape: 512 tokens
+[20:31:34] [CACHE] Saved: Magicians Of The Gods [The Forgotten Wisdom Of Earth's Lost Civilization].txt
+[20:31:34] [READ] Processing: whiteheadrussell-principiamathematicavolumei.txt
+[20:31:34] [DEBUG] Text length for whiteheadrussell-principiamathematicavolumei.txt: 1230476 chars
+[20:31:35] [DEBUG] Successfully encoded 512 tokens
+[20:31:35] [DEBUG] Final tokenized shape: 512 tokens
+[20:31:35] [CACHE] Saved: whiteheadrussell-principiamathematicavolumei.txt
+[20:31:35] [READ] Processing: GEBen.txt
+[20:31:35] [DEBUG] Text length for GEBen.txt: 1891458 chars
+[20:31:36] [DEBUG] Successfully encoded 512 tokens
+[20:31:36] [DEBUG] Final tokenized shape: 512 tokens
+[20:31:36] [CACHE] Saved: GEBen.txt
+[20:31:36] [READ] Processing: the_law_of_one_book_5.txt
+[20:31:36] [DEBUG] Text length for the_law_of_one_book_5.txt: 461415 chars
+[20:31:36] [DEBUG] Successfully encoded 512 tokens
+[20:31:36] [DEBUG] Final tokenized shape: 512 tokens
+[20:31:36] [CACHE] Saved: the_law_of_one_book_5.txt
+[20:42:49] [READ] Processing: kjv.txt
+[20:42:49] [DEBUG] Text length for kjv.txt: 5145575 chars
+[20:42:52] [DEBUG] Successfully encoded 512 tokens
+[20:42:52] [DEBUG] Final tokenized shape: 512 tokens
+[20:42:52] [CACHE] Saved: kjv.txt
+[20:42:52] [READ] Processing: The Age of Spiritual Machines_ When Computers Exceed Human Intelligence ( PDFDrive ).txt
+[20:42:53] [DEBUG] Text length for The Age of Spiritual Machines_ When Computers Exceed Human Intelligence ( PDFDrive ).txt: 946257 chars
+[20:42:53] [DEBUG] Successfully encoded 512 tokens
+[20:42:53] [DEBUG] Final tokenized shape: 512 tokens
+[20:42:53] [CACHE] Saved: The Age of Spiritual Machines_ When Computers Exceed Human Intelligence ( PDFDrive ).txt
+[20:42:53] [READ] Processing: 2017-clark-surfing.txt
+[20:42:53] [DEBUG] Text length for 2017-clark-surfing.txt: 14618 chars
+[20:42:53] [DEBUG] Successfully encoded 512 tokens
+[20:42:53] [DEBUG] Final tokenized shape: 512 tokens
+[20:42:53] [CACHE] Saved: 2017-clark-surfing.txt
+[20:42:53] [READ] Processing: the-hidden-reality2.txt
+[20:42:53] [DEBUG] Text length for the-hidden-reality2.txt: 884441 chars
+[20:42:54] [DEBUG] Successfully encoded 512 tokens
+[20:42:54] [DEBUG] Final tokenized shape: 512 tokens
+[20:42:54] [CACHE] Saved: the-hidden-reality2.txt
+[20:53:56] [READ] Processing: polishingthemirror.txt
+[20:53:56] [DEBUG] Text length for polishingthemirror.txt: 335617 chars
+[20:53:56] [DEBUG] Successfully encoded 512 tokens
+[20:53:56] [DEBUG] Final tokenized shape: 512 tokens
+[20:53:56] [CACHE] Saved: polishingthemirror.txt
+[20:53:56] [READ] Processing: The Complete Book of Enoch, Standard English Version - Jay Winter.txt
+[20:53:56] [DEBUG] Text length for The Complete Book of Enoch, Standard English Version - Jay Winter.txt: 323087 chars
+[20:53:57] [DEBUG] Successfully encoded 512 tokens
+[20:53:57] [DEBUG] Final tokenized shape: 512 tokens
+[20:53:57] [CACHE] Saved: The Complete Book of Enoch, Standard English Version - Jay Winter.txt
+[20:53:57] [READ] Processing: the_law_of_one_book_4.txt
+[20:53:57] [DEBUG] Text length for the_law_of_one_book_4.txt: 427701 chars
+[20:53:57] [DEBUG] Successfully encoded 512 tokens
+[20:53:57] [DEBUG] Final tokenized shape: 512 tokens
+[20:53:57] [CACHE] Saved: the_law_of_one_book_4.txt
+{'train_runtime': 5444.2313, 'train_samples_per_second': 0.006, 'train_steps_per_second': 0.001, 'train_loss': 3.0415570735931396, 'epoch': 1.0}
+[STEP 6][TRAINING COMPLETE] Training complete.

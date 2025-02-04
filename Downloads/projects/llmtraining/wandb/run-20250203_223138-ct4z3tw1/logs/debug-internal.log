@@ -1,0 +1,9 @@
+{"time":"2025-02-03T22:31:38.387678-05:00","level":"INFO","msg":"stream: starting","core version":"0.19.5","symlink path":"/Users/kurultai/Downloads/projects/llmtraining/wandb/run-20250203_223138-ct4z3tw1/logs/debug-core.log"}
+{"time":"2025-02-03T22:31:38.496954-05:00","level":"INFO","msg":"created new stream","id":"ct4z3tw1"}
+{"time":"2025-02-03T22:31:38.497005-05:00","level":"INFO","msg":"stream: started","id":"ct4z3tw1"}
+{"time":"2025-02-03T22:31:38.497222-05:00","level":"INFO","msg":"handler: started","stream_id":"ct4z3tw1"}
+{"time":"2025-02-03T22:31:38.497313-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"ct4z3tw1"}
+{"time":"2025-02-03T22:31:38.497328-05:00","level":"INFO","msg":"sender: started","stream_id":"ct4z3tw1"}
+{"time":"2025-02-03T22:31:38.734724-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-03T22:35:54.164994-05:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/kurult-ai/huggingface/ct4z3tw1/file_stream\": read tcp 192.168.86.81:50496->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-02-03T22:37:24.080295-05:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 192.168.86.81:50495->35.186.228.49:443: read: connection reset by peer"}

@@ -1,0 +1,3032 @@
+Transcribed from: Paths to god _ living the Bhagavad Gita ( PDFDrive ).pdf
+Method used: pdfplumber
+==================================================
+
+Copyright © 2004 by Ram Days
+Foreword by Marlene Older
+“Buddhist Mealtime” by Joseph Goldstein
+“Mindfulness Meditation on Food” by Jack Cornfield
+All rights reserved.
+Published in the United States by Three Rivers Press, an imprint of the Crown
+Publishing Group, a division of Random House, Inc., New York.
+www.crownpublishing.com
+THREE RIVERS PRESS and the Tugboat design are registered trademarks of
+Random House, Inc.
+Library of Congress Cataloging-in-Publication Data
+Ram Days.
+Paths to god: living the Bhagavad Gita / Ram Days.—1st ed.
+1. Bhagavad-Gita—Criticism, interpretation, etc. 2. Yoga. I. Title.
+BL1138.66. R345 2004
+294.5’436—dc22 2004015183
+www.randomhouse.com
+ISBN: 978-0-30742142-5
+v3.0_r2
+Table of Contents
+Title Page
+Copyright Page
+Dedication
+Praise
+Acknowledgments
+Foreword
+Introduction
+1 - Context and Conflict
+2 - Karma and Reincarnation
+3 - Karma Yoga
+4 - Nana Yoga
+5 - Brahman
+6 - Sacrifice and Mantra
+7 - Renunciation and Purification
+8 - Devotion and the Guru
+9 - Social Aspects of Sahara
+10 - Dying
+Conclusion
+The Course Syllabus for The Yoga's of the Bhagavad Gita
+A. KEEPING A JOURNAL
+B. CONTEMPLATION
+C. MEDITATION
+D. THE WITNESS
+E. GIVING AND RECEIVING
+F. SILENCE
+G. PAPAYA
+H. HATH YOGA ASANA AND PANAMA
+I. JAPAN YOGA
+J. GOING TO CHURCH OR TEMPLE
+K. KIRAN
+L. SATAN COLLABORATION
+M. PUPA TABLE
+N. KARMA YOGA
+The Supplemental Syllabus
+A. VIPASSANA MEDITATION
+B. MINDFULNESS MEDITATION ON FOOD
+C. BUDDHIST MEALTIME MEDITATIONS
+D. SATAN MEDITATION
+E. HOW TO USE A MALE
+F. THE CHAKRAS
+G. THE YOGA OF PSYCHEDELICS
+Notes
+Glossary
+Resources
+About the Author
+Books by Ram Days
+To my gurus...
+Praise for Paths to God
+“Ram Days makes the Bhagavad Gita. . . Easily accessible and
+practical in how we can touch the deep mystery and live a good life in
+modern times.”
+—Angeles Adrien, Ph.D.,
+author of The Four-Fold Way
+and Signs of Life
+“What a blessing: Ram Days on the Bhagavad Gita. Who better to
+lead the Western mind into the profound depths of this spiritual
+classic. With wisdom, humor, and great compassion, Paths to God
+illuminates the liberating power of the Rita—a rare gift in these
+unsettled times.”
+—Joseph Goldstein,
+author of One Dharma: The
+Emerging Western Buddhism
+“Ram Days is the perfect person to relate the timeless wisdom of the
+Bhagavad Gita to the real challenges, joys, and sorrows of our present
+time. Through offering a wide variety of approaches to spiritual
+happiness, Paths to God is one of the most inclusive and inviting
+books available to us.”
+—Sharon Salzburg,
+author of Faith: Trusting Your Own
+Deepest Experience
+Acknowledgments
+There are three women whose contributions have made this book
+possible—the Three Graces: Jo Anne Vaughan, Rita (Lee) Brady, and
+Parfait (Betty) O’Neill. Without the gifts of each of them, this book
+could not have happened.
+At many gatherings nowadays, there is what is called a “Keeper of
+the Heart”—someone whose task it is to hold an open, loving space,
+no matter what is going on around her. Jo Anne has been the Keeper
+of the Heart for this book. In a thousand unsung ways, she has literally
+loved this book into being.
+Rita created both the glossary and the resources guide for this book,
+starting from a shoebox full of random clippings and scribblings. Out
+of her deep familiarity with spiritual literature, she has spun straw into
+gold and created a spiritual storehouse full of all sorts of rich and tasty
+treats.
+Parfait, who was one of the students at Ram Days’s Europa
+workshop, phoned to offer her help at a crucial moment, when the
+transcription of the lectures was hopelessly stalled. Not only did she
+transcribe some of the tapes, but she sent along a treasure of Europa
+memorabilia, including some personal photos of the event and a copy
+of the original syllabus, which we’d given up hope of finding. Parfait
+died of cancer in 2001. Her gift lives on in this book.
+In addition to Jo Anne, Rita, and Parfait, we also want to extend
+thanks to the staff members of Naropa University for their
+encouragement and cooperation, and special thanks to Richard
+Chamberlain of Europa’s Development Office for somehow
+managing to lay his hands on a copy of the original 1974 summer
+schedule, which provided a wealth of information about the event.
+Our thanks to Joseph Goldstein and to Jack Cornfield for generously
+allowing us to use their food meditations in this book; their practices
+added a fresh dimension to the workshop, and now to this book as
+well. And thanks to Ramesh war Was for being our “eyes” at the
+workshop, and for sharing some of the photographs he took there.
+When, at the last moment, we found we needed to track down
+sources for the many quotes that had been included in the Europa
+lectures, a number of volunteers stepped forward to help with the task.
+Our thanks to all of those who joined the treasure hunt: James Beans,
+Carolyn Behave, Caroline Bloomfield, Denise Coates, Stefan Cohen,
+Robin Collins, Aaron Crawford, Honda Gaylord, Deborah Hopping,
+Linda Cleaner, Dale Martin, Bobbie Aims, Ralf Brute, Kathleen
+Murphy, Linda Nicholas, Sharon and Larry Roll, George T. Sergio
+Jr., and Paul Wilson.
+And, of course, most of all, thanks to Need Karol Baba, for
+gracing us all with parts in this dance. I jay!
+BACKWARD AND FOREWORD Or. . . Where This
+Book Came from, and How It Might Be Used
+This book has a curious history. It grew out of a workshop called “The
+Yoga's of the Bhagavad Gita” that Ram Days taught in the summer of
+1974. He presented the workshop as part of the curriculum for a
+summer session at the newly established Europa Institute (now
+Naropa University) in Boulder, Colorado.
+Europa was founded by Program Trunk Roche, a Tibetan
+Talk and Narayana master. Trunk was trained in the philosophical
+and meditative traditions of two branches of Tibetan Buddhism—the
+Kyrgyz and Cinema sects—and he was one of the first teachers to
+begin introducing Tibetan practices to the West.
+Europa’s aim was to explore the teachings of Eastern religious
+traditions within a rigorous, Western academic environment. The
+program for the summer session announced, “The purpose of Europa
+Institute is to provide an environment in which the Eastern and
+Western intellectual traditions can interact and in which these
+disciplines can be grounded in the personal experience and practice of
+staff and students. All the staff members are involved in the
+practice of some discipline related to psychological and spiritual
+growth. It is this direct experience which can form the sound basis for
+integrating the complementary intellectual and sensory-intuitive
+approaches to living in the world.”
+In other words, Europa set out to meet the Western academic
+establishment on its own terms, to become an accredited, degree-granting institution of higher learning, but one that would offer
+degrees in fields like “Buddhist Studies, Exploration of Self and
+Society, and a cross-cultural, interdisciplinary combination of the
+two.” Courses included “not only the more intellectual disciplines—
+the humanities and the social and physical sciences—but also
+meditation, sensory awareness, dance, t’ai ch’i Chuan, theater, art, and
+music.” You could get credit toward a B.A. from Europa for taking
+Ram Days’s workshop.
+Ram Days supported the establishment of Europa because he was
+interested in the experiment that such an institution represented. But
+more than that, Ram Days honored the teachings and traditions of
+Trunk Roche, and wanted to help them take root in the West.
+And so, in June and July 1974, he joined the faculty for the summer
+session that would inaugurate Europa.
+That summer at Europa brought together an outstanding cast of
+teachers. Besides Ram Days and Trunk Roche, the faculty
+included Allen Ginsberg, Gregory Bateson, José Arguello, Jack
+Cornfield, Ben Weaver, and some two dozen others. Ram Days’s own
+staff of teaching assistants included Krishna Was, Joseph Goldstein,
+Ramesh war Was, Mirabeau Bush, Paul Gorman, and Ram Dev. Mirabeau
+called that summer at Europa “the seedpod” for the teachings that
+would shape the growing presence of Eastern spirituality in the West.
+There were courses in Tibetan and Theravada Buddhism, in the
+Sanskrit and Mongolian languages, in Tactic literature and Japanese
+art—even in artificial intelligence (which was distinctly cutting edge
+in 1974!). One of the participants called that summer at Europa “the
+Hindu-Buddhist Woodstock.”
+And in the program for the summer session, under the heading
+“Modes of Self-Exploration,” was listed Ram Days’s course, “The
+Yoga's of the Bhagavad Gita.” The course description read: “The
+Bhagavad Gita (The Song of God) is both one of the most sacred
+books in India and also one of the most profound statements of yoga.
+In the West many of us find that karma yoga is the most suitable
+practice, and the Bhagavad Gita is unparalleled as a statement of this
+form, i.e., the yoga of conscious service. Through reflection on the
+text and the many commentaries (Krishna Poem, Gandhi, etc.), we can
+evolve a perceptual framework which allows us to transmute daily life
+experience into a vehicle for liberation.”
+Ram Days’s workshop was held in a building on Pearl Street in
+downtown Boulder. Photos and videos show a plain, whitewashed,
+cement-block building. There was a big stage, Ram Days recalls, to
+accommodate the many musicians who took part in the program at
+1
+one time or another (including K. K. SAH, an extraordinary Kiran
+singer, who came from India for the workshop).
+Europa essentially offered Ram Days free rein as to the topic for his
+workshop; so why did he choose to teach about the Rita? Ram Days
+says, “Maharajah was always giving away copies of two books:The
+Ramayana and the Bhagavad Gita. Since those were the books he
+seemed to think were most important, I felt it behooved me to learn as
+much as I could about them. Through being around Maharajah and
+spending so much time at his temples, I felt I had absorbed at least
+some understanding of the Ramayana. Teaching this course at Europa
+seemed like an opportunity to plumb more deeply into the other book,
+the Rita.”
+Ram Days had a second motive for focusing on the Rita, as the
+course description suggests, and that was his appreciation for its
+unique appropriateness to our own cultural circumstances. The
+philosophy of the Rita is one that turns out to be especially suitable
+for us in the West, because instead of encouraging us to turn away
+from the world, it turns our lives in the world into our spiritual work.
+We don’t have much room in our society for wandering mendicant
+monks, or many caves where sadhus can hang out. We’re a culture of
+“doers,” and so, as the course description pointed out, “Many of us
+find that karma yoga is the most suitable practice.”
+Ram Days prepared intensively for the seminar. He had an old
+2
+school bus, which he’d outfitted as a camper, and he spent the two
+months before the workshop living alone, out in the desert, immersing
+himself in the Rita. He spent his time reading the Rita, meditating on
+the Rita, studying commentaries on the Rita. He had with him some
+half dozen or so different translations of the Rita, and he read and
+reread them all. He typed out the text of the Rita, with big spaces
+between each of the verses, where he wrote comments about the
+slogan. He stayed at Organ Pipe Cactus National Monument in
+Arizona for a while, and then at Joshua Tree National Park in
+California; he said, “I gave the first version of the Rita lectures to the
+jackrabbits that were hanging around the bus.”
+At Europa, Ram Days’s class alternated evenings with a class called
+“The Tibetan Buddhist Path,” taught by Trunk Roche. Although
+Ram Days and Roche deeply respected one another, their teachings
+were widely divergent in style and approach. Trunk’s teachings
+were rooted in his lineage, and they followed a traditional Buddhist
+intellectual approach, with exact categories and precise definitions.
+Ram Days’s teachings were devotional, rooted in the intuitive and less
+tightly structured. Ram Days said, “Trunk was teaching about
+meditation and emptiness, and I was teaching about devotion and the
+guru. The students felt like they were at a tennis match!”
+There were over a thousand registered students in Ram Days’s
+workshop. Although students were supposed to register for one course
+or the other, there were many “crossover” students who came to Ram
+Days’s workshop and vice versa; and while most of them came simply
+to hear what Ram Days had to say, some were Trunk partisans who
+came to needle Ram Days. Ram Days remarked at one point that he
+had received “lots of letters from you, with many qualitative
+judgments about me.”
+There were no ill feelings between the two teachers; in fact, at the
+end of the summer Trunk offered Ram Days a place on the Europa
+faculty. Trunk said that that kind of diversity was good for the
+students. But the students themselves were more factional in their
+feelings; the conflicts came to be known around Europa as “the Holy
+Wars.”
+In an interesting way, those circumstances turned out to be uniquely
+fortunate for Ram Days’s workshop. Ramesh war Was wrote, “The
+confluence of Buddhism, Hinduism and America in Boulder that
+summer was chaotic but profoundly unifying. Trunk and Ram Days
+teasing each other on stage provided great humor and lightness, and
+the contrast between Buddhist clarity of intellect and the Shakti heart
+has never been better illumined.” The situation imposed a more
+rigorous standard of expression on Ram Days’s teaching. If preparing
+for the workshop deepened Ram Days’s understanding of the Rita,
+teaching the workshop honed his formulation of that understanding.
+In teaching about the Rita, Ram Days was exploring one of the
+most significant and influential books in Indian culture. Mahatma
+Gandhi wrote of the Rita, “When doubts haunt me, when
+disappointments stare me in the face and I see no ray of hope on the
+horizon, I turn to the Bhagavad Gita and find a verse to comfort me,
+and I immediately begin to smile in the midst of overwhelming
+sorrow. Those who meditate on the Rita will derive fresh joy and new
+meaning from it every day.”
+The influence of the Rita has not been limited to India; it has
+touched the West as well. Henry David Thoreau said that in
+comparison with the Rita, “our modern world and its literature seem
+puny and trivial.” Ralph Waldo Emerson called it “the first of books.
+. . The voice of an old intelligence.”
+It is believed that the Bhagavad Gita was written sometime during
+the first millennium B.C., and later inserted into a much vaster and
+probably much older work, the Mahabharata. The Mahabharata is not,
+strictly speaking, Hindu scripture (as are the Vedas and the
+Upanishads), but one of some twenty Indian epics, called the Purana's.
+The Purana's contain the stories of the lives of the various incarnations
+or living manifestations of God: there is the Brahma Purana, and the
+Garuda Purana, and the Linda Purana, and so on. And among those
+are the two so-called Maharanis, or Great Purana's: they are the
+Mahabharata and the Ramayana. The two Maharanis are woven so
+deeply into the culture, life, and thought of India that one pundit said,
+“The Mahabharata and the Ramayana are India.”
+In the middle of that great tale of the Mahabharata we find the
+Bhagavad Gita, said to contain “the essence of Hinduism.”
+Historically speaking, the Rita did, in fact, represent Hinduism’s
+response to certain Buddhist ideas that were exerting increasing
+influence on Indian thought at the time. The Rita specifically
+addressed the Buddhist emphasis on disengagement from the world as
+the primary path to God. In place of that, the Rita offered a practice of
+action in the world as a method for coming into unity.
+The Rita is at once an instruction manual for living a spiritual life
+and a profound, ecstatic vision of the ultimate nature of God. There
+are many beautiful English versions of the Rita, but the one chosen
+for the Europa workshop was the translation by Juan Mascara. Ram
+Days said, “I picked the Mascara text because it’s delightfully easy to
+work with. It is, in some ways, wanting in its profundity of
+interpretation, its sophistication from a Sanskrit point of view; but it
+doesn’t seem to have as many axes to grind as some of the other
+translations do. And I confess: I also chose it because it was the one
+that happened to be available in the temple where I lived in India in
+1969, and so it was my first introduction to the Bhagavad Gita. And
+you know how you always get hooked on your first love!”
+Although Ram Days’s lectures at Europa (and by extension, this
+book) were based on the Rita, it would be a mistake to think that they
+were about the Rita in the usual sense. What Ram Days offered at
+Europa was not a scholarly exegesis on the Rita, or an analysis of its
+text, but a series of riffs on the Rita’s major topics. The themes of the
+Rita were the launching pad for what turned out to be Ram Days’s
+quintessential teaching on applied Hinduism. His premise is that the
+Rita outlines a series of practices that taken together comprise a
+complete yoga for living our lives as a spiritual act. Ram Days’s
+accomplishment in the workshop was to shape those practices into a
+form that we as Westerners could understand and adopt.
+This book is derived from transcriptions of the lectures Ram Days
+gave at Europa. It is both historical document and perennial
+philosophy. The workshop was a unique blend of metaphysics and
+methods, and so this book is also a rich weave of philosophy and
+practice. Ram Days presents a vision of where we’re going, and he
+also teaches us about the path for getting there.
+Ram Days’s lectures were only part of the participants’ experience
+of the workshop. Each student received a copy of a syllabus, which
+presented a series of experiential exercises, through which the
+participants could begin “bringing the Rita back home,” so to speak.
+The introduction to the syllabus stated, “In addition to the lectures,
+this course includes a number of exercises designed to provide
+experiences which can evolve into a complete Sahara (a program of
+spiritual practices), based on the Rita.” Participants set up pupa tables
+in their rooms; they made their own males and chanted with them.
+They took silent meditative walks, and they practiced hath yoga
+Asana. There were eating meditations, and journal-writing exercises,
+and all-night chants. And every afternoon there were discussion
+circles, led by Ram Days’s staff of teaching assistants. In short, what
+the workshop provided was the opportunity and the encouragement to
+focus intensively for a time on cultivating the spiritual side of things;
+it provided a space to plunge deeply into spiritual practice.
+Emerging as it did from the workshop, which was a participatory
+experience, this book presents you with a choice. The first possibility
+is to take it simply as a book to read. Great!—you’ll find it’s a
+wonderful book. It’s Ram Days’s most profound teaching on the
+nature and practice of Hinduism, and his insights and observations
+will deepen your understanding of the Rita and its message.
+But you’ll find there is another option available. You can engage
+with this book in a way that makes it personal. You can take it to be a
+kind of do-it-yourself workshop; it can be a path to enter, a way of
+coming into a new relationship with your life. Taken that way, you’ll
+discover that the book presents you with a delicious array of
+opportunities, with descriptions of practices, and little samplers of
+various techniques. Should you find yourself drawn to one or another
+of the methods, there is a wealth of resources to help you get started?
+The syllabus from the workshop is one such resource. There is also a
+supplementary syllabus, comprised of some instructions and examples
+of practices presented during the workshop. The resources guide will
+lead you to books, CDs, tapes, videos, and websites. It’s a rich
+offering.
+So what started life as a series of lectures given to a family of
+jackrabbits in the California desert has morphed into the book that you
+are holding in your hands. It’s a book that represents Ram Days’s
+deepest wisdom about one of India’s most profound spiritual texts. It
+shows us the way those of us here, in this contemporary Western
+culture, can translate the yoga taught by the Bhagavad Gita into a
+living spiritual practice of our own.
+Marlene Older, editor
+Offer in thy heart all thy works to me,
+and see me as the End of thy love,
+take refuge in the Yoga of reason,
+and ever rest thy soul in me.
+Bhagavad Gita, ch.18, verse 57
+Ram Days’s Lecture Notes: A portion of Ram Days’s handwritten
+notes, with an overview of some of the themes of the course.
+Introduction
+This is a book that is based on a course about an ancient Hindu text,
+which was taught at a Buddhist university, by a Jew who has a great
+love for Christ and Muhammad—so you can imagine what you’re in
+for!
+When I say this is “about an ancient Hindu text,” I don’t want to
+mislead you. This isn’t really a book “about” the Bhagavad Gita. It
+isn’t an analysis of the Rita, or a commentary on the Rita, or anything
+like that. Rather, it’s a series of reflections about the major themes of
+the Rita—themes that touch on the various yoga, or paths for coming
+to union with God, that the Rita investigates. It’s an attempt to look at
+how those yoga might be relevant to our own lives, in this day and
+age.
+The Buddhist part of the equation, Europa, was an institution
+founded by Trunk Roche, a talk of a Tibetan Buddhist lineage.
+But it was an institution concerned as much with the development of
+the intellect as with its Buddhist lineage, with scholarship as much as
+with tradition. And that presented me with a number of interesting
+challenges, because my course on the Rita was primarily concerned
+with issues of the heart—with the devotional and karmic-yogic
+aspects of life. Mine was not “the thinking man’s” course.
+I should point out that I’m not anti-intellectual. I think the intellect
+is a beautiful instrument that can be used very productively, when one
+isn’t attached to the idea that thinking is what it’s all about. But we are
+coming out of a kind of sickness here in the West, a sickness in the
+way in which we have overthought, the way in which we have been
+intellectually way ahead of our hearts’ and our bodies’ wisdom. We’re
+just now learning how to quiet down a bit, and get it all together,
+which means that people who are trying to work with the intellect as
+their primary yoga are dealing with a very hot fire. I honor them, but it
+isn’t my own major path.
+Besides feeling a little intellectually out of place, I had some other
+qualms about my plans for the course. In talking with Swami
+Muktananda (a very beautiful holy man from India) just before I went
+to Europa to teach that summer, I expressed to him my feeling of
+presumptuousness at attempting to teach about the Rita. What could I
+possibly have to say about it? Most people in India probably know
+more about it than I do. In India, many ordinary people are great
+scholars, really, who have made extensive studies of the Rita. Often in
+India I’ve gotten into long, philosophical discussions about the Rita
+with a railway conductor, or a sweeper—people who, when they’ve
+finished with whatever job they do for a living each day, do their
+important work, which is studying spiritual books like the Rita or the
+Ramayana.
+So I was telling Swami Muktananda that I thought I was being a
+little presumptuous in imagining that I had anything to teach about the
+Rita, and in response, he told me this story.
+Krishna, at one stage of his incarnation as an avatar, was a beautiful, young boy
+(something you’ll need to know to understand this tale). Now there was a great
+student of the Rita, an old man. He was so intent on studying the Rita that he
+had stopped doing all of his work; he wouldn’t do anything but read the Rita all
+day long. Soon he and his wife were without food. His wife was very harsh with
+him, saying, “You have a duty to go out and bring food home for the family.”
+She kept pressing him, making his life very difficult, but he’d just go off into the
+woods and study the Rita every day.
+One day, as he sat in the woods studying the Rita, the old man came across a
+line in the book in which Krishna said, “If you offer all of your devotion to me,
+you need to worry about nothing in the world. It will all be taken care of.” And the
+man thought, “Well isn’t that a peculiar line? I mean, here I am, totally devoted
+to the Rita, to Krishna, but my wife and I have no food, and she’s all upset with
+me. It says right here that if I am devoted to the Rita, everything will be taken
+care of. Why isn’t everything being taken care of? Could there possibly be
+something wrong with the Rita?” At that point he took his pen and drew a line
+through that sentence, because he wasn’t sure about it.
+Now at that moment, back at his house, there was a knock at the door. The
+wife went to the door and there stood a handsome young man, with bags of rice
+and of lentils and of flour—huge bags, a supply to last for many months.
+The wife said, “Who are you? What is all this?”
+The young man said, “This is for the family of somebody who studies the
+Rita.”
+As the young man started to carry the bags of food into the house, the wife
+noticed that his shirt was open, and that there was a wound on his chest, with
+blood oozing out of the wound. She said to him, “What happened? Who did this
+to you?”
+He said, “This was done to me by a man studying the Rita out in the woods.”
+He said no more, put down the bags of food, and left.
+When the husband came back home and saw all the food, he asked his wife
+about it. She said, “You know, the most peculiar thing happened.” She
+proceeded to tell him about the young man’s visit, and she said, “When I looked
+at him, I saw there was blood coming out of a wound on his chest. And when I
+asked him how it had happened, he said it had been done by a man studying the
+Rita out in the woods.”
+At that point, Swami Muktananda told me, the old man realized
+what had happened, and he fainted. Because he saw that when he had
+underlined the book out of his sense of doubt, he had wounded the
+body of Krishna. Swami Muktananda said, “You see, you have to
+understand:The Rita isn’t a book about Krishna—the Rita is
+Krishna.” And then he said to me, “You don’t have to worry about
+teaching the Rita—that’s none of your business. The Rita will teach
+itself. Krishna will do it in spite of you.” So I felt I was taken off the
+hook by Swami Muktananda.
+One important reason why I agreed to teach at Europa that summer
+was because I wanted to honor its founder, Program Trunk
+Roche, and the lineage he represented. Once we here in the West
+began to turn our attention to consciousness and the spirit, we
+discovered that there were traditions that had been concerning
+themselves with those questions for a long, long time. Trunk
+represented one of those exquisitely pure traditions or lineages.
+Ram Days and Program Trunk: Program, the Tibetan founder of
+Europa and a graduate of Oxford, and Ram Days, the Harvard social
+scientist, would hold colloquial in the afternoons and debate the fine
+points of Shakti, or devotional practice, versus Tibetan Mahayana
+Buddhism. It was a very playful exchange, but behind the laughter
+both shared a deep understanding of dharma and an appreciation for
+one another’s spiritual paths.
+We in the West seem to have become very reactive toward
+traditional religious forms, which I think comes from the way we’ve
+seen rituals and ceremonies used as ends in themselves—as a
+mechanical, ritualistic priest craft, with the living spirit gone out of it.
+That has certainly happened in the East, and it’s happened in Western
+religions as well.
+A lot of us now have come through a time of throwing over one
+tradition after another. In this culture, we’ve thrown over sexual
+traditions; we’ve thrown over traditional social relations concerning
+marriage and the family; we’ve thrown over traditions about
+economics and working conditions; we’ve overthrown all kinds of
+political traditions. In most cases, that’s come out of a healthy
+awakening to the deafness of the existing structures. But somehow
+we’ve gotten a little lost in thinking that traditions per se are bad,
+when maybe what’s needed is not to throw them away, but to
+reawaken them. I think that one of our challenges now is to become
+sophisticated enough not to throw out the baby with the bathwater.
+I have gone to a lot of traditional religious ceremonies in both the
+East and the West. You go into a church or a temple, and often what
+you see is that everybody’s going through the motions: they go
+through the ritual as if they were checking off their shopping lists at
+the supermarket. They may be singing wonderful songs about
+resurrection and rebirth, but nothing’s happening. The ceremony and
+the ritual originally came out of living spirit, but that’s gotten lost in
+the shuffle, and what’s left is just the mechanical stuff.
+But now if I come back to it with eyes that are tuned to other planes
+of consciousness, and if I can center and not get lost in my old
+reactions to the situation, suddenly there it all is: Living Spirit again. I
+think that we are all being prepared—all of us—to serve in that
+capacity of reinvesting our society with Living Spirit. And that
+happens through our becoming Living Spirit—because the only thing
+you really transmit to another person is your Being. The fancy words
+don’t mean a thing.
+In that awakening process we’re all going through, there are various
+stages, levels in the evolution of consciousness, and some of those
+stages are characterized in the Rita, as we trace Arjuna’s awakening
+through the eighteen chapters of the book. First there’s despair, then
+there’s possibility, then there’s the beginning of awakening. Then
+comes the opening of the mystic vision, and the deepening of the
+direct experience—that’s in chapters 7 through 12. Then comes the
+last part, which happens when the faith is strong: there’s an opening to
+the deeper wisdom. That’s the way the phases of the journey are
+spelled out in the Rita.
+We represent among us many different levels of consciousness. It’s
+not a matter of better or worse, we’re just at various stages of the trip.
+Some of us are just beginning to feel the first touch of unease, a little
+discomfort with the way the game’s been going. And at the other end
+of the scale, some of us are so drunk with the bliss of mystic visions
+that it’s all we can do to stay here and not go running off to a cave!
+As we move through levels of consciousness, we find that our
+understanding about the nature of our lives changes. Just to get the
+flavor of the transformation, let’s listen to the statements of some of
+the beings who have gone the whole journey. For example, this is
+Jakob Böhme, the Christian mystic, speaking: “The external world, or
+the external life, is not a valley of suffering for those who enjoy it, but
+only for those who know of a higher life. The animal enjoys animal
+life, the intellect the intellectual realm. But he who has entered into
+regeneration recognizes his terrestrial existence as a burden and a
+1
+prison.”
+Air said: “Dancing is not for me anymore. The mind no longer
+plays the tune. The vessel of desire is broken, the gown of desire has
+become frayed. Parts enough have I played; I can act no more. Friends
+and companions have all forsaken me. God’s name alone I now have.”
+2
+And Thomas Merton: “The lightning flashes from east to west,
+illuminating the whole horizon and striking where it pleases, and at
+the same instant, the instant liberty of God flashes in the depths of a
+man’s soul, and he is illumined. At that moment he sees that, though
+he seems to be in the middle of his journey, he has already arrived at
+the end. Although he is a traveler in time, he has opened his eyes for a
+3
+moment in eternity.”
+Each of those is a statement of the possibility inherent in human
+consciousness. And while some of them may be spoken in ways that
+are difficult for us to hear just now, perhaps in the course of exploring
+the Rita we will start to have a new perspective on things. We may
+notice that our primary identification is no longer with the plane of
+reality that we started out with; we may notice that we are already
+participants in another realm or plane of consciousness, which has
+become more real to us than the one we left behind. (This new realm,
+too, will turn out to be an illusion, of course. . . But that will come to
+its own due time.)
+As we start to reperceive the nature of our lives through a book like
+the Rita, it gets harder to play out some of our old social roles. I
+remember when that began to happen for me: It was back at Harvard
+in the early sixties. Tim Leary and I were doing research on
+psychedelics under the umbrella of the university, and Harvard was
+getting a little concerned, because we had just ordered half a million
+dollars’ worth of LSD from Switzerland. So the university set up a
+“watchdog committee.” It was unheard of for faculty members to
+watch over each other, but Harvard was getting pretty desperate. I was
+on that committee, actually, and we couldn’t agree on anything;
+finally, some of the members took things in their own hands, and
+arranged a public meeting to put down our work. The thrust of the
+meeting was that we were not being “scientific”—mainly, they said,
+because we were ingesting the chemicals ourselves, and how could
+you be a “scientist” when you were changing your perceptual
+viewpoint in the midst of your observations?
+Now there is, in fact, a very rich tradition in psychology called
+“introspectionism,” which deals with inner experience, but it was held
+in very low repute in those days because of the takeover of
+psychology by the behaviorists. Behaviorism had embraced physics as
+its model for the study of the human mind, and so it rejected anything
+that could not be seen from the outside. Our interest in presenting the
+things that were happening inside of us as the data in our experiments
+flew in the face of all that behaviorist theory.
+At the meeting, Timothy took the stand and said, “You’re wrong— I
+am a scientist. You people just don’t understand what real science is.”
+He argued that they were persecuting scientific inquiry because of
+their own preconceptions.
+Now, Timothy happens to have been a darned good philosopher of
+science, and I think he had a very good argument, but it wasn’t quite
+the same as mine. The most powerful things that had ever happened to
+me were happening to me through our Saturday night sessions with
+psychedelics, and somehow that was more real to me than what I was
+teaching on Monday, Wednesday, and Friday. I was not sure, though,
+that I could make the point about our scientific methodology, so I took
+a stance very different from Timothy’s. I said, “Ladies and gentlemen,
+you’re absolutely right. I am no longer a scientist. Furthermore, I’m turning in my
+badge. From now on, I should be considered a ‘datum.’ I’m the data,
+and you may study me, to see what happened to him who ‘did that in
+the sixties.’ You can be the scientists; you can have that role. I give it
+up. I really don’t want it anymore.”
+Why didn’t I want it? Because I’d discovered it’s a drag. If I adopt
+that role, I’ve got to sit in intellectual judgment on everything that
+comes to me. I’ve got to say, “Will I accept this? What is its statistical
+likelihood? What is the probability of its recurrence?” I’ve got to live
+inside a probabilistic model, and sit with a skeptical stance of doubt.
+I had realized I didn’t want to do that anymore. Furthermore, I wanted to be at the
+place where, later on, when I sat in a village in India, and heard
+people tell me miracle stories that would set off the doubt alarms in all
+my Western scientific friends, I could say, “Yeah! Of course! Far
+out!”—and mean it! I had realized I’d rather cultivate faith than
+skepticism. It was a new definition of who I am.
+Now, we have been talking about this whole process as a
+transformation, as an evolution of consciousness. But maybe it’s less a
+matter of evolving or changing, than of simply acknowledging who
+we already are. The way I see it is that there are states of
+consciousness that are always available to us if we have not veiled
+ourselves from them through our attachment to our own thoughts. All
+of it is always available to all of us—but whether we know that or not
+(or, better, the degree to which we know it) depends on who we think
+we are. What the Rita does, then, is to present us with a template for
+expanding our definitions of who we are, and therefore for
+appreciating our lives in a whole new context.
+P. D. Suspense said an interesting thing—he said: “I found that
+the chief difficulty for most people was to realize they really heard
+new things—that is, things that they had never heard before. They
+kept translating what they heard into their habitual language. They
+4
+had ceased to hope and believe that there might be anything new.”
+He’s reminding us of how hard it is to open to something new without
+immediately labeling it in terms of our old formulas, our old
+attachments.
+I’d like to encourage you to come to our exploration of the Rita
+being open to the possibility of hearing something new—that is, being
+open to a new perspective, to a new understanding of how we might
+perceive and live our lives. The Rita is Krishna, remember, and
+Krishna is a manifestation of our own inner being, so opening to the
+study of the Rita will open us, in a profound way, to our own deeper
+selves.
+In what I’m going to be saying now, I’ll have to assume that you’re
+familiar with the Bhagavad Gita, at least in a general way. If you
+haven’t read it yet, I encourage you to do so; it will only take you
+about three or four hours. I would suggest that you read it through that
+first time just as a very interesting story: Who is Krishna? Who is
+Arjuna? And how do they find themselves in this peculiar
+predicament, sitting in a chariot, out on a battlefield?
+I would further suggest that you plan to read the Rita twice more. I
+would suggest that you read it again after we have finished our
+discussion in chapter 1 about the basic conflict in which Arjuna finds
+himself, and after you have personalized that conflict sufficiently to understand what his predicament is. I suggest you read it that
+time identifying with Arjuna; that is, once you have figured out what
+your own conflict is, your own spiritual struggle, then use that as the
+framework, and listen to Krishna telling you how it all is regarding
+your own battleground.
+Then, when you are ready, may I suggest a third reading of the
+Rita, in which you read it identifying with Krishna. Because that, in
+fact, is also who you truly are.
+Now, that last reading may raise some interesting problems for you.
+If you are Krishna, then you are the Rita. Maybe you’ll be reading
+along, and you’ll come to a line, and you’ll think to yourself, “I would
+never say that!” But the fact is, the Rita does say that, and we’re
+supposed to be taking Krishna’s perspective. What to do?
+This is where your spiritual exercises come in, like the ones we’ll
+be talking about or the ones in the syllabus. For instance, you might
+work with your perplexities through a practice like contemplation:You
+sit down in front of your pupa table or in any quiet space; you take
+both the line as it’s written and the line as you think it ought to be, and
+you sit with both those thoughts. The process will show you exactly
+where you’re hanging on. You’ll think, “I never would have said
+that!” Ah!— there it is. That’s the one! Who is the “I” who would
+never have said that? Where is the clinging? Those are the lines that
+will turn out to be the richest ones for you, because they will show
+you where you’re holding on, where your secret stash of attachment
+lies.
+Implicit in the suggestion that you use an exercise like
+contemplation to go deeper with your third reading of the Rita is a
+more general thought about the way you might want to approach this
+exploration. Since this book emerged within the context of a
+workshop, it includes suggestions for practices, like the contemplation
+exercise we just talked about. The practices offer an opportunity to
+expand your experience outside the covers of a book, and to engage
+with the material in a deeper way. The practices can profoundly enrich
+your appreciation of the way the Rita’s teachings work.
+Here’s another example: journal keeping. Since going through this
+experience will, in a way, be like going on a journey of exploration,
+you might want to consider keeping a journal as you make your way
+through this book. When you travel, don’t you keep little journals of
+all the far-out things that happen to you? Writing about those things
+can be useful, in showing you transformations that might otherwise
+slide by or be forgotten. Something that puzzles you this week may
+seem crystal clear a few weeks from now, and that’s interesting to
+notice. Or something that happens through your reading disconfirms
+some cherished belief system; if you don’t write it down, you might
+selectively forget it, in order to keep your ego-sense consistent. That’s
+why journals and diaries can be very useful devices.
+(Maharajah, my guru, always kept a diary. Every day he would close
+himself up in his room and write two pages in his diary. Now, you
+might wonder, “What would a guru’s diary be like? What would he
+write in it?” Would it be “I saw this many people today. . . . I gave
+them ‘the touch.’ . . . I spent the afternoon with Krishna and Rama and
+Christ. . . . Christ is looking much better these days”? What would he
+put in a diary? After Maharajah had left his body, we were finally
+shown the diaries. For each day, there would be the date, and the
+name of the place where Maharajah was staying; and then there would
+be two pages where the major events of the day were written: “Ram,
+Ram, Ram, Ram, Ram, Ram, Ram, Ram, Ram, Ram, Ram, Ram,
+Ram, Ram. . .” —on and on, for two pages. The name of God was all
+that seemed to have been relevant that day. And the next day. And the
+next.)
+If you decide to keep a journal, please start right away; you’ll find
+it’s much more useful if you do it continuously, right from the outset.
+You can use it to record your reflections about lines in the Rita, or
+examples of the ways you personalize the teachings of the Rita
+through your own experience. You can add quotes or pictures. Some
+of the journals I’ve seen over the years are incredibly beautiful, filled
+with artwork, with wonderful poetry, with all the stuff of our
+ruminating minds.
+So keeping a journal is one more way you might consider
+deepening your participation in this journey. There will be more
+suggestions as we go along, so you can jump into the whole process at
+whatever level of involvement feels right for you. You can simply
+read this book, and maybe find in it some thoughtful perspectives on the Rita and about Hinduism. Or you can personalize it, you can
+use it differently: you can dive into it as a spiritual exercise,
+with journals and pupa tables and contemplation practices and all the
+Jeshua stuff. Those are all like the side trips on a tour, and you can
+take as many or as few of the excursions as you’d like. It’s up to you
+to decide what feels right for you at this moment.
+As we read the Rita, we’ll notice that it is designed in a very
+interesting way. Everything that really needs to be said is pretty much
+said in the first two chapters. After that, it’s said over and over again,
+but with more and more exquisiteness and with more and more detail.
+The whole book becomes like a spiral, and we find that we see the
+themes of the Rita from many different vantage points as it unfolds,
+and as our engagement with it deepens.
+This book will unfold in the same way, with ideas appearing again
+and again in new contexts, and with methods and practices that
+complement and build on one another. That whole process will keep
+presenting us with new perspectives and new possibilities as we go
+along, and each one will be an invitation to go a little deeper,
+something coaxing us to awaken a little more.
+And if this book really works, it will turn out that who you are at
+the end of it won’t be quite the same you as the one who’s reading
+these words right now.
+Conclusion
+This being the conclusion, custom calls for us to look back over the trip we’ve
+been taking together, and to try and figure out where it is we’ve come with it all.
+In service to that, it would seem appropriate for us to do a couple of things: The
+first is to bring together the various strands of thought we have been following,
+to tie up the loose ends so we can come to some feeling of closure about it all.
+The other is to reflect on what all this might conceivably have had to do with the
+Bhagavad Gita.
+To take the last one first: I think we’ve found that the relationship between
+this book and the Rita is a little more subtle than we may at first have
+anticipated. Although this is supposed to be a book about the Rita, and although
+it has come out of many, many years of reading and studying the Rita, a lot of it
+hasn’t been directly connected to the Rita in any technical sense. It clearly
+wasn’t a scholarly discourse on the text, for example. It wasn’t an interpretation
+of its slogan. I think what would be most accurate is to say that this book is a
+commentary on the foundation concepts on which the Rita is built, and a
+reflection on some ways we can bring the Rita’s practices into our own spiritual
+lives. Those are the aspects of the Rita that we have been exploring.
+As for creating closure and bringing it all together, I suspect that that will
+really have to wait until it happens, in its own time, in each of our hearts, as we
+bring the teachings into the light of our own experiences. But although we
+probably can’t tie it all together in a neat package, what we can do instead is to
+trace the major threads that have run through this book.
+Looking back, I think we can see that the underlying theme throughout all of
+this has had to do with the way the Bhagavad Gita provides us with a map for
+our own Sahara. The Rita sets out a system of practices, yoga, for bringing us
+into union with Brahman, with the One. And when those practices work, as they
+do in the case of Arjuna, then comes the Mystic Vision.
+In the eleventh chapter of the Rita, we’re given a taste of what that vision is
+like. Arjuna says to Krishna, “I have heard thy words of truth, but my soul is
+yearning to see thy form as God of this all.” Then, because of the preparation
+Arjuna has had, Krishna gives him “divine sight,” so he can see Krishna’s
+cosmic form—which is Awful: full of awe. Arjuna sees the whole universe
+there in front of him, all around him, with the radiance of a thousand suns—all creation coming and going in Krishna.
+That vision totally blows Arjuna’s mind. He says, “I have seen what no man
+has seen before. I rejoice in exultation—and yet my heart trembles with fear.
+Have mercy upon me: show me again thine own human form.” The mystic
+vision is too much for Arjuna’s mind to take in; he’s ready to go back to seeing
+Krishna in his human form again. But as a result of that experience, any
+remaining doubts Arjuna may have had are overridden, and he simply surrenders
+into doing his dharma. From that point on, Krishna starts to give him instruction
+in a much more direct way. The seduction is over, if you will.
+Now the thing is when that experience comes to Arjuna, he’s already leading a
+very saving life, a spiritually pure existence. All the non-killing, non-stealing,
+non-lying, non-lusting, non-giving-and-receiving stuff is simply assumed in
+Krishna’s dealings with Arjuna. The experience of the cosmic form comes after
+all that is already a given, and after a certain amount of wisdom—higher wisdom
+—has been developed in Arjuna through Krishna’s teachings.
+Preparation for the mystic vision is important. You recall that we’ve talked
+about the lower wisdom and the higher wisdom—that the lower wisdom is the
+stuff your ordinary intellect can manipulate, conceive of, play with,
+conceptualize, whereas the higher wisdom is the wisdom that comes to us only
+through initiation. The higher wisdom comes only through direct experience;
+you have to become it. And the Rita runs us through that whole process. The
+Rita presents the lower wisdom in the first few chapters, then follows with the
+purifications that are the groundwork for us to open to the higher wisdom, so
+that through the higher wisdom we can arrive at the possibility of having certain
+kinds of experiences which come with it—namely, the experiences that come to
+Arjuna in chapter 11.
+Now, what happened to many of us, through our use of psychedelics, was that
+the sequence got inverted. We had the chapter 11 Experience before we’d read
+chapters 1 through 10. We were left with a mind-blowing vision without any
+structural understanding of it, or any degree of purification that would allow us
+to receive it. That was part of what all the “bad tripping” was about. But though
+sometimes in a fierce way, those visions ultimately did force us to go back and
+seek the purification, seek the higher wisdom, so that the launching pad for our
+mystical visions would start to be different. And so although the yoga that has
+been emerging in the United States may not be sequencing in exactly the way the
+Bhagavad Gita outlines, now that we have used the psychedelics, and blown
+ourselves out of our totally externalizing/worldly/philosophical-materialist mind-set, we are ready to hear what we need to hear in order to get on with it, so we
+can become the statement of the higher wisdom: a liberated being.
+So we look to the Rita to tell us about all those practices we’re ready to start
+doing. We do that, even though we know, as we said before, that in a way all
+practices are a hype. We do it because we feel a need for practices, because we
+feel intuitively drawn toward them. Something within us is simply nudging us.
+We see the dilemma in that, because we know that all our dramas, including the
+drama of “Getting Enlightened,” are just more veils, and that veils keep us from
+seeing who we really are. So Getting Enlightened keeps us from getting
+enlightened. But then that becomes the incentive for deepening our practices still
+further, so they’re coming from a purer place, and the cycle continues. From one
+level up, we see that the perfection includes our use of the methods. We realize
+that there is nothing at all to do, but in a state of total openness to all the
+possibilities in our lives, we’re drawn to work on ourselves.
+When we’re ready to start doing practices, the Rita provides us with a
+curriculum of all the various yoga we can begin to include in our lives. A yoga
+is really any practice we undertake with the intention of coming closer to God.
+The key to it is the “intentional practice” part and so yoga scan involve any and
+all parts of our lives. Martin Barber said, “There is no human act that cannot be
+hallowed into a path to God.”
+But although the Rita offers us a number of different yoga to work with, it’s
+clear that the one it’s mainly concerned with is the path of karma yoga. The Rita
+was, you will recall, meant in part as Hinduism’s reply to Buddhism; it embraces
+a spiritual path of engagement in the world rather than withdrawal from it.
+I see the Rita as basically a karma yoga manual, a guidebook for bringing
+spirit into action. I find the teachings of the Rita reflected in the lives of Gandhi
+and Martin Luther King. The Rita is a path of yoga that’s designed for a life of
+action rather than a life of contemplation, and it tells us how to carry on our
+spiritual quest right in the midst of our lives in the world. It spells out the way
+we can do that: by offering all our actions to God, by acting without any
+attachment, and by acting without seeing ourselves as the actors.
+Before we arrive at that place of pure, detached action, we will go through a
+lot of other levels first, and each one will contribute its own little piece to our
+Sahara. For instance, if we’re still acting from the feeling “I ought to do karma
+yoga,” our actions will come tarnished with guilt and anger, and to that extent,
+they aren’t “pure” karma yoga. However, that very impurity will become the
+force that drives us to reflect more deeply about our actions; and then, as we do,
+and as our wisdom gets clearer, our motivation will get purer, and our karma
+yoga will change.
+In earlier chapters, we talked about karma yoga and sacrifice as if they were
+separate practices. But the fact is that the highest statement of karma yoga is also
+a full expression of the act of sacrifice. In practicing true karma yoga, we
+sacrifice ourselves and our gratifications into selfless, dharma action. The ritual
+of sacrifice satisfies some deep yearning in us to complete a cycle, to offer back
+for what we’ve been given. When Krishna agrees to come onto the physical
+plane as an avatar, it is an act of sacrifice. Can you imagine, being God and
+having to wear a people-suit? It’s itchy, and it doesn’t fit very well, and it’s so
+constricting. But in order to reinstitute dharma on the physical plane, Krishna
+manifests in form. That sacrifice has come down to us as an offering. Then, to
+complete the circle, to close the ring, to make the whole thing sacred, we offer
+our lives back up in sacrifice. The whole movement of the formless into form
+into the formlessness becomes one huge “Omaha!”—one huge offering into the
+fire of ongoing transformation.
+If all that seems too romantic to you, then work with sacrificing what you do
+every day to your higher consciousness. Sacrifice it all to your awakening—each
+thing you do, all day long. If you’re driving a car, if you’re getting gas, if you’re
+making the bed, if you’re brushing your teeth, if you’re going to the toilet—
+whatever it is you’re doing, make it grist for the mill of your awakening.
+Any act we perform can be looked at in a worldly way, or it can be looked at
+from a different vantage point—a vantage point that redefines who we are and
+what it is we’re doing here. Am I just “brushing my teeth”? Or am I “brushing
+my teeth as a way of going to God”? It’s a choice, and that process of shifting
+our vantage point is profound. It’s really a process of re-creating our perceptual
+field, re-creating our entire universe, act by act.
+We can turn any part of our lives into a sacrifice, into an offering. We can turn
+our feelings into our sacrifice. If you’re having trouble with someone, make
+them your practice. Add a picture of her or him to your altar. I take the people
+I’m having a really fierce time with, and I stick their pictures on my pupa table.
+Maharajah said to me, “Whatever else you do with another human being, never
+put them out of your heart.” And so now there’s that being whom I’m angry with
+there on my pupa table. I go to do my morning meditation; I look at the picture,
+and my heart closes to him or her. So I sit there with that picture, I sit there with
+that being, until I can let go of the anger, until I can reperceive that being, until I
+am seeing her or him as God. I get as close to the fire of my feelings as I can—
+and believe me, it gets hot!
+Sacrifice and renunciation are kindred practices. Sacrifice, in a way, ritualizes
+our acts of renunciation. There is a place for renunciation, papayas, or
+austerities, in our spiritual practice. It’s useful to impose disciplines on
+ourselves, when we feel that’s what we crave. If you crave it, it’s good to fast,
+because it will let you see how attached you are to food. If you crave it, it’s good
+to be brahmacharya, because you will see how captivated you are by your sexual
+desires. Papayas let us bring into consciousness the full extent of our
+attachments. If we can look at those attachments from the outside, from the place
+of the witness, we won’t get quite so sucked in by our sense desires all the time.
+If our minds aren’t always going outward so much, they’ll be free to turn inward,
+back toward the Light.
+That’s what austerities are about. When they make us feel joyful, because
+we’re releasing ourselves from something that’s holding us back from God,
+that’s a good indication that renunciation is the right practice at the moment. On
+the other hand, if we’re gritting our teeth and doing it all in order to “be good,”
+then maybe we should wait a while. When we start measuring “How much can I
+give up?—that’s a pretty good indication that righteousness has crept in. “I’ve
+given up sex, and I’ve given up meat, and I’ve given up milk, and I’ve given up. .
+. ” What an ego trip that is! That’s just being attached to being nonattached, and
+you haven’t even begun to renounce! The practice of renunciation is
+ultimately about renouncing our SU firing over this or that, and when that
+happens, the whole melodramatic part of the renunciation trip starts to fade
+away. The game isn’t to see how little food we can eat, or how little sex we can
+have, or how few clothes we can wear—that’s nonsense. The point of the game
+is to be free: not attached to having, not attached to not having, but free.
+Renunciation is a means to an end. Once we’re free, renunciation is irrelevant.
+The minute we’re free of attachment, we can use or not use anything in the
+universe. In fact, it all then becomes ours to use. All the energy of the universe is
+free energy, and once we’re free, it’s all there for us to use. But that’s only after
+we are without attachments, because only then can we be trusted with the keys to
+the kingdom. When we are without desires, without attachments, we will act
+only when we are drawn by our dharma to act. There will be nothing we’re
+looking to get from the situation that would take us away from our doing our
+karma yoga. Perfectly.
+Although it doesn’t take center stage in the Rita the way karma yoga does,
+Shakti yoga is central to the Rita’s message. In chapter 12, Krishna says that
+Shakti is the highest form of yoga. He tells Arjuna, “Those who set their hearts
+on me and ever in love worship me, these I hold as the best yogis.” Shakti yoga
+and karma yoga are woven together. Krishna tells Arjuna that those who serve
+him with love will be guided by him from within their hearts. It’s the goal of the
+karma yogi to act out of pure dharma—that is, to have every action guided by
+God’s will. And here Krishna is telling us that the way that’s accomplished is
+simply by adding love to the equation.
+So we add in the love, we engage in the Shakti practices, although at the same
+moment we recognize that there is a danger of getting lost in the object of our
+devotion and never moving past it. There is what we’ve called the lower Shakti
+and the higher Shakti, and the lower Shakti can be very dualistic—it’s the
+worship of somebody or something “out there.” Lower Shakti usually comes
+with a kind of needful, clinging attachment. There’s nothing wrong with any of
+that; it’s part of the way Shakti works. It’s fine, so long as we understand what
+it’s about, and we keep developing our wisdom so we can move on.
+I myself started out from a place of “lower Shakti,” feeling incredible love on
+a very personal level for this being, Maharajah. Here was this guy who was
+loving me, taking care of me, feeding me, clothing me, patting me on the head,
+pulling my beard, and giving me great teachings. I had never been loved like that
+before! My heart opened to him at a very romantic level; I just loved “Big
+Daddy.” However, through that love I opened myself to him, and so every
+teaching he was laying on me was just pouring straight into me, because my
+heart was so wide open. And in the course of that wide-openness, the teachings
+that came in from him kept redefining my existence and refining my
+understanding until my attachment to him as a form—that personal level of love
+for him—started to fall away, and something else came in its place. It became a
+love for that which he was showing me, that which lay beyond his form. At that
+point, my love for him had become the vehicle for my opening. That’s the way
+the yoga of devotion does its work.
+Chapter 9 of the Rita ends with Krishna telling Arjuna, Always think of me,
+always love me. “Give me your mind and your heart, and you’ll come to me,” he
+says. We can see a kind of daisy-chain of practices here: first karma yoga and
+Shakti yoga are linked— Krishna guides via the heart, the actions of his
+devotees. Now we see that Shakti yoga and Nana yoga are linked—to get to
+God, we have to give over both our hearts and our minds. We need wisdom to
+keep us from getting trapped in the lower Shakti; but the thinking mind needs to
+be balanced by the Shakti heart. When that combination of Nana and Shakti
+comes together, it’s powerful! The devotion gets clearer and clearer, and the
+wisdom gets more and more subtle. The Shakti takes us through the emptiness,
+and into a loving dharma.
+Papa RAMDAC was a beautiful Indian holy man. He was born in 1884 and spent
+most of his life in Mangalore, India, at an ashram he had there with Mother
+Krishna. Papa RAMDAC said that since all human beings have bodies, hearts,
+and intellects, they need to use all three in their spiritual development; otherwise,
+he said, it’s like exercising one part of the body and ignoring all the rest. He said
+that the body is to be used for selfless service (karma yoga); that the heart is to
+be used for devotion (Shakti yoga); and that the mind is to be used for
+discernment (Nana yoga). That is, each yoga is a technique that uses some
+aspect of who we are, as human beings, in order to take us to a new perceptual
+vantage point on our lives.
+All Nana yoga practices are ways of turning the mind back on itself. Papa
+RAMDAC wrote, “Man should use the intellect forVichara— i.e., he should
+discriminate between the real and the unreal to give up attachment to the
+unreal or perishable things of the world.” He’s telling us to switch our attention
+from the unreal—which is what we usually call “reality”—to the real. Working
+with a statement like that, with all its implications, with the writings and
+teachings of holy beings like Papa RAMDAC: that’s one form of Nana yoga. Then
+there are the forms of Nana in which we use the mind to beat the mind, practices
+like Zen koans or Richard ATM. There are practices that focus the mind, like
+meditation or mantra. And there are practices that let us take a step back from
+the mind, like witnessing.
+I think that the practice of witnessing can be a key spiritual exercise for us,
+because it lets us move outside the dramas of our lives. It shows us that there
+exists another plane from which to view our experiences. The danger of
+confusion in this practice is mistaking the judging voice inside our own minds
+for the spiritual witness. When we first begin to get some grasp of what the
+dance is all about, and we start to stand back a bit from our own trips, we
+frequently adopt a type of witnessing that is very judgmental. It’s got a standard
+— you’ve got Buddha as your standard, or Christ as your standard, or Krishna as
+your standard, or Maharajah as your standard—and next to that standard you’ve
+got your own behavior and your own thoughts and your own feelings. You set
+those two things side by side, and then judge your own behavior against the
+standard. That’s an extension of what is known as the superego, and it’s a heavy
+emotional trip that only tends to lock you more tightly into your predicament. It
+certainly doesn’t do much to free you.
+The witness that’s useful in our spiritual work has a totally different quality. It
+isn’t judging—good, bad, it’s all the same. This witness isn’t trying to change
+anything—it’s just seeing it all. It is the completely uncommitted; it’s not
+committed to your enlightenment, it’s not trying to get you ahead, it’s simply
+witnessing, nothing else.
+As we move into that perspective, however, we discover that in developing
+the witness, we sacrifice being the experience. That is, we sacrifice the thrill of
+the experience into the witness. Anytime we want to, we can become that part of
+ourselves that is the witness, which is just noticing it all, very calmly, very
+unanimously. It just takes a flick of our perspective—in fact, just the intention
+to be coming from that other place. That’s all. But to do that, we have to be
+ready to let go of being the experience.
+To develop that kind of witness, you have to have a little elbow room. That’s
+why one of my first instructions for Sahara would be “Give yourself some
+space.” Don’t always be filling up your time and your mind with content; create
+a spacious environment for yourself, one that makes it easier to step back and
+notice your trip.
+Then do just that. Notice it. Don’t judge it, don’t try to change it, don’t do
+anything at all except to notice it. You will find that a lot of your stuff has only
+been able to survive unnoticed; the minute you begin to bring it into the light of
+that “I” that is just looking at it all, it starts to change—without your ever having
+done a thing! All you did was to start identifying with a different part of your
+being, a part you could use to watch all the rest of it.
+Say I’m sitting here, witnessing, and suddenly I move my hands. I’m
+witnessing, so I notice the movement. Now, I can say to myself, “Why are you
+moving your hands so much?” That’s judging. Or I can say to myself, “Well,
+now that you’ve noticed that you’re moving your hands, you’ll stop.” That’s a
+program. But behind judgments and programs, there is just witnessing: hands
+moving, witness noticing, nothing more.
+But even with this level of the witness, we’re still operating within a dualistic
+framework: The witness is still witnessing something. Later on, there comes yet
+another kind of witnessing, a kind of pervasive perception of everything, which
+comes out of total nonattachment. When we come to that place, another
+transformation occurs: Then we are still the witness, but we are also the enjoyed.
+We are the experience, the experience, the total participant. There is no part of it
+we are not. And that is the witness Krishna is referring to when he says, “I am
+the Witness. I am the Knower of all the fields.” That’s not an ego witness; that’s
+not a Nana-yogic exercise. That’s Brahman. The practice has transcended itself;
+it has taken us to the place where we witness it all because we are it all, because
+we have merged. It is the Oneness out of which the higher wisdom is born. It is
+the “beyond the Beyond.”
+So how does all of this add up? What does all of this mean in terms of our own
+Sahara? We are all at different places in our journey. Some of us feel we’re
+right at the beginning of something new. Some of us feel like we’ve fallen off
+the path. Some of us are doing regular practices. Some of us don’t know what to
+do next. For many of us, there is a lot of confusion about our Sahara: What
+should I do? Am I doing it right? Is some other path better for me than this one
+is?
+In trying to figure out a way to approach our Sahara, there are a few
+strategies that I would suggest we keep in mind—and the first and most
+important one is Relax! It doesn’t really matter which next thing you do, because
+whatever it is, it will become your next teaching. And it isn’t the thing you do
+that matters, anyway—it’s who it is that’s doing it, where it’s coming from in
+you. That means that all those choices and all those decisions that we agonize
+over aren’t really quite so fraught and melodramatic as we like to make them out
+to be.
+The second part of my strategy has to do with learning to listen within. It’s
+about learning to trust the inner, intuitive sense of what it is you are about at any
+moment. Doing that may take you down some very unexpected avenues—in
+fact, it probably already has. For example, I’ll bet that a large percentage of the
+people who are attending meditation retreats and monastic retreats these days
+wouldn’t even have entertained the possibility of such a thing a few years ago.
+Can you imagine, wasting your vacation going someplace where you sit on a
+pillow for sixteen hours a day? But then suddenly it feels right on. It feels like
+the obvious next thing to do.
+So instead of preprogramming how you think your spiritual journey is going
+to unfold, it’s better to listen intuitively. That means you’re going to have to
+keep being straight with yourself. Don’t be afraid to change when your intuitive
+wisdom tells you to. You start a Sahara, and you go into it with total
+commitment, and you drink deeply of it. But then you begin to experience its
+limitations for you. At that point, the tendency is either to deny your intuitive
+wisdom in order to stay on, or to start looking for things to criticize in the
+method so you can justify exiting. However, I think that a more sophisticated
+way of dealing with it is just to say, “I have no more work to do here right now.”
+No judgments. It’s not that it isn’t beautiful, and it’s not that you aren’t beautiful
+—it’s just saying, “We don’t have any more work together at this time.”
+Now, you’re going to have to trust your own heart in all that, because you’re
+not likely to get much support for your decision from either your teacher or your
+fellow students. Your teacher is going to say, “You mustn’t leave. If you leave,
+you’re going to fall into the pits of hell.” Don’t worry about it, scary though it
+may be. You’ve got to keep trusting your intuitive heart. At some point, your
+heart drew you to the teacher, and if you trusted your heart then, trust it now
+when it says, “Go on.” There is nothing wrong, either, with leaving a teacher and
+then coming back five years later and saying, “Well, I guess I made a mistake.”
+Mistakes are an absolutely necessary part of the process.
+Once you relax and trust your heart, you’ll find that you will be drawn by
+exactly those forms and practices that are going to take you through. Work with
+whatever it is that’s drawing you at the moment. At one moment, you’ll sit by
+the river, and you’ll look at a rock, and you’ll feel its sacredness, and that will
+take you out of yourself. At another moment, nature won’t do it for you, but
+something else will. Sometimes it will be just a word about Christ that will do it;
+your heart will open, and you will feel that spark of Spirit. Or there will come a
+moment when the intellect will be so clear and precise that you will see the
+whole panorama, the awesome nature of the design of it all, and that will take
+you beyond thought. Each of those is a different moment. At one moment, one
+form feels comfortable, right, useful; at another moment, another form. Just keep
+flowing in and out of the forms. Use them and then drop them—the forms aren’t
+“it.” The point isn’t to cling to one practice or another, one teacher or another;
+the point is to use whatever can at this moment open you to living spirit.
+If you have any doubts about whether you should be doing a practice, stop
+doing it. If you have any misgivings about doing Sahara, if there is any
+question in your mind as to why you are doing it, stop. Go back and live your
+life just the way you lived it before you ever heard the word “Sahara,” before
+you ever turned on, before you ever meditated or prayed, before you ever knew
+anything about all of this nonsense. Go and live exactly as you did, and forget
+this whole Jeshua business. And then watch what happens. Watch the way you
+are drawn by some inner thread to open a spiritual book and read a few passages,
+or to sit quietly and watch a candle flame.
+If we can just quiet down all the ought and should in ourselves, if we can be
+finished with that whole Protestant ethic trip we’ve been on, we will see that we
+are really already further out than we give ourselves credit for being. We keep
+thinking we have to get behind ourselves and push, when all the time we are
+actually being propelled full speed ahead. When we see that, we recognize that
+Sahara isn’t something we do to get ourselves somewhere; it’s something we
+do to get ourselves out of the way, so we can stop being obstacles to the process.
+When we try to quiet down and listen for what to do, we often find that there’s
+a lot of emotional stuff standing in our way. We find that before we can get on
+with it, we have to get rid of all our accumulated personality stuff, and cleaning
+up our stuff means we first have to look at it. We all have things we keep
+closeted away in our minds— thoughts about who we think we are; thoughts that
+are so gross, so personal, so humiliating, so awkward, so. . . Yick!—that we
+would never want to let another person see them. You can run your own
+personal laundry list of what those things for you—but whatever they are, they
+make us feel so uncomfortable about ourselves that all we want to do is hide
+from them. We seal them off in some dark corner of our minds and never look at
+them.
+When I work with people, there’s a practice I sometimes use to help them get
+their stuff out on the table, where they can look at it. I’ll sit across from a person
+and say, “Let’s focus our eyes on each other’s Anna” (that’s the third-eye point—
+it’s on the forehead, between, and just above, the eyebrows). Then I’ll say to the
+person, “If there’s anything at all that you can bring to mind that would be too
+uncomfortable, embarrassing, disgusting, obnoxious, scary, or wild to share with
+another human being, share it with me. Go ahead.” Saying that is like saying,
+“Don’t think of a rhinoceros.” What immediately comes to mind is whatever it is
+you most want to hide: “When I’m alone, I pick my nose.” Or “I’d like to have
+sex with my mother.” Or whatever it is that you’ve been hiding. If the person
+can bring herself or himself to be really honest, to tell me what comes to mind,
+that brings it out into the light, which is the first step in letting go of it.
+That exercise also lets us see that we aren’t as vulnerable as we thought we
+were. I’ll start to do that exercise with somebody, and that person will say, “Oh,
+no—I can’t tell you that!” Then he’ll wrestle with it for a while, and finally he’ll
+say, “Well, all right, I’ll tell you. I masturbate thinking of my father’s penis, and
+I tie my legs together first.” Then he waits for some kind of reaction from me—
+he waits for me to gasp, or draw back, or look askance or something. But I’m
+just sitting there with my male, chanting, “Ram, Ram, Ram. . .” He could have
+said anything! Whatever it is, it’s just another thing. Yeah, right, so what else is
+new? What stuff could you possibly have that’s unique? Do you really think
+you’ve got stuff that’s so special? I’ve been doing this exercise with people for
+years now, and I haven’t heard anything new so far. Little permutations on this
+and that, but nothing really new. And furthermore, I haven’t found one thing, yet
+that has freaked me out. From where I’m sitting, in the middle of my mantra, it’s
+all just stuff, stuff, and more stuff passing by.
+So you let it all come out, and you look it all in the eye. But then once you’ve
+brought all the stuff to the surface, once you’ve looked at it in the daylight, the
+next question is, how quickly can you let go of it? That’s the critical next step.
+You don’t keep dwelling on it— haven’t you had enough of all those
+melodramas yet? Let them go;— it’s OK. So you are lewd, lascivious, lazy,
+disgusting, disgraceful, perverse, greedy, passionate, hateful, vengeful, and
+despicable. Right. And here we are. See? “And here we are”—in other words,
+it’s the human condition! We’re all part of it—what can we do? So, finally, you
+just let go of all your stuff. You let go of it, inside your head. You just release it
+—that’s all. There’s such a sense of lightness and freedom that comes with that.
+After you’ve been working with bringing all the terrible stuff out into the
+light, it’s a good idea to balance it by flipping the exercise around, and
+examining your own beauty and your own divinity. Let yourself experience—
+deeply experience—the incredible beauty of your own being, without allowing
+any sense of unworthiness to hold you back. Feel the radiance of your own inner
+heart, touch the depth of your own inner wisdom. Sit with that, until it deeply
+permeates your being. An exercise like that helps offset the whole negative core-ego trip that we seem to be stuck with.
+Another way to experience your divinity is to identify yourself with a Being
+of Light, like Christ, or Quan Yin, or Rama, or the Buddha. Start by visualizing
+her or him “out there,” in front of you, external to yourself. Then gradually begin
+drawing that Being into yourself. You can use your breath to help: with every in-
+breath, you draw the Being into yourself more deeply. With every out-breath,
+you feel that presence filling you. Draw that Being into your heart, into the
+center of your own being. Let that presence expand and expand, until it fills you,
+until it becomes who you are. Let yourself become that Being of Light and Love.
+Then afterward ask yourself, “During the time I was being that Being, what
+happened to all those ‘negative’ things in me? Where were they then?”
+So my suggestions thus far are that we relax, trust our hearts, and to do
+whatever cleaning-up operations present themselves. My final suggestion for a
+strategy of Sahara is this: Trust the dharma. Trust it, even if you feel at some
+ego level that you’re shucking yourself a bit. It’s very helpful to our Sahara if
+we can start looking at the laws working around us and upon us as benevolent.
+Notice that I don’t mean benevolent as “nice,” in the sense of something that’s
+trying to keep our egos happy or even trying to keep us alive. I mean something
+that’s benevolently guiding us through our karma—that is, something that’s
+benevolent because it’s helping us to awaken.
+My understanding of the dharma is that it’s a system designed to help us on
+our evolutionary journey. We are all part of an evolutionary journey, and every
+experience happening to us at every moment is a gift, a teaching we’re being
+given. All we need is the perceptual stance that allows us to appreciate it for
+what it is. This moment, right now: Do you see what a gift it is to your
+awakening? It’s perfectly designed to help you break out of the shell of your
+ego, to dissolve the separation between yourself and the Beloved.
+As I understand the law of it all, we are all dwelling in Grace all the time. The
+only thing that ever falls out of Grace is our own thinking mind:We fall because
+we think we fell. The minute we give up our thoughts—just our thoughts!—there
+we are. God is always exactly one thought away—and the minute we quiet that
+thought, here we are again.
+Well, the issue of the law and its workings brings us back to those still
+unanswered questions about free will and determinism, about karma and
+responsibility. I was in a dialogue with Trunk once, in Vermont, and he said to
+me, “What do you do about sorcerers?” I said, “What sorcerers, Trungpa? Furthermore, I don’t
+see any sorcerers, and besides, I wouldn’t do anything about them, anyway. My
+guru takes care of me; that’s his business. I just love God.” And Roche
+replied, “You’re copping out.” He said, “These are critical times, Ram Days, and
+we must assume responsibility.” I thought about that for a moment, and I
+decided that he must be putting me on, so I said to him, “All times are critical,
+Roche, and God has all the responsibility.” He said, “No, you don’t
+understand. You must take responsibility.”
+I’ve come to believe that Trunk was right, in a certain way, and that I was
+copping out. If I deny the “sorcerers”—that is, if I deny this physical plane with
+its individual differences of good and evil—then I am caught. I am caught in
+denial, out of fear of this plane, with all its stuff. I am no less hung up than if I
+had been totally preoccupied with the individual distinctions and failed to
+appreciate the One that lies behind it all.
+So I’ve worked with that concept of “responsibility” over the years, and what
+has emerged is a deeper and deeper understanding of the whole question of free
+will and determinism, and of the paradox: that they are both simultaneously true.
+It’s like there are levels of free will and determinism, almost like a free-will
+sandwich, with determinism in between. Before we start awakening to who we
+really are, we’re living within the laws of karma, and it’s all just running off
+mechanically. But within that mechanical runoff, we think we’re making
+choices, and so we have to make them. We have to exercise our “free will.”
+Then we begin to become a little more aware, and we see that we have no free
+will, that it’s all just law upon unfolding law. We see that everything is just
+lawfully running through us, including our apparent “choices.” So we say, “I
+have no responsibility—I’m just my karma running off.” But then, as we keep
+going further still and transcend the guns, we come into the Brahmanic state—
+and there our will is truly, totally, absolutely free. We can do whatever we want
+to do.
+The only hitch is that by then there is absolutely no desire left within us. In a
+state of total bliss, what would you desire? From that place, the only acts we end
+up doing with our “free will” are the things we are drawn to do by the workings
+of the dharma. That is, we end up acting only to fulfill the law, because there is
+nothing else we would conceivably do. We exercise our free will by
+surrendering into being the pure instruments of the dharma. All those desires that
+preoccupied us for so long? We could fulfill them with a thought—except that
+the desires themselves are long since gone. There is no longer any personal trip
+whatsoever that would motivate us to act, so although we’re entirely free, we act
+only to fulfill our role in the way of things.
+So do I have responsibility, or don’t I? Well, I do and I don’t. It all depends
+on where I’m standing. These days, I try to stay aware of both levels—to
+surrender it all to my guru, and at the same moment to assume responsibility for
+my dance. As far as I’m concerned, it is all being done by Maharajah—and yet I
+do my best to play my part as impeccably and as responsibly as I can. I am
+trying to learn to keep both of those perspectives going at the same time. At first,
+back before I met Maharajah, I thought I was making all the decisions. Then I
+was caught in rejecting the responsibility, and saying, “Maharajah’s doing it.”
+Now, more and more, I’m appreciating that it’s a both/and situation, and I am
+living with all the richness of that paradox.
+And so it goes. We try to learn to live with all these complicated, multilayered
+dimensions of who we truly are. We see the trip we are on, and we see where it’s
+taking us. We see that it’s all an inevitable unfolding, and we open ourselves
+more and more to the process. In the meantime, we are all just lawfully running
+off our stuff. We are all each other’s karma, and it’s all the guru’s game. It’s all
+God’s Lila: us and our lives, our melodramas and our Bahamas, it’s all just God
+at play.
+Krishna describes the various ways in which the divine manifests in the
+universe: as that which creates form, as the forms that it has created, and as the
+essence within each of those forms. Krishna says, “I am also Brahman. I am the
+formless, timeless, spaceless, beginningless, endless Brahman. In each
+individual, the spark of that Brahman, the Atman, is me.” So Krishna produced
+each individual; Krishna is each individual; Krishna is within each individual.
+We are all Krishna. We are all God. And through the experiences of incarnation
+after incarnation, our souls will shed the veils that separate us from the Beloved.
+Slowly, slowly, we begin to appreciate the awesome nature of the design of it
+all. Just think: All of this—all of it!—is a totally preprogrammed trip we are on,
+a trip that is taking us through this dance of incarnations, through all the myriad
+roles and forms, all to bring us back to God, back into the One.
+Sometimes we get a glimpse behind the scenes, and we see our own
+lives as stories running their course. All the choices and decisions and crises:
+most of the time we’re seeing them all as: “What should I do next??!” But then
+we turn the page—and all of it was already written. It’s like a murder mystery,
+where you are the butler walking toward the pantry on page 42. But you are also
+the person who is reading the story—and who’s read it all before, it seems, so
+that somehow you already know what’s going to happen when the butler reaches
+the pantry. And finally, when you’re ready and when the moment is ripe, you
+recognize that you are the author as well.
+And behind the butler and the reader and the author, behind the Brahman and
+the Prakrit, behind the formless and the forms, behind every polarity and every
+distinction—I am. Formlessness to form, form to formlessness—all one. Sub EK.
+And in recognizing that dance of the formless and the forms, we recognize the
+sacredness of everything. Every thing. So we begin to acknowledge that
+recognition, and we begin to respect that sacredness: by reinvesting our lives
+with Spirit; by rediscovering ways of honoring the sacred; by offering ourselves
+and our incarnations into the fire, as our sacrifice to God. And it all gets lighter
+and lighter, it all starts to become more and more transparent. We are still doing
+our dance, but our egos are less and less intrusive all the time. We are dancing
+more lightly. We are learning we can walk without touching the ground.
+The Course Syllabus for The Yoga's of the Bhagavad Gita
+In addition to the lectures, this course includes a number of exercises designed to
+provide experiences which can evolve into a complete Sahara (program for
+spiritual practices) based upon the Rita. The exercises include:
+This syllabus is reproduced from the original and contains some variations in
+typography and usage from the rest of this book.
+A. KEEPING A JOURNAL
+During this five-week journey, beginning as soon as possible, keep a journal in
+which you record the insights and experiences that arise from going deeply into
+the Rita. Like the other exercises, writing will be used as a vehicle for becoming
+more conscious, for becoming an open book. Journals have a way of reminding
+us that we are constantly changing, that we are constantly changing, that there is
+no immutable, fixed self. “I seem to be a verb,” says Buckminster Fuller in his
+journal.
+The first entry should concern the personalizing for you of Arjuna’s
+predicament as defined in chapter 1. His despair, confusion, inner struggle,
+depression, loss of Seymour of experiences, desire to cling to old habits, etc., are to
+be recognized as part of the journey. What specific anecdotes or immediate
+states from your own “personal history” can you bring to mind which are a
+foundation for your empathy with Arjuna’s situation.
+Subsequent entries will include your reactions to each of the various exercises
+in the course as well as to points in the text or lectures from which you
+experience a profound affect. Entries can be as brief or extensive as you wish to
+make them.
+The entries can be in any form, whatever form feels right for the transmission.
+Some might be in discursive diary form; others might be less linear, more poetic.
+You may want to include quotes from other beings who are connected to your
+spiritual growth, or pictures, or anything that fits between the pages. Don’t write
+for an audience or reader. It should be your honest experience, a record of
+your own journey through these paths of consciousness, simple comments on
+what you are seeing about yourself, your world, and your relation to the
+teachings of the Rita.
+It is helpful to meditate before writing, to get closer to the source of the Word.
+If you can clear your mind, if you can create an open space where there is no
+thinking, no trying, the words will arise spontaneously, and you will only have to
+transfer them to paper.
+At the beginning of the fifth week those of you who wish formal course credit
+will be asked to submit your journal. In general, they will be scanned for the
+administrative purpose of determining a “pass” or “not pass” for the course. Any
+sincere journal effort will, of course, get a “pass.”
+Because of the number of students registered in the course and the time
+limitations, it will be impossible to read more than a page or two of any journal.
+If there are one or two specific pages which you wish the staff to read or
+comment upon—please note and clearly mark the page numbers on the cover. If
+there are specific pages you do not wish to have read, also clearly make note of
+these. The journals will be returned to you.
+B. CONTEMPLATION
+The characteristic of intellectuals is that they like what they cannot understand.
+If they do not understand it they will say, “Very good, very good.” If it is
+something they can easily understand, they say,“Nothing new, nothing special.”
+In true spiritual work, intellectual achievement per se is inadequate. The mind
+must carry out its conclusions in the heart, the seat of the emotions. The
+emotions, in turn, must effect actual deeds.
+Scriptural study can bring to us both exhilaration and humility. The sublimity
+of the words of truth will bring delight and inspiration to our minds and hearts.
+We will be stimulated to continue our study. Humility will come as we realize
+the inherent limitations in the intellect’s attempt to fully integrate and understand
+the Nature of Truth. The Word may be a taste, but we humbly realize that the
+“word” is not the thing. Our minds are continually inspired, humbled and blown
+as we advance in our studies.
+When we concentrate, we always concentrate on an object produced by our
+own mind. However, when a person is calm enough and pure enough, the act of
+concentration may, as Aldous Huxley says, merge into “the state of openness
+and alert passivity in which true contemplation becomes possible.” True
+contemplation is true prayer, a state of union with the divine. Contemplation in
+its lower forms is discursive thought. Don’t get lost in the lower forms.
+EXERCISE
+Begin this exercise early in the day, preferably after your morning
+centering practices. Choose a verse or a portion of a verse from the
+Bhagavad Gita which seems particularly meaningful to you right
+now, which touches some place inside of you. Read the verse
+several times. Try to understand the meaning of the verse with your
+rational mind. Now read it again and take the meaning inside. Just
+sit with it—not using the mind to understand. Take it as deeply
+within your heart as it wants to go. If you wish, do this last step
+again. Let the verse take you where it will, but witness the
+distractions and images that are brought up in your mind along the
+way.
+During the remainder of the day, when you find yourself
+becoming anxious, speedy, bored, or just in need of centering,
+remember the Rita verse and let it take you inside once more.
+If you truly desire freedom, and you understand and believe that
+living the truth of the Rita will actually set you free, you will find
+that the Rita becomes more and a more integral part of your daily
+actions.
+Optimally this exercise with the Rita would be done daily during the entire
+five weeks of the course.
+In addition, select from time to time other objects of contemplation, such as:
+A holy picture (you will find later that any picture can become
+holy through contemplation).
+A flower, leaf, rock, tree, etc. Sitting by a stream and
+contemplating the water is a very powerful exercise.
+A divine quality such as loving-kindness for all beings,
+compassion, equanimity, etc.
+The marketplace as you sit on a bench at a bus stop, etc.
+Anything else (e.g., relationships, etc.) which brings you to a
+place of deeper understanding.
+Time.
+The body is always in time, the spirit is always timeless, and the psyche is an amphibious creature, compelled by
+the laws of man’s being to associate itself to some
+extent with its body, but capable, if it so desires, of
+experiencing and identifying itself with its spirit.”
+—A. Huxley
+Time is what keeps the light from reaching us. There is
+no greater obstacle to God than time.
+—Eckhart
+Our true future is our own growth in Now, not in the
+tomorrow of passing time.
+—Nicole
+In order to open the doors to a feeling of what time is and how our lives
+function in relationship to it, it is useful to experiment with the following:
+EXERCISE
+Do each of the following for 10 minutes, one after another:
+Watch your breath—follow it as it enters the body and as it
+leaves.
+Eat your favorite food.
+Watch TV or listen to the radio with your eyes closed.
+Sit around and do nothing.
+Notice how your perception of time changes in each activity.
+EXERCISE
+Sit quietly for 20 minutes. Divide a page of your journal into two
+columns: Past and Future. List simply your thoughts under the
+headings. Reflect on how much of your thought comes under these
+two categories.
+EXERCISE
+Conceive of a world of only two dimensions—all surface (length
+and breadth), but with a small extension into the third dimension
+(thickness), like a piece of paper. Imagine beings living in this
+paper world, cognizant of nothing else but their world and what lies
+in it. Now if a pencil is pushed through the paper, they would know
+only a cross-section of the pencil because that would be all the
+pencil in their world.
+Envision our relationship with time as limited in the same way.
+For us, the pencil exists in its entirety—the beginning and the end.
+For them, only the cross-section in the paper exists. The cross-section in their world corresponds to the measure of time called
+“present moment.” What the paper beings knew with their two-dimensional senses, we would know to be only relatively real—
+only a part of the pencil. Reflect on the possibility that our sense of
+“passing time” may also be only relatively real.
+If one of us could descend into the paper world, learn the two-dimensional views and habits of thought, and explain that this
+world is only a limited expression of an infinitely larger and
+different world, what would they say? Examine your views of time
+in this light.
+In your journal keep a list of the objects of contemplation you work with and
+diary notes if you wish. If you are not able to “grok” or fully incorporate one or
+more of them initially, perhaps you will want to work with them again later.
+C. MEDITATION
+The quieting of the mind is perhaps the single most important foundation for all
+other yogic practices. Europa has provided meditation halls for us. If you are not
+in the habit of meditating regularly, it would be useful for you to attend a regular
+sitting each day at one of these halls. The presence of other meditators and a
+meditation master helps. Later, as you prefer, you can meditate in any quiet
+place where you will not be disturbed during the period of practice.
+Each week throughout the course, during a lecture period, a meditation
+teacher of Satipatthana Vipassana from the Theravada Buddhist tradition will
+introduce one of a series of formal meditation exercises. He and other members
+of the staff will be available during office hours to advise you about any
+difficulties you may encounter.
+If you are already an adept in another form of meditation, or are
+simultaneously receiving meditation instructions in another course at Europa,
+feel free to pursue these other practices if you prefer.
+D. THE WITNESS
+“Suddenly I remembered that I had forgotten to
+remember myself !”
+—Suspense
+The method of developing the witness is useful practice on the path, although it
+must be eventually left behind with other methods. The blossom must go as the
+fruit will grow. It is a voluntary creation of the intellect, a place of detached
+watching of phenomenal activity, where no judging or comparing takes place.
+(“If you wish to see the truth/then hold no opinions for or against anything.” 
+Just see what is. The witness dwells in the cool space between the heat of one’s
+imagined self and one’s projections. It is an aspect of ego used to extricate
+yourself from unconscious attachments to other aspects of ego.
+Moments of consciousness are brief compared to the vast intervals of
+unconscious, mechanical, conditioned ways of being. We are continuously
+losing the thread of attention, seeing who we are, losing it again, finding it again,
+being pulled this way and that by the surrounding forces.
+The witness, however, does not come into existence by desire or decision
+alone. It must be developed by specific techniques and exercises. Certain
+meditation practices of mindfulness may be used as well as exercises that take us
+out of our normal patterns. Many of the exercises in this course will allow us to
+observe our beings through new lenses. Special mindfulness meditations will
+also be taught during the course to help in establishing the witness.
+Situations that take us out of our normal patterns often allow us to observe our
+workings more clearly. Time of silence and fasting are examples of this. Yet all
+our daily actions are available to the witness, particularly if we slow them down
+enough to see the precise quality inherent in them. Opening a door, eating a
+salad, washing a dish—all are potential exercises in mindfulness. Any of our
+usually “thrown away” actions can have the clarity of the tea ceremony.
+The witness is not evaluative. It does not judge your actions. It merely notes
+them. Thus, if you perform an act because of desire, such as eating something
+that is not helpful to your Sahara, and then you put yourself down for having
+eaten it. . . The witness—when it finally appears—would merely note: (a) he is
+eating such-and-such, and (b) he is putting himself down for eating such-and-
+such. Thus, the witness has noted a “you” of desires and a super-ego you. . . Two
+“youare.”
+This point is important. Most of the time the inner voices of most people are
+continually evaluative. “I’m good for doing this” or “I’m bad for doing that.”
+You must make that evaluative role an object of contemplation as well. Keep in
+mind that the witness does not care whether you become enlightened or not. It
+merely notes how it all is.
+Appearance of the Witness
+At first the witness is adopted because of an intellectual understanding of the
+need to separate the Self from the Doer. You probably remember your witness
+only now and then, when you are in a calm dispassionate state of mind. The
+moment you get distracted you lose the witness. Later you “come to” and
+remember that you forgot.
+For example, you are walking down a street witnessing yourself walking
+down a street. You feel happy and witness feeling happy. . . And so it goes. Then
+you meet someone or see something that irritates you. Immediately you get
+irritated and forget all about the witness. The adrenaline pumps through you and
+you think angry thoughts. At this point “angry me” is who you are. Only much
+later do you remember that you were attempting to witness.
+At that point you promise yourself that you won’t forget again. Ah, how little
+you know about the subtleties of the seductions of the other “youare.” Again you
+are walking and again witnessing walking and so forth. This time you meet with
+another situation which irritates you. Again you lose your witness (or center as it
+is called sometimes) and again your endocrine glands secrete, and you think
+angry thoughts. But this time right in the middle of the entire drama you “wake
+up”. . . That is, you realize your predicament. But at this point it is difficult to get
+free of the angry you because you are already getting much gratification. (It’s
+like trying to stop in the midst of a sexual act.) And so you use some
+rationalization such as “I know I should be witnessing but after all he deserves to
+be punished” and with that you climb back into the “angry you” role with a
+certain amount of self-righteousness. And so it goes through thousands of such
+experiences.
+After a time (however long is necessary) you notice that although you still
+lose the witness (fall asleep) as often as before, you are starting to “remember”
+sooner. That is, you are getting to the point where the actual falling asleep is
+starting to “wake” you. This is a big step forward.
+Again, after some time, it all gets much more subtle. Now you are walking
+down the street and again you witness it all. . . And again an “irritant” presents
+itself. This time—as you are about to get angry— the witness says, “Ah, about to
+get angry, I see.” This often short-circuits the energy the “angry you” was
+fueling up with, and it falls away. So now the lapse between being awake and
+being asleep is getting much smaller. Simultaneously, you begin to note that you
+don’t fall asleep (i.e., fall out of the witness) nearly as often. Throughout the day
+you are remaining centered in the witness watching the drama of life unfold.
+Later, when you are established in the witness, it will begin to disappear as a
+conscious stance, and you will be left with a feeling of spacious, timeless
+presence surrounding each act.
+E. GIVING AND RECEIVING
+“Neither give nor receive.”
+—Patanjali
+“Not as the world gives do I give.”
+—Jesus
+“Saints and birds don’t collect.”
+—Need Karol Baba
+True giving and receiving are just part of the energy flow of the constantly
+changing universe in which we are all one and everything belongs to all of us. . .
+All the food and all the books and all the houses and cars and clothes and all the
+energy of the universe. Maharajah, who owned nothing but a blanket, and he
+periodically gave that away, said, “Why give me money? All the money in the
+universe is mine.” (Then he laughed.) We all share in it—it belongs to all of us
+and none of us. “Neither give nor receive,” warned Patanjali. Don’t be a giver or
+a receiver, just a void channel for the ever-changing energy. True giving is
+dwelling in a state of spontaneous compassion, dwelling in the open heart space.
+True receiving is the same. From that space you perceive a need in someone, and
+you fill it if you can. No ego motives. Pure action.
+That’s one level. At another level, most of us own things and desire to own
+more things. When we give, there is usually some feeling that “This is mine. I’m
+giving it to you, then it will be yours. And you should thank me and think that I
+am a generous person and love me a little more than if I hadn’t given it to you.”
+Often our gifts are Greek horses in Troy—they are filled with soldiers of the
+mind. They are given to fulfill our desires for power over others.
+In Hindi there is no commonly used word for “Thank you.” One rarely hears it
+expressed. The Indian tradition holds that giving is part of doing your dharma.
+One gives what is appropriate and prescribed for him to give and “why should I
+be thanked for doing what is my duty?”
+Most of our giving and receiving habits are based on the ego-created sense of
+separateness. They keep us from experiencing true giving and receiving, which
+is simply dwelling in the heart space, the center, and letting the energy flow
+through. When we are being still within that space, compassion—unconditioned
+love—arises spontaneously. For many of us, the most direct path to the center is
+meditation. When you’re there, you know openness. You know you are not the
+doer, the giver, the receiver.
+To work with these exercises is to try to give and receive from within that
+consciousness and to witness yourself doing it. Choose two of the following
+exercises—one that seems difficult for you (it will show you where you’re deeply
+attached) and one that seems easy (it will allow you to be more gentle with
+yourself, go more slowly, spend more time witnessing your attachment). After
+doing each of the exercises, write about it in your journal.
+GIVING EXERCISES
+Give away fruit on the street. Take enough to last a few hours so
+that you’ll experience a wide range of responses from people.
+Offer it to passersby. You might try doing it at two locations: one
+where many people are hungry (industrial and campus
+lunchtime) and then one where they’re probably not (middle-class shopping area in mid-afternoon). Watch the difference in
+your inner and outer behavior in the two places. Don’t be
+attached to the fruits.
+Give away some of your possessions.
+Give away something you don’t care about and then give away
+something that is precious to you.
+Give something to someone you like and then something to
+someone you don’t know or are not quite straight with.
+Give two gifts—buy one and make the other.
+Give something to your parents or your children.
+Give away money anonymously.
+Give fruit or sweets at an institution—a mental hospital or
+orphanage or old-age home.
+Give something to a child and then something to an adult.
+Give time. Offer an hour or a day in service to a friend or
+institution.
+Give it all away! (Except for your journal.) Because the
+administrators of the course have not done this particular
+exercise, we are offering it as useful based on hearsay.
+RECEIVING EXERCISES
+For one day eat only what is offered to you by others. (Don’t tell
+anyone what you are doing until the day is over.) Many yogis in
+India practice this tapas ya. It helps you realize that you are not
+the Prime Doer and awakens you to the level at which it is being
+done for you.
+Reflect on recent things that have been given to you and your
+reactions to these gifts.
+“Satisfied with whatever comes unasked. . . Even acting
+he is not bound.”
+—Rita 4,22
+“Tram, a saint in India and a poor man, was once
+given ten sticks of sugarcane as a gift. On his way
+home, he gave away nine of the sticks to beggars,
+saving one for himself. When he arrived home and told
+his wife, she beat him with the remaining stick.”
+—Story told by Maharajah
+F. SILENCE
+“The whole world is tormented by words And there is
+no one who does without words. But only insofar as one
+is free from words Does one really understand words.”
+—Sarah (early Tactic Buddhist)
+Select a day when you can arrange to go deeply into silence. Choose a time with
+the least obligation for speaking, having previously taken care of business
+matters and concerns for physical maintenance. It is probably best to tell your
+friends about the exercise so they will understand. Don’t speak to anyone during
+the day, though at least part of the day should be spent among people. Use brief
+written notes when necessary. Be compassionate in your silence; don’t make
+other people uptight in your presence. If you are becoming too fierce in your
+resolve, and your living situation is becoming awkward or uncomfortable, stop
+and wait for a day when you can handle it better.
+This day of silence is part of the continuing exercise of developing the witness
+and its reflection in your journal. Silence gives us the space to listen to the many
+voices we are. Journal entries might include some of this inner dialogue as well
+as other teachings of the silence, such as an awareness of how others around you
+use conversation.
+When the impulse to speak arises, this energy might be channeled into a
+spiritual affirmation or mantra, the Prayer of the Heart, the Triple Refuge, or
+whatever method is right for you.
+Sometime during the day, reserve at least one hour for the silence of body,
+speech, and mind. Find a comfortable position for the body, keeping the spine
+erect, and determine to sit for an hour without moving at all. At the same time,
+practice the silence of the mind through meditation or prayer. (“The inner silence
+is self-surrender— living without the sense of ego.” —Ramona Maharishi) You
+will already be practicing the silence of speech. These three silences—of body,
+speech, and mind—are known as the Noble Silence.
+Some inspirational words on the unspoken:
+“I realized in this place that people feared silence more
+than anything else, that our tendency to talk arises from
+self-defense and is always based upon a reluctance to
+see something, a reluctance to confess something to
+oneself. Directly a person is quiet himself, that is,
+awakes a little, he hears the DI fervent intonations and
+begins to distinguish other people’s lies.”
+—Suspense
+“Quietness is master of the deed.”
+—Tao Te Ching
+“My life is a listening— His is a speaking. My salvation
+is to hear and respond. For this, my life must be silent.
+Hence, my silence is my salvation.”
+—Thomas Merton
+“Silence provides economy of psychic energy and
+increased power of concentration.”
+—Meter Baba (silent for the last 40 years of his life)
+“Silence is the language of God— It is also the
+language of the heart.”
+—Swami Savanna
+“Be still and know that I am God.”
+—Psalm XAVI
+“Silence is the mother of truth.”
+—Thomas Merton
+“Only that which can be expressed in words is being
+said.”
+—Amanda Mai Ma
+G. PAPAYA
+“When in recollection he withdraws all his senses from
+the attractions of the pleasures of sense, even as a
+tortoise withdraws all its limbs, then his is a serene
+wisdom.”
+—Bhagavad Gita, 4–58
+Tapas ya or religious austerity is the most direct way of dealing with attachment.
+Fasting, silence, and sexual continence are widely practiced papayas.
+Fasting as a spiritual practice not only cleanses your body, but alters your
+consciousness just enough to allow you to hear the inner voices a little more
+clearly than usual. Fasting also gives those voices something to struggle with. If
+you can dwell in the witness place, you’ll be able to hear arguments from the
+grossest to the most subtle.
+Try jumping into the fire. Completely stop eating for a prescribed period of
+time. This gives you the space in which to witness the desire (probably over and
+over again)—space in which to see that you are not the desire; space in which to
+see how the desire rises and then falls away. And from this inner struggle comes
+the fire which will eventually consume your impurities.
+Resolve firmly to fast for a full day (24 hours). You might make the resolve
+just before sleep or just after your morning meditation, when you’ll hear it in the
+deeper places. Then, in the middle of the morning, when one of the many voices
+of the ego announces, “Tomorrow would really be better—I have so much to do
+today,” or “Small bites don’t count,” you can refer that voice to your resolve and
+get on with the business of fasting.
+Decide before you begin whether you will take juices, or fruit, or just water
+during the day. Some say the purest fast is to take just water; Maharajah said,
+“Always take a little something.” Whatever you do, it is important to take plenty
+of liquids (water, unsweetened herbal tea, etc.) to prevent dehydration. If you
+have to decide during the day what you will take, you may become confused
+about whether you are really keeping the fast. The simplest practices are best—
+decide on the rules for the day and then just remind yourself every time you are
+tempted. “Pleasures of the senses, but not desires, disappear from the austere
+soul.” Rita, 4–59
+It is best to do this fast on a relatively quiet day—if you’re concentrated on
+busyness all day, you may not even realize that you are fasting—you’ll be
+aware only of a gnawing hunger. You should try to stay quiet enough to hear the
+workings of the ego.
+Austerities are an act of will and will, can be used to strengthen the ego as well
+as to subjugate it. Be aware of any spiritual pride, self-pity, or feelings of
+competition that may develop. But if you undertake this exercise as an offering
+to the one Divine Being, there will be little room for these ego manifestations to
+arise.
+Make your journal entries either during the fast or just when it is over. Such
+insights are elusive.
+Re-enter the food realm gently, respectfully. “From food creatures come into
+being.” Take juice or fruit as your first meal and be careful not to overeat the day
+after your fast—your digestive system may not be able to handle it. Continue to
+witness your relation to food. Watch to see how not eating has made the habits
+of eating a little more conscious.
+“Offer unto Me that which is very dear to thee— which
+thou oldest most covetable. Infinite are the results of
+such an offering.”
+—Sri mad Bhagavan
+H. HATH YOGA ASANA AND PANAMA
+During the course it would be useful for you to become tuned to your body as
+the temple in which you dwell; as the most immediate environment in which you
+reside. An unhealthy or tense body can be a major impediment to one’s effort to
+open one’s heart and concentrate one’s mind. While it is true that the changing
+of mental and emotional tendencies will in itself cool out and harmonize your
+body, conversely, purifying of the physical will help in harmonizing the mind
+and heart.
+The traditional Hindu method for tuning, calming, and vitalizing the body is
+Hath Yoga, which involves consciously assuming a set of meditative postures
+or “Asana” and controlling the breath (Panama). Certain of the Asana, in
+addition, are primarily concerned with liberating or transmuting energy from one
+form to another or from one part of the body to another, and with purification of
+the blood and “Nazis” (spiritual nerves).
+Intensive hath yoga practiced for five weeks would rather dramatically
+change:
+Your ability to sit quietly in meditation without being
+preoccupied with your body.
+Your desires with regard to certain foods, tobacco, drugs, by
+Your desires with regard to certain foods, tobacco, drugs, by
+sensitizing you to your subtle body reactions.
+Your general body tone and sense of well-being.
+However, even twenty minutes a day would be a useful start.
+Many of you already know a set of Asana and panoramic exercise. For those
+of you who do not and wish to receive an instruction manual and guidance,
+please see one of the teaching fellows.
+Here we offer one composite exercise known as Sorry Namaskaram—the
+Sun Worship. It should be done four to six times on a level space in a quiet
+place. Clothing should be light and flexible. It should not be done within two
+hours after eating.
+EXERCISE
+Sorry Namaskaram: The Sun Worship
+Traditionally this is done early in the morning, facing the sun, with
+an attitude of worship. It is a good way to begin any Asana session.
+Exhale 1) Stand erect with palms touching opposite the middle of
+chest, fingers upward.
+Inhale 2) Raise arms over head, locking thumbs. Bend backward,
+looking up, with feet firmly planted.
+Exhale 3) Bend forward, separate hands, keeping the knees
+straight, but not locked; keeping head between arms, placing palms
+flat on the floor if possible.
+Inhale 4) Stretch the left leg back, bringing the left knee to the
+floor. The right foot remains between the hands. Look up and back.
+Stretch and curve spine.
+Stretch and curve spine.
+Exhale 5) The right leg is brought back to meet the left foot. The
+body is forming an arch.
+Inhale 6) Bring your knees to the floor, then the chest and chin,
+in a flowing motion. The palms should be beneath the shoulders.
+Hold breath 7) Lower the pelvis and stretch up the head, neck,
+and chest, looking up and back.
+Exhale 8) Bring the head between the arms, raising the body
+once again to an arch.
+Inhale 9) Thrust the left leg forward between the hands, with the
+left knee touching the chin. Look up.
+Exhale 10) Bring the right leg forward, straighten out the knees.
+Return to position 3.
+Inhale 11) Stretch up and back into position 7.
+Exhale 12) Bring arms down, palms together, as in position 1.
+Note: To quiet a restless mind, do slowly. To bring alertness to a
+dull mind, do rapidly.
+Sun Salutation: This was an illustration from the original Course
+Syllabus. It shows the twelve poses of Sorry Namaskaram, the
+sequence of yoga postures known as the Salutation to the Sun.
+I. JAPAN YOGA
+The “Word” is one of the most powerful devices for transforming your
+perceptions of daily life experiences. Repeating a word or phrase which is
+associated with your ever-deepening spiritual awareness can become a moment-
+to-moment way of “remembering.” Repetition of the name, such as RAM and
+KRISHNA, which have come to represent the various aspects of God, work in
+this way. Or a mantra such as the Tibetan OM MANI PADUA HUM, which
+reminds us of the jewel on the lotus which is manifest in our heart, is used similarly.
+To help keep your matrix word or phrase going, it is often useful to work
+with a kinesthetic reminder such as beads (called a male or rosary). We will
+provide you with a small male which you can use for this purpose.
+In beginning to work with mantra it is advisable to set aside an extensive
+period of time for doing only the mantra: three or four hours at least, preferably
+longer. This is the investment period.
+Then, each morning, as you start to awaken, come as quickly as you can
+“remember” into the mantra. At first, say it aloud. When it feels right, let the
+matrix repetition become sub-vocal. Later it becomes mental and finally
+continues to sound only in your heart. If the mental repetition falls away and all
+that is left is the feeling, just keep “listening” to this feeling of the mantra.
+During the remainder of the day keep the mantra going as much as possible. If
+the mantra is on your lips but not in your heart, don’t worry. The sound itself
+will eventually find its way to the cave of your heart if you persist.
+Co-ordinate the mantra with your steps as you walk. Realize the vibration of
+the mantra in each person you meet, even their (and your own) impurities.
+Notice that when your mind is calm, the mantra is as delicate and subtle as you
+will allow; when you are floundering, the mantra is also there, as strong and as
+gross as you need. Notice which desires, which situations, separate you from the
+mantra. And then gently come back to it. No blame.
+One of the most beautiful stories of the use of mantra is The Way of the
+Pilgrim, translated by R. M. French. In this tale, a simple man transforms his
+life, and the lives of those around him, through the use of “the Jesus prayer.”
+“I go about now and ceaselessly repeat the prayer of
+Jesus, which is more precious and sweet to me than
+anything in the world. At times, I do as much as forty-three or -four miles a day and do not feel that I am
+walking at all. I am aware only of the fact that I am
+saying my prayer. When the bitter cold pierces me, I
+begin to say my prayer more earnestly, and I quickly
+get warm all over. . . And doing this I am filled with
+joy. God knows what is happening to me.” “The power
+and the effect of a mantra depend on the spiritual
+attitude, the knowledge and the responsiveness of the
+individual. The sabra or sound of the mantra is not a
+physical sound (though it may be accompanied by such
+a one), but a spiritual one. It cannot be heard by the
+ears but only by the heart.”
+—Lama Dorinda
+“Place the name of RAMA as a jeweled lamp at the
+door of your lips and there will be light, as you will,
+both inside and out.”
+—Tulsa Was
+J. GOING TO CHURCH OR TEMPLE
+“If even two come together in my name, I am there.”
+—Jesus
+“He who worships me comes to me.”
+—Krishna
+“Christ and Krishna are one.”
+—Maharajah
+The yoga of worship is America’s chosen path. Much American energy has gone
+into institutionalizing worship as a path. In most cities there are dozens of
+temples and churches. To most people in America, spiritual paths other than
+church worship (such as meditation, renunciation, contemplation, and service)
+seem alien. Unfortunately, often the church rituals have lost much of the spiritual
+powers with which they were initially invested.
+So many people came to church to “get something” that many churches have
+little spirit remaining. Yet the rituals were often designed “in the Spirit” and
+need only a re-investment or re-consecration in order to once again become
+forms for sharing the Light.
+By attending church with the devotional stance of the Rita, which can allow
+you to see the living Spirit in existing rituals, you can participate in this process
+of re-investing the Spirit. Through the interaction of the devotional heart you
+bring and the form of the service, you will realize again the Living God.
+As our witness develops, we can begin to strip away the many veils between
+us and the place where we really dwell with the divine energy.
+EXERCISE
+Go to two different churches or temples. Do it on the same or
+different days. First attend a service at a place of worship different
+from the one you were raised in, then go to the one you went to as a
+child (if you did). Participate as fully as you can in the service,
+finding a shared space while at the same time maintaining a
+witness. Watch the ways you hold back from participating, the
+ways you judge the congregation and the clergy, and so on. Open
+your heart to the prayers, hymns, fellow beings, images, sense of
+Presence.
+This experience allows you to share an intimate space with
+beings you probably are otherwise unlikely to be with. Witness the
+beings you probably are otherwise unlikely to be with. Witness the
+ways in which this special context changes your perceptions
+(projections) of the other participants (fellow pilgrims on the path)
+and allows a sense of either communion or separation to manifest.
+See if the form of structured worship allows you to surrender to the
+Divine—through prayer or singing or merely being in the presence
+of group worship. Enter whatever you learn from the experience in
+your journal.
+K. KIRTAN is the chanting of the names of God—a devotional yogic technique which
+has the power to purify and open our hearts. Just as devotion has many levels,
+Kiran can be done from any state of mind or level of evolution, and it will lead to
+deeper levels of opening and understanding.
+Kiran uses music as a vehicle of communication, but is not concerned with
+musical ability. Singing beautifully is not important; what is important is singing
+from the heart. In devotional singing in India, many times it was the old man
+who sang last, with no teeth, raspy broken voice, and hacking cough, who would
+totally blow everyone out because he knew what and to whom he was singing,
+and the beauty of this communication with God was moving and powerful.
+To practice Kiran, the instruction is always to do it in a disinterested spirit.
+Give up wanting to “get off” and give up a judgmental, evaluating attitude. Go
+into it with an open mind, allowing yourself to make the effort necessary to
+experience the way in which this method works. It isn’t necessary to be “feeling
+devotional” to sing Kiran; let thoughts and moods pass through making space for
+new things to come from within. If you’re blissful, be blissful and singing; if
+bored, be bored and singing. Just keep offering it all into the fire of the name.
+The more you can give up, the more your attention will orbit around the mantra.
+If someone is leading the chanting (call and response), listening is as
+important as singing and will help keep the monkey-mind from wandering.
+During the night from about 9:30 p.m. of July 3rd until 8:00 a.m. of July 4th,
+we will share a traditional Hindu “Maya” (fire ceremony) and the singing of a
+chant.
+For the all-night chant, bring a blanket or pillow to sit or sleep on. If you need
+to nap, do it right there—you may find yourself dreaming the mantra. It’s an
+informal experience of sharing space for the night, so bring whatever you need
+to keep the physical plane together (juice to drink, etc.), but keep it simple.
+The deeper you go, the less you know, the more you are. You may wonder at
+times whether you’re chanting the mantra or the mantra is chanting you. Or you
+may find that you’ve stepped back far enough so that while you are chanting, the
+whole process and all thoughts are being witnessed from a deep calm space
+within, and that with each repetition of the mantra this place gets deeper and
+more “here.”
+Kiran is a devotional yogic technique. For the lovers of God, the very sound
+of His name brings joy. It’s said that “in its highest aspect, divine love is nothing
+less than the immortal bliss of liberation.”
+“Taking the name of God, dive deep, O mind Into the
+heart’s fathomless depths, Where many precious gems
+(of love) lie hid. Never believe that the bed of the ocean
+is bare, If in the first few dives, you fail. With firm
+resolve and self-control Dive deep and make your way
+into God’s realm.”
+—Ramakrishna
+“God is not different from His name.”
+—Old saying
+“When hearing the name once, you shed tears and your
+hair stands on end, then you may know for certain that
+you do not have to perform devotional rituals anymore.
+It will be enough just to repeat the name.”
+—Ramakrishna
+“However huge may be the stock of our accumulated
+sins, the whole of it gets burnt as fuel, is burnt by fire,
+as soon as the name of God is uttered with a sincere
+heart.”
+—H. P. Polar
+L. SATAN COLLABORATION
+Sharing your inner work with another person who is also on the path can be
+useful: helping each other. There are many ways in which such a collaborative
+contract to become conscious through one another can be carried out.
+EXERCISE
+One possibility is to silently sit opposite one another about two feet
+apart.
+Focus on the point between the eyes of the other individual so
+that you can see both eyes and the face. Relax. Sit this way for a
+half hour. During this period, or at separate sessions, you can:
+Study the other person as a being in an incarnation.
+Be aware of being studied and reflect on who you may be
+appearing to be in the eyes of the other person. Notice your
+feelings at being studied and where judgment creeps in.
+Let your models of whom the other person is keep changing. Each
+one you fix on, notice, and then let it go.
+Don’t dwell on any particular thoughts, images, or sensations
+Don’t dwell on any particular thoughts, images, or sensations
+(positive or negative). Just allow flow.
+Look for the deeper places in yourself and the other person
+behind body and personality where you can meet.
+Just sit focusing on the point between the eyes.
+Note the experiences in your journal. In order that your mind be
+free to range unhampered by social anxiety, agree in advance not to
+share what you see in each other. It is all right to share what you
+experienced in yourself if you choose.
+EXERCISE
+Another possibility would be to hang out with another person for
+several hours taking turns in the role of a witness-reporter who is
+attempting to dispassionately study nature in the form of the
+processes of the “other.” As the witness, remain quiet inside and
+just notice how another being works. As the one witnessed,
+experience your life as it is appearing to a dispassionate observer.
+Avoid judgments.
+Keep a note of the experience in your journal.
+M. PUPA TABLE
+In developing an inner Center, a meditative stance, or connecting with your heart
+cave, it is most useful to create an external quiet space where you can hook up
+for refueling.
+When setting up the pupa table, choose a quiet place, a place that can be a
+refuge. You come home feeling speedy, you’re angry at someone—whatever—
+sit down in front of the pupa table and Remember.
+Typically, pictures of holy beings, statues, flowers, fruit, beautiful stones or
+shells, or things which you associate with the highest place in yourself, are put
+on a pupa table. Here you may worship God with form in any way that opens
+your heart. You can sing, meditate, offer food, perform ritualistic worship with
+bells, candles and mantras, incense, or you may just want to hang out in the
+space that you and the pupa table create together.
+You may want only one picture on the table. Buddha, say, is your connection,
+your refuge, and one statue or picture of Buddha is all you want or need on the
+altar. Or there may be many manifestations of the One that brings you to that
+place.
+A pupa table is a good place to do conscious work on yourself as well as a
+place to worship. For example, you feel great love for Christ and His picture is
+there, right in the middle. But Shiva is an energy that you would rather not think
+about—too fierce. Put His picture or a symbolic Shiva ling am (or a picture of
+someone with whom you have real difficulty being conscious) next to the picture
+of Christ. In the supportive, quiet atmosphere you are in while in front of your
+pupa table, your relationship with Shiva can be more deeply established and the
+relationship between and the identity of Christ and Shiva can be realized.
+Possibly you’re preoccupied with sex. Then work with a picture of Mary the
+Mother of Christ or of Anandamide Ma and perhaps a pornographic photo, too
+(if you are a male this time around), and later in the day try to feel the divine
+essence in all women that you meet. Perhaps putting a picture of your parents
+right between Christ and Buddha would be meaningful work for you right now.
+The statue of Buddha is not just a symbol of Buddha, it is Buddha. The picture
+of Lord Rama is not just a piece of paper, but a manifestation of the true spirit of
+Rama. Realize this and later wherever you are becomes your pupa table, a place
+to open your heart and feel the presence of the One Supreme Being.
+“Not by the Vedas, or an austere life, or gifts to the
+poor or ritual offerings can I be seen as thou hast seen
+me. Only by love can men see me, and know me, and
+come to me.”
+—Bhagavad Gita XI, 53, 54
+N. KARMA YOGA
+“Do whatever you do, but consecrate the fruit of your
+actions to me.”
+—Krishna in the Rita
+“He who sees the inaction that is in action, and the
+action that is in inaction, is wise indeed. Even when he
+is engaged in action he remains poised in the
+tranquility of the Atman.”
+—Rita
+Actions done as a sacrifice or offering or in a disinterested fashion are the central
+component of the Bhagavad Gita. We consider this yoga at length in the
+lectures.
+In order to experience the process of this yoga, you will have to look around
+you for opportunities to serve as an offering to God. Of course, ultimately you
+will experience every act (including the taking of this course) as an exercise in
+karma yoga. However, until you become familiar with the stance of a karma
+yogi, it would be well to carry out some specific exercises. Try to do at least one
+specific karma yogic exercise a week during the duration of the course. By
+keeping notes in your journal you will be able to see changes in your approach
+and appreciation of the subtlety of this method in even the short time we are
+together.
+EXERCISE
+(possible examples)
+Clean litter from the highways surrounding Boulder.
+Clean litter from the highways surrounding Boulder.
+Volunteer at local hospitals and/or old age homes (Boulder or
+Denver) by offering to help and hanging out with the patients.
+Perhaps read to the blind or elderly.
+Get involved in some local volunteer organization for a day
+(recycling center, child care).
+Try to choose a project where you don’t immediately fall into your old role as
+the doer, i.e., do something that is not usually part of your daily activities. If you
+are primarily an intellectual person and choose a project which is manual in
+nature, it will probably be easier to remember to keep remembering to offer your
+actions.
+Also take a few activities you regularly do each day and attempt to do them in
+the spirit of karma yoga. Choose one activity you usually “enjoy” and another
+which you usually “dislike.” Notice the relation of the karma yogic stance to
+these emotional concomitants of the action.
+The Supplemental Syllabus
+A. VIPASSANA MEDITATION
+Being with the universe, just the way it is. Sounds, sensations in the body, just
+allowing each sensation to be, to be just the way it is. Sometimes the awareness
+is drawn to the sound of a bird, sometimes to coldness in the body, sometimes to
+pain, and other times to thought. Just notice your awareness skipping from
+sensation to sensation, from thought to thought. If you experience discomfort,
+just move your body very gently, noticing the intention to move, and then the
+moving.
+Notice that the awareness is like a flashlight, and the beam focuses now in one
+place, now in another. Sometimes it’s focused on a sensation on the surface of
+the body, and other times on a fleeting memory or a plan. At other times it’s
+drawn to a sound, when the beam focuses on the sound. Each thought and
+sensation arises and draws your awareness to it, and then soon your awareness
+passes on to something else.
+Let the awareness move—from thing to thing. Notice that the
+sensation of a moment ago is now gone. The thought you might have been
+having two minutes ago—where is it now? The awareness has gone on to
+something else.
+Now one of the processes in meditation is concentration, which means, very
+simply, bringing that flashlight beam of awareness to one point, and letting it
+rest on that one point; and each time it moves away from the point, very gently
+bringing it back again. We’re able to use almost any point for concentration;
+sometimes it’s a candle flame, or a point on the forehead. In this case, we’ll use
+one of the traditional points of focus: the breath. But the whole breath would be
+too much to follow, so you pick a very tiny component, a small sensation that
+goes along with each breath. There are two places where you can do that. The
+first is to focus at the tip of the nose, just inside the nostril. You will notice that
+with each in-breath, there is the feeling of air against the inside of the tip of the
+nostril, and that with each out-breath there is again the feeling of air passing by
+the inside of the nostril. So you can focus at that point, and with each in-breath,
+notice it as “breathing in,” and with each out-breath, notice it as “breathing out.”
+This meditation is transcribed from Ram Days’s audiotape “Vipassana
+Meditation.” It is an example of a session of concentration meditation, in which
+the attention is focused on a primary object, in this case the breath.
+The alternative point of focus is in the abdomen; within the abdomen is a
+muscle, which you can feel rising with each in-breath and falling with each out-breath. As it rises, you note “rising,” and as it falls, you note “falling.” After
+you’ve experimented for a few moments with these two options, pick one of
+them, and for the remainder of this meditation, stay with that particular choice—
+either the “breathing in/breathing out” at the tip of the nostril, or the
+“rising/falling” in the abdomen.
+This point is now called your primary object. It becomes like the center of a
+flower: you let your awareness rest in the center, at the tip of the nose or in the
+abdomen; and each time your mind, your awareness, is drawn away from the
+primary object—to a thought or to a sensation—notice that it has been drawn
+away, and very gently return your awareness to the primary object.
+Meditation is a very sweet art. You’ll find the primary object becomes like a
+home, like a cave, and after a while you are content just to stay with the breath,
+and give the awareness a rest from all of its wandering and jumping, here and
+there.
+It helps in the early stages to silently note “breathing in” and “breathing out,”
+or silently note “rising” and “falling.” Each time the awareness moves away, as
+soon as you notice it, in a very soft and gentle way draw it back to the
+rising/falling or to the breathing in/breathing out.
+If you’re just beginning in meditation, you will notice how resistant the mind
+is to staying on one point. It’s had years of freedom to roam here and there. It’s a
+very slow and patient process, to train the awareness to stay with the primary
+object. You must be very gentle with yourself.
+If your awareness is drawn away by pain, note “pain,” and then return to the
+primary object. If the pain persists, then you may want to make the pain itself
+your primary object, and just notice the pain as precisely as you can. To keep the
+mind from wandering, keep it right with the pain. When the pain dissolves, then
+you turn once again to the breath.
+If you experience sleepiness, you may want to take a few intentional deep
+breaths, noticing them very attentively as “rising/falling” or as “breathing
+in/breathing out,” and then let the breath return once again to its natural rhythm.
+Thoughts that arise about the meditation or about your ability to do the
+meditation are just judgments, just thoughts that are drawing your awareness
+away; note them, and then once again return to the “breathing in, breathing out”
+or to the “rising, falling.”
+Examine the breath at your point of choice very precisely. In the “breathing
+in” or in the “rising,” note the beginning, the middle, and the end of it. Note the
+space after the in-breath, before the out-breath begins. Then in the “breathing
+out” or in the “falling,” note the entire exhalation—the beginning, the middle,
+and the end of it. Notice the space between the exhalation and the next
+inhalation.
+During these few minutes of meditation, you have no other business than just
+to stay with the breath. You’re free not to have to plan, or to remember, or to
+collect sensations. Just come home to the breath. Sounds, sensations, thoughts—
+each like a flower petal that draws your awareness away from the center. Notice
+it, and return again to the center.
+At the conclusion of each meditation, it’s good to take whatever quietness you
+have achieved, and allow that opening to make you a conduit, to bring messages
+of peace and light out into the universe. You may want to offer this “Etta
+Meditation,” or blessing, to do that:
+May all beings be free from danger
+May all beings be free from mental suffering
+May all beings be free from physical suffering
+May all beings know peace.
+Om
+B. MINDFULNESS MEDITATION ON FOOD
+by Joseph Goldstein
+One way to stay grounded on the experiential level rather than on the thought or
+conceptual level is to develop a very strong mindfulness of all the processes
+involved in eating. A lot is revealed about our own minds and bodies when we
+learn to eat with awareness, to eat mindfully. First, we begin to see that point at
+which desire arises. We then become mindful of desire and our subsequent
+actions. As we observe the processes involved, there can be a deep and
+penetrating insight into the fact that it is all impersonal phenomena happening.
+There is no self, or I, or me, or mine in the food, there is no self or I in the eating
+of it, or in the awareness of the eating. It is all an empty, impersonal process
+going on.
+Eating meditatively is a profound practice, in that one can attain high states of
+Sarah and even enlightenment in the very process of eating. There have been
+many cases, in meditation centers or where people are practicing to a very high
+degree, where in the very process of lifting the hand, someone may go into
+Sarah, and their hand just stays there, halfway to their mouths, for as long as
+they stay in Sarah. Or they may experience the moment of nirvana while
+eating, experiencing a moment of enlightenment. It’s a very good practice to
+cultivate.
+What we’re going to do now is to learn how to observe eating with a silent
+mind, to experience all the different mental and physical processes involved. For
+this exercise, you might use a few raisins. The first thing that happens is the
+intention to look at the food. So that intention should be noted: “intending,”
+“intending.” Then the head turns, so that it can see the food. The turning of the
+head should be done mindfully, noting the whole process that’s involved:
+“turning,” “turning,” “turning.”
+As a result of the turning of the head, the color of the food, comes into contact
+with the eye, and seeing-consciousness arises. There should be a mental note, a
+state of mindfulness with regard to the fact that we are seeing: “seeing,”
+“seeing.” Notice that all the eye sees is color—the eye does not see “food.” Food
+is a concept. In this practice of mindfulness we want to stay on the experiential
+level of the process. So we note “seeing,” “seeing.”
+Because of seeing, the intention arises to move the hand to take the food. The
+noting of the mental intention before the act should be done carefully:
+“intending,” “intending.” Then the movement of the hand should be done
+mindfully: “moving,” “moving.” Just experience the sensations of movement—
+no “arm,” which is a concept, no I, no self, no me, no mine. There is simply the
+impersonal, material process of moving, and the process of knowing the
+movement, all done very meditatively, very mindfully. “Moving,” “moving.”
+Then there is touching of the food. The experience of the touch sensation. The
+intention to lift the arm—the mental intention— should be noted before the
+movement is begun: “intending,” “intending.” That mental intention becomes
+the cause of the arm being raised. The cause and effect relationship should be
+seen very clearly.
+Then “raising,” “raising”—experience the whole movement of the arm. No I,
+no me, no mine, no self, simply movement and the awareness of movement. The
+arm is brought up. Intention to open the mouth: “intending,” “intending.”
+Opening of the mouth: “opening,” “opening.” Very aware, very mindful of all
+the physical processes involved, and the knowing of them.
+Opening the mouth, then the intention to put the food into the mouth:
+“intending,” “intending.” Putting the food into the mouth, placing the food. The
+feeling of touch of the food on the tongue—just touch sensations and the
+awareness of them. No self, no I, no me, no mine, simply the awareness of
+sensation.
+The intention to close the mouth: “intending,” then the subsequent closing.
+Not chewing yet, unless you want to eat your meal with your arm up in the air.
+So—intending to lower the arm, noting the mental intention, then the moving of
+the arm, making the movement the object of mindfulness. Then the intention to
+begin chewing, and the subsequent chewing process, watching the movement of
+the mouth, of the jaws, of the teeth. The awareness of taste—the tasting that
+comes in the process of chewing.
+Just at this point, there is a very interesting thing which happens: generally
+after the first couple of chews, taste begins to arise—and then it disappears! The
+food is still in the mouth, but it’s rather tasteless. At this point, because of our
+desire for more pleasant taste sensations, we often find the hand again reaching
+for more food. Food is still in the mouth, and we’re still chewing it, but the hand
+is moving and taking food and putting it into the mouth. Become mindful of the
+arising and passing away of the taste and the whole subsequent process, of the
+food being mashed up, then the intention to swallow and the swallowing. Again,
+the intention arising to take more food. Notice the intention, and then the
+reaching for the food again, following the whole process through the taking of
+the food, the intending to move the arm and the moving of the arm, the intention
+to open the mouth and the opening, the placing of the food, the closing of the
+mouth, the replacing of the arm, the chewing, the tasting, the swallowing—all
+very distinct, impersonal processes happening.
+By cultivating this kind of mindfulness of process, not only do we become
+aware of how our desire for food arises, and watch that desire mindfully without
+identifying with it, we also begin to penetrate into the very basic nature of the
+entire mind-body process. And done very mindfully, it’s a deep and penetrating
+meditation.
+As a general suggestion to those of you who are cultivating awareness or
+mindfulness around food, a useful exercise might be to eat one meal a day (or
+even just a piece of fruit) in silence, mindful and very attentive to the entire
+process involved. The entire exercise becomes meditation. And in this way we
+gradually expand the state of mindfulness to include the entire experience of all
+our activities, and we begin to live in a very meditative space. It’s valuable to
+cultivate this kind of penetrating awareness.
+C. BUDDHIST MEALTIME MEDITATIONS
+by Jack Cornfield
+The techniques that I’m going to share with you, which come from my teachers
+and from the Buddhist tradition, are all designed for the same purpose: for
+breaking the illusion of separateness between you and the food, or breaking the
+attachment or desire. For it’s not what it is that you eat that makes you wise and
+leads to the development of insight, but the process of how you eat that will lead
+to that. And the Buddhist emphasis is always on the attitude, on the cultivation
+of certain mind-states, on letting go of the attachment to sense desires.
+The first meditation that’s done in the Buddhist tradition is a meditation on
+loving kindness and compassion, on the Bodhisattva nature, on the sharing of
+our food with all the beings in existence. I’ll share with you one Buddhist chant,
+a Pale chant, that’s often used to offer food: Same Loki ye Sarah, Ivana Hara
+he tukamanunang, oh jinungsabelabante damage Tasha. “May all sentient beings
+share this meal with me, and by the power of merit, may all beings live in health
+and happiness.” Then throughout the meal you keep to this mind-state of loving
+kindness, of compassion, of sharing whatever there is with all the beings in the
+universe.
+Another technique to use in eating is to consider the food as broken down into
+its elements. The purpose of this is to develop detachment and wisdom into the
+emptiness of self, or into the Brahmanic nature of all that you’re doing. So you
+take your piece of food, and you hold it up and look at it, and you recognize in it
+the aspects of the earth element—of solidity, of hardness or softness; of the
+element of fire—the heat or cold of it; of the air or vibratory element—the
+element of distension that keeps it in that shape; and of the element of cohesion
+that keeps it together, the water element. You see that in the food, and you feel
+it, and you examine it. And then you look at your own body, and you say, “Wow!
+There’s the element of hardness, of solidity. . . The element of heat and cold. . .
+The element of vibration, distension. . . The element of cohesion.” So all I’m
+doing when I’m eating is taking the elements and putting the elements into
+elements. And you notice that when you chew the elements, they change. The
+cohesion increases and the hardness disappears somewhat. You can watch the
+process of the transformation of the elements from the food as you chew them
+and swallow them.
+Another way to approach eating is to do a meditation on the emptiness, again
+related to the Brahmanic meditation that was spoken of, where you take a piece
+of food, and you see that the food is not self, that there’s no one there, just food.
+You see your body reaching for the food and holding it, and you look at your
+arm and the rest of your body and realize that that’s not you—that’s just the
+body. And you look at the mind that knows, that’s watching all that, and you see
+that that’s not you either—that’s just awareness of the fact of the body or
+awareness of the food. And then as one very famous Buddhist teacher said,
+“Eating is like putting nothing into nothing.”
+Another technique to use, to break down the illusion of self, the illusion of
+separateness, the illusion of permanence, is to look at the whole process of
+eating in terms of change, in the change of form and also in the change of feeling
+when you’re doing the eating. Imagine the whole sequence. Imagine the genesis,
+of the food that grew from the earth, of the green shoot and the ripe stalk or fruit,
+then the picking of it, the cleaning of it, the bringing of it to your table. . . Now
+seeing the food there before you, and continuing the process—in your mind first,
+before you start to eat—of considering the change in the food, the eating of it,
+the tasting and swallowing, the change of that food into elements, into
+nutriments for your body, into excrement, back into the earth, and the whole
+cycle beginning again of the regeneration of food. So you see everything in
+terms of a flow, in terms of a process, and you see that it’s all changing. That’s
+another way to look at eating as a meditation.
+Still another way is to be mindful of sensation and touch. Sensation and
+mindfulness of sensation are the basis for a lot of vipassana, or “insight,”
+meditation practices, because they’re something you can see very clearly
+changing from moment to moment: the arising and ceasing of sensation. So in
+eating, you can be aware first of the sensation of yourself sitting there. . . You
+can be aware of the sensations in yourself—of hunger, or desire, the feelings in
+your body. When you reach for the fork, you can be aware of the sensation of
+your hands touching the utensil, feeling that in your fingers; you can be aware of
+the sensation of the movement of your arm, bringing the food up to your mouth,
+and of the sensation of the touch of the food on your lips. Be aware of the
+sensation on your tongue and your teeth, as you chew the food. . . Be aware of
+the sensation as you swallow, feeling the food go all the way down into your
+stomach. By paying close attention to the sensation, you cut off the
+discrimination of your mind. You don’t allow yourself to say, “OOO—wow! That
+was delicious!” Or “Ugh. That was awful.” You’re just mindful of the process of
+each sensation arising and ceasing as you eat, and so you’re able to cut the
+desires.
+A way that’s very commonly taught in monasteries, and especially talked
+about among the bikes or the monks in the Buddhist tradition, is to look at food
+just in terms of its sustenance: the contemplation of food for sustenance. The
+body is simply a vehicle to be cared for and not to be pampered, and food is
+simply a means of sustaining life to continue your spiritual practice. You’re not
+eating because you enjoy eating, but you’re eating as a way to sustain your
+energy to continue your practice on the spiritual path.
+There’s a story that’s told about the kind of attitude that eventually needs to be
+developed in this meditation on food for sustenance: There was a couple and a
+young child who were crossing a vast desert. They brought very little food with
+them, and they had run out of food and just about run out of water, and they still
+had a long way to go. And they were quite sure in fact that they would die. Well,
+from the heat of the day and the desert, in fact the child did die. And the two
+parents decided that in order to continue the crossing of the desert in their
+journey, so they would not die, they would eat the body of the child. And that’s
+the attitude of taking food not out of pleasure, not out of desire or out of
+attachment, but simply for sustenance, just as those parents ate the flesh of their
+own child. That’s a very powerful attitude, one that breaks through the greed and
+the attachment to the sense pleasures of eating, and it is another kind of
+meditation.
+When you’ve developed that attitude, you don’t eat more than you need. All
+of these different meditations are merely techniques, devices for developing
+balance in the mind. Because the whole of the dharma is just a question of
+balance, really. Here you have to balance your greed and your habitual patterns
+of enjoyment and attachment with a meditation, to get you to a point where
+you’re no longer attached.
+When I was first in the monastery in Laos, it was an ascetic monastery, and
+I’d been there a few weeks and was really checking it out, to make sure that the
+teacher looked like he was enlightened and that all the monks were practicing
+right. And I saw some things I didn’t like. Monks were a little sloppy eating, or
+they’d get their food, and they’d say their chant, and then they’d start to eat very
+fast. And even the teacher I wondered about; he would say very contradictory
+things at times to different people. I went to him; I was very disturbed, and I
+even thought of leaving and going to find another teacher, a better guru to fit my
+model of what a teacher should be like. And I said, “I feel really uncomfortable.
+Why do you say one thing to one person and one to another about how we
+should eat or how we should act?” And his answer to me was this: “The way I
+teach is very simple,” he said. “It’s like someone walking down a path or a road
+at night, and sometimes they get off a little bit onto the right side and I see them
+and I say, ‘Go left.’ And sometimes they almost fall in the ditch on the left side
+and I see them and I say, ‘Go right, go right.’ That’s all I do. And all the
+meditations are techniques to use to develop a balance of mind and mental
+factors.”
+So I asked him further. I said, “Well, I’m still disturbed. Some of the monks
+are eating quickly, and even you sometimes seem to be sloppy.” It was very hard
+to say—I thought a lightning bolt might strike me! Nothing happened. He just
+laughed, and he said, “You have to be thankful for the appearance of
+imperfections in your teacher— the things that make him look like he’s not
+enlightened.” I said, “Oh, yeah?” And he said, “Because if it were not for these
+imperfections, you might be deceived into thinking that the Buddha was
+somewhere outside yourself.”
+The balance of mind is the key. When there’s a very strong imbalance, you
+need strong medicine to balance it. Some of us really get into food trips—
+Thanksgiving dinner, or going to the refrigerator and the pickles and olives and
+cheesecake and all those wonderful things. And in order to balance that, one
+other meditation that’s used is to contemplate on the true repulsiveness of food.
+Think about it: the benefits of the meditation on the repulsiveness of food are
+that you really begin to know the nature of food and of the process. Your
+mindfulness grows. You understand the lust in yourself, and you are able to let
+go of it. The meditation on the repulsiveness of food begins with contemplation
+on the procurement. So you think, if you still eat meat, of the animals and their
+carcasses, and of the flesh and blood and fat, and of the disgusting juices that run
+out when the animals are cut open. Or if you don’t eat meat, think of the food
+from the earth, and even of the dirt of the earth itself, of the shit from the cows
+and the horses, the dirt of all kinds. And in this society, they’re trying to keep
+your food clean, so they put in preservatives. But just let the food stand out in
+the sun for a short time, and it turns rancid and moldy, or rotten and foul and
+oozing and fermenting.
+And the meditation for the monks as it’s given in the scriptures is this: he’s
+eating his food, he’s dipped his hand into the bowl and is squeezing the food in
+his fingers, “and the sweat trickling down from his five fingers wets any crisp
+food that there may be and makes it sodden, and when its good appearance has
+been spoiled by his squeezing it up, and it’s been made into a ball and put into his
+mouth, then the lower teeth function as a mortar and the upper teeth as pestle and
+the tongue as a hand, and it gets pounded there with the pestle of the teeth, like a
+dog’s dinner in a dog’s trough, while he turns it over and over with his tongue.
+And then the thick spittle at the tip of the tongue smears it, and the filth from the
+teeth in the parts where the toothbrush cannot reach smear it. When thus mashed
+up and besmeared, this peculiar compound, now destitute of its original color
+and smell, is reduced to a condition as utterly nauseating as a dog’s vomit in a
+dog’s trough. Yet notwithstanding that it is like this, it can still be swallowed
+because it can no longer be seen by the eyes. And where does it go? It is
+swallowed by one who is twenty-five years old, or thirty years old; it finds itself
+in a place like a cesspit, unwashed for those twenty-five years or thirty years.”
+That’s strong medicine, but it’s a very effective balance for the passions and
+desires that go with the delicious taste of food and with all the food trips in our
+culture.
+So food isn’t what it appears. The very highest practice, the place where this
+initial balance developed, is the practice of vipassana mindfulness. This is the
+mindful observation of all the mind and body processes that are involved in
+eating, as they change from moment to moment: the thoughts,
+perceptions, feelings, and sensations in the form. To quote the Buddha, “The
+merit made in serving one thousand meals to the whole order of monks with the
+Buddha at its head cannot compare to him who develops clear insight into the
+arising and vanishing of phenomena for just one moment.”
+D. SATAN MEDITATION
+Sat sang means a coming together in Truth. The beauty of having sat sang is that
+you are sharing a contract with another person that you will help one another go
+to God. That means that you are both consciously working at seeing one another
+as souls.
+The best way to see another person as a soul is just to sit down and do it. It’s
+something to be experienced, not talked about. It’s the place where our
+individual differences look like background and not like a figure anymore. If you
+have spiritual friends to hang out with, here is a little sat sang collaboration you
+might want to try together. It’s like a joint meditation exercise.
+Sit down opposite somebody. Get comfortable; take a couple of slow breaths.
+Don’t talk to each other—this isn’t a social thing. Don’t “talk” with your
+expressions, either—forget about the smiling and the nodding and all those facial
+gestures. Just sit and look at the other person.
+Focus at a point right between one another’s eyes, so you’re able to see both
+of their eyes at once. Now just sit with one another like that, with the eyes as the
+focal point for, say, a thirty-minute meditation. Relax, sit there, and let it all
+happen to you. Let yourself see all the things that arise in the other person, let
+yourself experience all the feelings you have as you are being looked at intensely
+by another person. Keep looking and looking.
+Pretty soon, you will see the other person’s face begin to change. Sometimes
+it will become incredibly beautiful, and sometimes incredibly horrible. Either
+way, don’t let it create a reaction in you. Don’t let it suck you in—just stay right
+with the eyes and say, “And this too. And this too.” Look at your ten thousand
+horrible visions and your ten thousand beautiful visions, and let them all go by.
+Just keep looking and looking and looking.
+After a while, you will discover that the “stuff” of it all starts to change. It
+starts to become ground rather than figure. The good, the bad, the beautiful, the
+ugly, all just passing show, and you see deeper and deeper and deeper until you
+are just looking at another being who’s looking back at you. You are soul
+acknowledging soul.
+Those are the kind of games you can play when you have sat sang as your
+playmates.
+E. HOW TO USE A MALA is a string of beads, used to chant the names of God. It’s the same thing
+as prayer beads, or a rosary. A Hindu male typically has either 108 beads (108
+being considered a sacred number in Hinduism) or 27 beads (which is one-fourth
+of 108). In addition to the 108 or 27 “counting beads,” a male generally has an
+additional bead, called the “guru bead,” which hangs perpendicular to the circle
+of counting beads. The illustration gives instructions for making one—all you
+need are some beads and a string.
+A Hindu male is usually worked with by using the right hand. The male is
+held resting over the third finger of the right hand, and the beads are brought
+toward you, one by one, using the thumb. Each bead counts one repetition of the
+mantra. When you get around to the guru bead, you don’t count it, and you don’t
+pass it; you stop there, mentally bow to the guru, flip the male around, and start
+going back the other way. Each time you come to the guru bead you awaken
+once more, then you turn around and go back the way you came.
+Now for those of you who are left-handed (as I am): In India, you would be
+inclined to use the right hand anyway, because of certain cultural traditions. The
+Tibetans, on the other hand, have no such rules; they use their males in either
+hand, and with any finger. In the Hindu tradition, you can use any finger of the
+right hand to hold the beads, except for the first finger, which is the pointing or
+“accusing” finger; you don’t use that one. The reason most people use the third
+finger is that there is a nerve on the inside of that finger which is connected to
+your spine in such a way that you’re getting a little added benefit from the
+practice. It’s similar to an acupressure point, and it adds a little extra energy rush
+to the process.
+Doing a mantra doesn’t require using a male; the male is just there to add
+another dimension to the practice. Besides speaking the mantra, and hearing the
+mantra as you speak it, the process becomes tactile as well. If you want a
+psychological analysis of the use of a male, you could say that it is a “kinesthetic
+cue device.” Without it, you could be doing the mantra and get lost in doing it
+mechanically. But if you suddenly feel the bead between your fingers, it wakes
+you up again. Bead by bead—it’s like the steps of a ladder, walking you straight
+into the Brahman.
+Instructions were given on how to make a male and each student
+received a bag containing 36 small wooden beads, one larger wooden
+bead, a white nylon cord, and a thread from Need Karol Baba’s
+blanket with which they could make their own male.
+F. THE CHAKRAS
+The chakra system works within the energy framework of our bodies; although
+the chakras themselves are operating at the astral level, they express themselves
+through our bodies’ energy patterns. Traditionally there are said to be seven
+chakras, starting with the Tuladhar at the base of the spine, and ending with the
+Sahara at the crown of the head. The chakras aren’t physical forms; they’re
+more like foci of energy, and they’re located along the subhuman, which is a
+kind of astral-level spinal cord. The subhuman is said to run down the center of
+the spinal column, but it isn’t something you would find on an X-ray. In the
+same way, the “Ida” and the “pin gala” are the “nerves” of the system, running
+alongside the subhuman, but they aren’t “nerves” you could dissect in an
+anatomy class. These are all astral entities.
+The energy which moves through the subhuman is known as “Kundalini,”
+which literally means “she who is coiled.” Kundalini energy is visualized as a
+coiled serpent, which resides at the base of the spine, until something—
+something in our practices, or something in the course of our evolution—causes
+it to begin to uncoil and to rise up the subhuman. As it does, it encounters each
+of the chakras.
+The first chakra, the Tuladhar (which is at the base of the spine, halfway
+between the anal sphincter and the genitals) is primarily connected with survival
+functions. The second chakra, svadishtana, is the sexual chakra. The third
+chakra, which is called Manipur, is located in the area around the mid-section,
+at the solar plexus; it’s thought to be connected with expressions of ego-power.
+The fourth chakra is called the Anaheim, or the heart chakra, and it’s related to
+compassion. The fifth chakra, the Buddha, located in the throat, is connected
+with turning inward toward God, and therefore with the development of the “true
+voice,” the divine sound speaking through us. The sixth chakra, which is the
+Anna, is located in the center of the forehead; it is usually called the third-eye
+chakra, and it is connected with the inner guru and the higher wisdom. And
+finally the seventh chakra, the Sahara, at the crown of the head, is the
+thousand-petaled lotus, enlightenment, the merging into Brahman.
+As the Kundalini energy uncoils itself up the spine, it passes through each of
+those chakras in turn, through the focus of each form of energy. The Kundalini
+radiates out from the subhuman at each chakra level, and it energizes, or
+activates, each of those physical/psychological energy fields. But if, as the
+Kundalini begins to rise, it comes to a center which is blocked, the energy will
+emerge as some form of behavior. It’s like water going up a tube; if it gets to a
+crimp in the tube, it can’t go up any further. Say the energy gets to the second
+chakra; the name for the second chakra, which is the sexual chakra, translates as
+“her favorite resort”—referring to the Kundalini. It’s sort of like the Riviera of
+the chakra-world; the Kundalini gets there and decides to hang out and vacation
+for a while. Or maybe it manages to dodge that shoal, but then it gets to the third
+chakra, and it gets grabbed by all the ego’s power needs, and it can’t go any
+further.
+In the real world, the process isn’t as neat and orderly as all that makes it
+sound, however. It’s not like you finish with the first chakra, now you go on to
+the second. . . You finish with the second and go on to the third, and so on.
+Everybody’s got a little of everything going all the time, more blocked in this
+chakra, less blocked in that one. As you get more sophisticated about the chakra
+systems, you begin to assess your own predicament in terms of the movement of
+the Kundalini—you’ll say: “Well, a lot of my energy is still tied up in my second
+chakra, but my fourth chakra is beginning to open.”
+I’ve worked some with the energies of the chakra system, and sometimes
+when I’m sitting and talking to somebody, suddenly what I see is a living chakra
+chart, right there in front of me. I see the various chakras, all sending out energy:
+“BZT, BZT, BZT”—like “lust, lust, lust,” or “power, power, power,” or
+“compassion, compassion, compassion.” Or maybe I’ll see that nothing’s
+coming through the heart chakra, but the third eye is like a headlight beam.
+The Kundalini gets awakened in many different ways. Swami Muktananda had
+the capacity to give shakiest, a direct hit of energy that would awaken the
+Kundalini. It would have the strangest effects on people. Suddenly somebody
+would get up and start to dance—somebody you’d never have expected to
+behave that way: a rotund gentleman in a conservative blue serge suit, for
+example, who got up and started to do an incredible Indian dance. And the man
+sitting next to him, who looked like a professor, with his tweed jacket and the
+pipe in his mouth, who suddenly started to do Madras—complex, exquisite,
+perfect Madras—but the look on his face was one of total perplexity. Somebody
+else would be doing automatic breathing and bouncing across the floor like a
+beach ball. The whole place would begin to look like the back ward of a mental
+hospital.
+All the while, Swami Muktananda would just be sitting up there, with his eyes
+closed, playing his extra. But his presence was like a beam of energy, activating
+the Kundalini, the energy centers, in all the people around him. The shakiest—
+his giving of Shakti—caused the Kundalini to begin to uncoil, and depending on
+where the chakras were blocked, the energy came out in different behavioral
+manifestations. Block a little of it here and some more of it there, and that
+combination will make you get up and dance. Some other combination will
+cause automatic breathing. If you understand the system, you can keep score of
+who’s got which chakra-thing going.
+If you’re drawn toward working with energy systems, you might decide to
+explore working with these chakra energies. There are different ways to do it.
+You can try doing it through meditation, for example—you can visualize
+bringing the energies up through each of the chakras, and out through the crown
+of your head. Or you might want to work with another type of visualization
+exercise, like a mandala from Tibetan traditions. In some other traditions you
+might be given a specific mantra, a “big” or seed-sound, for opening a certain
+chakra. You can use Panama, a method which works with breath control to
+move the energy from chakra to chakra. Each of those is a technique that works
+in a specific way to awaken the Kundalini energy. You can try them out,
+experiment with them; you can see how they affect the chakra energies, and how
+that jibes with your other spiritual practices.
+G. THE YOGA OF PSYCHEDELICS
+First off, I want to say that I would never recommend to anyone that they use
+psychedelics as a means to alter their consciousness. But if someone comes to
+me and says, “I’m going to take this,” then I say to them, “I think you should
+study and understand something about the method you’re about to use, so you
+can enter it in the spirit of its being a yoga for you, a path toward union.”
+The predicament we face at the moment is that most psychedelic substances
+are currently illegal. When people ask me what I think about government policy
+toward psychedelics, I always respond that the most reasonable thing to do about
+substances which alter human consciousness is to educate people, not to police
+them. It makes very good sense to prepare people for a psychedelic experience,
+maybe even to license them, the way you do before you let someone drive a
+vehicle. But you shouldn’t prohibit anyone from using whatever substances they
+choose. You respect the right of other beings to alter and to explore their own
+consciousness in their own way. That ought to be basic human freedom.
+At the moment, however, it isn’t. And so if we use psychedelics, it will be in
+an atmosphere in which we can’t really fulfill Maharajah’s criterion of “feeling
+much peace.” In our minds there will be the inevitable paranoia that comes from
+working with something that is illegal; that means there is always a certain little
+part of our consciousness which has to be held down to “watch out for the fuzz,”
+to put it in the vernacular. That’s why if we are using psychedelics, it’s good to
+have someone available to take care of the scene on the physical plane, so we
+can relax and concentrate on doing our inner work.
+In thinking about psychedelics, the first thing to understand is that there is a
+whole range of substances which share that name, and that they are of very
+different strengths. Some are mild; most marijuana, for example, falls in that
+category. Mild psychedelics open up the possibilities, but they don’t override the
+personality. Stronger psychedelics, on the other hand—things like mescaline, or
+psilocybin, or LSD—are likely to override our existing thought patterns in a very
+powerful way. If we aren’t prepared for that, it can get pretty hairy. If we don’t
+have a sufficiently deep Nana practice, some understanding of what’s happening
+to us, we freak when the entire structure of our existence starts to fall away.
+That’s why it’s important to do some reading and studying and contemplating in
+advance, so we’ll have some foothold in the experiences as they start to happen
+to us.
+Those of us who have experienced psychedelic trips know that there are two
+points in the session where problems can arise. The first is going up, when we
+find the world and ourselves in it dissolving all around us. That’s the Kansas
+motel trip I described: “Help, I’m dying!”
+The other point that can be freaky is the re-entry, when we start to come back, and we see what a schlock scene we’re returning to. That can send us into a
+tailspin, as we try to run away from our lives and hang on to the high. Usually,
+however, once we come down, those are exactly the experiences that motivate us
+to clean up our act. It’s just part of the process of seeing the horror show we
+have created for ourselves, out of our ignorance, and it becomes the inducement
+for doing the practices of purification and all the rest of it. Then we can be a
+little more open the next time around.
+It’s extremely useful, especially with a first session, to have someone on hand
+who is very experienced, someone quiet and calm, someone with whom you feel
+loving and safe. If that’s not possible, try to have something else, like some
+music that you love and can surrender into, something that is familiar and
+comfortable. And always take a psychedelic in a place where there’s minimal
+paranoia and where you can trust that you won’t be disturbed.
+Be open in your heart to each moment, and only do what feels totally right.
+Let’s say you and some friends have a psychedelic session planned for Saturday
+night; everybody’s already, but there’s a feeling inside you that says, “No—for
+some reason, this isn’t right.” Trust that feeling. Wait. Wait until the moment
+feels absolutely “right on.” Listen carefully to your own heart; if you feel that
+using psychedelics seems to be part of your practice, then use them, but use them
+very consciously.
+Notes
+Backward and Foreword
+1. This and other quoted information about the workshop was taken from a copy
+of the program for the Europa 1974 Summer Session, generously provided by
+Richard Chamberlain of the Communications Department at Naropa University.
+Introduction
+1. Jakob Böhme, The Confessions of Jakob Böhme, edited by W. S. Palmer
+(1954).
+2. Air, Songs of Air, translated by Rabindranath Tagore (1915).
+3. Thomas Merton, A Search for Wisdom and Spirit:Thomas Merton’s Theology
+of the Self, edited by Anne E. Carr (1989).
+4. Peter Suspense, The Psychology of Man’s Possible Evolution (1945).
+Chapter 2: Karma and Reincarnation
+1. Rum, The Pocket Rum Reader, edited by Air Helsinki (2001).
+2. Jack London, Star-Rover (1915).
+3. Lama Angara Dorinda, quoted in the foreword to The Tibetan Book of the
+Dead, by W. Y. Evans-Went (foreword by Donald Lopez) (2000).
+4. The Buddha, The Words of the Buddha (An Outline of the Teachings of the
+Buddha in the Words of the Pale Canon), compiled by Nyanatiloka (undated).
+Chapter 3: Karma Yoga
+1. Platinum, The Six Enneads, translated by Stephen McKenna and B. S. Page
+(1991).
+2. Master Eckhart, The Essential Sermons, Commentaries, Treatises and
+Defense, translated and edited by Bernard McGinn and Edmund College (1981).
+3. Mohandas Gandhi, The Gospel of Selfless Action, or The Rita According to
+Gandhi (1946–2000).
+4. Carlos Castaneda, Journey to Indian: The Lessons of Don Juan (1972).
+5. The Book of Tao, translated by R. B. Blarney (1955).
+6. Meter Baba, Is That So? (1978).
+Chapter 4: Nana Yoga
+1. Gurdjieff quoted in P. D. Suspense, In Search of the Miraculous: Frag
+mention an Unknown Teaching (1974).
+2. Ramona Maharishi, in his poem “Reality in 40 Verses (and Supplement)” in
+The Collected Works of Ramona Maharishi, edited by Arthur Osborne (1972).
+Chapter 5: Brahman
+1. Ganesha, Janeshwari (a thirteenth-century commentary on the Rita), quoted
+at www.sscnet.ucla.edu/southasia/Religions/texts/Janesh.htm.
+2. Rum, quoted at www.iranonline.com/literature/Articles/Persian-
+literature/Rum.
+3. Ramona Maharishi, The Collected Works of Ramona Maharishi, edited by
+Arthur Osborne (1972).
+4. Franklin Merrill Wolfe, Consciousness Without an Object (1973).
+Chapter 6: Sacrifice and Mantra
+1. P. D. Suspense, In Search of the Miraculous: Fragments of an Unknown
+Teaching (1974).
+2. The Way of a Pilgrim and The Pilgrim Continues His Way, translated by
+Helen Bacon (1985).
+Chapter 7: Renunciation and Purification
+1. Mohandas Gandhi, Epigrams from Gandhi, compiled by S. R. Linear.
+2. Mohandas Gandhi, “The Rita According to Gandhi,” in a translation which
+appeared in the columns of Young India on June 8, 1931.
+Chapter 8: Devotion and the Guru
+1. Hafiz of Shiraz, Divan-y-Hafiz, edited by Mira Mohammad Mazzini and Dr.
+ASEM Ghana (1941).
+2. For Love of the Dark One: Songs of Mirabeau, translated by Andrew Schelling
+(1993).
+3. Ramona Maharishi, Spiritual Instruction of Bhagavān Sri Ramona Maharishi
+(1974).
+4. Swami Muktananda, Play of Consciousness: A Spiritual Autobiography
+(1978).
+Chapter 10: Dying
+1. Ramona Maharishi, The Collected Works of Ramona Maharishi, edited by
+Arthur Osborne (1972).
+2. Zen Flesh, Zen Bones, compiled by Paul Reps and Neogen Sendai (1994).
+Glossary
+Abhidhamma The section of Theravada Buddhist scripture concerned with
+philosophical, cosmological, and psychological analysis.
+Adharma / Amharic Unrighteous conduct. Failure to perform spiritual duty or
+to act from the Truth within one’s heart.
+Shankara The false belief in individuality. This Illness or I-maker is the source
+of egoism, the root cause of dualism.
+AHIMA Non-harming in deeds, words, and thoughts. One who does not have
+compassion for others, including all life-forms, is in some way harming them.
+One of the FAMAS.
+Ananda Absolute bliss.
+Aparigraha Non-covetousness, non-acquiring, non-attachment. To accept only
+that which is absolutely necessary in deed, word, and thought. One of the FAMAS.
+Arti A ritual performed to show reverence to a deity. A holy person moves
+clockwise around an image of the deity while chanting and carrying a tray
+containing a lamp/candle, camphor, and other items such as sacred ash, Quasi
+leaves, flowers.
+Arti lamp The flame carried during an art ceremony. The flame symbolizes
+both the embodiment of the deity and the deity’s transcendence of bodily form.
+Asana(s) Literally “seat.” A posture that is stable and comfortable. One of the
+eight limbs of Astana yoga.
+Ashram(a) A spiritually based residence or retreat site where yoga is lived and
+taught; Often, an ashram is founded in honor of a particular spiritual master.
+Also, a stage of life; human life has four “ashrams: student, householder,
+spiritual seeker, ascetic.
+Ashtanga yoga A physical discipline to synchronize the breath with postures to
+balance the body and calm the mind. The “eight-liter” yoga: Rama, Nyasa,
+Asana, Panama, pratyahara, Havana, Dayana, and Sarah.
+Asteya Non-stealing. Not taking what does not belong to oneself. One of the
+FAMAS.
+Atman The spark or breath of the Divine in all beings.
+Alachua An incarnate being who lives in a state beyond body consciousness.
+An ascetic who enjoys liberation and supernatural powers.
+Avatar The highest form an entity can attain and still incarnate. The incarnation
+of a deity, such as Rama, Krishna, Christ, Zoroaster, or Buddha.
+Bardo Literally “island.” The state between death and rebirth.
+Bhakti The yoga of devotion. (“The way Shakti works—you just love until you
+and the Beloved become one.” —Ram Days) which An individual devoted to
+the task of following the path by renunciation of the distractions of worldly
+affairs.
+Bhutan Maya Offering food to birds and animals as a spiritual practice.
+Brahma Maya Surrendering oneself to the Divine, especially through the study
+of religious texts and ideas.
+Brahmacharya The practice of chastity. The spiritual student who is practicing
+impeccable behavior, including chastity. One of the FAMAS.
+Brahman The inconceivable, the inexpressible, the indescribable. The principle
+of illumination by which all phenomena, without exception, emanate and to
+which all return. Ultimate reality.
+Buddhi The reasoning and discriminating faculty of the mind. Functions
+independent of the senses, and therefore is able to clarify and control them.
+Chakra(s) One of seven energy vortices or nerve plexuses along the astral spinal
+column. Each chakra has a physical and emotional counterpart.
+Chit Absolute knowledge.
+Darshan Receiving a glimpse of Truth from being in the presence of a holy
+person, sacred idol, or sacred place.
+Dharana Concentration on a single object.
+Dharma/dharma The bases of all universal order, social and moral. Conformity
+to natural righteousness or spiritual duty.
+Dhyana Meditation or contemplation.
+Dokusan In the Zen Buddhist tradition, a private interview with one’s teacher.
+Dorje The thunderbolt in art and ritual that symbolizes the method of using
+something invincible that can cut through anything.
+Entheogens From the Greek, enters, meaning “God within.” Often called
+psychedelics. Use of these substances (e.g., peyote, ayahuasca, cannabis, etc.)
+Permits temporary freedom from the perception of reality created by the rational
+mind.
+Ghee Clarified butter. It represents abundance and fertility, often used as a ritual
+offering.
+Guna(s) In Hindu philosophy, literally, “threads or strands.” The three inherent
+characteristics or qualities of nature: sativa (truth/purity), rajas (energy/passion),
+and Tamás (inertia/illusion).
+Gyan(a) The yoga of intellectual introspection and discernment. The goal is
+toward mind control.
+Hatha yoga The path of body control and discipline. Includes the breath and
+postures.
+Ida The left Nazi (stream of energy) that runs along the subhuman (the astral
+spinal column that carries the Kundalini energy). It is feminine, watery in nature,
+cool, and soothing. See pin gala.
+Indrias The powers of the senses (hear, feel, see, taste, smell) and the powers of
+action (voice, hand, foot, organ of excretion, organ of generation).
+Ishtar Dev A “chosen deity” or personal God who protects and assists the
+devotee on the Path. (“Hangman is Maharani’s Ishtar Dev, his route through.”
+—Ram Days) Japan Devotional repetition of a mantra, a prayer, or names of God.
+Java/Jonathan The incarnate individualized Self. The soul identifies with its
+manifested or incarnate state.
+Jnana yoga The path of knowledge and wisdom arrived at through inquiry and
+discrimination.
+Kalpa In Hindu chronology, 4,320,000,000 years. The length of a day and night
+of Brahman.
+Karma Literally, “action.” This includes not only one’s actions this lifetime, but
+throughout all lifetimes. It is the fuel of samsara. The karmic principle of cause
+and effect is not a system of reward and punishment outside ourselves, rather it
+is a natural law maintaining the balance of the universe.
+Karma yoga The path of action. The practice of consciously using one’s daily
+life and work as a spiritual path while relinquishing attachment to the fruits of
+the actions.
+Kaya A form or body. The body of dharma is the dharma kaya.
+Koan An unsolvable riddle used as a meditation practice in some schools of Zen
+Buddhism. (“The mind using itself to beat itself.” — Ram Days) Kshatriya One
+of the four social classes of Aryan clans in India: Brahmin (learned), Kshatriya
+(warrior), valley (merchant), and Sudra (laborer). Kshatriya is the fighter of the
+senses and protector of people. Arjuna is a Kshatriya.
+Lila Divine play; reality seen as God-at-play.
+Loka Other realms or dimensions than the physical world.
+Manas The lower mind. The rational faculty of the mind which has a dual role as
+a sense organ and an organ of action. Through manas, impressions from the
+external world are received (sense) and conscious and creative responses are
+given (action).
+Mantra Rhythmic repetition of words or phrases that support an individual’s
+inner journey. A method of silencing the mind. Om is the supreme mantra.
+Mauna Spiritual silence.
+Mauni A sadhu who uses silence as an pay.
+Maya Literally, “illusion.” The flux that underlies everything that is created and
+dissolved (the phenomenal world). That which diverts humans from Spirit
+(Reality) to matter (unreality).
+Murti The manifestation of sacred power or a deity in the form of an icon, often
+a statue.
+Namaste A verbal greeting, often with palms held together at the heart center,
+meaning I honor the divinity in you. (“I honor the place in you where, when you
+are resting in yours, and I am resting in mine, there is only one of us.” —Ram
+Days) Nirvana / nirvana Liberation from material existence. The transcendental
+freedom that stands as the final goal of the Buddha’s teachings. Unconditional
+wisdom, unlimited awareness.
+Nivritti To flow back. Involution, away from activity. Opposed to Pavarotti,
+evolution.
+Niyama(s) The internal disciplines of Astana yoga: Sacha (purity of mind and
+body), Santosh (contentment), tapas (self-discipline), svadhyaya (devotion and
+spiritual study), and Hara Gandhara (surrender, union with the Divine).
+NRI Maya Offerings to guests or to the needy (such as food to the hungry) given
+as a spiritual act or practice.
+Pingala The right Nazi (stream of energy) that runs along the subhuman (the
+astral spinal column which carries the Kundalini energy). It is masculine, fiery in
+nature, hot, and stimulating. See Ida.
+Pitch Maya Offering oblations, usually of water and rice, to the dead, especially
+ancestors.
+Prakriti Nature; phenomenal world. Oneness manifests as Purus (spirit) and
+Prakrit. Prakrit is part of the Divine Being, not subordinate to it.
+Pralaya Periodic cosmic dissolution marking the end of an age. When all forms
+merge into one indiscriminate whole.
+Pranam To bow down to show respect, especially to a sadhu.
+Pranayama Regulation of the breath to control prank, or the life force of the
+body. Used in yoga and meditation for cleansing the body and concentrating the
+mind.
+Pratyahara Withdrawal of senses from objects to still the mind. One of the eight
+limbs of Astana yoga.
+Pravritti To flow forth. Evolution, toward sense stimulus. Opposed to nitrite,
+involution.
+Psychotropic A substance that can influence human consciousness, changing the
+functioning of the mind.
+Punya Right understanding. To act mindfully.
+Purusha Spirit. Pure consciousness. Oneness manifests as Purus and Prakrit
+(phenomenal world).
+Raja yoga The “royal” path. The mind becomes the instrument of the soul.
+Rajas/basic Energy. Action, stimulation of desires. One of the guns.
+Ram Nam Satya Hey The Hindu mantra that accompanies bringing the body of
+a deceased person to the Ganges River during funeral rites. Often heard in
+Bananas (Varanasi).
+Ramayana Literally, the vehicle of Rama. Composed by the sage Valid, the
+Ramayana is the oldest known Sanskrit epic poem of India. The adventures of
+the avatar Rama and his consort Site with the demon Havana. The Ramayana
+brings to life the eternal struggle between the impersonal laws of nature and
+dharma.
+Roche Literally, “precious One.” A title of honor given to Talks and others
+of high spiritual attainment.
+Rohatsu die session A Zen tradition of intense meditation practice. For the first
+eight days of December, continuous meditation with breaks for surreys, eating,
+and sleeping.
+Sadhak A spiritual aspirant of God or Truth doing Sahara.
+Sadhana(s) From the verb root sad, meaning “to go straight to the goal.”
+Spiritual way or spiritual disciplines that ultimately create evolutionary energy
+for all beings.
+Sadhu A holy person, saint, or sage.
+Samadhi Concentration, absorption, unification. The person and the object of
+meditation merge. Total absorption of body, mind, soul, and spirit into the One
+Reality. Oneness, ecstasy.
+Samsara Literally, “to circle.” The bondage of the repetitious cycle of birth,
+death, and rebirth initiated by one’s karma (actions in each lifetime).
+Sankhya A Hindu school of philosophy focusing study on the human body and
+soul.
+Sat Truth Absolute Being. Beyond duality.
+Satori In the Zen Buddhist tradition, “direct perception.” This experience may
+vary from a flash of intuitive awareness to nirvana. It is the beginning and not
+the end of Zen training.
+Sattva/static Ritually pure. Being in a state of tranquility or purity. One of the
+guns.
+Satya Truthfulness.
+Sesshin A period of intense meditation practice.
+Seva Service without attachment to the fruits of one’s labor. (“God serving God
+—puts it into a loving space.” —Ram Days) shaped yoga The yoga of working
+with the inner sound.
+Shakti The feminine principle of Divine energy or power. Recognition of one’s
+own inner power.
+Siddhi From side, “to attain.” Supernatural or hidden powers inherent in the
+human spirit attained through mantra, meditation, and other yogic practices.
+Siddhi baba A perfected yogi who has mastered the eight Sindhi: the power to
+become infinitely small (anima), infinitely large (maxima), light (Mafia),
+heavy (Karima), to create (Oshawa), command (Harshitha), reach anywhere
+(Pratt), and gratify any wish (Panama).
+Sila Purification, morality, virtue.
+Skandas The causal and impermanent elements inherent in all forms of life.
+There are five elements (stands) creating the personality and temporal nature of
+humans: RPA (form), Vedanta (sensation), Santa (perception), Sankara
+(reactions), and Vienna (consciousness).
+Stupa Literally, “crest, top, summit.” The monument built over the ashes or
+relics of a spiritual master.
+Sunnyas A enunciate. One who has renounced the world for a life of solitude
+and meditation.
+Sushumna The astral spinal column, where the chakras ascend and where the
+Kundalini energy is carried.
+Swaha Invocation used during offerings to spiritual deities. Has the intent of “So
+be it!”
+Svayamvara The Indian ceremony when the princess chooses her own husband.
+Tapasya/tapas Self-discipline and austerity to achieve progress in spiritual
+growth.
+Theravada Buddhism: Literally, “the Way of the Elders.” A council of five
+hundred elders committed the Buddha’s teachings from oral tradition to written
+form. From this text, the Pale Canon, Theravada Buddhism draws its spiritual
+inspiration. It is the predominant school of Buddhism in Southeast Asia, and is
+often referred to as Southern Buddhism. Since the nineteenth century it has
+spread across Europe and North America.
+Tucket A low bed or platform made from planks used by some of the holy beings
+in India.
+Talk(s) A sage who has chosen to reincarnate, rather than accept nirvana, to be
+available to spiritual seekers.
+Upanishads Literally, “to be close-by devotedly.” One of the most important
+Hindu spiritual texts. The Upanishads, along with the Arawakan and
+Brahmana's, are the principal commentaries on the Vedas and on Hindu scriptural
+ideas. The central teaching is that the Self is the same as Brahman.
+Upaya A way or path. Any means or method used to achieve spiritual awareness.
+Vasana(s) Self-limitation caused from memories (habits or conditioning) that
+can prevent enlightenment. Awareness of these memories can be used to
+progress.
+Vedas Literally, “wisdom.” The ancient sacred writings of India which form the
+heart of Hindu scripture. The Vedas were composed beginning in 2000 B.C. The
+four Vedas (also called the Summits) are the Rig-Veda, the Saavedra, the
+Yajur Veda, and the Atharva Veda.
+Richard ATM “Who am I?” A practice of self-inquiry, taught and practiced by
+Ramona Maharishi.
+Visuddhimagga A fifth-century work on Theravada Buddhist doctrine.
+Translated into English by Shikoku Nanomole. Visuddhimagga, the title, is also a
+phrase meaning “the Path of Purification.”
+Rama(s) One of the external disciplines: AHIMA (non-harming), Satya
+(truthfulness), assay (non-stealing), brahmacharya (chastity), and aparigraha
+(non-covetousness).
+Yoga(s) Literally, to yoke or join. The way to or the union of the soul with the
+Ultimate Reality. Includes meditation, breath control, postures, right behavior,
+devotion, etc.
+yoga An age in Hindu chronology lasting 432,000 years. There are four Yumas in
+each cycle of creation: Satya or Krita Yoga (Truth or Golden Age), with
+emphasis on meditation; Treat Yoga (Silver Age), sacrifices; Avalara Yoga
+(Bronze Age), worship of deities; and the present Kali Yoga (Dark or Iron Age),
+chanting of Holy Names. The Kali age began in 3102 B.C. and is the fourth yoga
+of this cycle.
+Zazen “Just sitting” method of meditation in Zen Buddhism.
+Zendo In the Zen Buddhist tradition, a place used to practice taken.
+Resources
+An extensive resources guide has been compiled to help you get started with
+practices that have been introduced in this book. The guide is too long to include
+here, but it is available online at www.RamDassTapes.org. It is a compendium
+of information about books, tapes, CDs, videos, and websites, relating not only
+to the teachers and teachings that have been mentioned, but to Hinduism and
+Hindu philosophy in general. Please visit the site and make use of the wealth of
+information it offers.
+Here are a few of the more important resources directly related to the Rita.
+Books
+The Bhagavad Gita. Introduction and translation by Juan Mascara, Penguin
+Group, 1962.
+Bhagavad Gita. Translated by Swami Prabhavananda and Christopher
+Isherwood, Barnes & Noble Books, 1995.
+The Bhagavad Gita: A New Translation. Stephen Mitchell, Three Rivers Press,
+2002.
+The Bhagavad Gita. Translation and introduction by Eliot Deutsche, Holt,
+Reinhart and Winston, 1968.
+Jnaneshwari. Interpretation and commentary of the Bhagavad Gita by the
+thirteenth-century poet-saint Jnaneshwar, George Allen and Unwin Publishers.
+Illuminations from the Bhagavad Gita. Kim and Chris Murray, Mandala
+Publishing Group, 1998.
+Ethics of the Bhagavad Gita. Swami Savanna. Why the Rita was taught on a
+battlefield and more, Divine Life Society, 1995.
+The Rita Vision. Swami Chimamanda. Pithy exposition on the first three chapters
+of the Bhagavad Gita, Divine Life Society.
+The Song Celestial. Ramona Maharishi’s selected verses from the Bhagavad Gita.
+Sri Niranjanananda Swami, 1951.
+Spiritual Heritage of India. Swami Prabhavananda. Comprehensive history of
+India’s philosophy and religions; discusses the Vedas, the Upanishads, the Rita,
+the six systems of Indian philosophy. Sri Ramakrishna Math.
+Electronic
+http://eawc.evansville.edu/inpage.htm. A wealth of information on the historical
+context of the Rita and the Rita’s relation to Indian religious thought.
+www.geocities.com/somsram. A valuable site on the Rita, with discourses,
+interpretation, and verses and chanting of slogan in audio.
+www.onlinedarshan.com. Entire text can be read online: Ramayana, Vedas,
+Upanishads, Purana's, and the Bhagavad Gita. Also, Goswami Tulsidas’s life
+story and teachings.
+Organizations
+International/American Rita Society. Offers free distribution of the Rita to
+hospitals, libraries, and other public entities; entire Rita for online reading;
+support and guidance in establishing Rita discussion groups; free
+correspondence courses. www.gitasociety.com, or 511 Lowell Place, Fremont,
+CA 94536.
+NOTE: CDs and cassette tape recordings of the “Yoga's of the Bhagavad Gita”
+lectures from which this book was drawn are available from the Ram Days Tape
+Library Foundation (www.RamDassTapes.org).
+1 K. K. was a lifelong devotee of Need Karol Baba, and
+he was present when Ram Days first met Maharajah. It
+was to K. K.’s home in Capital that Ram Days was taken
+following that first meeting.
+2 Ultimately, the school bus wound up parked at the
+Lama Foundation, a spiritual community in the
+mountains outside of Tao's, New Mexico, where it housed
+the community’s sole telephone and was used as office
+space for the Lama staff. In a fierce forest fire which
+swept through Lama in 1996, the bus was one of the few
+structures that was not totally destroyed; however, the
+side of the bus that had faced the fire was burned black,
+while the other side was scorched—an interesting
+symbolic close to its story.
+About the Author
+Ram Days has served on the faculty at Stanford and Harvard Universities. Since
+1968, he has pursued a variety of spiritual practices, including guru Krita,
+devotional yoga, meditation, and Sufi and Jewish studies.
+Books by Ram Days
+Identification and Child Rearing (Richard Alpert) with R. Sears and L. Ran
+(Stanford University Press, early 1960s) The Psychedelic Experience (Richard
+Alpert) with Timothy Leary and Ralph Metzger (University Books, 1964) LSD
+(Richard Alpert) with S. Cohen and L. Schiller (New American Library, 1966) Be
+Here Now (Lama Foundation; Crown Books, 1971)
+The Only Dance There Is (Anchor Books, 1974)
+Grist for the Mill with Stephen Levine (Unity Press, 1976; new edition by
+Celestial Arts, 1987) Journey of Awakening (Bantam Books, 1978)
+Miracle of Love (Dutton, 1979; new edition by Hangman Foundation, 1996)
+How Can I Help? With Paul Gorman (Alfred Knopf, 1985) Compassion in
+Action with Mirabeau Bush (Bell Tower, 1992) Still Here: Embracing Aging,
+Changing and Dying (River head Books, 2000) One-Liners: A Mini-Manual for
+a Spiritual Life (Bell Tower, 2002) Paths to God: Living the Bhagavad Gita
+(Harmony, 2004)
+What’s next on
+your reading list?
+Discover your next
+great read!
+Get personalized book picks and up-to-date news about
+this author.
+Sign up now.

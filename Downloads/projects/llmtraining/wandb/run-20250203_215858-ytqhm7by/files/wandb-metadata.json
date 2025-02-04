@@ -1,0 +1,40 @@
+{
+  "os":  "macOS-14.3-arm64-arm-64bit-Mach-O",
+  "python":  "CPython 3.13.0",
+  "startedAt":  "2025-02-04T02:58:59.429816Z",
+  "program":  "/Users/kurultai/Downloads/projects/llmtraining/llmtraining.py",
+  "codePath":  "Downloads/projects/llmtraining/llmtraining.py",
+  "email":  "d@kurult.ai",
+  "root":  "/Users/kurultai/Downloads/projects/llmtraining",
+  "host":  "Daniels-MacBook-Pro.local",
+  "executable":  "/Users/kurultai/Downloads/projects/llmtraining/.venv/bin/python3",
+  "codePathLocal":  "llmtraining.py",
+  "cpu_count":  12,
+  "cpu_count_logical":  12,
+  "disk":  {
+    "/":  {
+      "total":  "994662584320",
+      "used":  "469135630336"
+    },
+    "/System/Volumes/Data":  {
+      "total":  "994662584320",
+      "used":  "469135630336"
+    }
+  },
+  "memory":  {
+    "total":  "34359738368"
+  },
+  "cpu":  {
+    "count":  12,
+    "countLogical":  12
+  },
+  "apple":  {
+    "name":  "Apple M2 Max",
+    "ecpuCores":  4,
+    "pcpuCores":  8,
+    "gpuCores":  38,
+    "memoryGb":  32,
+    "swapTotalBytes":  "33285996544",
+    "ramTotalBytes":  "34359738368"
+  }
+}

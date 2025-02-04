@@ -1,0 +1,47 @@
+  0%|                           | 0/32 [00:00<?, ?it/s]Traceback (most recent call last):
+[21:59:00] [CACHE] Loaded cache for the-emperors-new-mind-by-roger-penrose.txt
+[21:59:00] [CACHE] Loaded cache for synthesized_knowledge.txt
+  File "/Users/kurultai/Downloads/projects/llmtraining/llmtraining.py", line 180, in <module>
+    )
+  File "/Users/kurultai/Downloads/projects/llmtraining/llmtraining.py", line 177, in main
+    eval_dataset=val_dataset,
+    ^^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 2171, in train
+    return inner_training_loop(
+        args=args,
+    ...<2 lines>...
+        ignore_keys_for_eval=ignore_keys_for_eval,
+    )
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 2531, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 3712, in training_step
+    self.accelerator.backward(loss, **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/accelerate/accelerator.py", line 2246, in backward
+    loss.backward(**kwargs)
+    ~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/_tensor.py", line 626, in backward
+    torch.autograd.backward(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, gradient, retain_graph, create_graph, inputs=inputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+    ~~~~~~~~~~~~~~~~~~~~^
+        tensors,
+        ^^^^^^^^
+    ...<5 lines>...
+        accumulate_grad=True,
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+KeyboardInterrupt

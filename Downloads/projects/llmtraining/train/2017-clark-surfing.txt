@@ -1,0 +1,209 @@
+Transcribed from: 2017-clark-surfing.pdf
+Method used: pdfplumber
+==================================================
+
+Minds&Machines
+DOI10.1007/s11023-017-9420-y
+Andy Clark, Surfing Uncertainty: Prediction, Action,
+and the Embodied Mind
+New York: Oxford University Press, 2016, xviii + 401, $29.95,
+ISBN 9780190217013
+Matteo Colombo1
+(CID:2)Springer Science+BusinessMediaDordrecht2017
+Suppose you shut down your senses for a while. Suppose you decide to live with a
+blindfold for one week. Or, more drastically, you decide to spend one week in a
+dark, sound-proof, odorless tank, inside which you will float in salt water at
+constant temperature. Youbelieveyouwillgainamuchneededpeaceofmind. You
+willperceivenothing; youwillthinknothing. Afterthisperiod ofblissfuloblivion,
+you will be ready to engage with the world again, with an external environment
+whichconstantlybombardsyourhelplesssensorysystemswithabuzzingstreamof
+sensory data. At least you believe that.
+Butthisbeliefrestsonafundamentalmistake, accordingtoAndyClark’surfing
+Uncertainty. Whatyouperceivedependsnotjustonthesensorydatathatyourbrain
+receives from the environment; what you normally see, smell, and hear would also
+dependoninternallygeneratedtop-downsignalsconveyingpriorexpectationsabout
+the world. Whenyoutakeallthesensorystimulationaway, yourperceptiondoesnot
+stop. It just gets stranger. People experiencing sensory deprivation for just a few
+hours often report vivid hallucinations. They may see bright spots of light, faces,
+landscapes, and colored patterns; they may hear arias, beats, and voices (e.g.,
+Megabit et al. 2004; Mason and Brady 2009). Deprived of sensory data, the brain
+spontaneously generates its own; and, restless, you begin to have finicky
+perceptions.
+Surfing Uncertainty isadelightfullywrittenbookthatshowshow thispictureof
+the brain has far-reaching consequences for central questions in cognitive science,
+philosophy, andneuroscience. Blendingresultsfromembodiedcognitionwithideas
+and results from computational neuroscience and machine learning, Clark argues
+that ‘‘the predictive brain ... is an action-oriented engagement machine, adept at
+& Matteo Colombo
+m.colombo@uvt.nl
+1 TilburgCenterforLogic, EthicsandPhilosophyofScience, UniversityofTilburg,
+POBox90153,5000LETilburg,The Netherlands
+123
+M. Colombo
+finding efficient embodied solutions that make the most of body and world’’
+(p. 300). Biological brains would not be passive receivers of sensory data, but
+proactive machines:evolvedorgansconstantlytryingtopredicttheirownstreamsof
+incoming sensory stimulation. To develop his argument, Clark synthesizes a large
+body of work in embodied cognitive science and computational neuroscience. The
+upshot of this synthesis is a unifying, principled theory of the embodied mind,
+which Clark dubs Predictive Processing (PP).
+Surfing Uncertainty is in three parts. Part I includes Chapters 1–3, where Clark
+weavesavastarrayofresultsandconceptsfromdifferentcornersofcomputational
+neuroscience and machine learning to lay bare the tenets of PP. While traditional
+approaches depict perception as a passive, cumulative, bottom-up process of
+progressively complex feature detection, PP understands perception as an active
+process constituted by the ongoing interaction of top-down and bottom-up
+processing. Chapter1beginstounpackthisideabyfocusingontwocomputational
+building blocks of PP: prediction and prediction error. Clark explains that
+hierarchically organized brains leverage these quantities to support adaptive action
+andtomakesenseofinputdatathataresparse, noisy,and ambiguous. WhileClark
+doesnotprovideaprecisedefinitionofthenotionofprediction(or expectation), he
+warns readers that computing predictions involves no conscious, personal-level
+judgement or homunculus; it requires only automatic, sub-personal operations
+defined over physical states and events. As such, usage of ‘prediction’ picks out a
+distinctivefunctionalroleinacomputationalsystemthatconstantlysolvesproblems
+of statistical inference by trying to minimize the errors in its predictions.
+Drawing on several ideas, examples and case studies, Clark explains that higher
+levelcorticalareasinthebrainwouldencodepredictions, whicharebroadcastedby
+backwardconnectionsinthe corticalhierarchyto‘explain’input from lower areas.
+Top-downpredictionswouldbegeneratedusingastatistical (generative)model that
+might itself be learned by exposure to training sensory data. Although this statistical
+model consists of sets of assumptions about what in the environment could have
+causedthestreamofdataimpingingonoursensorysurfaces, Clarkemphasisesthat
+themodelisnotsomuchinthebusinessofaccuratelyrepresentingtheenvironment.
+Instead, brains’ generative model attends to the business of control and regulation
+(cf., Conan and Ashby 1970).
+Learning would occur when the actually observed sensory data differs from the
+predicted data, resultinginapredictionerror, broadcastedbyforwardconnectionsin
+the cortical hierarchy for the immediate selection of action or for synaptic changes
+underlying prediction update. Only expected features of an input signal are
+suppressed, and only unexpected features are fed forward to tune the generative
+model to reduce discrepancies between predicted and actual sensory signals.
+While this functional asymmetry between prediction and prediction error signals is
+on-off’scentralcommitments, italsoidentifiespredictionerrorminimizationas
+cognitive bedrock, as a fundamental functional principle of biological brains.
+In Chapter 2, Clark adds to this picture the notion of precision. Defined as the
+reciprocal of the variance of a probability distribution, the precision of an error
+signalwouldmodulatetheamplitudeofpredictionerrorsandconstituteattention. A
+more precise prediction error will have more weight on updating the brain’s
+123
+Surfing Uncertainty:Prediction, Action,and the…
+Generative model. Precision weighting on prediction errors would enable brains to
+tipthebalancebetweensensoryinputandpriorexpectationsatdifferentspatialand
+temporal levels in the processing hierarchy, in a way that is context- and task-
+sensitive.
+PrecisionweightingplaysanessentialroleinClark’argument, asitwouldallow
+us to explain apparently different modes of perception, action, and reasoning by
+appealing to a single kind of mechanism—more on this in a moment. As Clark
+explains in Chapter 3, the same kind of precision-weighted multi-level prediction
+machinery would also account for imagination, dreaming, and memory as cases
+where top-down predictions run without meeting incoming sensory signals. And it
+may ground semantic content too, which would derive from embodied brains’
+predictions concerning how causal structure can be projected into observed data.
+Where causal structure latches on to organism-salient patterns in the stream of
+sensory data, we have a grip on the world, which would be revealed as inherently
+meaningful.
+Part II of Surfing Uncertainty includes Chapters 4–7, which are the philosophy-
+icallyrichest. Thefocusisonaction, andtheclaimClarkputsforwardisthatPPis
+the ideal explanatory partner for embodied theories of cognition. Relying on many
+case studies and concepts from machine learning, computational neuroscience and
+embodied cognitive science, Clark tries to work out how PP might reconfigure Trey-
+ditionalpuzzlesaboutmind. Amongotherissues, heexploreswhetherthereisroom
+for desire and reward in PP’s account of action (Chapter 4), how we grasp the
+intentionsofothersbysimulatingthem (Chapter5), howweshouldunderstandthe
+representations posited by PP (Chapter 6), and how PP explains emotion and
+psychiatric disorders like schizophrenia and autism, and even helps us make
+progress towards a solution to the hard problem’ of consciousness (Chapter 7).
+Clark’s argument begins from the idea that embodied brains have two types of
+strategiesofmatchingtheirpredictionstotheworldsoastocancelpredictionerrors.
+Perception is the first strategy, where the brain finds the prediction that best
+explains’ the sensory data. Action (or active inference) is the second, where the
+brain actively samples proprioceptive data to fit its predictions. Forming a
+continuous causal circle shaped by precision weighting, perception and action
+would be synergy strategies brains use to match their predictions to the world.
+Precision weighting would equip brains with a kind of mechanism to select
+between knowledge-sparse and knowledge-rich modes of perception and action,
+based on context and task. Using this mechanism, brains are best positioned to
+deliver, whenever possible, cheap, action-involving solutions to the problems they
+face. Because delivering these solutions often piggybacks on bodily and environ-mental structures, PP and embodied theorists can be friends. PP would in fact
+constitute the ideal, empirically productive, neurocomputational framework for
+studying the role of weighted prediction error and of top-down predictions in the
+workings of embodied, situated brains.
+Part III contains the last three chapters of Surfing Uncertainty. Appealing once
+more to precision weighting, Clark argues (in Chapter 8) that human reasoning is
+notsupportedbytwo(or more)functionallydistinctsystems. Labelslike‘System1’
+and‘System2’, or‘model-free’and‘model-based’wouldnotpickoutnaturalkinds,
+123
+M. Colombo
+but‘‘differentadmixturesofresourceandinfluence, eachofwhichisrecruitedinthe
+same general way as circumstances dictate’’ (p. 256). Clark also touches upon the
+relationship between extended cognition and PP, explaining that PP offers ‘‘a
+specific, and highly extension-friendly,’ proposal concerning the shape of the
+specifically neural contributiontocognitive success’’(p. 260). Chapter 8endswith
+discussion of the ‘‘Darkened Room Puzzle,’’which is the worry that‘‘prediction-driven organisms ... should simply seek out states that are easily predicted, such as
+an empty darkened room in which to spend the remainder of their increasingly
+hungry, thirsty, and depressing days’’ (p. 262). To dissolve this puzzle, Clark
+appeals to structurally implicit, innately specified expectations characteristic of us
+humans, which may account for our drive towards play, exploration, and novelty.
+Chapter 9 explains how social institutions, social norms, and language fit into PP.
+Linguistically-empowered social norms and other human institutions would
+function as prediction-error minimizing devices that we structure and re-structure
+to support smooth interactions with others (cf., Colombo 2016). Chapter 10
+concludes by flagging remaining ‘‘problems, puzzles, and pitfalls’’ for PP.
+One potential problem that Clark does not address concerns the inductive basis
+onwhichthecaseforPPisbuilt. SurfingUncertaintyrepeatedlyemphasisesthatPP
+may constitute a ‘‘truly fundamental and deeply unified science of the embodied
+mind’’ (p. 297). PP is said to constitute the beginnings of this unified science
+because it identifies one type of embodiment-friendly neurocomputational mechanism, which might be tokened at different spatial and temporal scales in the
+nervous system, and which may ground functional explanations of many sets of
+behaviouralandneuraldata. Clarkidentifiesthismechanismandprovidesevidence
+foritsrealitybytappingawidevarietyofsources, mostprominently:KarlFriston’s
+free-energy principle (cf., Frisson 2010), Bayesian cognitive science, and deep
+learning approaches.
+However, this inductive basis is not homogenous. Deep learning is aimed at
+pattern recognition. This approach suggests that the primary task of mind is to
+discover structured patterns in large data sets through many layers of feature
+extraction. Bayesian approaches are instead aimed at model-building, where the
+primary task of mind is to use causal models to understand and act in the world
+(Lake et al. 2016). Furthermore, some of the elements of both deep learning and
+Bayesian approaches do not seem to mesh with central commitments of PP. For
+instance, biologically plausible deep learning algorithms discover structure in data
+by using backpropagation, where—in contradiction to PP—errors are propagated
+backwards. Finally, currentworksuggeststhatbrainsmightactuallyoptimizemany
+diverse cost functions that would not be reducible to prediction error minimization
+without explanatory loss (cf. Marble stone et al. 2016).
+The potential problem then is that the paradigm cases and concepts on which
+Clark builds thecaseforPPmaynotallexemplifythe same kind of mechanism. If
+so, then PP will not deliver a global understanding of embodied brains. Evaluating
+this worry obviously requires a close engagement with the primary literature. But
+one might predict that, given the range and diversity of phenomena studied in
+cognitive neuroscience, global understanding may well take the form of a
+123
+Surfing Uncertainty:Prediction, Action,and the…
+‘Patchwork quilt’ of models and approaches, none of which enjoys explanatory
+primacy.
+By painting such a stunningly unified picture, Clark’s Surfing Uncertainty does,
+however, agreatservicetophilosophersandcognitivescientists. WhetherornotPP
+turns out to be a truly unifying, explanatory account of embodied brains, Clark
+crystallizes many of the contentious issues and developments in computational
+neuroscience, whilst developing the conceptual landscape for carrying out new
+productive work. Surfing Uncertainty is essential reading for anybody interested in
+mind, brain, and cognitive science.
+References
+Colombo, M. (2016). Social motivation in computational neuroscience. Or if brains are prediction
+machines, thentheHumeantheoryofmotivationisfalse. InJ. Kiverstein(Ed.), Routledgehandbook
+ofphilosophyofthesocialmind. NewYork:Routledge.
+Conan, R.C., &Ashby, R.W.(1970). Everygoodregulatorofasystemmustbeamodelofthatsystem.
+Internationaljournalofsystemsscience,1(2),89–97.
+Frisson, K.(2010). Thefree-energyprinciple:aunifiedbraintheory? Naturereviewsneuroscience,11(2),
+127–138.
+Lake, B.M., Ullman, T.D., Tenenbaum,J.B., &Gershman, S.J.(2016). Buildingmachinesthatlearnand
+thinklikepeople, arXivpreprintarXiv:1604.00289.
+Marble stone, A., Wayne, G., & Wording, K. (2016). Towards an integration of deep learning and
+neuroscience. FrontiersinComputationalNeuroscience,10,94.DOI:10.3389/fncom.2016.00094.
+Mason, O. J., & Brady, F. (2009). The psychotomimetic effects of short-term sensory deprivation.
+Journalofnervousandmentaldisease,197,783–785.DOI:10.1097/nmd.0b013e3181b9760b.
+Megabit, L.B.,Maguire’D., Warde, A., Alterescu, K., Stickgold, R., &Pascual-Leone, A.(2004). Visual
+hallucinationsduringprolongedblindfoldinginsightedsubjects. Journalofneuro-ophthalmology,
+24(2),109–113.
+123

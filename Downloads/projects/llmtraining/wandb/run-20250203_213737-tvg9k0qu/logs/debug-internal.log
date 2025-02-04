@@ -1,0 +1,16 @@
+{"time":"2025-02-03T21:37:38.090609-05:00","level":"INFO","msg":"stream: starting","core version":"0.19.5","symlink path":"/Users/kurultai/Downloads/projects/llmtraining/wandb/run-20250203_213737-tvg9k0qu/logs/debug-core.log"}
+{"time":"2025-02-03T21:37:38.202166-05:00","level":"INFO","msg":"created new stream","id":"tvg9k0qu"}
+{"time":"2025-02-03T21:37:38.202439-05:00","level":"INFO","msg":"stream: started","id":"tvg9k0qu"}
+{"time":"2025-02-03T21:37:38.202456-05:00","level":"INFO","msg":"handler: started","stream_id":"tvg9k0qu"}
+{"time":"2025-02-03T21:37:38.202685-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"tvg9k0qu"}
+{"time":"2025-02-03T21:37:38.202792-05:00","level":"INFO","msg":"sender: started","stream_id":"tvg9k0qu"}
+{"time":"2025-02-03T21:37:38.515437-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-03T21:37:38.587363-05:00","level":"INFO","msg":"stream: closing","id":"tvg9k0qu"}
+{"time":"2025-02-03T21:37:38.587521-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-02-03T21:37:38.588412-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-02-03T21:37:39.378958-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-02-03T21:37:39.522255-05:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/kurult-ai/huggingface/tvg9k0qu/file_stream\": read tcp 192.168.86.81:49243->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-02-03T21:37:41.986293-05:00","level":"INFO","msg":"sender: closed","stream_id":"tvg9k0qu"}
+{"time":"2025-02-03T21:37:41.986285-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"tvg9k0qu"}
+{"time":"2025-02-03T21:37:41.986594-05:00","level":"INFO","msg":"handler: closed","stream_id":"tvg9k0qu"}
+{"time":"2025-02-03T21:37:41.986618-05:00","level":"INFO","msg":"stream: closed","id":"tvg9k0qu"}

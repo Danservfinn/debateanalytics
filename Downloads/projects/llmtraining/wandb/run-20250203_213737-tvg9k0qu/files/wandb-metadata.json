@@ -1,0 +1,12 @@
+{
+  "os":  "macOS-14.3-arm64-arm-64bit-Mach-O",
+  "python":  "CPython 3.13.0",
+  "startedAt":  "2025-02-04T02:37:38.086001Z",
+  "program":  "/Users/kurultai/Downloads/projects/llmtraining/llmtraining.py",
+  "codePath":  "Downloads/projects/llmtraining/llmtraining.py",
+  "email":  "d@kurult.ai",
+  "root":  "/Users/kurultai/Downloads/projects/llmtraining",
+  "host":  "Daniels-MacBook-Pro.local",
+  "executable":  "/Users/kurultai/Downloads/projects/llmtraining/.venv/bin/python3",
+  "codePathLocal":  "llmtraining.py"
+}

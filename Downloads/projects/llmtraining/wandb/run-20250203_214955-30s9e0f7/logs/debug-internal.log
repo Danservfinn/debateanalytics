@@ -1,0 +1,7 @@
+{"time":"2025-02-03T21:49:55.991062-05:00","level":"INFO","msg":"stream: starting","core version":"0.19.5","symlink path":"/Users/kurultai/Downloads/projects/llmtraining/wandb/run-20250203_214955-30s9e0f7/logs/debug-core.log"}
+{"time":"2025-02-03T21:49:56.146423-05:00","level":"INFO","msg":"created new stream","id":"30s9e0f7"}
+{"time":"2025-02-03T21:49:56.146477-05:00","level":"INFO","msg":"stream: started","id":"30s9e0f7"}
+{"time":"2025-02-03T21:49:56.148206-05:00","level":"INFO","msg":"handler: started","stream_id":"30s9e0f7"}
+{"time":"2025-02-03T21:49:56.150301-05:00","level":"INFO","msg":"sender: started","stream_id":"30s9e0f7"}
+{"time":"2025-02-03T21:49:56.150357-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"30s9e0f7"}
+{"time":"2025-02-03T21:49:57.064115-05:00","level":"INFO","msg":"Starting system monitor"}

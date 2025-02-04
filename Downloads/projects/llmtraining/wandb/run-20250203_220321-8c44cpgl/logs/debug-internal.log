@@ -1,0 +1,15 @@
+{"time":"2025-02-03T22:03:21.32787-05:00","level":"INFO","msg":"stream: starting","core version":"0.19.5","symlink path":"/Users/kurultai/Downloads/projects/llmtraining/wandb/run-20250203_220321-8c44cpgl/logs/debug-core.log"}
+{"time":"2025-02-03T22:03:21.43423-05:00","level":"INFO","msg":"created new stream","id":"8c44cpgl"}
+{"time":"2025-02-03T22:03:21.434273-05:00","level":"INFO","msg":"stream: started","id":"8c44cpgl"}
+{"time":"2025-02-03T22:03:21.43429-05:00","level":"INFO","msg":"sender: started","stream_id":"8c44cpgl"}
+{"time":"2025-02-03T22:03:21.434307-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"8c44cpgl"}
+{"time":"2025-02-03T22:03:21.434323-05:00","level":"INFO","msg":"handler: started","stream_id":"8c44cpgl"}
+{"time":"2025-02-03T22:03:21.650163-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-03T22:03:29.352979-05:00","level":"INFO","msg":"stream: closing","id":"8c44cpgl"}
+{"time":"2025-02-03T22:03:29.353032-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-02-03T22:03:29.353435-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-02-03T22:03:29.794467-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-02-03T22:03:29.97279-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"8c44cpgl"}
+{"time":"2025-02-03T22:03:29.972786-05:00","level":"INFO","msg":"handler: closed","stream_id":"8c44cpgl"}
+{"time":"2025-02-03T22:03:29.972807-05:00","level":"INFO","msg":"sender: closed","stream_id":"8c44cpgl"}
+{"time":"2025-02-03T22:03:29.972966-05:00","level":"INFO","msg":"stream: closed","id":"8c44cpgl"}

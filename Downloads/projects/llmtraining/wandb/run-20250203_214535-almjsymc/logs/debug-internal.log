@@ -1,0 +1,15 @@
+{"time":"2025-02-03T21:45:35.461772-05:00","level":"INFO","msg":"stream: starting","core version":"0.19.5","symlink path":"/Users/kurultai/Downloads/projects/llmtraining/wandb/run-20250203_214535-almjsymc/logs/debug-core.log"}
+{"time":"2025-02-03T21:45:35.571779-05:00","level":"INFO","msg":"created new stream","id":"almjsymc"}
+{"time":"2025-02-03T21:45:35.571967-05:00","level":"INFO","msg":"handler: started","stream_id":"almjsymc"}
+{"time":"2025-02-03T21:45:35.571983-05:00","level":"INFO","msg":"stream: started","id":"almjsymc"}
+{"time":"2025-02-03T21:45:35.572179-05:00","level":"INFO","msg":"sender: started","stream_id":"almjsymc"}
+{"time":"2025-02-03T21:45:35.572217-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"almjsymc"}
+{"time":"2025-02-03T21:45:35.863006-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-03T21:45:35.935954-05:00","level":"INFO","msg":"stream: closing","id":"almjsymc"}
+{"time":"2025-02-03T21:45:35.935986-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-02-03T21:45:35.936883-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-02-03T21:45:36.651538-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-02-03T21:45:36.834033-05:00","level":"INFO","msg":"sender: closed","stream_id":"almjsymc"}
+{"time":"2025-02-03T21:45:36.834028-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"almjsymc"}
+{"time":"2025-02-03T21:45:36.834245-05:00","level":"INFO","msg":"handler: closed","stream_id":"almjsymc"}
+{"time":"2025-02-03T21:45:36.834272-05:00","level":"INFO","msg":"stream: closed","id":"almjsymc"}

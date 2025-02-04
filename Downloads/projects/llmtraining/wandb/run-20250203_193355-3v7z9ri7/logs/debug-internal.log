@@ -1,0 +1,20 @@
+{"time":"2025-02-03T19:33:55.82114-05:00","level":"INFO","msg":"stream: starting","core version":"0.19.5","symlink path":"/Users/kurultai/Downloads/projects/llmtraining/wandb/run-20250203_193355-3v7z9ri7/logs/debug-core.log"}
+{"time":"2025-02-03T19:33:55.931426-05:00","level":"INFO","msg":"created new stream","id":"3v7z9ri7"}
+{"time":"2025-02-03T19:33:55.931506-05:00","level":"INFO","msg":"stream: started","id":"3v7z9ri7"}
+{"time":"2025-02-03T19:33:55.931519-05:00","level":"INFO","msg":"handler: started","stream_id":"3v7z9ri7"}
+{"time":"2025-02-03T19:33:55.931741-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"3v7z9ri7"}
+{"time":"2025-02-03T19:33:55.931973-05:00","level":"INFO","msg":"sender: started","stream_id":"3v7z9ri7"}
+{"time":"2025-02-03T19:33:56.201055-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-03T19:41:11.598857-05:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/kurult-ai/axlotl/3v7z9ri7/file_stream\": read tcp 192.168.86.81:62798->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-02-03T19:41:41.62259-05:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/kurult-ai/axlotl/3v7z9ri7/file_stream\": read tcp 192.168.86.81:62805->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-02-03T19:53:11.602435-05:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/kurult-ai/axlotl/3v7z9ri7/file_stream\": read tcp 192.168.86.81:63063->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-02-03T20:00:41.608961-05:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/kurult-ai/axlotl/3v7z9ri7/file_stream\": read tcp 192.168.86.81:63172->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-02-03T20:46:26.650377-05:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/kurult-ai/axlotl/3v7z9ri7/file_stream\": read tcp 192.168.86.81:63839->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-02-03T21:05:16.882187-05:00","level":"INFO","msg":"stream: closing","id":"3v7z9ri7"}
+{"time":"2025-02-03T21:05:16.882215-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-02-03T21:05:16.883529-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-02-03T21:05:17.538052-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-02-03T21:05:17.715781-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"3v7z9ri7"}
+{"time":"2025-02-03T21:05:17.715966-05:00","level":"INFO","msg":"handler: closed","stream_id":"3v7z9ri7"}
+{"time":"2025-02-03T21:05:17.716023-05:00","level":"INFO","msg":"sender: closed","stream_id":"3v7z9ri7"}
+{"time":"2025-02-03T21:05:17.716038-05:00","level":"INFO","msg":"stream: closed","id":"3v7z9ri7"}

@@ -1,0 +1,53 @@
+  0%|                           | 0/32 [00:00<?, ?it/s]Traceback (most recent call last):
+[21:37:38] [CACHE] Loaded cache for the-emperors-new-mind-by-roger-penrose.txt
+  File "/Users/kurultai/Downloads/projects/llmtraining/llmtraining.py", line 184, in <module>
+    main()
+    ~~~~^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/llmtraining.py", line 181, in main
+    trainer.train()
+    ~~~~~~~~~~~~~^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 2171, in train
+    return inner_training_loop(
+        args=args,
+    ...<2 lines>...
+        ignore_keys_for_eval=ignore_keys_for_eval,
+    )
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 2480, in _inner_training_loop
+    batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches)
+                                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer.py", line 5153, in get_batch_samples
+    batch_samples += [next(epoch_iterator)]
+                      ~~~~^^^^^^^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/accelerate/data_loader.py", line 563, in __iter__
+    current_batch = next(dataloader_iter)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/utils/data/dataloader.py", line 708, in __next__
+    data = self._next_data()
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/utils/data/dataloader.py", line 764, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/torch/utils/data/_utils/fetch.py", line 55, in fetch
+    return self.collate_fn(data)
+           ~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/trainer_utils.py", line 848, in __call__
+    return self.data_collator(features)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/data/data_collator.py", line 45, in __call__
+    return self.torch_call(features)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/data/data_collator.py", line 810, in torch_call
+    batch = pad_without_fast_tokenizer_warning(
+        self.tokenizer, examples, return_tensors="pt", pad_to_multiple_of=self.pad_to_multiple_of
+    )
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/data/data_collator.py", line 66, in pad_without_fast_tokenizer_warning
+    padded = tokenizer.pad(*pad_args, **pad_kwargs)
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 3346, in pad
+    padding_strategy, _, max_length, _ = self._get_padding_truncation_strategies(
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        padding=padding, max_length=max_length, verbose=verbose
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/kurultai/Downloads/projects/llmtraining/.venv/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 2770, in _get_padding_truncation_strategies
+    raise ValueError(
+    ...<3 lines>...
+    )
+ValueError: Asking to pad but the tokenizer does not have a padding token. Please select a token to use as `pad_token` `(tokenizer.pad_token = tokenizer.eos_token e.g.)` or add a new pad token via `tokenizer.add_special_tokens({'pad_token': '[PAD]'})`.
