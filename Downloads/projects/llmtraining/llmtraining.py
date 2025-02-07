@@ -88,7 +88,7 @@ class TextFilesDataset(Dataset):
                 padding="max_length",
                 max_length=self.max_length
             )
-            # If tokenized is a BatchEncoding, convert it to a dict.
+            if hasattr(tokenized, "to_dict"):
             if isinstance(tokenized, BatchEncoding):
                 tokenized = tokenized.to_dict()
             # Duplicate input_ids into labels.
