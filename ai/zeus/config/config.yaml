@@ -1,0 +1,291 @@
+# ZEUS Trading Agent Configuration
+# Autonomous crypto trading agent configuration
+
+# Trading Configuration
+trading:
+  exchange: "mexc"
+  initial_balance: 1000.0  # Starting with $1,000 USDC
+  target_balance: 1000000.0  # Target $1,000,000
+  base_currency: "USDC"
+  
+  # Position sizing and risk management
+  position_sizing:
+    min_position_size: 10.0  # Minimum $10 position
+    max_leverage: 3.0  # Maximum 3x leverage
+    
+  risk_management:
+    max_position_size_pct: 20.0  # Max 20% per position
+    max_daily_loss_pct: 15.0  # Stop after 15% daily loss
+    max_total_loss_pct: 50.0  # Emergency stop at 50% total loss
+    max_drawdown_pct: 30.0  # Maximum drawdown allowed
+    emergency_stop_loss_pct: 50.0  # Emergency stop threshold
+    kelly_fraction: 0.25  # Kelly Criterion safety factor
+
+# Wallet Configuration
+wallet:
+  evm:
+    rpc_url: "https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID"
+    chain_id: 1
+    usdc_address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    weth_address: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+    chains:
+      ethereum:
+        rpc_url: "https://ethereum.publicnode.com"
+        chain_id: 1
+        usdc_address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        native_token: "ETH"
+      base:
+        rpc_url: "https://mainnet.base.org"
+        chain_id: 8453
+        usdc_address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        native_token: "ETH"
+      optimism:
+        rpc_url: "https://mainnet.optimism.io"
+        chain_id: 10
+        usdc_address: "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85"
+        native_token: "ETH"
+      arbitrum:
+        rpc_url: "https://arb1.arbitrum.io/rpc"
+        chain_id: 42161
+        usdc_address: "0xaf88d065e77c8cC2239327C5edb3A432268e5831"
+        native_token: "ETH"
+      polygon:
+        rpc_url: "https://polygon-rpc.com"
+        chain_id: 137
+        usdc_address: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359"
+        native_token: "MATIC"
+      bsc:
+        rpc_url: "https://bsc-dataseed.binance.org"
+        chain_id: 56
+        usdc_address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+        native_token: "BNB"
+      avalanche:
+        rpc_url: "https://api.avax.network/ext/bc/C/rpc"
+        chain_id: 43114
+        usdc_address: "0xB97EF9Ef8734C71904d8002F8b6Bc66Dd9c48a6E"
+        native_token: "AVAX"
+      fantom:
+        rpc_url: "https://rpc.ftm.tools"
+        chain_id: 250
+        usdc_address: "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
+        native_token: "FTM"
+      gnosis:
+        rpc_url: "https://rpc.gnosischain.com"
+        chain_id: 100
+        usdc_address: "0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83"
+        native_token: "xDAI"
+      moonbeam:
+        rpc_url: "https://rpc.api.moonbeam.network"
+        chain_id: 1284
+        usdc_address: "0x931715FEE2d06333043d11F658C8CE934aC61D0c"
+        native_token: "GLMR"
+
+# Model Configuration
+models:
+  primary:
+    provider: "local"  # Primary: Local DeepSeek R1 14B via Ollama
+    model: "deepseek-r1:14b"
+    temperature: 0.1
+    max_tokens: 4096
+    
+  fallback:
+    - provider: "openrouter"
+      model: "deepseek/deepseek-r1-0528"
+      api_key_env: "OPENROUTER_API_KEY"
+      temperature: 0.6
+      max_tokens: 4096
+      
+    - provider: "openrouter"
+      model: "qwen/qwen3-coder"
+      api_key_env: "OPENROUTER_API_KEY"
+      temperature: 0.6
+      max_tokens: 2000
+
+# Strategy Configuration
+strategies:
+  enabled:
+    - "momentum_trading"
+    - "arbitrage"
+    - "news_trading"
+    - "technical_patterns"
+    - "yield_farming"
+    - "order_flow_imbalance"
+    - "on_chain_analysis"
+    
+  # Strategy-specific parameters
+  momentum_trading:
+    lookback_period: 20
+    threshold: 0.02
+    weight: 0.15
+    
+  arbitrage:
+    min_spread: 0.001  # 0.1% minimum spread
+    max_exposure: 0.3  # 30% max portfolio exposure
+    weight: 0.15
+    
+  news_trading:
+    sentiment_threshold: 0.7
+    impact_threshold: 0.5
+    weight: 0.20
+    
+  technical_patterns:
+    confidence_threshold: 0.6
+    weight: 0.15
+    
+  yield_farming:
+    min_apy: 0.05  # 5% minimum APY
+    max_risk_score: 0.7
+    weight: 0.10
+    
+  order_flow_imbalance:
+    imbalance_threshold: 0.65
+    volume_threshold: 100000
+    weight: 0.15
+    
+  on_chain_analysis:
+    whale_threshold: 1000000  # $1M+ movements
+    weight: 0.10
+
+# Data Sources Configuration
+data_sources:
+  market_data:
+    - name: "binance"
+      type: "exchange"
+      enabled: true
+      rate_limit: 1200  # requests per minute
+      
+    - name: "coinmarketcap"
+      type: "market_cap"
+      enabled: true
+      
+  news_sources:
+    - name: "cointelegraph"
+      type: "rss"
+      url: "https://cointelegraph.com/rss"
+      weight: 0.2
+      
+    - name: "coindesk"
+      type: "rss"
+      url: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+      weight: 0.2
+      
+    - name: "decrypt"
+      type: "rss"
+      url: "https://decrypt.co/feed"
+      weight: 0.15
+      
+    - name: "theblock"
+      type: "rss"
+      url: "https://www.theblock.co/rss.xml"
+      weight: 0.15
+      
+    - name: "benzinga_crypto"
+      type: "rss"
+      url: "https://www.benzinga.com/feed/crypto"
+      weight: 0.1
+      
+  economic_data:
+    - name: "fred"
+      type: "api"
+      api_key_env: "52a0e1bfb911b167d077a38219b9cd63"
+      enabled: false  # Optional
+      
+    - name: "alpha_vantage"
+      type: "api"
+      api_key_env: "OPL5FDVTJCP014CO"
+      enabled: false  # Optional
+
+# Exchange Configuration
+exchange:
+  mexc:
+    api_key: ""  # Will be loaded from environment
+    secret_key: ""  # Will be loaded from environment
+    testnet: false
+    rate_limit: 100  # requests per minute
+    
+# Wallet Configuration
+wallet:
+  evm:
+    private_key: ""  # Will be loaded from environment
+    wallet_address: ""  # Will be loaded from environment
+    rpc_url: "https://mainnet.infura.io/v3/40a6efc975e24ff4b59ff23665112294"
+    gas_price_strategy: "medium"
+    
+  # Future multi-chain support
+  solana:
+    enabled: false
+    private_key: "avsnLhe3kLktsh9XZ44ZMXxjxBn6VdKco4A9ZxPavXsKQ5WqxNp5o2wS9BQTdesi9xrDVKu3tfBaAtKJgxnWwn5"
+    rpc_url: "https://api.mainnet-beta.solana.com"
+    
+  bitcoin:
+    enabled: false
+    private_key: ""
+    network: "mainnet"
+
+# Monitoring and Logging
+monitoring:
+  log_level: "INFO"
+  log_file: "logs/zeus-{date}.log"
+  metrics_interval: 60  # seconds
+  performance_tracking: true
+  
+  alerts:
+    emergency_stop: true
+    daily_loss_limit: true
+    large_drawdown: true
+    
+# Database Configuration
+database:
+  type: "sqlite"
+  path: "data/zeus_memory.db"
+  backup_interval: 3600  # 1 hour in seconds
+  
+# Security Configuration
+security:
+  encryption_key_path: "config/.encryption_key"
+  api_rate_limiting: true
+  max_daily_api_calls: 10000
+  
+# Performance Configuration
+performance:
+  max_concurrent_requests: 10
+  request_timeout: 30  # seconds
+  retry_attempts: 3
+  cache_duration: 300  # 5 minutes
+
+# Cost Management
+cost_management:
+  max_monthly_api_cost: 100.0  # $100 budget
+  cost_tracking: true
+  alert_threshold: 0.8  # Alert at 80% of budget
+  
+# Market Regime Configuration
+market_regime:
+  update_interval: 300  # 5 minutes
+  lookback_window: 100
+  transition_smoothing: true
+  confidence_threshold: 0.6
+
+# Sentiment Analysis Configuration
+sentiment:
+  model: "ProsusAI/finbert"  # FinBERT model
+  batch_size: 32
+  confidence_threshold: 0.6
+  impact_window: 3600  # 1 hour in seconds
+
+# Risk Scoring Configuration
+risk_scoring:
+  volatility_window: 24  # hours
+  correlation_threshold: 0.7
+  max_portfolio_risk: 0.8
+  
+# Backtesting Configuration (for future use)
+backtesting:
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+  initial_balance: 1000.0
+  commission: 0.001  # 0.1% commission
+
+# Development Configuration
+development:
+  debug_mode: false
