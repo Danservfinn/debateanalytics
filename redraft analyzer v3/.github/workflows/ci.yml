@@ -1,0 +1,318 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  lint-test-contracts:
+    name: Lint, Test & Contracts (py${{ matrix.python-version }} · ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ["3.10", "3.11"]
+    env:
+      PIP_CACHE_DIR: ~/.cache/pip
+      NEWMAN_REPORT_DIR: reports/newman
+      POSTMAN_COLLECTION: tools/newman/redraft_collection.json
+      POSTMAN_ENVIRONMENT: tools/newman/local.postman_environment.json
+      OPENAPI_PREFIX: api/openapi_v010
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('requirements-dev.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+            ${{ runner.os }}-pip-
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Run database migrations for tests
+        env:
+          DATABASE_URL: sqlite:///ci_test.db
+        run: |
+          alembic upgrade head
+
+      - name: Run ruff (lint)
+        run: ruff check .
+
+      - name: Run pytest + coverage
+        env:
+          DATABASE_URL: sqlite:///ci_test.db
+          OPENROUTER_API_KEY: ""
+        run: |
+          pytest -q --cov=src --cov-report=xml --cov-report=term
+
+      - name: Upload coverage artifact
+        if: matrix.python-version == '3.11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.python-version }}
+          path: |
+            coverage.xml
+            .coverage
+
+      - name: Set up Node.js
+        if: matrix.python-version == '3.11'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: tools/newman/package-lock.json
+
+      - name: Install Newman tooling
+        if: matrix.python-version == '3.11'
+        working-directory: tools/newman
+        run: npm ci
+
+      - name: Export OpenAPI schema
+        if: matrix.python-version == '3.11'
+        run: python tools/export_openapi.py --out ${OPENAPI_PREFIX}
+
+      - name: Validate harness routes in OpenAPI
+        if: matrix.python-version == '3.11'
+        run: python tools/validate_harness_openapi.py ${OPENAPI_PREFIX}.json
+
+      - name: Spectral lint OpenAPI
+        if: matrix.python-version == '3.11'
+        run: npx --yes @stoplight/spectral-cli lint ${OPENAPI_PREFIX}.yaml
+
+      - name: Guard OpenAPI breaking changes
+        if: matrix.python-version == '3.11'
+        env:
+          BASELINE_SPEC: reports/openapi/openapi_main.yaml
+        run: |
+          mkdir -p reports/openapi
+          if git rev-parse --verify origin/main >/dev/null 2>&1; then
+            git fetch origin main --depth=1
+            git show origin/main:${OPENAPI_PREFIX}.yaml > "${BASELINE_SPEC}" 2>/dev/null || true
+          fi
+          if [ -s "${BASELINE_SPEC}" ]; then
+            npx --yes @redocly/openapi-diff "${BASELINE_SPEC}" ${OPENAPI_PREFIX}.yaml --fail-on=changed
+          else
+            echo "No baseline OpenAPI found on origin/main; skipping diff guard."
+          fi
+
+      - name: Start API server (background)
+        if: matrix.python-version == '3.11'
+        env:
+          PYTHONPATH: .
+        run: |
+          uvicorn src.app.api.server:app --host 0.0.0.0 --port 8000 --log-level warning &
+          echo $! > uvicorn.pid
+          timeout 90 bash -c 'until curl -sf http://127.0.0.1:8000/healthz; do sleep 2; done'
+
+      - name: Run Newman contract suite
+        if: matrix.python-version == '3.11'
+        env:
+          NODE_PATH: tools/newman/node_modules
+        run: |
+          mkdir -p ${NEWMAN_REPORT_DIR}
+          echo "Running Newman contract tests including harness endpoints..."
+          npx newman run ${POSTMAN_COLLECTION} \
+            -e ${POSTMAN_ENVIRONMENT} \
+            --reporters cli,json \
+            --reporter-json-export ${NEWMAN_REPORT_DIR}/contract-report.json \
+            --working-dir .
+
+      - name: Validate harness endpoints specifically
+        if: matrix.python-version == '3.11'
+        env:
+          NODE_PATH: tools/newman/node_modules
+        run: |
+          echo "Running focused harness endpoint tests..."
+          npx newman run ${POSTMAN_COLLECTION} \
+            -e ${POSTMAN_ENVIRONMENT} \
+            --folder "Harness dashboard summary" \
+            --folder "Harness runs list" \
+            --folder "Harness run detail" \
+            --folder "Harness trigger run" \
+            --folder "Harness fixture download (pihs)" \
+            --reporters cli,json \
+            --reporter-json-export ${NEWMAN_REPORT_DIR}/harness-focused-report.json \
+            --working-dir .
+
+      - name: Verify harness API token configuration
+        if: matrix.python-version == '3.11'
+        run: |
+          echo "Checking harness API authentication setup..."
+          # Verify that harness endpoints require proper authentication
+          if curl -sf "${BASE_URL:-http://127.0.0.1:8000}/api/source-harness/dashboard.json" > /dev/null 2>&1; then
+            echo "❌ Harness dashboard endpoint should require authentication"
+            exit 1
+          fi
+          echo "✅ Harness endpoints properly protected with authentication"
+
+      - name: Health check OpenTelemetry collector
+        if: matrix.python-version == '3.11'
+        run: |
+          echo "Verifying OpenTelemetry collector configuration..."
+          if [ ! -f "otel/otelcol-config.yaml" ]; then
+            echo "❌ Missing OTLP collector config file"
+            exit 1
+          fi
+
+          # Validate YAML syntax
+          python -c "import yaml; yaml.safe_load(open('otel/otelcol-config.yaml'))" || {
+            echo "❌ Invalid YAML in otelcol-config.yaml"
+            exit 1
+          }
+
+          # Check for required sections
+          python -c "
+          import yaml
+          config = yaml.safe_load(open('otel/otelcol-config.yaml'))
+          required = ['receivers', 'processors', 'exporters', 'service']
+          for req in required:
+              if req not in config:
+                  print(f'❌ Missing required section: {req}')
+                  exit(1)
+          print('✅ OTLP collector config validation passed')
+          "
+
+      - name: Stop API server
+        if: always() && matrix.python-version == '3.11'
+        run: |
+          if [ -f uvicorn.pid ]; then kill $(cat uvicorn.pid) || true; fi
+
+      - name: Secret scan (gitleaks)
+        if: matrix.python-version == '3.11'
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          args: detect --source . --no-banner --redact
+
+      - name: Generate SBOM (Syft)
+        if: matrix.python-version == '3.11'
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: reports/sbom/sbom.json
+
+      - name: Upload OpenAPI artifacts
+        if: matrix.python-version == '3.11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: openapi-artifacts
+          path: |
+            ${OPENAPI_PREFIX}.json
+            ${OPENAPI_PREFIX}.yaml
+            reports/openapi/openapi_main.yaml
+          if-no-files-found: warn
+
+      - name: Upload Newman artifacts
+        if: matrix.python-version == '3.11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: newman-contract-suite
+          path: |
+            ${NEWMAN_REPORT_DIR}/contract-report.json
+          if-no-files-found: error
+
+      - name: Upload SBOM
+        if: matrix.python-version == '3.11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: reports/sbom/sbom.json
+          if-no-files-found: error
+
+      - name: Harness Data Cleanup Dry Run
+        if: matrix.python-version == '3.11'
+        env:
+          DATABASE_URL: sqlite:///ci_migrations.db
+        run: |
+          echo "Running harness data cleanup dry-run to validate deletion selection..."
+          python tools/cleanup_harness_data.py --dry-run --orphans-only
+
+  source-harness-quality-check:
+    name: Source Harness Quality Check (${{ matrix.source }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        source: [pihs, boone]
+    env:
+      PYTHONPATH: .
+      HARNESS_REPORT_DIR: reports/harness/${{ matrix.source }}
+      FIXTURE_CAPTURE_ENABLED: true
+      TEST_MODE: ci
+      DATABASE_URL: sqlite:///ci_harness.db
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -e .
+
+      - name: Run database migrations for harness tests
+        run: |
+          alembic upgrade head
+
+      - name: Run Source Harness Quality Check
+        run: |
+          mkdir -p ${HARNESS_REPORT_DIR}
+          python tools/source_harness/source_harness_app.py run \
+            --sources ${{ matrix.source }} \
+            --json \
+            --output ${HARNESS_REPORT_DIR}/report.json \
+            --trend-csv ${HARNESS_REPORT_DIR}/trends.csv
+
+      - name: Validate Harness Report
+        run: |
+          if [ ! -f "${HARNESS_REPORT_DIR}/report.json" ]; then
+            echo "❌ No harness report generated"
+            exit 1
+          fi
+
+          # Parse JSON and validate
+          python -c "
+          import json
+          with open('${HARNESS_REPORT_DIR}/report.json') as f:
+              report = json.load(f)
+
+          if report.get('status') != 'ok':
+              print('❌ Harness check failed')
+              for source in report.get('sources', []):
+                  if source.get('status') != 'ok':
+                      print(f\"  - {source['source']}: {source['status']} - {source.get('notes', '')}\")
+              exit(1)
+          print('✅ Harness quality check passed')
+          "
+
+      - name: Upload Harness Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: harness-report-${{ matrix.source }}
+          path: |
+            ${HARNESS_REPORT_DIR}/report.json
+            ${HARNESS_REPORT_DIR}/trends.csv
+          if-no-files-found: warn
