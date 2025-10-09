@@ -1,0 +1,1792 @@
+openapi: 3.1.0
+info:
+  title: Redraft Analyzer API
+  description: Fantasy Football valuation system with deterministic baseline + LM
+    Studio adjuster
+  version: 0.10.0
+paths:
+  /v2/trade/analyze/manual:
+    post:
+      tags:
+      - trade
+      summary: Analyze Manual
+      operationId: analyze_manual_v2_trade_analyze_manual_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManualAnalyzeRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/trade/analyze/multi/manual:
+    post:
+      tags:
+      - trade
+      summary: Analyze Multi Manual
+      operationId: analyze_multi_manual_v2_trade_analyze_multi_manual_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiAnalyzeRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/trade/analyze:
+    post:
+      tags:
+      - trade
+      summary: Analyze
+      operationId: analyze_v2_trade_analyze_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyzeRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/trade/analyze/multi:
+    post:
+      tags:
+      - trade
+      summary: Analyze Multi
+      operationId: analyze_multi_v2_trade_analyze_multi_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiAnalyzeRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/analysis/player/{player_id}/extended:
+    post:
+      tags:
+      - extended-analysis
+      summary: Start Extended Analysis
+      operationId: start_extended_analysis_v2_analysis_player__player_id__extended_post
+      parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Player Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtendedAnalysisRequest'
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtendedAnalysisJobResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/analysis/jobs/{job_id}:
+    get:
+      tags:
+      - extended-analysis
+      summary: Get Job
+      operationId: get_job_v2_analysis_jobs__job_id__get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtendedAnalysisJobStatusResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/players/{player_id}/extended/latest:
+    get:
+      tags:
+      - extended-analysis
+      summary: Get Latest
+      operationId: get_latest_v2_players__player_id__extended_latest_get
+      parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Player Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtendedAnalysisLatestResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/waivers/rank:
+    post:
+      tags:
+      - waivers
+      summary: Start Waiver Ranking
+      operationId: start_waiver_ranking_v2_waivers_rank_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WaiverRankRequest'
+      responses:
+        '202':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WaiverRankJobResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/waivers/rank/jobs/{job_id}:
+    get:
+      tags:
+      - waivers
+      summary: Get Waiver Job Status
+      operationId: get_waiver_job_status_v2_waivers_rank_jobs__job_id__get
+      parameters:
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Job Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WaiverRankJobStatusResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/waivers/rank/latest:
+    get:
+      tags:
+      - waivers
+      summary: Get Latest Waiver Ranking
+      operationId: get_latest_waiver_ranking_v2_waivers_rank_latest_get
+      parameters:
+      - name: league_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: League Id
+      - name: team_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Team Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WaiverRankingLatestResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/free-agents:
+    get:
+      tags:
+      - waivers
+      summary: Get Free Agents Ranking
+      description: 'Stage 12: GET /v2/free-agents endpoint'
+      operationId: get_free_agents_ranking_v2_free_agents_get
+      parameters:
+      - name: league_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: League Id
+      - name: team_id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Team Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WaiverRankingLatestResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/source-harness/dashboard.json:
+    get:
+      tags:
+      - source-harness
+      summary: Get Dashboard Json
+      description: 'Get dashboard summary with overall status (JSON)
+
+
+        Cache: 5 minutes (300 seconds) to reduce load on the service'
+      operationId: get_dashboard_json_api_source_harness_dashboard_json_get
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummary'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/source-harness/runs:
+    get:
+      tags:
+      - source-harness
+      summary: Get Recent Runs
+      description: Get recent harness run summaries
+      operationId: get_recent_runs_api_source_harness_runs_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          description: Maximum number of runs to return
+          default: 50
+          title: Limit
+        description: Maximum number of runs to return
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HarnessRunSummary'
+                title: Response Get Recent Runs Api Source Harness Runs Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - source-harness
+      summary: Trigger Run
+      description: Trigger a new harness run asynchronously
+      operationId: trigger_run_api_source_harness_runs_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HarnessTriggerRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessTriggerResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/source-harness/runs/{run_id}:
+    get:
+      tags:
+      - source-harness
+      summary: Get Run Detail
+      description: Get detailed information for a specific harness run
+      operationId: get_run_detail_api_source_harness_runs__run_id__get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HarnessRunDetail'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/source-harness/fixtures/{run_id}/download:
+    get:
+      tags:
+      - source-harness
+      summary: Download Fixture
+      description: Get pre-signed URL for fixture download
+      operationId: download_fixture_api_source_harness_fixtures__run_id__download_get
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Run Id
+      - name: source
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Source name (pihs or boone)
+          title: Source
+        description: Source name (pihs or boone)
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FixtureDownloadResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/source-harness/dashboard:
+    get:
+      tags:
+      - source-harness
+      summary: Dashboard Html
+      description: HTML dashboard UI with auth protection (served at /dashboard)
+      operationId: dashboard_html_api_source_harness_dashboard_get
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/models:
+    get:
+      summary: List Models
+      description: List available LLM models.
+      operationId: list_models_v2_models_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /v2/players:
+    get:
+      summary: Get Players
+      description: Get paginated list of players with optional filtering and sorting.
+      operationId: get_players_v2_players_get
+      parameters:
+      - name: sort_by
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Sort field
+          default: baseline_score
+          title: Sort By
+        description: Sort field
+      - name: sort_dir
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 'Sort direction: asc|desc'
+          default: desc
+          title: Sort Dir
+        description: 'Sort direction: asc|desc'
+      - name: position
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by position
+          title: Position
+        description: Filter by position
+      - name: teams
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Filter by teams
+          title: Teams
+        description: Filter by teams
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Max results
+          default: 50
+          title: Limit
+        description: Max results
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Pagination offset
+          default: 0
+          title: Offset
+        description: Pagination offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get Players V2 Players Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/players/{player_id}:
+    get:
+      summary: Get Player Detail
+      description: Get detailed information about a specific player.
+      operationId: get_player_detail_v2_players__player_id__get
+      parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Player Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Get Player Detail V2 Players  Player Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /healthz:
+    get:
+      summary: Health Check
+      description: Basic health check endpoint.
+      operationId: health_check_healthz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Health Check Healthz Get
+  /readyz:
+    get:
+      summary: Readiness Check
+      description: Readiness check with system status.
+      operationId: readiness_check_readyz_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Readiness Check Readyz Get
+  /v2/ingest/run:
+    post:
+      summary: Run Ingestion
+      description: Trigger an ingestion cycle.
+      operationId: run_ingestion_v2_ingest_run_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              title: Payload
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                title: Response Run Ingestion V2 Ingest Run Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/players/{player_id}/uncertainty:
+    get:
+      summary: Get Player Uncertainty
+      operationId: get_player_uncertainty_v2_players__player_id__uncertainty_get
+      parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Player Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v2/players/{player_id}/uncertainty/recompute:
+    post:
+      summary: Recompute Player Uncertainty
+      operationId: recompute_player_uncertainty_v2_players__player_id__uncertainty_recompute_post
+      parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Player Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AnalyzeRequest:
+      properties:
+        team_a:
+          $ref: '#/components/schemas/TeamSpec'
+        team_b:
+          $ref: '#/components/schemas/TeamSpec'
+        league_settings:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: League Settings
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: OpenRouter model id override (validated against /v2/models)
+      type: object
+      required:
+      - team_a
+      - team_b
+      title: AnalyzeRequest
+    DashboardSummary:
+      properties:
+        last_run_status:
+          type: string
+          title: Last Run Status
+        last_run_started_at:
+          type: string
+          title: Last Run Started At
+        required_sources_ok:
+          type: integer
+          title: Required Sources Ok
+        required_sources_total:
+          type: integer
+          title: Required Sources Total
+        oldest_source_age_hours:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Oldest Source Age Hours
+        recent_runs:
+          items:
+            $ref: '#/components/schemas/HarnessRunSummary'
+          type: array
+          title: Recent Runs
+          default: []
+        failing_sources:
+          items:
+            type: string
+          type: array
+          title: Failing Sources
+          default: []
+        sources_completed:
+          type: integer
+          title: Sources Completed
+          default: 0
+        sources_failed:
+          type: integer
+          title: Sources Failed
+          default: 0
+      type: object
+      required:
+      - last_run_status
+      - last_run_started_at
+      - required_sources_ok
+      - required_sources_total
+      title: DashboardSummary
+      description: Overall dashboard status summary
+    ExtendedAnalysisJobResponse:
+      properties:
+        job_id:
+          type: string
+          title: Job Id
+        queued_at:
+          type: string
+          format: date-time
+          title: Queued At
+        status:
+          $ref: '#/components/schemas/ExtendedAnalysisJobStatus'
+          default: queued
+        cached_result:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Cached Result
+        from_cache:
+          type: boolean
+          title: From Cache
+          default: false
+      type: object
+      required:
+      - job_id
+      - queued_at
+      title: ExtendedAnalysisJobResponse
+    ExtendedAnalysisJobStatus:
+      type: string
+      enum:
+      - queued
+      - running
+      - succeeded
+      - failed
+      title: ExtendedAnalysisJobStatus
+    ExtendedAnalysisJobStatusResponse:
+      properties:
+        job_id:
+          type: string
+          title: Job Id
+        player_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Player Id
+        status:
+          $ref: '#/components/schemas/ExtendedAnalysisJobStatus'
+        queued_at:
+          type: string
+          format: date-time
+          title: Queued At
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+        completed_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completed At
+        snapshot_ts:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Snapshot Ts
+        prompt_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt Version
+        retry_count:
+          type: integer
+          minimum: 0.0
+          title: Retry Count
+          default: 0
+        result:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Result
+        error:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - job_id
+      - status
+      - queued_at
+      title: ExtendedAnalysisJobStatusResponse
+    ExtendedAnalysisLatestResponse:
+      properties:
+        player_id:
+          type: string
+          title: Player Id
+        snapshot_ts:
+          type: string
+          format: date-time
+          title: Snapshot Ts
+        prompt_version:
+          type: string
+          title: Prompt Version
+        request_hash:
+          type: string
+          title: Request Hash
+        request:
+          type: object
+          title: Request
+        result:
+          type: object
+          title: Result
+        llm:
+          anyOf:
+          - $ref: '#/components/schemas/LLMUsage'
+          - type: 'null'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        cache_ttl_seconds:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Cache Ttl Seconds
+      type: object
+      required:
+      - player_id
+      - snapshot_ts
+      - prompt_version
+      - request_hash
+      - request
+      - result
+      - created_at
+      title: ExtendedAnalysisLatestResponse
+    ExtendedAnalysisRequest:
+      properties:
+        depth:
+          type: string
+          pattern: ^(standard|deep)$
+          title: Depth
+          default: standard
+        timeframe:
+          type: string
+          pattern: ^(this_week|ros|both)$
+          title: Timeframe
+          default: ros
+        focus:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Focus
+          description: Optional focus areas, e.g. ['injury','usage']
+        max_tokens:
+          type: integer
+          maximum: 4096.0
+          minimum: 256.0
+          title: Max Tokens
+          default: 1200
+        language:
+          type: string
+          maxLength: 5
+          minLength: 2
+          title: Language
+          default: en
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: OpenRouter model override. Must appear in /v2/models response.
+        budget_usd:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Budget Usd
+          description: Absolute budget ceiling for this request. Overrides default.
+      type: object
+      title: ExtendedAnalysisRequest
+    FAABRecommendation:
+      properties:
+        suggested_bid:
+          type: integer
+          title: Suggested Bid
+        bid_range:
+          items:
+            type: integer
+          type: array
+          title: Bid Range
+        confidence:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Confidence
+        rationale:
+          type: string
+          title: Rationale
+      type: object
+      required:
+      - suggested_bid
+      - bid_range
+      - confidence
+      - rationale
+      title: FAABRecommendation
+    FixtureDownloadResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+      type: object
+      required:
+      - url
+      title: FixtureDownloadResponse
+      description: Response for fixture downloads
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HarnessRunDetail:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        started_at:
+          type: string
+          title: Started At
+        completed_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Completed At
+        status:
+          type: string
+          title: Status
+        trigger_user:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Trigger User
+        trigger_type:
+          type: string
+          title: Trigger Type
+        sources_filtered:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sources Filtered
+        sources:
+          items:
+            $ref: '#/components/schemas/SourceStatusData'
+          type: array
+          title: Sources
+        errors:
+          items:
+            type: object
+          type: array
+          title: Errors
+          default: []
+        summary:
+          type: object
+          title: Summary
+          default: {}
+      type: object
+      required:
+      - run_id
+      - started_at
+      - status
+      - trigger_type
+      - sources
+      title: HarnessRunDetail
+      description: Detailed harness run data
+    HarnessRunSummary:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        started_at:
+          type: string
+          title: Started At
+        status:
+          type: string
+          title: Status
+        trigger_type:
+          type: string
+          title: Trigger Type
+        sources_completed:
+          type: integer
+          title: Sources Completed
+        sources_failed:
+          type: integer
+          title: Sources Failed
+        overall_age_hours:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Overall Age Hours
+      type: object
+      required:
+      - run_id
+      - started_at
+      - status
+      - trigger_type
+      - sources_completed
+      - sources_failed
+      title: HarnessRunSummary
+      description: Summary of a harness run for dashboard display
+    HarnessTriggerRequest:
+      properties:
+        sources:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Sources
+        trigger_user:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Trigger User
+      type: object
+      title: HarnessTriggerRequest
+      description: Request to trigger a new harness run
+    HarnessTriggerResponse:
+      properties:
+        run_id:
+          type: string
+          title: Run Id
+        job_id:
+          type: string
+          title: Job Id
+        message:
+          type: string
+          title: Message
+        estimated_duration_seconds:
+          type: integer
+          title: Estimated Duration Seconds
+          default: 30
+      type: object
+      required:
+      - run_id
+      - job_id
+      - message
+      title: HarnessTriggerResponse
+      description: Response to harness run trigger
+    Identity:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+          description: Sleeper ID (preferred)
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+          description: Player name
+        pos:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Pos
+          description: QB|RB|WR|TE
+        team:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Team
+          description: Team code
+      type: object
+      title: Identity
+    LLMUsage:
+      properties:
+        provider:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+        input_tokens:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Input Tokens
+        output_tokens:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Output Tokens
+        latency_ms:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Latency Ms
+        cost_usd:
+          anyOf:
+          - type: number
+            minimum: 0.0
+          - type: 'null'
+          title: Cost Usd
+      type: object
+      title: LLMUsage
+    ManualAnalyzeRequest:
+      properties:
+        team_a:
+          $ref: '#/components/schemas/TeamSpec'
+        team_b:
+          $ref: '#/components/schemas/TeamSpec'
+        league_settings:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: League Settings
+      type: object
+      required:
+      - team_a
+      - team_b
+      title: ManualAnalyzeRequest
+    MultiAnalyzeRequest:
+      properties:
+        proposals:
+          items:
+            $ref: '#/components/schemas/AnalyzeRequest'
+          type: array
+          title: Proposals
+      type: object
+      required:
+      - proposals
+      title: MultiAnalyzeRequest
+    SourceStatusData:
+      properties:
+        source:
+          type: string
+          title: Source
+        status:
+          type: string
+          title: Status
+        observed_at:
+          type: string
+          title: Observed At
+        age_hours:
+          type: number
+          title: Age Hours
+        hash:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hash
+        parser_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parser Version
+        prompt_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt Version
+        metrics:
+          additionalProperties:
+            type: number
+          type: object
+          title: Metrics
+          default: {}
+        latency_ms:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Latency Ms
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        has_fixtures:
+          type: boolean
+          title: Has Fixtures
+          default: false
+      type: object
+      required:
+      - source
+      - status
+      - observed_at
+      - age_hours
+      title: SourceStatusData
+      description: Source status information for dashboard
+    TeamSpec:
+      properties:
+        players:
+          items:
+            $ref: '#/components/schemas/Identity'
+          type: array
+          title: Players
+          description: Players for the team
+      type: object
+      title: TeamSpec
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    WaiverCandidateInput:
+      properties:
+        player_id:
+          type: string
+          title: Player Id
+        name:
+          type: string
+          title: Name
+        team:
+          type: string
+          title: Team
+        pos:
+          type: string
+          title: Pos
+        baseline_score:
+          type: number
+          maximum: 100.0
+          minimum: 0.0
+          title: Baseline Score
+        metrics:
+          $ref: '#/components/schemas/WaiverCandidateMetrics'
+        market_velocity:
+          type: number
+          minimum: 0.0
+          title: Market Velocity
+          description: 0-1 indicator of add/drop velocity for market multiplier
+          default: 0.0
+        percent_rostered:
+          anyOf:
+          - type: number
+            maximum: 100.0
+            minimum: 0.0
+          - type: 'null'
+          title: Percent Rostered
+          description: Percent rostered across the platform (optional heuristic input)
+      type: object
+      required:
+      - player_id
+      - name
+      - team
+      - pos
+      - baseline_score
+      - metrics
+      title: WaiverCandidateInput
+      description: Incoming candidate payload from the caller.
+    WaiverCandidateMetrics:
+      properties:
+        vor_team_fit:
+          type: number
+          title: Vor Team Fit
+          description: Value over replacement relative to roster needs
+        need_urgency:
+          type: number
+          minimum: 0.0
+          title: Need Urgency
+          description: 0-1 urgency signal for roster gaps/injuries
+        opportunity:
+          type: number
+          title: Opportunity
+          description: Usage/snap/role change multiplier
+        schedule_adj:
+          type: number
+          title: Schedule Adj
+          description: Schedule adjustment in normalized units
+        risk_penalty:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Risk Penalty
+          description: 0-1 penalty applied post-normalization to reduce score
+          default: 0.0
+      type: object
+      required:
+      - vor_team_fit
+      - need_urgency
+      - opportunity
+      - schedule_adj
+      title: WaiverCandidateMetrics
+      description: Derived metrics that feed the Stage 12 ranking formula.
+    WaiverCandidateResult:
+      properties:
+        player_id:
+          type: string
+          title: Player Id
+        name:
+          type: string
+          title: Name
+        team:
+          type: string
+          title: Team
+        pos:
+          type: string
+          title: Pos
+        baseline_score:
+          type: number
+          title: Baseline Score
+        fa_rank_score:
+          type: number
+          title: Fa Rank Score
+        tier:
+          type: string
+          title: Tier
+        components:
+          additionalProperties:
+            type: number
+          type: object
+          title: Components
+        faab_recommendation:
+          $ref: '#/components/schemas/FAABRecommendation'
+        links:
+          additionalProperties:
+            type: string
+          type: object
+          title: Links
+      type: object
+      required:
+      - player_id
+      - name
+      - team
+      - pos
+      - baseline_score
+      - fa_rank_score
+      - tier
+      - components
+      - faab_recommendation
+      - links
+      title: WaiverCandidateResult
+      description: Computed candidate output.
+    WaiverLeagueContext:
+      properties:
+        league_id:
+          type: string
+          title: League Id
+        team_id:
+          type: string
+          title: Team Id
+        remaining_faab:
+          type: integer
+          minimum: 0.0
+          title: Remaining Faab
+        total_faab:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Total Faab
+      type: object
+      required:
+      - league_id
+      - team_id
+      - remaining_faab
+      title: WaiverLeagueContext
+      description: Identifiers and FAAB budget posture for the target team.
+    WaiverLeagueSettings:
+      properties:
+        scoring_format:
+          type: string
+          title: Scoring Format
+          default: ppr
+        season_week:
+          type: integer
+          minimum: 1.0
+          title: Season Week
+        total_weeks:
+          type: integer
+          minimum: 1.0
+          title: Total Weeks
+        min_increment:
+          type: integer
+          minimum: 1.0
+          title: Min Increment
+        waiver_type:
+          type: string
+          title: Waiver Type
+          default: faab
+        reserve_buffer_pct_override:
+          anyOf:
+          - type: number
+            maximum: 0.9
+            minimum: 0.0
+          - type: 'null'
+          title: Reserve Buffer Pct Override
+          description: Optional override for reserve buffer percentage (0-0.9)
+      type: object
+      required:
+      - season_week
+      - total_weeks
+      - min_increment
+      title: WaiverLeagueSettings
+      description: League configuration that influences budget decay and increments.
+    WaiverRankJobResponse:
+      properties:
+        job_id:
+          type: string
+          title: Job Id
+        queued_at:
+          type: string
+          format: date-time
+          title: Queued At
+        status:
+          $ref: '#/components/schemas/WaiverRankJobStatus'
+        result:
+          anyOf:
+          - $ref: '#/components/schemas/WaiverRankingResult'
+          - type: 'null'
+        error:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - job_id
+      - queued_at
+      - status
+      title: WaiverRankJobResponse
+    WaiverRankJobStatus:
+      type: string
+      enum:
+      - queued
+      - running
+      - succeeded
+      - failed
+      title: WaiverRankJobStatus
+    WaiverRankJobStatusResponse:
+      properties:
+        job_id:
+          type: string
+          title: Job Id
+        status:
+          $ref: '#/components/schemas/WaiverRankJobStatus'
+        queued_at:
+          type: string
+          format: date-time
+          title: Queued At
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+        completed_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Completed At
+        result:
+          anyOf:
+          - $ref: '#/components/schemas/WaiverRankingResult'
+          - type: 'null'
+        error:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - job_id
+      - status
+      - queued_at
+      title: WaiverRankJobStatusResponse
+    WaiverRankRequest:
+      properties:
+        league:
+          $ref: '#/components/schemas/WaiverLeagueContext'
+        settings:
+          $ref: '#/components/schemas/WaiverLeagueSettings'
+        candidates:
+          items:
+            $ref: '#/components/schemas/WaiverCandidateInput'
+          type: array
+          title: Candidates
+        snapshot_ts:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Snapshot Ts
+          description: Optional timestamp representing data snapshot consistency
+      type: object
+      required:
+      - league
+      - settings
+      - candidates
+      title: WaiverRankRequest
+      description: Request payload for initiating a ranking job.
+    WaiverRankingLatestResponse:
+      properties:
+        league_id:
+          type: string
+          title: League Id
+        team_id:
+          type: string
+          title: Team Id
+        snapshot_ts:
+          type: string
+          format: date-time
+          title: Snapshot Ts
+        result:
+          $ref: '#/components/schemas/WaiverRankingResult'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        cache_ttl_seconds:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Cache Ttl Seconds
+      type: object
+      required:
+      - league_id
+      - team_id
+      - snapshot_ts
+      - result
+      - created_at
+      title: WaiverRankingLatestResponse
+    WaiverRankingResult:
+      properties:
+        league_id:
+          type: string
+          title: League Id
+        team_id:
+          type: string
+          title: Team Id
+        snapshot_ts:
+          type: string
+          format: date-time
+          title: Snapshot Ts
+        candidates:
+          items:
+            $ref: '#/components/schemas/WaiverCandidateResult'
+          type: array
+          title: Candidates
+        provenance:
+          additionalProperties:
+            type: string
+          type: object
+          title: Provenance
+      type: object
+      required:
+      - league_id
+      - team_id
+      - snapshot_ts
+      - candidates
+      - provenance
+      title: WaiverRankingResult
+      description: Complete ranking artifact returned to callers.
