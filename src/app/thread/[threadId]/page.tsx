@@ -200,7 +200,7 @@ export default function ThreadDetailPage() {
     )
   }
 
-  if (error || !thread) {
+  if (error || !thread || !thread.metadata) {
     return (
       <div className="min-h-screen">
         <FloatingShapes />
@@ -208,7 +208,7 @@ export default function ThreadDetailPage() {
         <main className="container mx-auto px-4 py-8">
           <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
             <AlertTriangle className="w-12 h-12 text-warning" />
-            <p className="text-lg font-medium">{error || "Thread not found"}</p>
+            <p className="text-lg font-medium">{error || "Thread not found or invalid data"}</p>
             <Link href="/">
               <Button variant="outline">
                 <ArrowLeft className="w-4 h-4 mr-2" />
@@ -349,7 +349,7 @@ export default function ThreadDetailPage() {
                     className="bg-primary hover:bg-primary/90"
                   >
                     <Sparkles className="w-4 h-4 mr-2" />
-                    Analyze with GLM-4
+                    Analyze with Claude
                   </Button>
                 </div>
               </CardContent>
@@ -650,7 +650,7 @@ export default function ThreadDetailPage() {
           <p>Debate Analytics - AI-Powered Reddit Analysis</p>
           {deepAnalysis && (
             <p className="text-xs mt-1">
-              Deep analysis powered by GLM-4
+              Deep analysis powered by Claude
             </p>
           )}
         </footer>

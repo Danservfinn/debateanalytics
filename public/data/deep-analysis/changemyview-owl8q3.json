@@ -1,0 +1,809 @@
+{
+  "data": {
+    "claims": [
+      {
+        "id": "claim_1",
+        "text": "The most recent data seems to suggest that the 'sweet spot' in terms of gap between Pfizer vaccines is 8 weeks",
+        "author": "jho_18",
+        "commentId": "jho_18_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.9
+      },
+      {
+        "id": "claim_2",
+        "text": "Around 170 women had to be hospitalised for COVID on the past three months, and none were double jabbed",
+        "author": "jho_18",
+        "commentId": "jho_18_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 1
+      },
+      {
+        "id": "claim_3",
+        "text": "It takes approx. 2 weeks for the vaccine to confer an effect",
+        "author": "jho_18",
+        "commentId": "jho_18_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "verified",
+        "relevanceScore": 0.8
+      },
+      {
+        "id": "claim_4",
+        "text": "Roughly two-thirds of pregnant women with COVID-19 have no symptoms at all (also known as being asymptomatic). Most pregnant women who do have symptoms only have mild cold or flu-like symptoms",
+        "author": "atra-ignis",
+        "commentId": "atra-ignis_response",
+        "sourceCited": true,
+        "sourceUrl": "https://www.rcog.org.uk/en/guidelines-research-services/guidelines/coronavirus-pregnancy/covid-19-virus-infection-and-pregnancy/",
+        "verificationStatus": "sourced",
+        "relevanceScore": 1
+      },
+      {
+        "id": "claim_5",
+        "text": "The fetus and the mother don't share a blood supply now. So the vaccine won't effect the child",
+        "author": "NetrunnerCardAccount",
+        "commentId": "NetrunnerCardAccount_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "disputed",
+        "relevanceScore": 0.9
+      },
+      {
+        "id": "claim_6",
+        "text": "The vaccine can cause a fever, there's good research to suggest a fever during the first 12 weeks (but especially the first 6) can cause problems such as neural tube defects",
+        "author": "atra-ignis",
+        "commentId": "atra-ignis_fever",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 1
+      },
+      {
+        "id": "claim_7",
+        "text": "In Germany, the recommendation of the StIKo (The official board that decides who should get which vaccines) is for pregnant women NOT to get the Covid-19 vaccine",
+        "author": "Irinam_Daske",
+        "commentId": "Irinam_Daske_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.9
+      },
+      {
+        "id": "claim_8",
+        "text": "Basically every time a vaccine has had a serious side effect it appeared in less time from the initial dose then this one (Usually the time is 3 months)",
+        "author": "NetrunnerCardAccount",
+        "commentId": "NetrunnerCardAccount_2",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.7
+      },
+      {
+        "id": "claim_9",
+        "text": "The Stiko - the German commission for vaccination - recommends that pregnant women should not get the vaccine",
+        "author": "Morasain",
+        "commentId": "Morasain_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.9
+      },
+      {
+        "id": "claim_10",
+        "text": "Pregnancy suppresses the immune system, meaning while we can generate sufficient immune response to confer long term immunity, the sort of turbo charged immune response that could result in spontaneous abortion actually gets dampened a bit",
+        "author": "InfernalWedgie",
+        "commentId": "InfernalWedgie_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.8
+      },
+      {
+        "id": "claim_11",
+        "text": "Pregnant women are immunocompromised as compared to the general population, meaning that they need both doses of the vaccine even more than non-pregnant people of the same age to develop adequate immune reactions",
+        "author": "medlabunicorn",
+        "commentId": "medlabunicorn_1",
+        "sourceCited": true,
+        "sourceUrl": "https://www.cdc.gov/vaccines/pregnancy/pregnant-women/need-to-know.html",
+        "verificationStatus": "sourced",
+        "relevanceScore": 0.9
+      },
+      {
+        "id": "claim_12",
+        "text": "The first vaccine is 30% effective against Delta",
+        "author": "atra-ignis",
+        "commentId": "atra-ignis_delta",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.8
+      },
+      {
+        "id": "claim_13",
+        "text": "There is evidence suggesting that regular use of folic acid (in any good prenatal) reduces or even removes that risk [of fever-related birth defects]",
+        "author": "youlovemyfish",
+        "commentId": "youlovemyfish_1",
+        "sourceCited": true,
+        "sourceUrl": "https://www.cdc.gov/ncbddd/birthdefects/features/kf-birthdefects-maternal-fever-during-pregnancy.html",
+        "verificationStatus": "sourced",
+        "relevanceScore": 0.8
+      },
+      {
+        "id": "claim_14",
+        "text": "Your vaccine chances of side effects are the same for pregnant and non pregnant folks",
+        "author": "CapmBlondeBeard",
+        "commentId": "CapmBlondeBeard_1",
+        "sourceCited": true,
+        "sourceUrl": "https://www.cdc.gov/coronavirus/2019-ncov/vaccines/recommendations/pregnancy.html",
+        "verificationStatus": "sourced",
+        "relevanceScore": 0.9
+      },
+      {
+        "id": "claim_15",
+        "text": "You're looking at probably a 1% chance of fever >38.9°C to 40.0°C and 0% chance >40C",
+        "author": "CapmBlondeBeard",
+        "commentId": "CapmBlondeBeard_1",
+        "sourceCited": true,
+        "sourceUrl": "https://www.cdc.gov/vaccines/covid-19/info-by-product/pfizer/reactogenicity.html",
+        "verificationStatus": "sourced",
+        "relevanceScore": 0.9
+      }
+    ],
+    "arguments": [
+      {
+        "id": "arg_1",
+        "commentId": "h7gqskq",
+        "author": "jho_18",
+        "position": "con",
+        "summary": "Recent data shows 170 hospitalized pregnant women with COVID in 3 months, none double-jabbed. Vaccine takes 2 weeks to be effective, creating exposure risk during medical appointments.",
+        "supports": [],
+        "attacks": [],
+        "strength": 0.8,
+        "evidenceQuality": 0.7
+      },
+      {
+        "id": "arg_2",
+        "commentId": "h7gqae2",
+        "author": "GadgetGamer",
+        "position": "con",
+        "summary": "Official UK health authorities (NHS, RCOG) recommend COVID vaccination during pregnancy, citing established risks to baby from maternal COVID-19.",
+        "supports": [],
+        "attacks": [],
+        "strength": 0.7,
+        "evidenceQuality": 0.8
+      },
+      {
+        "id": "arg_3",
+        "commentId": "h7gma8k",
+        "author": "LongLiveSmoove",
+        "position": "neutral",
+        "summary": "Medical decisions should be made with doctors rather than internet strangers who lack credentials and patient-specific knowledge.",
+        "supports": [],
+        "attacks": [],
+        "strength": 0.9,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_4",
+        "commentId": "h7gqj3l",
+        "author": "NetrunnerCardAccount",
+        "position": "con",
+        "summary": "Fetus and mother don't share blood supply, so vaccine won't directly affect the child.",
+        "supports": [],
+        "attacks": [],
+        "strength": 0.3,
+        "evidenceQuality": 0.2
+      },
+      {
+        "id": "arg_5",
+        "commentId": "h7gqucz",
+        "author": "atra-ignis",
+        "position": "pro",
+        "summary": "Vaccine can cause fever, and research shows fever during first 12 weeks can cause neural tube defects and other problems.",
+        "supports": [],
+        "attacks": [
+          "arg_4"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_6",
+        "commentId": "h7gsjro",
+        "author": "squtternutboshed",
+        "position": "con",
+        "summary": "Vaccine fever lasts ~12 hours while COVID fever may last days; prolonged fever is what's risky for pregnancy.",
+        "supports": [],
+        "attacks": [
+          "arg_5"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.5
+      },
+      {
+        "id": "arg_7",
+        "commentId": "h7gxuk9",
+        "author": "Morasain",
+        "position": "pro",
+        "summary": "German vaccination commission (STIKO) recommends pregnant women should not get COVID vaccine due to limited research.",
+        "supports": [],
+        "attacks": [
+          "arg_2"
+        ],
+        "strength": 0.6,
+        "evidenceQuality": 0.7
+      },
+      {
+        "id": "arg_8",
+        "commentId": "h7himfh",
+        "author": "InfernalWedgie",
+        "position": "con",
+        "summary": "As an infectious disease epidemiologist and new mother, reviewed trial data and consulted specialists - all supported vaccination. Pregnancy suppresses immune system, reducing severe side effect risk.",
+        "supports": [],
+        "attacks": [
+          "arg_5"
+        ],
+        "strength": 0.9,
+        "evidenceQuality": 0.8
+      },
+      {
+        "id": "arg_9",
+        "commentId": "h7h9xot",
+        "author": "jsmooth7",
+        "position": "con",
+        "summary": "Risk comparison should be COVID symptoms vs vaccine side effects, not vaccine vs no vaccine. COVID symptoms are worse including fever.",
+        "supports": [
+          "arg_6"
+        ],
+        "attacks": [
+          "arg_5"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_10",
+        "commentId": "h7hei3g",
+        "author": "atra-ignis",
+        "position": "pro",
+        "summary": "Two-thirds of pregnant women with COVID-19 are asymptomatic, most others have only mild symptoms. Risk calculation should include probability of getting COVID and severe outcomes.",
+        "supports": [],
+        "attacks": [
+          "arg_9"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.7
+      },
+      {
+        "id": "arg_11",
+        "commentId": "h7hhlkv",
+        "author": "NetrunnerCardAccount",
+        "position": "con",
+        "summary": "Vaccine side effects typically appear within 3 months if they occur. Other countries gave pregnant women priority with no reported issues. Minor COVID case has greater fever than vaccine side effects.",
+        "supports": [
+          "arg_6"
+        ],
+        "attacks": [
+          "arg_5"
+        ],
+        "strength": 0.6,
+        "evidenceQuality": 0.5
+      },
+      {
+        "id": "arg_12",
+        "commentId": "h7hb3g3",
+        "author": "lost_signal",
+        "position": "con",
+        "summary": "Wife is infectious disease MD who has seen severe outcomes in unvaccinated pregnant mothers (death, premature delivery). Medical professionals in the field are getting vaccinated while pregnant.",
+        "supports": [
+          "arg_8"
+        ],
+        "attacks": [],
+        "strength": 0.8,
+        "evidenceQuality": 0.7
+      },
+      {
+        "id": "arg_13",
+        "commentId": "h7hrr4y",
+        "author": "youlovemyfish",
+        "position": "con",
+        "summary": "Research on fever risks applies to high and prolonged fevers. Regular folic acid use (in prenatal vitamins) reduces or removes fever-related birth defect risk.",
+        "supports": [],
+        "attacks": [
+          "arg_5"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_14",
+        "commentId": "h7gpx2o",
+        "author": "medlabunicorn",
+        "position": "con",
+        "summary": "Pregnant women are immunocompromised and need both vaccine doses more than general population. Full vaccination significantly reduces death risk.",
+        "supports": [
+          "arg_8"
+        ],
+        "attacks": [],
+        "strength": 0.7,
+        "evidenceQuality": 0.8
+      },
+      {
+        "id": "arg_15",
+        "commentId": "h7hm29l",
+        "author": "emi_lgr",
+        "position": "con",
+        "summary": "Internet research cannot match medical professional expertise. All available COVID data shows higher risk from maternal COVID infection than vaccine complications.",
+        "supports": [
+          "arg_3"
+        ],
+        "attacks": [],
+        "strength": 0.8,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_16",
+        "commentId": "h7i81wo",
+        "author": "[deleted]",
+        "position": "pro",
+        "summary": "Personal case with autoimmune disorder and history of miscarriages - doctor advised against second dose during pregnancy due to specific medical history.",
+        "supports": [],
+        "attacks": [],
+        "strength": 0.6,
+        "evidenceQuality": 0.4
+      },
+      {
+        "id": "arg_17",
+        "commentId": "h7idmub",
+        "author": "thisdude415",
+        "position": "con",
+        "summary": "Without history of miscarriage or autoimmune disorders, OP is accepting known significant COVID risk to avoid small unknown vaccine risk. COVID has been studied in pregnant populations and is very bad.",
+        "supports": [],
+        "attacks": [
+          "arg_16"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.7
+      },
+      {
+        "id": "arg_18",
+        "commentId": "h7jo74u",
+        "author": "Irinam_Daske",
+        "position": "pro",
+        "summary": "German STIKO officially recommends against COVID vaccination for pregnant women and children under 17, showing the question isn't clear-cut.",
+        "supports": [
+          "arg_7"
+        ],
+        "attacks": [
+          "arg_2"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.8
+      },
+      {
+        "id": "arg_19",
+        "commentId": "h7hb3zg",
+        "author": "[deleted]",
+        "position": "con",
+        "summary": "Brazilian maternity nurse reports many pregnant women hospitalized with COVID, not doing well. Brazil recommends vaccination for pregnant women unless extreme medical contraindication.",
+        "supports": [
+          "arg_1",
+          "arg_12"
+        ],
+        "attacks": [],
+        "strength": 0.6,
+        "evidenceQuality": 0.5
+      },
+      {
+        "id": "arg_20",
+        "commentId": "h7hutb2",
+        "author": "ImRedditingNaked",
+        "position": "neutral",
+        "summary": "Mother and fetus aren't completely separate - antibodies pass through, vertical transmission occurs. Maternal blood can be tested for fetal DNA.",
+        "supports": [],
+        "attacks": [
+          "arg_4"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.8
+      }
+    ],
+    "fallacies": [
+      {
+        "id": "fallacy_1",
+        "type": "ad_hominem",
+        "commentId": "h7h1cz6",
+        "author": "atra-ignis",
+        "severity": "medium",
+        "description": "Instead of addressing the substance of the criticism, OP attacks the commenter's knowledge and research efforts",
+        "quote": "Have you done that? I have a feeling you haven't or you wouldn't be making ill informed attacks."
+      },
+      {
+        "id": "fallacy_2",
+        "type": "strawman",
+        "commentId": "h7gnh4n",
+        "author": "LongLiveSmoove",
+        "severity": "high",
+        "description": "Misrepresents OP's position as putting wife and baby's life 'in the hands of internet strangers' when OP clearly stated they've consulted doctors and are seeking additional information",
+        "quote": "Pretty much you're saying you'd rather put you wife and babies life in the hands of internet strangers as opposed to a doctor."
+      },
+      {
+        "id": "fallacy_3",
+        "type": "false_dilemma",
+        "commentId": "h7gpx2o",
+        "author": "medlabunicorn",
+        "severity": "high",
+        "description": "Presents only two extreme options - get vaccinated or accept death - ignoring the nuanced risk assessment OP is trying to make",
+        "quote": "The only question is, do you care if your wife and unborn child die?"
+      },
+      {
+        "id": "fallacy_4",
+        "type": "appeal_to_emotion",
+        "commentId": "h7gpx2o",
+        "author": "medlabunicorn",
+        "severity": "high",
+        "description": "Uses fear-based emotional manipulation about death rather than engaging with the actual risk calculations",
+        "quote": "The only question is, do you care if your wife and unborn child die?"
+      },
+      {
+        "id": "fallacy_5",
+        "type": "strawman",
+        "commentId": "h7h1cz6",
+        "author": "amedeemarko",
+        "severity": "medium",
+        "description": "Dismisses OP's evidence-based concerns as mere 'superstitions' without addressing the actual medical considerations raised",
+        "quote": "You don't have concerns. You have superstitions."
+      },
+      {
+        "id": "fallacy_6",
+        "type": "appeal_to_authority",
+        "commentId": "h7go3oz",
+        "author": "smcarre",
+        "severity": "medium",
+        "description": "Assumes doctor's authority is absolute without considering that doctors can have different opinions or that seeking additional information is reasonable",
+        "quote": "what's important is that the doctor you spoke to had access to all the necessary information he could have needed to make his recommendation"
+      },
+      {
+        "id": "fallacy_7",
+        "type": "hasty_generalization",
+        "commentId": "h7hb3g3",
+        "author": "lost_signal",
+        "severity": "medium",
+        "description": "Uses anecdotal evidence from one doctor's experience to make broad claims about vaccine safety without statistical context",
+        "quote": "she's seen some hella bad outcomes on unvaccinated pregnant mothers. (Death; premature delivery etc)."
+      },
+      {
+        "id": "fallacy_8",
+        "type": "false_equivalence",
+        "commentId": "h7h9r4b",
+        "author": "NetrunnerCardAccount",
+        "severity": "medium",
+        "description": "Treats the risk calculation as simple when OP is trying to weigh probability of exposure against known side effects",
+        "quote": "This is like saying since there is a small chance of a small fever with this procedure , I'd prefer the one with a larger chance."
+      },
+      {
+        "id": "fallacy_9",
+        "type": "strawman",
+        "commentId": "h7emi_lgr",
+        "author": "emi_lgr",
+        "severity": "medium",
+        "description": "Mischaracterizes OP's research efforts as thinking they're equivalent to medical training, when OP is seeking additional expert input",
+        "quote": "you're equating the research that you or someone else here can pull up with your doctor's advice"
+      },
+      {
+        "id": "fallacy_10",
+        "type": "ad_hominem",
+        "commentId": "h7j2pvk",
+        "author": "medlabunicorn",
+        "severity": "low",
+        "description": "Attacks OP's character by implying he's being controlling rather than addressing the medical question",
+        "quote": "Just out of curiosity, why are you speaking as though it is your decision whether or not your wife gets the vaccine?"
+      },
+      {
+        "id": "fallacy_11",
+        "type": "moving_goalposts",
+        "commentId": "h7gnf3l",
+        "author": "smcarre",
+        "severity": "low",
+        "description": "When OP explains the limited consultation time, shifts to arguing that time doesn't matter rather than addressing the original point",
+        "quote": "If a literal doctor that has better knowledge... couldn't change your view, what would it take for us to change it?"
+      },
+      {
+        "id": "fallacy_12",
+        "type": "false_dilemma",
+        "commentId": "h7gwjl5",
+        "author": "JackDieFrikandel",
+        "severity": "medium",
+        "description": "Presents it as simply 'COVID vs. Vaccine' when OP is considering timing, probability of exposure, and risk mitigation strategies",
+        "quote": "Its COVID vs. Vaccine here. I cannot fathom how risking COVID will be less detrimental than risking a vaccine"
+      }
+    ],
+    "rhetoricalProfiles": [
+      {
+        "username": "atra-ignis",
+        "style": "collaborative",
+        "logicScore": 70,
+        "emotionScore": 45,
+        "evidenceScore": 60,
+        "authorityScore": 25,
+        "concessionScore": 85,
+        "intellectualHonesty": 8,
+        "commentCount": 24,
+        "steelmans": 3,
+        "strawmans": 1,
+        "concessions": 4,
+        "dodges": 2
+      },
+      {
+        "username": "smcarre",
+        "style": "authoritative",
+        "logicScore": 65,
+        "emotionScore": 20,
+        "evidenceScore": 40,
+        "authorityScore": 90,
+        "concessionScore": 15,
+        "intellectualHonesty": 5.5,
+        "commentCount": 5,
+        "steelmans": 0,
+        "strawmans": 2,
+        "concessions": 0,
+        "dodges": 3
+      },
+      {
+        "username": "misanthpope",
+        "style": "adversarial",
+        "logicScore": 60,
+        "emotionScore": 40,
+        "evidenceScore": 55,
+        "authorityScore": 30,
+        "concessionScore": 20,
+        "intellectualHonesty": 6,
+        "commentCount": 6,
+        "steelmans": 1,
+        "strawmans": 1,
+        "concessions": 1,
+        "dodges": 2
+      },
+      {
+        "username": "jsmooth7",
+        "style": "analytical",
+        "logicScore": 80,
+        "emotionScore": 25,
+        "evidenceScore": 70,
+        "authorityScore": 20,
+        "concessionScore": 75,
+        "intellectualHonesty": 8.5,
+        "commentCount": 4,
+        "steelmans": 2,
+        "strawmans": 0,
+        "concessions": 2,
+        "dodges": 0
+      },
+      {
+        "username": "NetrunnerCardAccount",
+        "style": "analytical",
+        "logicScore": 75,
+        "emotionScore": 15,
+        "evidenceScore": 65,
+        "authorityScore": 40,
+        "concessionScore": 50,
+        "intellectualHonesty": 6.5,
+        "commentCount": 4,
+        "steelmans": 1,
+        "strawmans": 1,
+        "concessions": 1,
+        "dodges": 1
+      },
+      {
+        "username": "lost_signal",
+        "style": "authoritative",
+        "logicScore": 60,
+        "emotionScore": 50,
+        "evidenceScore": 75,
+        "authorityScore": 95,
+        "concessionScore": 30,
+        "intellectualHonesty": 7,
+        "commentCount": 3,
+        "steelmans": 0,
+        "strawmans": 1,
+        "concessions": 0,
+        "dodges": 1
+      },
+      {
+        "username": "JackDieFrikandel",
+        "style": "emotional",
+        "logicScore": 50,
+        "emotionScore": 70,
+        "evidenceScore": 60,
+        "authorityScore": 25,
+        "concessionScore": 40,
+        "intellectualHonesty": 6,
+        "commentCount": 3,
+        "steelmans": 0,
+        "strawmans": 1,
+        "concessions": 1,
+        "dodges": 1
+      },
+      {
+        "username": "medlabunicorn",
+        "style": "authoritative",
+        "logicScore": 45,
+        "emotionScore": 60,
+        "evidenceScore": 80,
+        "authorityScore": 85,
+        "concessionScore": 10,
+        "intellectualHonesty": 4.5,
+        "commentCount": 2,
+        "steelmans": 0,
+        "strawmans": 1,
+        "concessions": 0,
+        "dodges": 1
+      },
+      {
+        "username": "hacksoncode",
+        "style": "authoritative",
+        "logicScore": 30,
+        "emotionScore": 10,
+        "evidenceScore": 20,
+        "authorityScore": 95,
+        "concessionScore": 5,
+        "intellectualHonesty": 7,
+        "commentCount": 3,
+        "steelmans": 0,
+        "strawmans": 0,
+        "concessions": 0,
+        "dodges": 0
+      },
+      {
+        "username": "squtternutboshed",
+        "style": "collaborative",
+        "logicScore": 70,
+        "emotionScore": 60,
+        "evidenceScore": 65,
+        "authorityScore": 40,
+        "concessionScore": 80,
+        "intellectualHonesty": 8.5,
+        "commentCount": 2,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      },
+      {
+        "username": "smithykate",
+        "style": "collaborative",
+        "logicScore": 65,
+        "emotionScore": 50,
+        "evidenceScore": 70,
+        "authorityScore": 30,
+        "concessionScore": 85,
+        "intellectualHonesty": 8,
+        "commentCount": 2,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      },
+      {
+        "username": "Morasain",
+        "style": "analytical",
+        "logicScore": 75,
+        "emotionScore": 20,
+        "evidenceScore": 80,
+        "authorityScore": 70,
+        "concessionScore": 70,
+        "intellectualHonesty": 8,
+        "commentCount": 2,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      }
+    ],
+    "hiddenGems": [
+      {
+        "commentId": "h7idmub",
+        "author": "thisdude415",
+        "text": "This is the sort of rational, evidence based reasoning that should cause OP to delay the second shot too\n\nWithout a history of miscarriage or allergic/autoimmune disorders, OP and his wife are accepti",
+        "karma": 5,
+        "qualityScore": 0.8,
+        "reasonUnderrated": "Posted deep in thread responding to personal medical story, provides nuanced risk analysis that acknowledges individual circumstances matter"
+      },
+      {
+        "commentId": "h7hutb2",
+        "author": "ImRedditingNaked",
+        "text": "True that they have distinct circulatory systems, but mothers and fetus are not at all completely separate.\n\nMothers' antibodies pass into fetal circulation and persist for months after birth. This is",
+        "karma": 1,
+        "qualityScore": 0.8,
+        "reasonUnderrated": "Corrects medical misinformation with accurate immunology explanation, but buried deep in comment chain"
+      },
+      {
+        "commentId": "h7hrr4y",
+        "author": "youlovemyfish",
+        "text": "Also for your peace of mind, the research on fevers is for high and prolonged fevers and there is evidence suggesting that regular use of folic acid (in any good prenatal) reduces or even removes that",
+        "karma": 4,
+        "qualityScore": 0.7,
+        "reasonUnderrated": "Provides specific, actionable medical information with CDC source that directly addresses OP's main concern about fever risks"
+      },
+      {
+        "commentId": "h7jo74u",
+        "author": "Irinam_Daske",
+        "text": "On the other side, that was only the opinion of one GP.\n\nIn Germany, the recommendation of the StIKo (The official board that decides who should get which vaccines) is for pregnant women NOT to get th",
+        "karma": 1,
+        "qualityScore": 0.7,
+        "reasonUnderrated": "Posted very late in thread, provides international perspective from German medical authorities that contradicts UK guidance"
+      },
+      {
+        "commentId": "h7i3b68",
+        "author": "ironmaeven",
+        "text": "It's quite possible that she won't have a face to face appointment until the first scan at 12 weeks. Most Trusts have been doing the initial booking-in appointment (8-10 weeks) over the phone during c",
+        "karma": 9,
+        "qualityScore": 0.7,
+        "reasonUnderrated": "Provides specific, practical UK healthcare system information that directly challenges OP's assumption about exposure timing, but posted late"
+      }
+    ],
+    "manipulationAlerts": [
+      {
+        "type": "statistical_anomaly",
+        "severity": "low",
+        "description": "Heavy comment clustering in first hour (35 comments) followed by rapid decline suggests potential early brigading or cross-posting, though this could be normal for controversial topics on r/changemyview",
+        "involvedUsers": []
+      },
+      {
+        "type": "bot_behavior",
+        "severity": "low",
+        "description": "u/DeltaBot shows automated behavior patterns with formulaic responses and zero engagement beyond system functions, but this is expected for a legitimate moderation bot",
+        "involvedUsers": [
+          "DeltaBot"
+        ]
+      }
+    ],
+    "verdict": {
+      "overallScore": 72,
+      "coreDispute": "Whether pregnant women should delay COVID vaccination during first trimester due to fever risks versus getting immediate protection against COVID complications.",
+      "evidenceQuality": 0.65,
+      "proArguments": 5,
+      "conArguments": 13,
+      "consensusPoints": [
+        "Medical decisions should involve consultation with qualified healthcare providers",
+        "Both COVID infection and vaccine side effects carry some level of risk during pregnancy",
+        "Individual risk assessment should consider exposure levels and personal circumstances"
+      ],
+      "unresolvedQuestions": [
+        "Specific quantified risk comparison between vaccine fever duration/severity versus COVID fever in pregnant women",
+        "Whether the OP's low-exposure situation meaningfully changes the risk-benefit calculation",
+        "Long-term safety data for COVID vaccines during first trimester pregnancy"
+      ],
+      "redFlags": [
+        "OP seeking medical advice from internet strangers rather than healthcare professionals",
+        "Some responses made definitive medical recommendations without full patient context",
+        "Potential for confirmation bias in how evidence was presented by various commenters"
+      ],
+      "recommendedReadingTime": 15,
+      "optimizedReadingPath": [
+        "medical_professional_response",
+        "epidemiologist_comment",
+        "fever_duration_comparison",
+        "uk_data_comment",
+        "risk_assessment_framework"
+      ]
+    },
+    "metadata": {
+      "id": "owl8q3",
+      "title": "CMV: My wife shouldn’t get the 2nd dose of the Covid vaccine during her first trimester",
+      "author": "atra-ignis",
+      "subreddit": "changemyview",
+      "selftext": "The title already says most of it. We’re in early pregnancy and are trying to decide if the missus should get her second dose of the Pfizer vaccine while she’s still in the first trimester. \n\nWe’re UK based, are both working from home and not seeing many people socially at the moment and can continue to do so until we hit the 12 week mark. So our risk of exposure to covid is relatively low. \n\nMain concerns with the vaccine is the impact of a fever as a side effect of the vaccine. To a lesser extent there is also the concern of little research into the effects of the vaccine on an early foetus. \n\nSo, that’s our current risk / reward calculus. Change my view.\n\nEdit: Yes, we’ve talked to a doctor. They essentially outlined the same risk / rewards I’ve outlined above. I’ve seen some high quality discussion and research on this sub so I thought I’d see what it turned up.\n\nEdit 2: If your answer is “talk to a doctor” I’ve answered that below and won’t be engaging with it further. If you have a good argument backed by statistics and/or medical research please contribute.\n\nEdit 3: Just to be super super clear. The doctor did not conclusively recommend she got the vaccine. He outlined the risks in both directions and said the decision was up to us.\n\nIs it not possible to have a civil discussion about this? My opinion of this sub is rapidly deteriorating.\n\nFinal Edit: After some more discussion between ourselves we’ve decided to bring forward her vaccination to just after the 6 week mark. Greater exposure to risk when going to medicinal appointments was the compelling argument. \n\nBut those of you who answered stating I was being irresponsible, or worse actively trying to kill my wife and child, should be ashamed of yourselves. We’re very pro vaccine, but there are unknown risks associated with early pregnancy. The visceral response I got from some people made me begin to actually understand anti-vaxers a little. That level of attack (with under informed arguments in most cases) rarely does anything but cause a person to more strongly cling to the belief you are arguing against. If you really want to convince more people to get vaccines spend a little more time trying to understand human psychology and less being a keyboard warrior on Reddit.",
+      "score": 271,
+      "upvoteRatio": 0.76,
+      "numComments": 160,
+      "createdUtc": 1627930694,
+      "url": "https://www.reddit.com/r/changemyview/comments/owl8q3/"
+    },
+    "analyzedAt": "2025-12-31T22:55:44.186339Z"
+  },
+  "cachedAt": 1767221744255
+}
