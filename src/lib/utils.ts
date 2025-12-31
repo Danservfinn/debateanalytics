@@ -23,8 +23,12 @@ export function formatScore(score: number): string {
 /**
  * Format a date relative to now
  */
-export function formatRelativeTime(date: Date | string): string {
-  const d = typeof date === 'string' ? new Date(date) : date
+export function formatRelativeTime(date: Date | string | number): string {
+  const d = typeof date === 'number'
+    ? new Date(date * 1000) // Unix timestamp in seconds
+    : typeof date === 'string'
+      ? new Date(date)
+      : date
   const now = new Date()
   const diffMs = now.getTime() - d.getTime()
   const diffMins = Math.floor(diffMs / 60000)
