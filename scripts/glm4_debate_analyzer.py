@@ -439,8 +439,9 @@ class GLM4Client:
             return self._direct_api_call(messages, temperature, max_tokens)
 
     def _direct_api_call(self, messages: List[Dict], temperature: float, max_tokens: int) -> str:
-        """Direct HTTP API call to ZhipuAI"""
+        """Direct HTTP API call to ZhipuAI with retry logic for rate limiting"""
         import json
+        import time
 
         url = f"{self.base_url}/chat/completions"
         headers = {
@@ -457,17 +458,32 @@ class GLM4Client:
         # Create SSL context
         ssl_context = ssl.create_default_context(cafile=certifi.where())
 
-        # Make request
+        # Make request with retry logic
         data = json.dumps(payload).encode('utf-8')
-        req = urllib.request.Request(url, data=data, headers=headers, method='POST')
 
-        try:
-            with urllib.request.urlopen(req, context=ssl_context, timeout=120) as response:
-                result = json.loads(response.read().decode('utf-8'))
-                return result['choices'][0]['message']['content']
-        except Exception as e:
-            print(f"API Error: {e}", file=sys.stderr)
-            raise
+        max_retries = 7
+        base_delay = 5  # Start with 5 second delay (ZhipuAI has strict rate limits)
+
+        for attempt in range(max_retries):
+            req = urllib.request.Request(url, data=data, headers=headers, method='POST')
+            try:
+                with urllib.request.urlopen(req, context=ssl_context, timeout=120) as response:
+                    result = json.loads(response.read().decode('utf-8'))
+                    return result['choices'][0]['message']['content']
+            except urllib.error.HTTPError as e:
+                if e.code == 429:  # Rate limited
+                    delay = base_delay * (2 ** attempt)  # Exponential backoff
+                    print(f"Rate limited, waiting {delay}s before retry {attempt + 1}/{max_retries}...", file=sys.stderr)
+                    time.sleep(delay)
+                    continue
+                else:
+                    print(f"API Error: {e}", file=sys.stderr)
+                    raise
+            except Exception as e:
+                print(f"API Error: {e}", file=sys.stderr)
+                raise
+
+        raise Exception(f"Max retries ({max_retries}) exceeded due to rate limiting")
 
 
 # ============================================================================
@@ -522,12 +538,18 @@ class DebateAnalyzer:
 
     def _call_llm(self, prompt: str, temperature: float = 0.3) -> Dict:
         """Make LLM call and parse JSON response"""
+        import time
+
         messages = [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": prompt}
         ]
 
         response = self.client.chat(messages, temperature=temperature)
+
+        # Add small delay between API calls to avoid rate limiting
+        time.sleep(1)
+
         return self._parse_json_response(response)
 
     def extract_claims(self, thread_data: Dict) -> List[Claim]:

@@ -107,25 +107,32 @@ export async function POST(request: NextRequest): Promise<NextResponse<DeepAnaly
       })
     }
 
-    // Get API key from environment
-    const apiKey = process.env.ZHIPUAI_API_KEY
+    // Get API key from environment (try Claude first, fall back to ZhipuAI)
+    const anthropicKey = process.env.ANTHROPIC_API_KEY
+    const zhipuKey = process.env.ZHIPUAI_API_KEY
+
+    const apiKey = anthropicKey || zhipuKey
+    const useClaude = !!anthropicKey
+
     if (!apiKey) {
       return NextResponse.json(
-        { success: false, error: 'Analysis service not configured' },
+        { success: false, error: 'Analysis service not configured. Set ANTHROPIC_API_KEY or ZHIPUAI_API_KEY.' },
         { status: 500 }
       )
     }
 
-    // Run the GLM-4 analysis script
-    const scriptPath = path.join(process.cwd(), 'scripts', 'glm4_debate_analyzer.py')
+    // Run the analysis script (Claude or GLM-4 based on available key)
+    const scriptName = useClaude ? 'claude_debate_analyzer.py' : 'glm4_debate_analyzer.py'
+    const scriptPath = path.join(process.cwd(), 'scripts', scriptName)
     const outputPath = path.join(CACHE_DIR, `${cacheKey}-temp.json`)
 
     // Ensure cache directory exists
     await mkdir(CACHE_DIR, { recursive: true })
 
-    const command = `python3 "${scriptPath}" --url "${url}" --output "${outputPath}" --model glm-4-plus`
+    const model = useClaude ? 'claude-sonnet-4-20250514' : 'glm-4-plus'
+    const command = `python3 "${scriptPath}" --url "${url}" --output "${outputPath}" --model ${model}`
 
-    console.log(`Running deep analysis for ${url}...`)
+    console.log(`Running deep analysis for ${url} with ${useClaude ? 'Claude' : 'GLM-4'}...`)
 
     try {
       await execAsync(command, {
@@ -133,7 +140,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<DeepAnaly
         maxBuffer: 50 * 1024 * 1024,
         env: {
           ...process.env,
-          ZHIPUAI_API_KEY: apiKey
+          ANTHROPIC_API_KEY: anthropicKey || '',
+          ZHIPUAI_API_KEY: zhipuKey || ''
         }
       })
 
