@@ -1,0 +1,94 @@
+{
+  "username": "wabeka",
+  "fetchedAt": "2025-12-31T16:35:26.811408",
+  "totalComments": 20,
+  "totalKarma": 95,
+  "avgKarma": 4.8,
+  "topSubreddits": [
+    {
+      "subreddit": "raleigh",
+      "commentCount": 12,
+      "totalKarma": 45,
+      "avgKarma": 3.8
+    },
+    {
+      "subreddit": "fantasyfootball",
+      "commentCount": 6,
+      "totalKarma": 45,
+      "avgKarma": 7.5
+    },
+    {
+      "subreddit": "LPR",
+      "commentCount": 1,
+      "totalKarma": 1,
+      "avgKarma": 1.0
+    },
+    {
+      "subreddit": "Patriots",
+      "commentCount": 1,
+      "totalKarma": 4,
+      "avgKarma": 4.0
+    }
+  ],
+  "activityPatterns": {
+    "mostActiveHour": 10,
+    "mostActiveDay": "Monday",
+    "avgCommentsPerDay": 0.27,
+    "accountAgeDays": 100
+  },
+  "argumentMetrics": {
+    "strongArguments": 3,
+    "moderateArguments": 17,
+    "weakArguments": 0,
+    "evidenceCited": 3,
+    "netArgumentScore": 3,
+    "avgArgumentLength": 75.0
+  },
+  "fallacyProfile": {
+    "totalFallacies": 1,
+    "fallacyTypes": [
+      {
+        "type": "hasty_generalization",
+        "count": 1
+      }
+    ],
+    "fallacyRate": 5.0
+  },
+  "rhetoricalStyle": "analytical",
+  "qualityScore": 5.5,
+  "radarData": {
+    "username": "wabeka",
+    "skills": [
+      {
+        "skill": "Evidence Use",
+        "value": 7.5,
+        "fullMark": 100
+      },
+      {
+        "skill": "Argument Quality",
+        "value": 55.0,
+        "fullMark": 100
+      },
+      {
+        "skill": "Logical Rigor",
+        "value": 15.0,
+        "fullMark": 100
+      },
+      {
+        "skill": "Fallacy Avoidance",
+        "value": 75.0,
+        "fullMark": 100
+      },
+      {
+        "skill": "Engagement",
+        "value": 9.6,
+        "fullMark": 100
+      },
+      {
+        "skill": "Depth",
+        "value": 25.0,
+        "fullMark": 100
+      }
+    ]
+  }
+}
