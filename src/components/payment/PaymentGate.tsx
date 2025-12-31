@@ -24,6 +24,7 @@ interface PaymentGateProps {
   isModal?: boolean
   onPaymentComplete: () => void
   onCancel: () => void
+  allowSkip?: boolean  // Temporary: allow skipping payment for testing
 }
 
 export function PaymentGate({
@@ -32,6 +33,7 @@ export function PaymentGate({
   isModal = false,
   onPaymentComplete,
   onCancel,
+  allowSkip = true,  // Default to true for testing phase
 }: PaymentGateProps) {
   const [copied, setCopied] = useState(false)
 
@@ -152,6 +154,20 @@ export function PaymentGate({
               <Loader2 className="w-4 h-4 animate-spin" />
               <span>Waiting for payment...</span>
             </div>
+
+            {/* Skip button for testing */}
+            {allowSkip && (
+              <div className="pt-4 border-t border-border/50">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onPaymentComplete}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Skip for now (testing only)
+                </Button>
+              </div>
+            )}
           </motion.div>
         )
 
