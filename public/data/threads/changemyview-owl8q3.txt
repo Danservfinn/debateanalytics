@@ -1,13 +1,13 @@
 ================================================================================
 REDDIT THREAD ANALYSIS
 ================================================================================
-Fetched: 2025-12-31 18:08:51
+Fetched: 2025-12-31 18:36:53
 
 ## POST METADATA
 - Title: CMV: My wife shouldn’t get the 2nd dose of the Covid vaccine during her first trimester
 - Subreddit: r/changemyview
 - Author: u/atra-ignis
-- Score: 273 (76% upvoted)
+- Score: 271 (76% upvoted)
 - Comments: 160
 - Created: 2021-08-02 14:58 UTC
 - URL: https://reddit.com/r/changemyview/comments/owl8q3/cmv_my_wife_shouldnt_get_the_2nd_dose_of_the/
@@ -44,15 +44,15 @@ But those of you who answered stating I was being irresponsible, or worse active
 ## TOP COMMENTS (by score)
 ================================================================================
 
-### Comment #1 | u/LongLiveSmoove | Score: 337 | Depth: 0
+### Comment #1 | u/LongLiveSmoove | Score: 339 | Depth: 0
 ----------------------------------------
 It’s probably better to have this discussion with a doctor as opposed to random internet people
 
-### Comment #2 | u/smcarre | Score: 172 | Depth: 2
+### Comment #2 | u/smcarre | Score: 171 | Depth: 2
 ----------------------------------------
 If a literal doctor that has better knowledge both in terms of the specific patient, on the directives given by research experts in his jurisdiction and the possible risks involved with the specific vaccine couldn't change your view, what would it take for us to change it?
 
-### Comment #3 | u/smcarre | Score: 106 | Depth: 4
+### Comment #3 | u/smcarre | Score: 107 | Depth: 4
 ----------------------------------------
 That's not really important, what's important is that the doctor you spoke to had access to all the necessary information he could have needed to make his recommendation and it was for your wife to get the vaccine.
 
@@ -78,11 +78,11 @@ On balance I’d say she’s at a greater risk not having it for these reasons.
 ----------------------------------------
 If it helps I got my first dose in my first trimester and had exactly this on my mind. My thinking was that any fever I may get from the vaccine would probably be 12hrs or so, a fever I would almost certainly get from COVID may last days and my understanding of the research was that a prolonged fever is what is risky. The extra time spent in hospitals etc. pushed me to decide the risk of the vaccine was worth it.
 
-### Comment #6 | u/atra-ignis [OP] | Score: 39 | Depth: 1
+### Comment #6 | u/atra-ignis [OP] | Score: 43 | Depth: 1
 ----------------------------------------
 The vaccine can cause a fever, there’s good research to suggest a fever during the first 12 weeks (but especially the first 6) can cause problems such as neural tube defects. It’s not as simple as “they don’t share a blood supply”.
 
-### Comment #7 | u/atra-ignis [OP] [DELTA] | Score: 38 | Depth: 1
+### Comment #7 | u/atra-ignis [OP] [DELTA] | Score: 37 | Depth: 1
 ----------------------------------------
 I’m going to award a !delta purely for the delay in the virus taking full effect when she’s entering a higher risk environment for medical appointment.
 
@@ -96,7 +96,7 @@ I’d your going to ask Reddit, the one person I’d like to see post here is /u
 
 Only issue is he may be banned from this sub for spreading too much truth
 
-### Comment #9 | u/lost_signal | Score: 25 | Depth: 4
+### Comment #9 | u/lost_signal | Score: 24 | Depth: 4
 ----------------------------------------
 I’m a big fan of watching what people do more than they say. We were trying to get pregnant at the same time she was getting vaccinated. Other pregnant ID fellows got vaccinated. 
 
@@ -116,31 +116,27 @@ Also I’ll call put my 2 year old is Vax’d (Team Pfizer, she was one of the f
 
 Seriously the day after the dose she was weirdly more agreeable (this kid hates the morning). I couldn’t figure out how to report “agreeable child” into VERS.
 
-### Comment #10 | u/LongLiveSmoove | Score: 25 | Depth: 2
+### Comment #10 | u/LongLiveSmoove | Score: 20 | Depth: 2
 ----------------------------------------
 It doesn’t matter how much research someone on this site can pull up. There could be someone who is antivax who could provide information that looks good and high quality but also omits important information. Not only is your doctor credible but also they know your medical records and history and are the ones who are going to be taking care of you throughout this process. If you don’t trust them get a second opinion
 
 Pretty much you’re saying you’d rather put you wife and babies life in the hands of internet strangers as opposed to a doctor.
 
-### Comment #11 | u/atra-ignis [OP] [DELTA] | Score: 16 | Depth: 3
+### Comment #11 | u/atra-ignis [OP] [DELTA] | Score: 18 | Depth: 3
 ----------------------------------------
 Thanks, I think we’ve reached the same conclusion that she’ll have to start going into higher risk environments so should get the vaccine earlier. Someone else made the same point and I awarded them a !delta for it, but I don’t see any reason I can’t give out two for the same point :)
 
-### Comment #12 | u/amedeemarko | Score: 13 | Depth: 2
+### Comment #12 | u/amedeemarko | Score: 15 | Depth: 2
 ----------------------------------------
 You don't have concerns. You have superstitions.
 
 Ask 5 more doctors and look for peer reviewed studies online.
 
-### Comment #13 | u/squtternutboshed | Score: 13 | Depth: 4
+### Comment #13 | u/squtternutboshed | Score: 12 | Depth: 4
 ----------------------------------------
 Honestly I just want to help you make the best decision for yourselves. I get how scary it is when you are feeling vulnerable and have another life to consider. I know I would have been so angry with my self if I turned down the vaccine and got really sick. We are happy with we went ahead. Congrats and best wishes.
 
-### Comment #14 | u/DarkLasombra | Score: 12 | Depth: 6
-----------------------------------------
-Yes that's literally the reason people should get multiple opinions.
-
-### Comment #15 | u/GadgetGamer | Score: 11 | Depth: 0
+### Comment #14 | u/GadgetGamer | Score: 11 | Depth: 0
 ----------------------------------------
 You should have a look at:
 
@@ -156,19 +152,23 @@ From [this info pdf](https://www.rcog.org.uk/globalassets/documents/guidelines/2
 
 &gt; *Studies have shown that hospital admission and severe illness are more common inpregnant women (compared to those not pregnant), especially those in the third trimesterof pregnancy, and that stillbirth and preterm birth is more likely (compared to pregnantwomen without COVID-19). Pregnant women with underlying medical conditions are athigher risk of severe illness*
 
-### Comment #16 | u/atra-ignis [OP] | Score: 10 | Depth: 1
+### Comment #15 | u/atra-ignis [OP] | Score: 10 | Depth: 1
 ----------------------------------------
 That might explain the quiet visceral reaction I got from some people who seemed to think I want to kill my wife and child. 
 
 I thought it was obvious from the “in the first trimester” part 🤔.
 
-### Comment #17 | u/jsmooth7 | Score: 10 | Depth: 0
+### Comment #16 | u/DarkLasombra | Score: 10 | Depth: 6
+----------------------------------------
+Yes that's literally the reason people should get multiple opinions.
+
+### Comment #17 | u/jsmooth7 | Score: 9 | Depth: 0
 ----------------------------------------
 The risks you should be comparing is not vaccine vs no vaccine. It should be covid symptoms vs vaccine side effects. Covid symptoms are quite a bit worse including for fever. 
 
 That said, one shot does give some protection from getting the virus and from the worst symptoms of the disease. And you may be able to avoid covid by not going out much but it's still not a guarantee. So you are gambling a little bit here by hoping you manage to avoid it until she gets the second shot. It's not a huge gamble, but still a bit of one.
 
-### Comment #18 | u/atra-ignis [OP] | Score: 10 | Depth: 1
+### Comment #18 | u/atra-ignis [OP] | Score: 9 | Depth: 1
 ----------------------------------------
 We have had a discussion with a doctor. UK guidance is to recommend she gets it at the moment but the concerns above still stand. 
 
@@ -193,7 +193,7 @@ CMV is a terrible place to post if you want people to agree with you.  What make
 ## OP'S REPLIES
 ================================================================================
 
-### OP Reply #1 | Score: 38
+### OP Reply #1 | Score: 37
 ----------------------------------------
 I’m going to award a !delta purely for the delay in the virus taking full effect when she’s entering a higher risk environment for medical appointment.
 
@@ -203,13 +203,13 @@ That might explain the quiet visceral reaction I got from some people who seemed
 
 I thought it was obvious from the “in the first trimester” part 🤔.
 
-### OP Reply #3 | Score: 4
+### OP Reply #3 | Score: 5
 ----------------------------------------
 Cheer, I’ve already looked over most of those resources. 
 
 She will 100% be getting the vaccine as soon as we hit the end of the first trimester.
 
-### OP Reply #4 | Score: 5
+### OP Reply #4 | Score: 4
 ----------------------------------------
 The actual calculus is ‘vaccine side effects’ vs ‘probability of getting covid * probability of it being a case of severe covid’.
 
@@ -221,15 +221,15 @@ I’ve come around to us getting the vaccine earlier but honestly so many of the
 
 Edit: I’m grumpy, most of this doesn’t really apply to your comment which was more or less reasonable.
 
-### OP Reply #5 | Score: 3
+### OP Reply #5 | Score: 5
 ----------------------------------------
 If you think that’s uncalled for you haven’t seen the number of replies on here flat out implying I’m trying to kill my wife and child.
 
-### OP Reply #6 | Score: 3
+### OP Reply #6 | Score: 6
 ----------------------------------------
 No worries. Thanks for taking the time to reply; and sorry you got caught in my grumpy crossfire :).
 
-### OP Reply #7 | Score: 10
+### OP Reply #7 | Score: 9
 ----------------------------------------
 We have had a discussion with a doctor. UK guidance is to recommend she gets it at the moment but the concerns above still stand. 
 
@@ -239,29 +239,29 @@ I’ve seen some very high quality research and discussion on this sub so though
 ----------------------------------------
 I’m not sure if you’ve spoken to a UK based NHS GP. You get 10 minutes to have a very brief discussion. We don’t have access to a midwife for several weeks yet.
 
-### OP Reply #9 | Score: -8
+### OP Reply #9 | Score: -7
 ----------------------------------------
 I’m sure your wife has seen some terrible stuff; she’s amazing for both the work she does with kids and dealing with covid on top of that. But telling me she’s seen bad outcomes is as useful as telling me I shouldn’t get in a car because an ER doctor has seen bad outcomes. If u/shittymorph is able to provide some really useful information that accurately takes in to account the relative risks on both sides then it’s a shame if he can’t contribute.
 
-### OP Reply #10 | Score: -20
+### OP Reply #10 | Score: -26
 ----------------------------------------
 Sigh, I’m really not. We’ve done a bunch of research. We’ve talked to medical professionals. I’m seeing if someone with in-depth knowledge happens to turn up and produce some good information backed by research.
 
 I’m not going to engage in this line of discussion further so if you haven’t got anything useful to contribute I wouldn’t bother replying again.
 
-### OP Reply #11 | Score: -16
+### OP Reply #11 | Score: -17
 ----------------------------------------
 Have you done that? I have a feeling you haven’t or you wouldn’t be making ill informed attacks.
 
-### OP Reply #12 | Score: 39
+### OP Reply #12 | Score: 43
 ----------------------------------------
 The vaccine can cause a fever, there’s good research to suggest a fever during the first 12 weeks (but especially the first 6) can cause problems such as neural tube defects. It’s not as simple as “they don’t share a blood supply”.
 
-### OP Reply #13 | Score: 16
+### OP Reply #13 | Score: 18
 ----------------------------------------
 Thanks, I think we’ve reached the same conclusion that she’ll have to start going into higher risk environments so should get the vaccine earlier. Someone else made the same point and I awarded them a !delta for it, but I don’t see any reason I can’t give out two for the same point :)
 
-### OP Reply #14 | Score: 8
+### OP Reply #14 | Score: 6
 ----------------------------------------
 You throw around the word risk like it’s an absolute, but really it’s just the probability of a negative outcome and the severity of said negative outcome. The risk from Covid is the “risk of contracting” * “risk of sever covid”. The risk from the vaccine is “risk known side effect causing problem” + “potentially unknown side effects” (it’s not like a lot of pregnant women were getting the vaccine 9 months ago). 
 
@@ -277,7 +277,7 @@ Just to be super super clear. The doctor did not conclusively recommend she got 
 
 Is it not possible to have a civil discussion about this?
 
-### OP Reply #17 | Score: 5
+### OP Reply #17 | Score: 2
 ----------------------------------------
 The vaccine is not “proven to be safe”. It usually has very mild side effects but there is very limited research on its effects during early pregnancy. 
 
@@ -326,7 +326,7 @@ Interesting; others managed to contribute more meaningfully.
 ## DELTA AWARDS (View Changes)
 ================================================================================
 
-### Delta #1 | u/atra-ignis | Score: 38
+### Delta #1 | u/atra-ignis | Score: 37
 ----------------------------------------
 I’m going to award a !delta purely for the delay in the virus taking full effect when she’s entering a higher risk environment for medical appointment.
 
@@ -336,7 +336,7 @@ Confirmed: 1 delta awarded to /u/jho_18 ([1∆](/r/changemyview/wiki/user/jho_18
 
 ^[Delta System Explained](https://www.reddit.com/r/changemyview/wiki/deltasystem) ^| ^[Deltaboards](https://www.reddit.com/r/changemyview/wiki/deltaboards)
 
-### Delta #3 | u/atra-ignis | Score: 16
+### Delta #3 | u/atra-ignis | Score: 18
 ----------------------------------------
 Thanks, I think we’ve reached the same conclusion that she’ll have to start going into higher risk environments so should get the vaccine earlier. Someone else made the same point and I awarded them a !delta for it, but I don’t see any reason I can’t give out two for the same point :)
 
@@ -345,28 +345,28 @@ Thanks, I think we’ve reached the same conclusion that she’ll have to start 
 Format: [score] u/author: first 100 chars...
 
 [+83] u/jho_18: Info: when did she have her first dose? And when was it in relation to her finding out she was pregn...
-  [+38] u/atra-ignis [OP]: I’m going to award a !delta purely for the delay in the virus taking full effect when she’s entering...
-    [+6] u/ironmaeven: It's quite possible that she won't have a face to face appointment until the first scan at 12 weeks....
+  [+37] u/atra-ignis [OP]: I’m going to award a !delta purely for the delay in the virus taking full effect when she’s entering...
+    [+5] u/ironmaeven: It's quite possible that she won't have a face to face appointment until the first scan at 12 weeks....
   [+10] u/atra-ignis [OP]: That might explain the quiet visceral reaction I got from some people who seemed to think I want to ...
 [+11] u/GadgetGamer: You should have a look at:  1. [Government information page about pregnancy and COVID vaccinations](...
-  [+4] u/atra-ignis [OP]: Cheer, I’ve already looked over most of those resources.   She will 100% be getting the vaccine as s...
+  [+5] u/atra-ignis [OP]: Cheer, I’ve already looked over most of those resources.   She will 100% be getting the vaccine as s...
   [+4] u/lostduck86: I'm in Norway. My fiance is pregnant. We were recommended by our doctor to hold off the vaccine for ...
     [-2] u/GadgetGamer: You can send your doctor those links then. I’ll take the word of an entire college over a single doc...
-[+10] u/jsmooth7: The risks you should be comparing is not vaccine vs no vaccine. It should be covid symptoms vs vacci...
-  [+5] u/atra-ignis [OP]: The actual calculus is ‘vaccine side effects’ vs ‘probability of getting covid * probability of it b...
+[+9] u/jsmooth7: The risks you should be comparing is not vaccine vs no vaccine. It should be covid symptoms vs vacci...
+  [+4] u/atra-ignis [OP]: The actual calculus is ‘vaccine side effects’ vs ‘probability of getting covid * probability of it b...
     [+3] u/jsmooth7: &gt; The actual calculus is ‘vaccine side effects’ vs ‘probability of getting covid * probability of...
-      [+3] u/atra-ignis [OP]: If you think that’s uncalled for you haven’t seen the number of replies on here flat out implying I’...
+      [+5] u/atra-ignis [OP]: If you think that’s uncalled for you haven’t seen the number of replies on here flat out implying I’...
         [+2] u/jsmooth7: Yeah sorry, at first I thought that was directed at me specifically. I even tried to edit it out rig...
-          [+3] u/atra-ignis [OP]: No worries. Thanks for taking the time to reply; and sorry you got caught in my grumpy crossfire :).
+          [+6] u/atra-ignis [OP]: No worries. Thanks for taking the time to reply; and sorry you got caught in my grumpy crossfire :).
             [+2] u/jsmooth7: Oh that's fine now that I know what you meant. I would be a little unhappy too if people were saying...
-[+337] u/LongLiveSmoove: It’s probably better to have this discussion with a doctor as opposed to random internet people
-  [+10] u/atra-ignis [OP]: We have had a discussion with a doctor. UK guidance is to recommend she gets it at the moment but th...
-    [+172] u/smcarre: If a literal doctor that has better knowledge both in terms of the specific patient, on the directiv...
+[+339] u/LongLiveSmoove: It’s probably better to have this discussion with a doctor as opposed to random internet people
+  [+9] u/atra-ignis [OP]: We have had a discussion with a doctor. UK guidance is to recommend she gets it at the moment but th...
+    [+171] u/smcarre: If a literal doctor that has better knowledge both in terms of the specific patient, on the directiv...
         [+0] u/smcarre: My question still stands, if a doctor that had as much information as a doctor could need and feasib...
       [-9] u/atra-ignis [OP]: I’m not sure if you’ve spoken to a UK based NHS GP. You get 10 minutes to have a very brief discussi...
-        [+106] u/smcarre: That's not really important, what's important is that the doctor you spoke to had access to all the ...
-          [+4] u/misanthpope: You have a lot of faith in doctors.  I know doctors who are antivax and doctors who think all their ...
-            [+12] u/DarkLasombra: Yes that's literally the reason people should get multiple opinions.
+        [+107] u/smcarre: That's not really important, what's important is that the doctor you spoke to had access to all the ...
+          [+5] u/misanthpope: You have a lot of faith in doctors.  I know doctors who are antivax and doctors who think all their ...
+            [+10] u/DarkLasombra: Yes that's literally the reason people should get multiple opinions.
             [+3] u/smcarre: And it's better to have faith in randos over the internet? If OP is skeptical of a specific doctor's...
               [+2] u/misanthpope: I don't know where you live,  but I can't find a doctor to talk to me for 30 minutes to put my mind ...
                 [+0] u/RegainTheFrogge: Do you live in the middle of nowhere?
@@ -377,33 +377,33 @@ Format: [score] u/author: first 100 chars...
                   [+1] u/misanthpope:  The only place most people can talk to "a bunch of doctors" is reddit
             [+3] u/smcarre: So how are we supposed to change OP's view if "it's just people's opinions"?
           [+1] u/Irinam_Daske: &gt;what's important is that the doctor you spoke to had access to all the necessary information he ...
-        [+6] u/dollabillkirill: I think you should try to get a few more opinions from other doctors if you feel that way.
+        [+7] u/dollabillkirill: I think you should try to get a few more opinions from other doctors if you feel that way.
     [+30] u/lost_signal: Wife is Infectious disease MD and PI for trials, and works at a children’s hospital that does delive...
-      [-8] u/atra-ignis [OP]: I’m sure your wife has seen some terrible stuff; she’s amazing for both the work she does with kids ...
-        [+25] u/lost_signal: I’m a big fan of watching what people do more than they say. We were trying to get pregnant at the s...
+      [-7] u/atra-ignis [OP]: I’m sure your wife has seen some terrible stuff; she’s amazing for both the work she does with kids ...
+        [+24] u/lost_signal: I’m a big fan of watching what people do more than they say. We were trying to get pregnant at the s...
       [+1] u/Populace_in_two: COVID affected mothers or just unvaccinated mothers? Isn’t that always a risk of pregnancy?
         [+1] u/lost_signal: I’m not a doctor but: Having mom end up in an ICU on respiratory support that causes pre-mature birt...
-    [+25] u/LongLiveSmoove: It doesn’t matter how much research someone on this site can pull up. There could be someone who is ...
-      [-20] u/atra-ignis [OP]: Sigh, I’m really not. We’ve done a bunch of research. We’ve talked to medical professionals. I’m see...
+    [+20] u/LongLiveSmoove: It doesn’t matter how much research someone on this site can pull up. There could be someone who is ...
+      [-26] u/atra-ignis [OP]: Sigh, I’m really not. We’ve done a bunch of research. We’ve talked to medical professionals. I’m see...
           [+1] u/ColdNotion: u/LongLiveSmoove – your comment has been removed for breaking Rule 2:   &gt; **Don't be rude or host...
-    [+13] u/amedeemarko: You don't have concerns. You have superstitions.  Ask 5 more doctors and look for peer reviewed stud...
-      [-16] u/atra-ignis [OP]: Have you done that? I have a feeling you haven’t or you wouldn’t be making ill informed attacks.
+    [+15] u/amedeemarko: You don't have concerns. You have superstitions.  Ask 5 more doctors and look for peer reviewed stud...
+      [-17] u/atra-ignis [OP]: Have you done that? I have a feeling you haven’t or you wouldn’t be making ill informed attacks.
           [+8] u/misanthpope: CMV is a terrible place to post if you want people to agree with you.  What makes you think they're ...
               [+0] u/DarkLasombra: They aren't ignoring their doctor. The doctor gave them information about risks and benefits and tol...
               [+1] u/hacksoncode: Sorry, u/charliewisco – your comment has been removed for breaking Rule 3:   &gt; **Refrain from acc...
           [+1] u/hacksoncode: Sorry, u/charliewisco – your comment has been removed for breaking Rule 3:   &gt; **Refrain from acc...
-      [+5] u/thisdude415: This is the sort of rational, evidence based reasoning that should cause OP to delay the second shot...
+      [+6] u/thisdude415: This is the sort of rational, evidence based reasoning that should cause OP to delay the second shot...
       [+1] u/empressbunny: I hope your pregnancy goes well! Best of luck to you, the little one and your family.  My sister had...
     [+7] u/Medium_Review: Maybe get other docs’ opinions?
       [+1] u/hacksoncode: u/AccidentalAbrasion – your comment has been removed for breaking Rule 2:   &gt; **Don't be rude or ...
 [-3] u/NetrunnerCardAccount: The fetus and the mother don’t share a blood supply now. So the vaccine won’t effect the child.
-  [+39] u/atra-ignis [OP]: The vaccine can cause a fever, there’s good research to suggest a fever during the first 12 weeks (b...
+  [+43] u/atra-ignis [OP]: The vaccine can cause a fever, there’s good research to suggest a fever during the first 12 weeks (b...
     [+51] u/squtternutboshed: If it helps I got my first dose in my first trimester and had exactly this on my mind. My thinking w...
-      [+16] u/atra-ignis [OP]: Thanks, I think we’ve reached the same conclusion that she’ll have to start going into higher risk e...
-        [+13] u/squtternutboshed: Honestly I just want to help you make the best decision for yourselves. I get how scary it is when y...
-        [+5] u/killergiraffe: Looks like you’ve already decided, but just wanted to say that your post was very reasonable! I was ...
-    [+0] u/NetrunnerCardAccount: This is like saying since there is a small chance of a small fever with this procedure , I’d prefer ...
-      [+8] u/atra-ignis [OP]: You throw around the word risk like it’s an absolute, but really it’s just the probability of a nega...
+      [+18] u/atra-ignis [OP]: Thanks, I think we’ve reached the same conclusion that she’ll have to start going into higher risk e...
+        [+12] u/squtternutboshed: Honestly I just want to help you make the best decision for yourselves. I get how scary it is when y...
+        [+6] u/killergiraffe: Looks like you’ve already decided, but just wanted to say that your post was very reasonable! I was ...
+    [+1] u/NetrunnerCardAccount: This is like saying since there is a small chance of a small fever with this procedure , I’d prefer ...
+      [+6] u/atra-ignis [OP]: You throw around the word risk like it’s an absolute, but really it’s just the probability of a nega...
         [+6] u/NetrunnerCardAccount: Basically every time a vaccine has had a serious side effect it appeared in less time from the initi...
         [+1] u/smithykate: I just wanted to jump on and say I’m in exactly the same position as your wife - just found out @ 4w...
     [+4] u/youlovemyfish: Also for your peace of mind, the research on fevers is for high and prolonged fevers and there is ev...
@@ -414,10 +414,10 @@ Format: [score] u/author: first 100 chars...
   [+2] u/atra-ignis [OP]: Your post will probably get deleted for not disagreeing with my initial point, but thank you for pro...
     [+1] u/Morasain: Oh, I completely misunderstood your post to be honest. Well, you're welcome anyway.
 [+9] u/InfernalWedgie: For what it's worth,  I'm an infectious disease epidemiologist.  I'm also a new mother. The only rea...
-[+0] u/medlabunicorn: You *should* just listen to your doctor, but here:  https://www.cdc.gov/vaccines/pregnancy/pregnant-...
+[-3] u/medlabunicorn: You *should* just listen to your doctor, but here:  https://www.cdc.gov/vaccines/pregnancy/pregnant-...
   [+2] u/atra-ignis [OP]: Just to be super super clear. The doctor did not conclusively recommend she got the vaccine. He outl...
-    [+1] u/JackDieFrikandel: The discussion is about a disease that can severely harm you, your child and/or your wife. To includ...
-      [+5] u/atra-ignis [OP]: The vaccine is not “proven to be safe”. It usually has very mild side effects but there is very limi...
+    [+2] u/JackDieFrikandel: The discussion is about a disease that can severely harm you, your child and/or your wife. To includ...
+      [+2] u/atra-ignis [OP]: The vaccine is not “proven to be safe”. It usually has very mild side effects but there is very limi...
         [+1] u/JackDieFrikandel: Wasn't the chance of severe covid side effects on women like 5%?
           [+2] u/atra-ignis [OP]: Now we’re getting to the crux of it. I can’t actually find the risk of severe covid in 30-35 year ol...
             [+2] u/JackDieFrikandel: https://scholar.google.fr/scholar?q=covid+effect+on+pregnancy&amp;hl=nl&amp;as_sdt=0&amp;as_vis=1&am...
@@ -425,8 +425,8 @@ Format: [score] u/author: first 100 chars...
     [+2] u/medlabunicorn: Just out of curiosity, why are you speaking as though it is your decision whether or not your wife g...
       [+1] u/atra-ignis [OP]: Because I can only speak for my thoughts when replying; she’d gone to bed. It’s clearly a joint deci...
     [+3] u/xole: What were the risks that the doctor mentioned?   Personally,  I haven’t read any risks about the vac...
-[+3] u/emi_lgr: The problem here is, you’re equating the research that you or someone else here can pull up with you...
-[+8] u/ingez90: Since pfizer is a mRNA vaccine theres no actual virus in the vaccin and research has shown no advers...
+[+5] u/emi_lgr: The problem here is, you’re equating the research that you or someone else here can pull up with you...
+[+7] u/ingez90: Since pfizer is a mRNA vaccine theres no actual virus in the vaccin and research has shown no advers...
 [+2] u/theFriendlySlytherin: It seems you know all of the risks, here's my only two cents.  There is no guarante that the vaccine...
 [+2] u/CapmBlondeBeard: What are the pros/cons you’ve come up with in speaking with the doc?  Not knowing your pros/cons, it...
 [+0] u/AelizaW: I think it might be helpful to frame it this way:  Is she (and the baby) at greater risk of serious ...

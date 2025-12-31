@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { useParams, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import Link from "next/link"
@@ -18,7 +18,8 @@ import {
   Brain,
   CheckCircle,
   Gem,
-  Shield
+  Shield,
+  Zap
 } from "lucide-react"
 import { Navbar } from "@/components/layout/Navbar"
 import { FloatingShapes } from "@/components/layout/FloatingShapes"
@@ -29,6 +30,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
+import { PaymentGate } from "@/components/payment/PaymentGate"
 import {
   VerdictCard,
   ClaimMatrix,
@@ -37,6 +39,7 @@ import {
   ManipulationAlerts
 } from "@/components/analysis"
 import { fetchThreadAnalysis, loadThread } from "@/lib/data"
+import { hasPaid, clearExpired } from "@/lib/payment-cache"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatNumber, formatRelativeTime } from "@/lib/utils"
 import type { ThreadAnalysis, ParticipantSummary } from "@/types/debate"
@@ -114,6 +117,18 @@ export default function ThreadDetailPage() {
   const [deepProgress, setDeepProgress] = useState(0)
   const [currentStage, setCurrentStage] = useState(0)
   const [error, setError] = useState<string | null>(null)
+
+  // Payment gate state for deep analysis
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [deepAnalysisPaid, setDeepAnalysisPaid] = useState(false)
+
+  // Check if deep analysis was already paid for
+  useEffect(() => {
+    clearExpired()  // Clean up expired payments
+    if (threadId && hasPaid('thread', threadId)) {
+      setDeepAnalysisPaid(true)
+    }
+  }, [threadId])
 
   useEffect(() => {
     async function loadData() {
@@ -343,18 +358,44 @@ export default function ThreadDetailPage() {
                       </p>
                     </div>
                   </div>
-                  <Button
-                    size="lg"
-                    onClick={runDeepAnalysis}
-                    className="bg-primary hover:bg-primary/90"
-                  >
-                    <Sparkles className="w-4 h-4 mr-2" />
-                    Analyze with Claude
-                  </Button>
+                  {deepAnalysisPaid ? (
+                    <Button
+                      size="lg"
+                      onClick={runDeepAnalysis}
+                      className="bg-primary hover:bg-primary/90"
+                    >
+                      <Sparkles className="w-4 h-4 mr-2" />
+                      Analyze with Claude
+                    </Button>
+                  ) : (
+                    <Button
+                      size="lg"
+                      onClick={() => setShowPaymentModal(true)}
+                      className="bg-primary hover:bg-primary/90"
+                    >
+                      <Zap className="w-4 h-4 mr-2" />
+                      Unlock Deep Analysis ($1)
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
           </motion.section>
+        )}
+
+        {/* Payment Modal */}
+        {showPaymentModal && (
+          <PaymentGate
+            analysisType="thread"
+            targetId={threadId}
+            isModal={true}
+            onPaymentComplete={() => {
+              setDeepAnalysisPaid(true)
+              setShowPaymentModal(false)
+              runDeepAnalysis()
+            }}
+            onCancel={() => setShowPaymentModal(false)}
+          />
         )}
 
         {/* Deep Analysis Loading */}

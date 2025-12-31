@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useParams } from "next/navigation"
+import { useEffect, useState, useCallback } from "react"
+import { useParams, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { ArrowLeft, RefreshCw } from "lucide-react"
 import Link from "next/link"
@@ -15,12 +15,15 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { SkeletonUserCard } from "@/components/ui/skeleton"
+import { PaymentGate } from "@/components/payment/PaymentGate"
 import { loadUserMetrics, fetchUserMetrics, addRecentSearch } from "@/lib/data"
+import { hasPaid, clearExpired } from "@/lib/payment-cache"
 import { fadeInUp } from "@/lib/animations"
 import type { UserMetrics, FallacyBreakdown, SkillDimension } from "@/types/debate"
 
 export default function UserProfilePage() {
   const params = useParams()
+  const router = useRouter()
   const username = params.username as string
 
   const [user, setUser] = useState<UserMetrics | null>(null)
@@ -28,40 +31,68 @@ export default function UserProfilePage() {
   const [error, setError] = useState<string | null>(null)
   const [isFetching, setIsFetching] = useState(false)
 
+  // Payment gate state
+  const [isPaid, setIsPaid] = useState(false)
+  const [showPaymentGate, setShowPaymentGate] = useState(true)
+
+  // Check payment status on mount
   useEffect(() => {
-    async function loadUser() {
-      if (!username) return
+    clearExpired()  // Clean up expired payments
+    if (username && hasPaid('user', username)) {
+      setIsPaid(true)
+      setShowPaymentGate(false)
+    }
+  }, [username])
 
-      setIsLoading(true)
-      setError(null)
+  // Load user data function
+  const loadUser = useCallback(async () => {
+    if (!username) return
 
-      try {
-        // Try cached data first
-        let userData = await loadUserMetrics(username)
+    setIsLoading(true)
+    setError(null)
 
-        // If no cached data, fetch from API
-        if (!userData) {
-          setIsFetching(true)
-          userData = await fetchUserMetrics(username)
-          setIsFetching(false)
-        }
+    try {
+      // Try cached data first
+      let userData = await loadUserMetrics(username)
 
-        if (userData) {
-          setUser(userData)
-          addRecentSearch(username)
-        } else {
-          setError('User not found or no comment history available.')
-        }
-      } catch (err) {
-        setError('Failed to load user data. Please try again.')
-        console.error(err)
+      // If no cached data, fetch from API
+      if (!userData) {
+        setIsFetching(true)
+        userData = await fetchUserMetrics(username)
+        setIsFetching(false)
       }
 
-      setIsLoading(false)
+      if (userData) {
+        setUser(userData)
+        addRecentSearch(username)
+      } else {
+        setError('User not found or no comment history available.')
+      }
+    } catch (err) {
+      setError('Failed to load user data. Please try again.')
+      console.error(err)
     }
 
-    loadUser()
+    setIsLoading(false)
   }, [username])
+
+  // Only load user data after payment is confirmed
+  useEffect(() => {
+    if (isPaid && !showPaymentGate) {
+      loadUser()
+    }
+  }, [isPaid, showPaymentGate, loadUser])
+
+  // Handle successful payment
+  const handlePaymentComplete = useCallback(() => {
+    setIsPaid(true)
+    setShowPaymentGate(false)
+  }, [])
+
+  // Handle payment cancel
+  const handlePaymentCancel = useCallback(() => {
+    router.push('/')
+  }, [router])
 
   const handleRefresh = async () => {
     setIsFetching(true)
@@ -92,6 +123,19 @@ export default function UserProfilePage() {
     count: f.count,
     percentage: (f.count / Math.max(1, user.fallacyProfile.totalFallacies)) * 100
   })) || []
+
+  // Show payment gate if not paid
+  if (showPaymentGate && !isPaid) {
+    return (
+      <PaymentGate
+        analysisType="user"
+        targetId={username}
+        isModal={false}
+        onPaymentComplete={handlePaymentComplete}
+        onCancel={handlePaymentCancel}
+      />
+    )
+  }
 
   return (
     <div className="min-h-screen">
