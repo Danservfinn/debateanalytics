@@ -19,12 +19,12 @@ interface FallacyPieProps {
 }
 
 const COLORS = [
+  '#a855f7', // primary (purple)
+  '#ec4899', // pink
   '#f59e0b', // warning (amber)
   '#ef4444', // danger (red)
   '#3b82f6', // info (blue)
   '#22c55e', // success (green)
-  '#8b5cf6', // purple
-  '#ec4899', // pink
   '#06b6d4', // cyan
   '#f97316', // orange
 ]

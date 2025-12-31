@@ -49,8 +49,8 @@ export function SkillRadar({ data, username }: SkillRadarProps) {
                 <Radar
                   name={username}
                   dataKey="value"
-                  stroke="#ea580c"
-                  fill="#ea580c"
+                  stroke="#a855f7"
+                  fill="#a855f7"
                   fillOpacity={0.3}
                   strokeWidth={2}
                 />

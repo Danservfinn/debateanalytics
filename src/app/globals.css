@@ -2,7 +2,7 @@
 
 /* ============================================
    DEBATE ANALYTICS - GLOBAL STYLES
-   Dark theme with glassmorphism and premium effects
+   Royal Purple theme with glassmorphism effects
    ============================================ */
 
 :root {
@@ -10,10 +10,10 @@
   --background: #09090b;
   --foreground: #fafafa;
 
-  /* Primary - Orange Accent */
-  --primary: #ea580c;
+  /* Primary - Royal Purple Accent */
+  --primary: #a855f7;
   --primary-foreground: #fafafa;
-  --primary-hover: #c2410c;
+  --primary-hover: #9333ea;
 
   /* Secondary */
   --secondary: #27272a;
@@ -40,7 +40,7 @@
 
   /* Border & Ring */
   --border: rgba(255, 255, 255, 0.1);
-  --ring: #ea580c;
+  --ring: #a855f7;
 
   /* Radius */
   --radius: 0.75rem;
@@ -111,14 +111,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-premium:hover {
-  border-color: rgba(234, 88, 12, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(234, 88, 12, 0.1);
+  border-color: rgba(168, 85, 247, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(168, 85, 247, 0.1);
   transform: translateY(-2px);
 }
 
 .card-featured {
-  background: linear-gradient(135deg, rgba(234, 88, 12, 0.1), rgba(24, 24, 27, 0.9));
-  border: 1px solid rgba(234, 88, 12, 0.3);
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(24, 24, 27, 0.9));
+  border: 1px solid rgba(168, 85, 247, 0.3);
   border-radius: var(--radius);
 }
 
@@ -127,13 +127,13 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 
 .bg-hero-gradient {
-  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(234, 88, 12, 0.15), transparent);
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 85, 247, 0.15), transparent);
 }
 
 .bg-mesh-gradient {
   background:
-    radial-gradient(at 40% 20%, rgba(234, 88, 12, 0.1) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
+    radial-gradient(at 40% 20%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(236, 72, 153, 0.08) 0px, transparent 50%),
     radial-gradient(at 0% 50%, rgba(59, 130, 246, 0.08) 0px, transparent 50%);
 }
 
@@ -142,11 +142,11 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 
 .glow-primary {
-  box-shadow: 0 0 20px rgba(234, 88, 12, 0.3), 0 0 40px rgba(234, 88, 12, 0.1);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), 0 0 40px rgba(168, 85, 247, 0.1);
 }
 
 .text-glow {
-  text-shadow: 0 0 20px rgba(234, 88, 12, 0.5);
+  text-shadow: 0 0 20px rgba(168, 85, 247, 0.5), 0 0 40px rgba(168, 85, 247, 0.3);
 }
 
 /* ============================================
@@ -253,7 +253,7 @@ h1, h2, h3, h4, h5, h6 {
 .timeline-node {
   background: var(--primary);
   border: 2px solid var(--background);
-  box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.2);
+  box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.2);
 }
 
 /* ============================================
