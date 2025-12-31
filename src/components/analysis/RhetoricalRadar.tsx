@@ -242,7 +242,7 @@ export function RhetoricalRadar({ profiles, className }: RhetoricalRadarProps) {
           )}
 
           {/* Profile List */}
-          <div className="space-y-2 max-h-[200px] overflow-y-auto">
+          <div className="space-y-2">
             <p className="text-xs text-muted-foreground uppercase tracking-wide mb-2">
               All Participants (ranked by honesty)
             </p>

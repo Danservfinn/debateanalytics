@@ -33,7 +33,13 @@ export async function loadThread(threadId: string): Promise<ThreadAnalysis | nul
   try {
     const response = await fetch(`${DATA_BASE_URL}/threads/${threadId}.json`)
     if (!response.ok) return null
-    return await response.json()
+    const data = await response.json()
+    // Validate structure - must have metadata property, not be an array (raw Reddit API format)
+    if (!data || Array.isArray(data) || !data.metadata) {
+      console.warn(`Invalid thread data format for ${threadId}, expected ThreadAnalysis object`)
+      return null
+    }
+    return data
   } catch (error) {
     console.error(`Failed to load thread ${threadId}:`, error)
     return null
