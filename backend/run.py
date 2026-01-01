@@ -4,6 +4,7 @@ Ensures proper module resolution for Railway deployment.
 """
 import sys
 import os
+import traceback
 
 # Add the backend directory to Python path BEFORE any imports
 backend_dir = os.path.dirname(os.path.abspath(__file__))
@@ -13,8 +14,19 @@ if backend_dir not in sys.path:
 # Set PYTHONPATH for subprocess calls
 os.environ["PYTHONPATH"] = backend_dir
 
-# Now import the app after path is configured
-from api.main import app
+print(f"Python version: {sys.version}")
+print(f"Backend dir: {backend_dir}")
+print(f"Sys.path: {sys.path[:3]}")
+
+try:
+    # Now import the app after path is configured
+    print("Importing api.main...")
+    from api.main import app
+    print("Import successful!")
+except Exception as e:
+    print(f"Import failed: {e}")
+    traceback.print_exc()
+    sys.exit(1)
 
 if __name__ == "__main__":
     import uvicorn
