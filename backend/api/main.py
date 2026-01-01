@@ -91,7 +91,7 @@ _analysis_jobs: Dict[str, AnalysisStatus] = {}
 
 def get_config() -> Config:
     """Get configuration instance"""
-    return Config()
+    return Config.from_env()
 
 
 def get_cache_manager() -> CacheManager:
