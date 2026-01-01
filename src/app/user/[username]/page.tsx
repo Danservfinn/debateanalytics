@@ -16,10 +16,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { SkeletonUserCard } from "@/components/ui/skeleton"
 import { PaymentGate } from "@/components/payment/PaymentGate"
-import { loadUserMetrics, fetchUserMetrics, addRecentSearch } from "@/lib/data"
+import {
+  loadUserMetrics,
+  fetchUserMetrics,
+  addRecentSearch,
+  triggerUserAnalysis,
+  checkAnalysisStatus,
+  fetchUserProfileFromBackend
+} from "@/lib/data"
 import { hasPaid, clearExpired } from "@/lib/payment-cache"
 import { fadeInUp } from "@/lib/animations"
 import type { UserMetrics, FallacyBreakdown, SkillDimension } from "@/types/debate"
+import type { BackendUserProfile, AnalysisJobStatus } from "@/types/backend"
 
 export default function UserProfilePage() {
   const params = useParams()
@@ -27,9 +35,12 @@ export default function UserProfilePage() {
   const username = params.username as string
 
   const [user, setUser] = useState<UserMetrics | null>(null)
+  const [backendProfile, setBackendProfile] = useState<BackendUserProfile | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [isFetching, setIsFetching] = useState(false)
+  const [analysisStatus, setAnalysisStatus] = useState<AnalysisJobStatus | null>(null)
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
 
   // Payment gate state
   const [isPaid, setIsPaid] = useState(false)
@@ -44,22 +55,91 @@ export default function UserProfilePage() {
     }
   }, [username])
 
+  // Poll for analysis status
+  const pollAnalysisStatus = useCallback(async (): Promise<boolean> => {
+    const status = await checkAnalysisStatus(username)
+    if (!status) return false
+
+    setAnalysisStatus(status)
+
+    if (status.status === 'completed') {
+      setIsAnalyzing(false)
+      return true
+    } else if (status.status === 'failed') {
+      setIsAnalyzing(false)
+      setError(status.error || 'Analysis failed. Please try again.')
+      return false
+    }
+
+    return false
+  }, [username])
+
   // Load user data function
   const loadUser = useCallback(async () => {
     if (!username) return
 
     setIsLoading(true)
     setError(null)
+    setAnalysisStatus(null)
 
     try {
-      // Try cached data first
-      let userData = await loadUserMetrics(username)
+      // First, try to get profile from Railway backend
+      const profile = await fetchUserProfileFromBackend(username)
+      setBackendProfile(profile)
 
-      // If no cached data, fetch from API
+      if (profile && profile.analysis_available) {
+        // Have cached analysis - transform to frontend format
+        const userData = await fetchUserMetrics(username)
+        if (userData) {
+          setUser(userData)
+          addRecentSearch(username)
+        }
+        setIsLoading(false)
+        return
+      }
+
+      // No analysis available - trigger one
+      setIsAnalyzing(true)
+      setIsFetching(true)
+
+      const jobStatus = await triggerUserAnalysis(username)
+      setAnalysisStatus(jobStatus)
+
+      if (jobStatus?.status === 'pending' || jobStatus?.status === 'in_progress') {
+        // Poll for completion
+        const pollInterval = setInterval(async () => {
+          const completed = await pollAnalysisStatus()
+          if (completed) {
+            clearInterval(pollInterval)
+            // Fetch the completed profile
+            const userData = await fetchUserMetrics(username)
+            if (userData) {
+              setUser(userData)
+              addRecentSearch(username)
+            }
+            setIsFetching(false)
+            setIsLoading(false)
+          }
+        }, 3000) // Poll every 3 seconds
+
+        // Timeout after 5 minutes
+        setTimeout(() => {
+          clearInterval(pollInterval)
+          if (isAnalyzing) {
+            setError('Analysis is taking longer than expected. Please try again later.')
+            setIsAnalyzing(false)
+            setIsFetching(false)
+            setIsLoading(false)
+          }
+        }, 300000)
+
+        return
+      }
+
+      // Try local cached data as fallback
+      let userData = await loadUserMetrics(username)
       if (!userData) {
-        setIsFetching(true)
         userData = await fetchUserMetrics(username)
-        setIsFetching(false)
       }
 
       if (userData) {
@@ -73,8 +153,10 @@ export default function UserProfilePage() {
       console.error(err)
     }
 
+    setIsFetching(false)
     setIsLoading(false)
-  }, [username])
+    setIsAnalyzing(false)
+  }, [username, pollAnalysisStatus])
 
   // Only load user data after payment is confirmed
   useEffect(() => {
@@ -96,15 +178,47 @@ export default function UserProfilePage() {
 
   const handleRefresh = async () => {
     setIsFetching(true)
+    setIsAnalyzing(true)
+    setAnalysisStatus(null)
     try {
-      const userData = await fetchUserMetrics(username)
-      if (userData) {
-        setUser(userData)
+      // Trigger fresh analysis
+      const jobStatus = await triggerUserAnalysis(username, true)
+      setAnalysisStatus(jobStatus)
+
+      if (jobStatus?.status === 'pending' || jobStatus?.status === 'in_progress') {
+        // Poll for completion
+        const pollInterval = setInterval(async () => {
+          const completed = await pollAnalysisStatus()
+          if (completed) {
+            clearInterval(pollInterval)
+            const userData = await fetchUserMetrics(username)
+            if (userData) {
+              setUser(userData)
+            }
+            setIsFetching(false)
+            setIsAnalyzing(false)
+          }
+        }, 3000)
+
+        // Timeout after 5 minutes
+        setTimeout(() => {
+          clearInterval(pollInterval)
+          setIsFetching(false)
+          setIsAnalyzing(false)
+        }, 300000)
+      } else {
+        const userData = await fetchUserMetrics(username)
+        if (userData) {
+          setUser(userData)
+        }
+        setIsFetching(false)
+        setIsAnalyzing(false)
       }
     } catch (err) {
       console.error(err)
+      setIsFetching(false)
+      setIsAnalyzing(false)
     }
-    setIsFetching(false)
   }
 
   // Generate radar data from user metrics
@@ -185,14 +299,58 @@ export default function UserProfilePage() {
 
         {/* Content */}
         {isLoading ? (
-          <div className="grid lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
-              <SkeletonUserCard />
-            </div>
-            <div>
-              <SkeletonUserCard />
-            </div>
-          </div>
+          <motion.div
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+          >
+            {isAnalyzing && analysisStatus ? (
+              <Card variant="premium" className="text-center py-12">
+                <CardContent className="space-y-6">
+                  <div className="flex justify-center">
+                    <RefreshCw className="w-12 h-12 animate-spin text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">Analyzing u/{username}</h3>
+                    <p className="text-muted-foreground">
+                      {analysisStatus.progress?.stage === 'fetching_data' && 'Fetching Reddit comment history...'}
+                      {analysisStatus.progress?.stage === 'building_threads' && 'Building debate threads...'}
+                      {analysisStatus.progress?.stage === 'identifying_debates' && 'Identifying debates with AI...'}
+                      {analysisStatus.progress?.stage === 'analyzing_arguments' && 'Analyzing argument quality...'}
+                      {analysisStatus.progress?.stage === 'synthesizing_profile' && 'Synthesizing comprehensive profile...'}
+                      {analysisStatus.progress?.stage === 'caching_results' && 'Saving results...'}
+                      {analysisStatus.progress?.stage === 'queued' && 'Analysis queued, starting soon...'}
+                      {!analysisStatus.progress?.stage && 'Processing...'}
+                    </p>
+                  </div>
+                  {analysisStatus.progress?.percent !== undefined && (
+                    <div className="w-full max-w-md mx-auto">
+                      <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full bg-primary"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${analysisStatus.progress.percent}%` }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-2">
+                        {analysisStatus.progress.percent}% complete
+                      </p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ) : (
+              <div className="grid lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-2">
+                  <SkeletonUserCard />
+                </div>
+                <div>
+                  <SkeletonUserCard />
+                </div>
+              </div>
+            )}
+          </motion.div>
         ) : error ? (
           <motion.div
             variants={fadeInUp}
@@ -215,10 +373,11 @@ export default function UserProfilePage() {
               <UserScorecard user={user} />
 
               <Tabs defaultValue="skills" className="w-full">
-                <TabsList className="w-full justify-start">
+                <TabsList className="w-full justify-start flex-wrap">
                   <TabsTrigger value="skills">Skills Profile</TabsTrigger>
                   <TabsTrigger value="fallacies">Fallacy Analysis</TabsTrigger>
                   <TabsTrigger value="activity">Activity</TabsTrigger>
+                  {backendProfile?.archetype && <TabsTrigger value="personality">Personality</TabsTrigger>}
                 </TabsList>
 
                 <TabsContent value="skills">
@@ -256,6 +415,122 @@ export default function UserProfilePage() {
                     </CardContent>
                   </Card>
                 </TabsContent>
+
+                {backendProfile?.archetype && (
+                  <TabsContent value="personality">
+                    <div className="space-y-4">
+                      {/* Archetype Card */}
+                      <Card variant="premium">
+                        <CardHeader>
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            Debate Archetype
+                            <Badge variant="success">{backendProfile.archetype.primary}</Badge>
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          {backendProfile.archetype.secondary && (
+                            <div>
+                              <p className="text-sm text-muted-foreground">Secondary Archetype</p>
+                              <p className="font-medium">{backendProfile.archetype.secondary}</p>
+                            </div>
+                          )}
+                          {backendProfile.archetype.blend && (
+                            <div>
+                              <p className="text-sm text-muted-foreground">Blend Style</p>
+                              <p className="font-medium">{backendProfile.archetype.blend}</p>
+                            </div>
+                          )}
+                          {backendProfile.archetype.signature_moves?.length > 0 && (
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-2">Signature Moves</p>
+                              <div className="flex flex-wrap gap-2">
+                                {backendProfile.archetype.signature_moves.map((move, i) => (
+                                  <Badge key={i} variant="neutral">{move}</Badge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {backendProfile.archetype.blindspots?.length > 0 && (
+                            <div>
+                              <p className="text-sm text-muted-foreground mb-2">Blindspots</p>
+                              <div className="flex flex-wrap gap-2">
+                                {backendProfile.archetype.blindspots.map((spot, i) => (
+                                  <Badge key={i} variant="warning">{spot}</Badge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+
+                      {/* MBTI Card */}
+                      {backendProfile.mbti && (
+                        <Card variant="premium">
+                          <CardHeader>
+                            <CardTitle className="text-lg flex items-center gap-2">
+                              MBTI Profile
+                              <Badge variant="success" className="text-lg px-3">{backendProfile.mbti.type}</Badge>
+                              <span className="text-sm text-muted-foreground">
+                                ({Math.round(backendProfile.mbti.confidence * 100)}% confidence)
+                              </span>
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-4">
+                            {backendProfile.mbti.debate_implications?.length > 0 && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-2">Debate Implications</p>
+                                <ul className="list-disc list-inside space-y-1">
+                                  {backendProfile.mbti.debate_implications.map((impl, i) => (
+                                    <li key={i} className="text-sm">{impl}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      )}
+
+                      {/* Good Faith Card */}
+                      {backendProfile.good_faith && (
+                        <Card variant="premium">
+                          <CardHeader>
+                            <CardTitle className="text-lg flex items-center gap-2">
+                              Good Faith Assessment
+                              <Badge
+                                variant={backendProfile.good_faith.score >= 70 ? 'success' : backendProfile.good_faith.score >= 40 ? 'warning' : 'danger'}
+                              >
+                                {backendProfile.good_faith.score}/100
+                              </Badge>
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-4">
+                            <p className="text-sm">{backendProfile.good_faith.assessment}</p>
+                            {backendProfile.good_faith.positive_indicators?.length > 0 && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-2">Positive Indicators</p>
+                                <div className="flex flex-wrap gap-2">
+                                  {backendProfile.good_faith.positive_indicators.map((ind, i) => (
+                                    <Badge key={i} variant="success">{ind}</Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            {backendProfile.good_faith.negative_indicators?.length > 0 && (
+                              <div>
+                                <p className="text-sm text-muted-foreground mb-2">Areas for Improvement</p>
+                                <div className="flex flex-wrap gap-2">
+                                  {backendProfile.good_faith.negative_indicators.map((ind, i) => (
+                                    <Badge key={i} variant="warning">{ind}</Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </CardContent>
+                        </Card>
+                      )}
+                    </div>
+                  </TabsContent>
+                )}
               </Tabs>
             </div>
 

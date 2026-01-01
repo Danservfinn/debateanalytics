@@ -7,10 +7,15 @@ import type {
   AnalysisManifest,
   ThreadAnalysis,
   UserMetrics,
-  GlobalStats
+  GlobalStats,
+  FallacyCount,
+  FallacyType
 } from '@/types/debate'
 
+import type { BackendUserProfile, AnalysisJobStatus } from '@/types/backend'
+
 const DATA_BASE_URL = '/data'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://debate-analytics-api-production.up.railway.app'
 
 /**
  * Load the analysis manifest
@@ -75,10 +80,176 @@ export async function loadUserMetrics(username: string): Promise<UserMetrics | n
 }
 
 /**
- * Fetch user metrics from API (triggers Python script if needed)
+ * Transform backend profile to frontend UserMetrics format
+ */
+function transformBackendProfile(profile: BackendUserProfile): UserMetrics {
+  // Map fallacy profile
+  const fallacyTypes: FallacyCount[] = (profile.fallacy_profile?.ranked_fallacies || [])
+    .map(f => ({
+      type: f.type as FallacyType,
+      count: f.count
+    }))
+
+  const totalFallacies = profile.fallacy_profile?.total_fallacies || 0
+  const totalComments = profile.total_comments || profile.stats?.total_comments || 0
+
+  // Calculate fallacy rate
+  const fallacyRate = totalComments > 0 ? (totalFallacies / totalComments) * 100 : 0
+
+  // Map quality breakdown to argument metrics
+  const quality = profile.quality_breakdown || {
+    structure: 50,
+    evidence: 50,
+    counterargument: 50,
+    persuasiveness: 50,
+    civility: 50
+  }
+
+  // Estimate argument counts from overall score
+  const overallScore = profile.overall_score || 50
+  const debatesAnalyzed = profile.debates_analyzed || profile.stats?.debates_analyzed || 0
+
+  // Map archetype to rhetorical style
+  let rhetoricalStyle: UserMetrics['rhetoricalStyle'] = 'balanced'
+  if (profile.archetype?.primary) {
+    const archetypeMap: Record<string, UserMetrics['rhetoricalStyle']> = {
+      'The Logician': 'analytical',
+      'The Empiricist': 'analytical',
+      'The Socratic': 'analytical',
+      'The Diplomat': 'balanced',
+      'The Devil\'s Advocate': 'balanced',
+      'The Debater': 'aggressive',
+      'The Crusader': 'emotional',
+      'The Storyteller': 'emotional',
+      'The Pragmatist': 'balanced'
+    }
+    rhetoricalStyle = archetypeMap[profile.archetype.primary] || 'balanced'
+  }
+
+  return {
+    username: profile.username,
+    fetchedAt: profile.cached_at || new Date().toISOString(),
+    totalComments,
+    totalKarma: 0, // Not provided by backend
+    avgKarma: 0,
+    topSubreddits: [], // Could be extracted from topic_expertise
+    activityPatterns: {
+      mostActiveHour: 12,
+      mostActiveDay: 'Monday',
+      avgCommentsPerDay: totalComments / Math.max(debatesAnalyzed, 1),
+      accountAgeDays: 365
+    },
+    argumentMetrics: {
+      strongArguments: Math.round(debatesAnalyzed * (overallScore / 100)),
+      moderateArguments: Math.round(debatesAnalyzed * 0.3),
+      weakArguments: Math.round(debatesAnalyzed * ((100 - overallScore) / 100)),
+      evidenceCited: Math.round(quality.evidence * debatesAnalyzed / 100),
+      netArgumentScore: Math.round((overallScore - 50) * debatesAnalyzed / 50),
+      avgArgumentLength: 150
+    },
+    fallacyProfile: {
+      totalFallacies,
+      fallacyTypes,
+      fallacyRate
+    },
+    rhetoricalStyle,
+    qualityScore: Math.round(overallScore / 10) // Convert 0-100 to 1-10
+  }
+}
+
+/**
+ * Fetch user profile from Railway backend API
+ */
+export async function fetchUserProfileFromBackend(username: string): Promise<BackendUserProfile | null> {
+  try {
+    const url = `${API_BASE_URL}/api/v1/users/${encodeURIComponent(username)}/profile?include_fallacies=true&include_top_arguments=true&include_expertise=true`
+    const response = await fetch(url)
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        return null
+      }
+      throw new Error(`Backend API error: ${response.status}`)
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error(`Failed to fetch profile from backend for ${username}:`, error)
+    return null
+  }
+}
+
+/**
+ * Trigger analysis for a user on Railway backend
+ */
+export async function triggerUserAnalysis(
+  username: string,
+  forceRefresh: boolean = false
+): Promise<AnalysisJobStatus | null> {
+  try {
+    const url = `${API_BASE_URL}/api/v1/users/${encodeURIComponent(username)}/analyze`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        force_refresh: forceRefresh
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error(`Failed to trigger analysis: ${response.status}`)
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error(`Failed to trigger analysis for ${username}:`, error)
+    return null
+  }
+}
+
+/**
+ * Check analysis status for a user
+ */
+export async function checkAnalysisStatus(username: string): Promise<AnalysisJobStatus | null> {
+  try {
+    const url = `${API_BASE_URL}/api/v1/users/${encodeURIComponent(username)}/analyze/status`
+    const response = await fetch(url)
+
+    if (!response.ok) {
+      throw new Error(`Failed to check status: ${response.status}`)
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error(`Failed to check analysis status for ${username}:`, error)
+    return null
+  }
+}
+
+/**
+ * Fetch user metrics from Railway backend API
+ * Falls back to local API if backend unavailable
  */
 export async function fetchUserMetrics(username: string): Promise<UserMetrics | null> {
   try {
+    // First try Railway backend
+    const backendProfile = await fetchUserProfileFromBackend(username)
+
+    if (backendProfile && backendProfile.analysis_available) {
+      return transformBackendProfile(backendProfile)
+    }
+
+    // If no analysis available, check if we should trigger one
+    if (backendProfile && !backendProfile.analysis_available) {
+      console.log(`No analysis available for ${username}, triggering analysis...`)
+      const jobStatus = await triggerUserAnalysis(username)
+      if (jobStatus?.status === 'pending' || jobStatus?.status === 'in_progress') {
+        // Return null to indicate analysis in progress
+        return null
+      }
+    }
+
+    // Fallback to local API
     const response = await fetch(`/api/analyze-user?username=${encodeURIComponent(username)}`)
     if (!response.ok) {
       const error = await response.json()

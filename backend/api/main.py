@@ -453,7 +453,7 @@ async def run_analysis_pipeline(
 
         user_data = reddit.fetch_user_data(
             username=username,
-            max_comments=max_comments,
+            comment_limit=max_comments,
         )
 
         if not user_data["comments"]:

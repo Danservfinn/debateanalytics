@@ -416,7 +416,7 @@ class RedditFetcher:
         comment_limit: int = 500,
         fetch_thread_context: bool = True,
         max_threads: int = 50,
-    ) -> Tuple[List[RedditComment], List[DebateThread]]:
+    ) -> dict:
         """
         Convenience method to fetch all user data needed for analysis.
 
@@ -427,14 +427,14 @@ class RedditFetcher:
             max_threads: Maximum threads to fetch context for
 
         Returns:
-            Tuple of (all comments, debate threads)
+            Dictionary with 'comments' and 'threads' keys
         """
         # Fetch all comments
         comments = list(self.get_user_comments(username, limit=comment_limit))
 
         if not comments:
             logger.warning(f"No comments found for u/{username}")
-            return [], []
+            return {"comments": [], "threads": []}
 
         # Build debate threads
         threads = self.build_debate_threads(
@@ -444,4 +444,4 @@ class RedditFetcher:
             max_threads=max_threads,
         )
 
-        return comments, threads
+        return {"comments": comments, "threads": threads}
