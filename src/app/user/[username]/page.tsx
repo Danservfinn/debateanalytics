@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { motion } from "framer-motion"
-import { ArrowLeft, RefreshCw } from "lucide-react"
+import { ArrowLeft, RefreshCw, Trophy, AlertTriangle, BookOpen, Sparkles, ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
 import Link from "next/link"
 import { Navbar } from "@/components/layout/Navbar"
 import { FloatingShapes } from "@/components/layout/FloatingShapes"
@@ -27,7 +27,7 @@ import {
 import { hasPaid, clearExpired } from "@/lib/payment-cache"
 import { fadeInUp } from "@/lib/animations"
 import type { UserMetrics, FallacyBreakdown, SkillDimension } from "@/types/debate"
-import type { BackendUserProfile, AnalysisJobStatus } from "@/types/backend"
+import type { BackendUserProfile, AnalysisJobStatus, TopArgument } from "@/types/backend"
 
 export default function UserProfilePage() {
   const params = useParams()
@@ -375,6 +375,7 @@ export default function UserProfilePage() {
               <Tabs defaultValue="skills" className="w-full">
                 <TabsList className="w-full justify-start flex-wrap">
                   <TabsTrigger value="skills">Skills Profile</TabsTrigger>
+                  {backendProfile?.top_arguments?.length ? <TabsTrigger value="top-arguments">Top Arguments</TabsTrigger> : null}
                   <TabsTrigger value="fallacies">Fallacy Analysis</TabsTrigger>
                   <TabsTrigger value="activity">Activity</TabsTrigger>
                   {backendProfile?.archetype && <TabsTrigger value="personality">Personality</TabsTrigger>}
@@ -384,8 +385,76 @@ export default function UserProfilePage() {
                   <SkillRadar data={radarData} username={user.username} />
                 </TabsContent>
 
+                {/* Top Arguments Tab */}
+                {backendProfile?.top_arguments?.length ? (
+                  <TabsContent value="top-arguments">
+                    <Card variant="premium">
+                      <CardHeader>
+                        <CardTitle className="text-lg flex items-center gap-2">
+                          <Trophy className="w-5 h-5 text-yellow-500" />
+                          Top Arguments
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        {backendProfile.top_arguments.map((arg, index) => (
+                          <TopArgumentCard key={index} argument={arg} rank={index + 1} />
+                        ))}
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                ) : null}
+
                 <TabsContent value="fallacies">
-                  <FallacyPie data={fallacyData} title="Fallacy Distribution" />
+                  <div className="space-y-4">
+                    <FallacyPie data={fallacyData} title="Fallacy Distribution" />
+
+                    {/* Detailed Fallacy Instances */}
+                    {backendProfile?.fallacy_profile?.ranked_fallacies?.length ? (
+                      <Card variant="premium">
+                        <CardHeader>
+                          <CardTitle className="text-lg flex items-center gap-2">
+                            <AlertTriangle className="w-5 h-5 text-orange-500" />
+                            Fallacy Instances
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                          {backendProfile.fallacy_profile.ranked_fallacies.slice(0, 5).map((fallacy, index) => (
+                            <div key={index} className="border-b border-border pb-4 last:border-0 last:pb-0">
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center gap-2">
+                                  <Badge variant="warning">{fallacy.type}</Badge>
+                                  <span className="text-sm text-muted-foreground">{fallacy.count} occurrences</span>
+                                </div>
+                              </div>
+                              {fallacy.instances?.slice(0, 2).map((instance, i) => (
+                                <div key={i} className="pl-4 mt-2 border-l-2 border-muted">
+                                  <p className="text-sm italic text-muted-foreground mb-1">"{instance.quote}"</p>
+                                  <p className="text-xs text-muted-foreground">{instance.explanation}</p>
+                                  <Badge
+                                    variant={instance.severity === 'major' ? 'danger' : instance.severity === 'moderate' ? 'warning' : 'neutral'}
+                                    className="mt-1"
+                                  >
+                                    {instance.severity}
+                                  </Badge>
+                                </div>
+                              ))}
+                            </div>
+                          ))}
+
+                          {backendProfile.fallacy_profile.patterns?.length > 0 && (
+                            <div className="pt-4 border-t border-border">
+                              <p className="text-sm text-muted-foreground mb-2">Common Patterns</p>
+                              <div className="flex flex-wrap gap-2">
+                                {backendProfile.fallacy_profile.patterns.map((pattern, i) => (
+                                  <Badge key={i} variant="neutral">{pattern}</Badge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    ) : null}
+                  </div>
                 </TabsContent>
 
                 <TabsContent value="activity">
@@ -616,10 +685,190 @@ export default function UserProfilePage() {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Topic Expertise */}
+              {backendProfile?.topic_expertise?.length ? (
+                <Card variant="premium">
+                  <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <BookOpen className="w-4 h-4" />
+                      Topic Expertise
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {backendProfile.topic_expertise.slice(0, 5).map((topic, i) => (
+                      <motion.div
+                        key={topic.topic}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="space-y-1"
+                      >
+                        <div className="flex items-center justify-between">
+                          <p className="font-medium text-sm">{topic.topic}</p>
+                          <Badge variant={topic.expertise_level >= 75 ? 'success' : topic.expertise_level >= 50 ? 'neutral' : 'warning'}>
+                            {topic.expertise_level}%
+                          </Badge>
+                        </div>
+                        <div className="h-1.5 bg-secondary rounded-full overflow-hidden">
+                          <motion.div
+                            className="h-full bg-primary"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${topic.expertise_level}%` }}
+                            transition={{ duration: 0.5, delay: i * 0.1 }}
+                          />
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          {topic.evidence_count} evidence points • {Math.round(topic.confidence * 100)}% confidence
+                        </p>
+                      </motion.div>
+                    ))}
+                  </CardContent>
+                </Card>
+              ) : null}
+
+              {/* Signature Techniques */}
+              {backendProfile?.signature_techniques?.length ? (
+                <Card variant="premium">
+                  <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-purple-500" />
+                      Signature Techniques
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {backendProfile.signature_techniques.slice(0, 5).map((tech, i) => (
+                      <motion.div
+                        key={tech.name}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        className="p-3 rounded-lg bg-secondary/50"
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <p className="font-medium text-sm">{tech.name}</p>
+                          <Badge
+                            variant={tech.frequency === 'high' ? 'success' : tech.frequency === 'moderate' ? 'neutral' : 'warning'}
+                          >
+                            {tech.frequency}
+                          </Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground mb-1">{tech.category}</p>
+                        <p className="text-xs">{tech.effectiveness}</p>
+                      </motion.div>
+                    ))}
+                  </CardContent>
+                </Card>
+              ) : null}
             </div>
           </div>
         ) : null}
       </main>
     </div>
+  )
+}
+
+// Top Argument Card Component
+function TopArgumentCard({ argument, rank }: { argument: TopArgument; rank: number }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: rank * 0.1 }}
+      className="border border-border rounded-lg overflow-hidden"
+    >
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full p-4 text-left hover:bg-secondary/50 transition-colors"
+      >
+        <div className="flex items-start gap-3">
+          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+            <span className="text-sm font-bold text-primary">#{rank}</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap mb-1">
+              <Badge variant="neutral">{argument.category}</Badge>
+              {argument.context?.subreddit && (
+                <span className="text-xs text-muted-foreground">r/{argument.context.subreddit}</span>
+              )}
+            </div>
+            <h4 className="font-medium text-sm line-clamp-2">{argument.title}</h4>
+            <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{argument.snippet}</p>
+          </div>
+          <div className="flex-shrink-0">
+            {isExpanded ? (
+              <ChevronUp className="w-5 h-5 text-muted-foreground" />
+            ) : (
+              <ChevronDown className="w-5 h-5 text-muted-foreground" />
+            )}
+          </div>
+        </div>
+      </button>
+
+      {isExpanded && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          className="px-4 pb-4 space-y-4 border-t border-border"
+        >
+          {/* Quality Breakdown */}
+          {argument.quality_breakdown && (
+            <div className="pt-4">
+              <p className="text-sm font-medium mb-2">Quality Scores</p>
+              <div className="grid grid-cols-5 gap-2">
+                {Object.entries(argument.quality_breakdown).map(([key, value]) => (
+                  <div key={key} className="text-center">
+                    <div className="text-lg font-bold text-primary">{value}</div>
+                    <div className="text-xs text-muted-foreground capitalize">{key}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Why Exceptional */}
+          {argument.why_exceptional && (
+            <div>
+              <p className="text-sm font-medium mb-1">Why This Stands Out</p>
+              <p className="text-sm text-muted-foreground">{argument.why_exceptional}</p>
+            </div>
+          )}
+
+          {/* Techniques Used */}
+          {argument.techniques_used?.length > 0 && (
+            <div>
+              <p className="text-sm font-medium mb-2">Techniques Used</p>
+              <div className="flex flex-wrap gap-1">
+                {argument.techniques_used.map((tech, i) => (
+                  <Badge key={i} variant="success">{tech}</Badge>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Context */}
+          {argument.context && (
+            <div className="pt-2 border-t border-border">
+              <p className="text-xs text-muted-foreground">
+                <span className="font-medium">Thread:</span> {argument.context.thread_title}
+              </p>
+              {argument.context.opponent_position && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  <span className="font-medium">Opposing:</span> {argument.context.opponent_position}
+                </p>
+              )}
+              {argument.context.outcome && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  <span className="font-medium">Outcome:</span> {argument.context.outcome}
+                </p>
+              )}
+            </div>
+          )}
+        </motion.div>
+      )}
+    </motion.div>
   )
 }
