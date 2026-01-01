@@ -8,6 +8,9 @@ from typing import Optional, Dict, Any
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 
+# Test imports
+from config import Config
+
 logger = logging.getLogger(__name__)
 
 # Initialize FastAPI app
