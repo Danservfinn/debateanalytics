@@ -356,19 +356,22 @@ BASE_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page_title | default('Debate Analyzer') }}</title>
+    <title>{{ page_title | default('Debate Analytics') }}</title>
     <style>
         :root {
-            --bg: #0d1117;
-            --bg-secondary: #161b22;
-            --border: #30363d;
-            --text: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent: #58a6ff;
-            --green: #3fb950;
-            --red: #f85149;
-            --yellow: #d29922;
-            --purple: #a371f7;
+            --bg: #0a0a0f;
+            --bg-secondary: rgba(20, 20, 30, 0.8);
+            --bg-card: rgba(30, 30, 45, 0.6);
+            --border: rgba(139, 92, 246, 0.3);
+            --border-hover: rgba(139, 92, 246, 0.5);
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #a855f7;
+            --accent-light: #c084fc;
+            --green: #22c55e;
+            --red: #ef4444;
+            --yellow: #eab308;
+            --purple: #a855f7;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -376,25 +379,93 @@ BASE_TEMPLATE = """
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+        /* Gradient background overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 0% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 100%, rgba(234, 88, 12, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(20, 20, 30, 0.5) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: -1;
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         nav {
-            background: var(--bg-secondary);
+            background: rgba(10, 10, 15, 0.9);
             border-bottom: 1px solid var(--border);
             padding: 16px 0;
             margin-bottom: 30px;
+            backdrop-filter: blur(10px);
         }
-        nav .container { display: flex; align-items: center; gap: 30px; }
-        nav a { color: var(--text); text-decoration: none; }
-        nav a:hover { color: var(--accent); }
-        nav .logo { font-size: 1.3em; font-weight: 600; color: var(--accent); }
-        h1, h2, h3 { margin-bottom: 16px; }
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        nav .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        nav .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        nav a:hover { color: var(--accent-light); }
+        nav .logo {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        nav .logo-icon {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        nav .logo span { color: var(--accent); }
+        nav .ai-badge {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        h1, h2, h3 { margin-bottom: 16px; color: var(--text); }
+        h1 span, h2 span { color: var(--accent); }
         .card {
-            background: var(--bg-secondary);
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 24px;
             margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.2s;
+        }
+        .card:hover {
+            border-color: var(--border-hover);
         }
         .card-header {
             display: flex;
@@ -408,54 +479,82 @@ BASE_TEMPLATE = """
             text-align: left;
             border-bottom: 1px solid var(--border);
         }
-        th { color: var(--text-muted); font-weight: 500; }
-        tr:hover { background: rgba(88, 166, 255, 0.05); }
+        th { color: var(--text-muted); font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        tr:hover { background: rgba(139, 92, 246, 0.05); }
         .btn {
             display: inline-block;
-            padding: 8px 16px;
+            padding: 10px 20px;
             background: var(--accent);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
             font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
         }
-        .btn:hover { opacity: 0.9; }
-        .btn-sm { padding: 4px 12px; font-size: 12px; }
+        .btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+        .btn-sm { padding: 6px 14px; font-size: 12px; }
         .btn-outline {
             background: transparent;
             border: 1px solid var(--border);
             color: var(--text);
         }
-        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
-        .stat-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            text-align: center;
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(139, 92, 246, 0.1);
         }
-        .stat-value { font-size: 2em; font-weight: 600; color: var(--accent); }
-        .stat-label { color: var(--text-muted); font-size: 0.9em; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 0 12px 0 40px;
+        }
+        .stat-card .stat-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 18px;
+            opacity: 0.6;
+        }
+        .stat-label { color: var(--text-muted); font-size: 13px; margin-bottom: 8px; }
+        .stat-value { font-size: 2.2em; font-weight: 700; color: var(--text); }
         .badge {
             display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: 500;
         }
-        .badge-green { background: rgba(63, 185, 80, 0.2); color: var(--green); }
-        .badge-red { background: rgba(248, 81, 73, 0.2); color: var(--red); }
-        .badge-yellow { background: rgba(210, 153, 34, 0.2); color: var(--yellow); }
-        .badge-purple { background: rgba(163, 113, 247, 0.2); color: var(--purple); }
+        .badge-green { background: rgba(34, 197, 94, 0.2); color: var(--green); }
+        .badge-red { background: rgba(239, 68, 68, 0.2); color: var(--red); }
+        .badge-yellow { background: rgba(234, 179, 8, 0.2); color: var(--yellow); }
+        .badge-purple { background: rgba(168, 85, 247, 0.2); color: var(--purple); }
         .progress-bar {
             height: 8px;
-            background: var(--bg);
+            background: rgba(139, 92, 246, 0.2);
             border-radius: 4px;
             overflow: hidden;
         }
-        .progress-fill { height: 100%; background: var(--accent); }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
         .chart-bar {
             display: flex;
             align-items: center;
@@ -466,43 +565,107 @@ BASE_TEMPLATE = """
         .chart-value { width: 50px; text-align: right; color: var(--text-muted); }
         .chart-fill {
             height: 20px;
-            background: var(--accent);
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
             border-radius: 4px;
             min-width: 4px;
         }
         input[type="text"] {
-            padding: 10px 14px;
-            background: var(--bg);
+            padding: 12px 16px;
+            background: rgba(20, 20, 30, 0.8);
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 8px;
             color: var(--text);
             font-size: 14px;
-            width: 250px;
+            width: 280px;
+            transition: border-color 0.2s;
         }
+        input[type="text"]::placeholder { color: var(--text-muted); }
         input[type="text"]:focus { outline: none; border-color: var(--accent); }
-        .form-inline { display: flex; gap: 10px; align-items: center; }
+        .form-inline { display: flex; gap: 12px; align-items: center; }
         .loading { opacity: 0.6; pointer-events: none; }
         .alert {
-            padding: 12px 16px;
-            border-radius: 6px;
+            padding: 14px 18px;
+            border-radius: 8px;
             margin-bottom: 16px;
         }
-        .alert-success { background: rgba(63, 185, 80, 0.1); border: 1px solid var(--green); }
-        .alert-error { background: rgba(248, 81, 73, 0.1); border: 1px solid var(--red); }
+        .alert-success { background: rgba(34, 197, 94, 0.1); border: 1px solid var(--green); }
+        .alert-error { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--red); }
         .text-muted { color: var(--text-muted); }
         .text-green { color: var(--green); }
         .text-red { color: var(--red); }
+        .text-accent { color: var(--accent); }
         .mt-4 { margin-top: 24px; }
         .mb-4 { margin-bottom: 24px; }
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 40px 0 50px;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+        }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* Pills/tags */
+        .tag-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+            justify-content: center;
+        }
+        .pill {
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pill:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        /* Section titles */
+        .section-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+        }
     </style>
 </head>
 <body>
     <nav>
         <div class="container">
-            <a href="/" class="logo">🎯 Debate Analyzer</a>
-            <a href="/users">Users</a>
-            <a href="/threads">Threads</a>
-            <a href="/thread-analysis">Thread Analysis</a>
+            <div class="nav-left">
+                <a href="/" class="logo">
+                    <span class="logo-icon">💬</span>
+                    Debate<span>Analytics</span>
+                </a>
+                <div class="nav-links">
+                    <a href="/users">📊 Dashboard</a>
+                    <a href="/threads">🏆 Leaderboard</a>
+                    <a href="/thread-analysis">🔬 Thread Analysis</a>
+                </div>
+            </div>
+            <span class="ai-badge">Powered by AI Analysis</span>
         </div>
     </nav>
     <div class="container">
@@ -566,35 +729,49 @@ BASE_TEMPLATE = """
 """
 
 HOME_TEMPLATE = """
-<h1>Reddit Debate Analyzer</h1>
-<p class="text-muted mb-4">Analyze any Reddit user's debate style, argument types, and logical fallacies.</p>
+<div class="hero">
+    <h1>Reddit <span>Debate Analytics</span></h1>
+    <p>AI-powered analysis of Reddit debates. Track argument quality, detect logical fallacies, and compare debaters across threads.</p>
 
-<div class="card">
-    <h3>Analyze a User</h3>
-    <div class="form-inline mt-4">
-        <input type="text" id="username" placeholder="Enter Reddit username..." />
+    <div class="form-inline mt-4" style="justify-content: center;">
+        <input type="text" id="username" placeholder="Enter Reddit username or thread URL..." style="width: 400px;" />
         <button class="btn" onclick="analyzeUser()">Analyze</button>
     </div>
+
+    <div class="tag-pills">
+        <span class="pill">r/changemyview</span>
+        <span class="pill">r/politics</span>
+        <span class="pill">r/philosophy</span>
+    </div>
 </div>
 
-<div class="stat-grid mt-4">
+<h2 class="section-title">Overview</h2>
+<div class="stat-grid">
     <div class="stat-card">
-        <div class="stat-value">{{ stats.total_users }}</div>
-        <div class="stat-label">Users Analyzed</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-value">{{ stats.total_analyses }}</div>
-        <div class="stat-label">Total Analyses</div>
-    </div>
-    <div class="stat-card">
+        <span class="stat-icon">💬</span>
+        <div class="stat-label">Threads Analyzed</div>
         <div class="stat-value">{{ stats.total_threads }}</div>
-        <div class="stat-label">Threads Tracked</div>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon">👥</span>
+        <div class="stat-label">Unique Debaters</div>
+        <div class="stat-value">{{ stats.total_users }}</div>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon">🏆</span>
+        <div class="stat-label">Strong Arguments</div>
+        <div class="stat-value">{{ stats.total_analyses }}</div>
+    </div>
+    <div class="stat-card">
+        <span class="stat-icon">⚠️</span>
+        <div class="stat-label">Fallacies Detected</div>
+        <div class="stat-value">-</div>
     </div>
 </div>
 
+<h2 class="section-title mt-4">Recent Threads</h2>
 {% if recent_users %}
-<div class="card mt-4">
-    <h3>Recently Analyzed</h3>
+<div class="card">
     <table>
         <thead>
             <tr>
@@ -608,12 +785,12 @@ HOME_TEMPLATE = """
         <tbody>
             {% for user in recent_users %}
             <tr>
-                <td><a href="/users/{{ user.username }}">u/{{ user.username }}</a></td>
+                <td><a href="/users/{{ user.username }}" style="color: var(--accent);">u/{{ user.username }}</a></td>
                 <td class="text-muted">{{ user.last_analyzed_at }}</td>
                 <td>{{ user.total_threads or 0 }}</td>
                 <td>
                     {% if user.total_threads %}
-                    {{ "%.1f"|format(user.win_count / (user.win_count + user.loss_count + user.draw_count) * 100 if (user.win_count + user.loss_count + user.draw_count) > 0 else 0) }}%
+                    <span class="badge badge-green">{{ "%.1f"|format(user.win_count / (user.win_count + user.loss_count + user.draw_count) * 100 if (user.win_count + user.loss_count + user.draw_count) > 0 else 0) }}%</span>
                     {% else %}-{% endif %}
                 </td>
                 <td><a href="/users/{{ user.username }}" class="btn btn-sm btn-outline">View</a></td>
@@ -622,7 +799,17 @@ HOME_TEMPLATE = """
         </tbody>
     </table>
 </div>
+{% else %}
+<div class="card" style="text-align: center; padding: 60px 20px;">
+    <div style="font-size: 48px; margin-bottom: 16px;">💬</div>
+    <p class="text-muted">No threads analyzed yet.</p>
+    <p class="text-muted">Paste a Reddit thread URL above to get started!</p>
+</div>
 {% endif %}
+
+<div class="footer">
+    Debate Analytics - AI-Powered Reddit Analysis
+</div>
 """
 
 USERS_TEMPLATE = """
@@ -843,49 +1030,51 @@ THREADS_TEMPLATE = """
 """
 
 THREAD_ANALYSIS_LIST_TEMPLATE = """
-<div class="card-header">
-    <h1>🎯 Thread Deep Analysis</h1>
-</div>
-
-<p class="text-muted mb-4">
-    Analyze any Reddit thread for sophisticated debate insights: participant rankings,
-    argument clashes, fallacy detection, key moments, and verdict determination.
+<div class="hero">
+    <h1>Thread <span>Deep Analysis</span></h1>
+    <p>
+        Analyze any Reddit thread for sophisticated debate insights: participant rankings,
+        argument clashes, fallacy detection, key moments, and verdict determination.
+    </p>
     {% if not has_anthropic %}
-    <br><span class="text-red">⚠️ Claude API not available. Set ANTHROPIC_API_KEY environment variable.</span>
+    <p class="text-red" style="margin-top: 12px;">⚠️ Claude API not available. Set ANTHROPIC_API_KEY environment variable.</p>
     {% endif %}
-</p>
 
-<div class="card">
-    <h3>Analyze a Thread</h3>
-    <div class="form-inline mt-4">
-        <input type="text" id="thread_url" placeholder="Paste Reddit thread URL..." style="width: 400px;" />
+    <div class="form-inline mt-4" style="justify-content: center;">
+        <input type="text" id="thread_url" placeholder="Paste Reddit thread URL..." style="width: 450px;" />
         <button class="btn" onclick="analyzeThread()" {% if not has_anthropic %}disabled{% endif %}>
             🔬 Deep Analyze
         </button>
     </div>
-    <p class="text-muted" style="margin-top: 10px; font-size: 12px;">
-        Example: https://reddit.com/r/changemyview/comments/abc123/cmv_topic/
-    </p>
+
+    <div class="tag-pills">
+        <span class="pill">r/changemyview</span>
+        <span class="pill">r/unpopularopinion</span>
+    </div>
 </div>
 
-<div class="stat-grid mt-4">
+<h2 class="section-title">Overview</h2>
+<div class="stat-grid">
     <div class="stat-card">
-        <div class="stat-value">{{ stats.total_analyses }}</div>
+        <span class="stat-icon">🔬</span>
         <div class="stat-label">Threads Analyzed</div>
+        <div class="stat-value">{{ stats.total_analyses }}</div>
     </div>
     <div class="stat-card">
-        <div class="stat-value">{{ stats.clear_winners }}</div>
+        <span class="stat-icon">🏆</span>
         <div class="stat-label">Clear Winners</div>
+        <div class="stat-value">{{ stats.clear_winners }}</div>
     </div>
     <div class="stat-card">
-        <div class="stat-value">{{ stats.avg_civility }}%</div>
+        <span class="stat-icon">🤝</span>
         <div class="stat-label">Avg Civility</div>
+        <div class="stat-value">{{ stats.avg_civility }}%</div>
     </div>
 </div>
 
+<h2 class="section-title mt-4">Recent Analyses</h2>
 {% if recent_analyses %}
-<div class="card mt-4">
-    <h3>Recent Analyses</h3>
+<div class="card">
     <table>
         <thead>
             <tr>
@@ -901,14 +1090,14 @@ THREAD_ANALYSIS_LIST_TEMPLATE = """
         <tbody>
             {% for a in recent_analyses %}
             <tr>
-                <td>{{ a.thread_title[:40] }}{% if a.thread_title|length > 40 %}...{% endif %}</td>
-                <td>r/{{ a.subreddit }}</td>
+                <td><a href="/thread-analysis/{{ a.id }}" style="color: var(--accent);">{{ a.thread_title[:40] }}{% if a.thread_title|length > 40 %}...{% endif %}</a></td>
+                <td><span class="pill" style="font-size: 11px;">r/{{ a.subreddit }}</span></td>
                 <td>
                     <span class="badge {% if a.outcome_type == 'clear_winner' %}badge-green{% elif a.outcome_type == 'draw' %}badge-yellow{% else %}badge-purple{% endif %}">
                         {{ a.outcome_type }}
                     </span>
                 </td>
-                <td>{% if a.winner %}u/{{ a.winner }}{% else %}-{% endif %}</td>
+                <td>{% if a.winner %}<span style="color: var(--green);">u/{{ a.winner }}</span>{% else %}-{% endif %}</td>
                 <td><span class="badge badge-purple">{{ a.quality_grade or 'N/A' }}</span></td>
                 <td class="text-muted">{{ a.analyzed_at[:16] }}</td>
                 <td><a href="/thread-analysis/{{ a.id }}" class="btn btn-sm btn-outline">View</a></td>
@@ -916,6 +1105,12 @@ THREAD_ANALYSIS_LIST_TEMPLATE = """
             {% endfor %}
         </tbody>
     </table>
+</div>
+{% else %}
+<div class="card" style="text-align: center; padding: 60px 20px;">
+    <div style="font-size: 48px; margin-bottom: 16px;">🔬</div>
+    <p class="text-muted">No threads analyzed yet.</p>
+    <p class="text-muted">Paste a Reddit thread URL above to get started!</p>
 </div>
 {% endif %}
 
@@ -959,35 +1154,38 @@ function analyzeThread() {
 """
 
 THREAD_ANALYSIS_DETAIL_TEMPLATE = """
-<div class="card-header">
+<div class="card-header" style="margin-bottom: 24px;">
     <div>
-        <h1>{{ analysis.thread_title[:60] }}{% if analysis.thread_title|length > 60 %}...{% endif %}</h1>
-        <p class="text-muted">r/{{ analysis.subreddit }} • u/{{ analysis.op_username }}</p>
+        <h1 style="font-size: 1.5em;">{{ analysis.thread_title[:60] }}{% if analysis.thread_title|length > 60 %}...{% endif %}</h1>
+        <p class="text-muted" style="margin-top: 4px;">
+            <span class="pill" style="font-size: 11px;">r/{{ analysis.subreddit }}</span>
+            <span style="margin-left: 8px;">by u/{{ analysis.op_username }}</span>
+        </p>
     </div>
-    <a href="{{ analysis.thread_url }}" target="_blank" class="btn btn-outline">View on Reddit</a>
+    <a href="{{ analysis.thread_url }}" target="_blank" class="btn btn-outline">View on Reddit →</a>
 </div>
 
 <!-- Verdict Card -->
-<div class="card" style="background: linear-gradient(135deg, #1a1f35 0%, #161b22 100%); border: 2px solid {% if verdict.winner %}var(--green){% else %}var(--yellow){% endif %};">
+<div class="card" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(30, 30, 45, 0.8) 100%); border: 2px solid {% if verdict.winner %}var(--green){% else %}var(--yellow){% endif %};">
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>
-            <h2 style="margin: 0; color: {% if verdict.winner %}var(--green){% else %}var(--yellow){% endif %};">
+            <h2 style="margin: 0; color: {% if verdict.winner %}var(--green){% else %}var(--yellow){% endif %}; font-size: 1.3em;">
                 ⚖️ VERDICT: {{ verdict.outcome_type | upper | replace('_', ' ') }}
             </h2>
             {% if verdict.winner %}
-            <p style="font-size: 1.5em; margin: 10px 0;">
-                🏆 Winner: <strong>u/{{ verdict.winner }}</strong>
-                <span class="text-muted">({{ "%.0f"|format(verdict.confidence * 100) }}% confidence)</span>
+            <p style="font-size: 1.5em; margin: 12px 0; color: var(--text);">
+                🏆 Winner: <strong style="color: var(--green);">u/{{ verdict.winner }}</strong>
+                <span class="text-muted" style="font-size: 0.7em;">({{ "%.0f"|format(verdict.confidence * 100) }}% confidence)</span>
             </p>
             {% endif %}
         </div>
-        <div class="stat-card" style="background: transparent; border: none;">
-            <div class="stat-value">{{ analysis.quality_grade }}</div>
-            <div class="stat-label">Thread Quality</div>
+        <div style="text-align: center;">
+            <div style="font-size: 2.5em; font-weight: 700; color: var(--accent);">{{ analysis.quality_grade }}</div>
+            <div class="text-muted" style="font-size: 12px;">Thread Quality</div>
         </div>
     </div>
     {% if executive_summary %}
-    <p style="font-style: italic; margin-top: 16px; color: var(--text);">
+    <p style="font-style: italic; margin-top: 16px; color: var(--text-muted); padding-top: 16px; border-top: 1px solid var(--border);">
         "{{ executive_summary.one_liner }}"
     </p>
     {% endif %}
