@@ -1,6 +1,6 @@
 [deploy]
-startCommand = "pip install -r requirements.txt && python test_server.py"
-healthcheckPath = "/health"
+startCommand = "pip install -r requirements.txt && python run.py"
+healthcheckPath = "/api/v1/health"
 healthcheckTimeout = 300
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 5
