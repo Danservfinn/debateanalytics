@@ -13,8 +13,11 @@ if backend_dir not in sys.path:
 # Set PYTHONPATH for subprocess calls
 os.environ["PYTHONPATH"] = backend_dir
 
+# Now import the app after path is configured
+from api.main import app
+
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
-    # Use string path so uvicorn handles the import after path is set
-    uvicorn.run("api.main:app", host="0.0.0.0", port=port, reload=False)
+    print(f"Starting Debate Analytics API on port {port}")
+    uvicorn.run(app, host="0.0.0.0", port=port)
