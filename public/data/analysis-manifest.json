@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "generatedAt": "2025-12-31T00:00:00Z",
+  "threads": [],
+  "userMetrics": {
+    "wabeka": {
+      "threadsParticipated": 1,
+      "strongArguments": 3,
+      "weakArguments": 0,
+      "logicalFallacies": 1,
+      "netArgumentScore": 3
+    }
+  },
+  "globalStats": {
+    "totalThreads": 0,
+    "totalUsers": 1,
+    "avgQualityScore": 5.5,
+    "totalArguments": 20,
+    "totalFallacies": 1
+  }
+}
