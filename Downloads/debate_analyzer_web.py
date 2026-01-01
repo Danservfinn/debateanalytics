@@ -361,15 +361,19 @@ BASE_TEMPLATE = """
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page_title | default('Debate Analytics') }}</title>
+    <!-- Google Fonts: Inter & Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0f;
-            --bg-secondary: rgba(20, 20, 30, 0.8);
-            --bg-card: rgba(30, 30, 45, 0.6);
-            --border: rgba(139, 92, 246, 0.3);
-            --border-hover: rgba(139, 92, 246, 0.5);
-            --text: #e2e8f0;
-            --text-muted: #94a3b8;
+            --bg: rgb(9, 9, 11);
+            --bg-secondary: rgba(15, 15, 20, 0.9);
+            --bg-card: rgba(24, 24, 27, 0.8);
+            --border: rgba(139, 92, 246, 0.2);
+            --border-hover: rgba(139, 92, 246, 0.4);
+            --text: rgb(250, 250, 250);
+            --text-muted: rgb(161, 161, 170);
             --accent: #a855f7;
             --accent-light: #c084fc;
             --green: #22c55e;
@@ -379,7 +383,7 @@ BASE_TEMPLATE = """
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
@@ -441,6 +445,8 @@ BASE_TEMPLATE = """
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            letter-spacing: -0.02em;
         }
         nav .logo-icon {
             width: 28px;
@@ -457,7 +463,13 @@ BASE_TEMPLATE = """
             font-size: 12px;
             color: var(--text-muted);
         }
-        h1, h2, h3 { margin-bottom: 16px; color: var(--text); }
+        h1, h2, h3 {
+            margin-bottom: 16px;
+            color: var(--text);
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
         h1 span, h2 span { color: var(--accent); }
         .card {
             background: var(--bg-card);
@@ -1261,11 +1273,12 @@ THREAD_ANALYSIS_DETAIL_TEMPLATE = """
 
 /* Thread Overview Hero */
 .thread-hero {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(20, 20, 30, 0.9) 50%, rgba(234, 88, 12, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(9, 9, 11, 0.95) 50%, rgba(168, 85, 247, 0.05) 100%);
     border-radius: 16px;
     padding: 32px;
     margin-bottom: 24px;
     border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
 }
 
 .op-claim-box {
@@ -1285,17 +1298,18 @@ THREAD_ANALYSIS_DETAIL_TEMPLATE = """
 }
 
 .metric-card {
-    background: var(--bg-card);
+    background: rgba(24, 24, 27, 0.6);
     border-radius: 12px;
-    padding: 20px;
+    padding: 24px 20px;
     text-align: center;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(63, 63, 70, 0.4);
     transition: all 0.3s ease;
 }
 
 .metric-card:hover {
-    border-color: var(--accent);
+    border-color: rgba(139, 92, 246, 0.4);
     transform: translateY(-2px);
+    background: rgba(24, 24, 27, 0.8);
 }
 
 .metric-value {
@@ -1303,12 +1317,15 @@ THREAD_ANALYSIS_DETAIL_TEMPLATE = """
     font-weight: 700;
     color: var(--accent);
     line-height: 1;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
 .metric-label {
-    font-size: 0.85em;
+    font-size: 0.8em;
     color: var(--text-muted);
     margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 /* Win/Loss Bar */
@@ -1503,24 +1520,27 @@ THREAD_ANALYSIS_DETAIL_TEMPLATE = """
 }
 
 .tab-btn {
-    padding: 10px 20px;
+    padding: 12px 24px;
     background: transparent;
     border: none;
     color: var(--text-muted);
     cursor: pointer;
     border-radius: 8px 8px 0 0;
-    transition: all 0.3s ease;
-    font-size: 0.95em;
+    transition: all 0.2s ease;
+    font-size: 0.9em;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 .tab-btn:hover {
     color: var(--text);
-    background: rgba(139, 92, 246, 0.1);
+    background: rgba(139, 92, 246, 0.08);
 }
 
 .tab-btn.active {
-    color: var(--accent);
-    background: rgba(139, 92, 246, 0.15);
+    color: var(--text);
+    background: rgba(139, 92, 246, 0.12);
     border-bottom: 2px solid var(--accent);
 }
 
