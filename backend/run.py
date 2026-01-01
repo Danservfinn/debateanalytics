@@ -1,66 +1,57 @@
 """
-Entry point for running the FastAPI application.
-Ensures proper module resolution for Railway deployment.
+Minimal FastAPI app for Railway deployment debugging.
 """
 import sys
 import os
-import traceback
 
-print("=== STARTUP DEBUG ===")
+print("=== MINIMAL STARTUP ===")
 print(f"CWD: {os.getcwd()}")
-print(f"__file__: {__file__}")
+print(f"Python: {sys.version}")
 
-# List directory contents
-print("Directory contents:")
-for item in os.listdir('.'):
-    print(f"  {item}")
+# List files
+print("Files in current directory:")
+for f in sorted(os.listdir('.')):
+    print(f"  {f}")
 
-# Add the backend directory to Python path BEFORE any imports
-backend_dir = os.path.dirname(os.path.abspath(__file__))
-if backend_dir not in sys.path:
-    sys.path.insert(0, backend_dir)
+# Check for api directory
+if os.path.exists('api'):
+    print("Files in api/:")
+    for f in sorted(os.listdir('api')):
+        print(f"  {f}")
 
-# Set PYTHONPATH for subprocess calls
-os.environ["PYTHONPATH"] = backend_dir
-
-print(f"Python version: {sys.version}")
-print(f"Backend dir: {backend_dir}")
-print(f"Sys.path: {sys.path[:3]}")
-
-# Check if key packages are installed
-print("Checking packages...")
+# Try basic imports
+print("\nChecking imports...")
 try:
     import fastapi
     print(f"  fastapi: {fastapi.__version__}")
-except ImportError as e:
-    print(f"  fastapi: MISSING - {e}")
+except Exception as e:
+    print(f"  fastapi FAILED: {e}")
+    sys.exit(1)
 
 try:
     import uvicorn
     print(f"  uvicorn: OK")
-except ImportError as e:
-    print(f"  uvicorn: MISSING - {e}")
-
-try:
-    import anthropic
-    print(f"  anthropic: OK")
-except ImportError as e:
-    print(f"  anthropic: MISSING - {e}")
-
-print("=== END DEBUG ===")
-
-try:
-    # Now import the app after path is configured
-    print("Importing api.main...")
-    from api.main import app
-    print("Import successful!")
 except Exception as e:
-    print(f"Import failed: {e}")
-    traceback.print_exc()
+    print(f"  uvicorn FAILED: {e}")
     sys.exit(1)
 
+# Create minimal app
+print("\nCreating minimal app...")
+from fastapi import FastAPI
+
+app = FastAPI(title="Debug API")
+
+@app.get("/")
+async def root():
+    return {"status": "ok", "message": "Minimal app running!"}
+
+@app.get("/api/v1/health")
+async def health():
+    return {"status": "healthy"}
+
+print("App created successfully!")
+
 if __name__ == "__main__":
-    import uvicorn
     port = int(os.environ.get("PORT", 8000))
-    print(f"Starting Debate Analytics API on port {port}")
+    print(f"Starting on port {port}...")
     uvicorn.run(app, host="0.0.0.0", port=port)
