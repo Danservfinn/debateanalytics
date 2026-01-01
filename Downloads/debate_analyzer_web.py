@@ -1242,6 +1242,16 @@ THREAD_ANALYSIS_DETAIL_TEMPLATE = """
 # Routes
 # =============================================================================
 
+@app.route('/health')
+def health():
+    """Health check endpoint for Railway."""
+    return jsonify({
+        'status': 'healthy',
+        'service': 'debate-analytics',
+        'thread_analysis_available': HAS_THREAD_ANALYZER and HAS_ANTHROPIC
+    })
+
+
 @app.route('/')
 def home():
     conn = get_db()
@@ -1518,18 +1528,23 @@ def api_thread_analysis():
 # Main
 # =============================================================================
 
+# Initialize database at module load (for gunicorn/production)
+init_db()
+
 def main():
     parser = argparse.ArgumentParser(description='Debate Analyzer Web Interface')
     parser.add_argument('--port', type=int, default=5000, help='Port to run on')
     parser.add_argument('--debug', action='store_true', help='Enable debug mode')
     args = parser.parse_args()
 
-    init_db()
+    # Use PORT env var if set (Railway), otherwise use --port arg
+    port = int(os.environ.get('PORT', args.port))
+
     print(f"\n🎯 Debate Analyzer Web Interface")
-    print(f"   Running on http://localhost:{args.port}")
+    print(f"   Running on http://localhost:{port}")
     print(f"   Database: {DB_PATH}\n")
 
-    app.run(host='0.0.0.0', port=args.port, debug=args.debug)
+    app.run(host='0.0.0.0', port=port, debug=args.debug)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,16 @@
+# Debate Analytics - Railway Deployment
+# Core web framework
+flask>=2.3.0
+gunicorn>=21.0.0
+
+# HTTP client for Reddit API
+requests>=2.31.0
+
+# Anthropic Claude API for Thread Deep Analysis
+anthropic>=0.18.0
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# SSL certificates
+certifi>=2023.0.0
