@@ -703,29 +703,56 @@ BASE_TEMPLATE = """
 
         function analyzeUser() {
             const input = document.getElementById('username');
-            const username = input.value.trim().replace(/^u\\//, '');
-            if (!username) return;
+            const inputValue = input.value.trim();
+            if (!inputValue) return;
 
             const btn = event.target;
             btn.classList.add('loading');
             btn.textContent = 'Analyzing...';
 
-            fetch('/api/analyze/' + username, { method: 'POST' })
-                .then(r => r.json())
-                .then(data => {
-                    if (data.success) {
-                        window.location.href = '/users/' + username;
-                    } else {
-                        alert('Error: ' + (data.error || 'Unknown error'));
+            // Check if input is a thread URL
+            if (inputValue.includes('reddit.com/r/') && inputValue.includes('/comments/')) {
+                // Thread analysis
+                fetch('/api/thread-analysis', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: inputValue })
+                })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success && data.analysis_id) {
+                            window.location.href = '/thread-analysis/' + data.analysis_id;
+                        } else {
+                            alert('Error: ' + (data.error || 'Unknown error'));
+                            btn.classList.remove('loading');
+                            btn.textContent = 'Analyze';
+                        }
+                    })
+                    .catch(err => {
+                        alert('Error: ' + err);
                         btn.classList.remove('loading');
                         btn.textContent = 'Analyze';
-                    }
-                })
-                .catch(err => {
-                    alert('Error: ' + err);
-                    btn.classList.remove('loading');
-                    btn.textContent = 'Analyze';
-                });
+                    });
+            } else {
+                // User analysis
+                const username = inputValue.replace(/^u\\//, '');
+                fetch('/api/analyze/' + username, { method: 'POST' })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = '/users/' + username;
+                        } else {
+                            alert('Error: ' + (data.error || 'Unknown error'));
+                            btn.classList.remove('loading');
+                            btn.textContent = 'Analyze';
+                        }
+                    })
+                    .catch(err => {
+                        alert('Error: ' + err);
+                        btn.classList.remove('loading');
+                        btn.textContent = 'Analyze';
+                    });
+            }
         }
     </script>
 </body>
