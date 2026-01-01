@@ -13,7 +13,7 @@ from urllib.parse import urlencode
 from collections import defaultdict
 from dataclasses import asdict
 
-from ..models.user_profile import RedditComment, RedditPost, DebateThread
+from models.user_profile import RedditComment, RedditPost, DebateThread
 
 # Try requests library for better SSL handling
 try:

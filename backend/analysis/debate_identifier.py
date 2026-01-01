@@ -8,8 +8,8 @@ import logging
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 
-from .claude_client import ClaudeClient
-from ..models.user_profile import DebateThread, DebateMetadata, RedditComment
+from analysis.claude_client import ClaudeClient
+from models.user_profile import DebateThread, DebateMetadata, RedditComment
 
 logger = logging.getLogger(__name__)
 

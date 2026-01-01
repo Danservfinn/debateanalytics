@@ -16,17 +16,17 @@ from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, asdict
 from datetime import datetime
 
-from ..models.user_profile import (
+from models.user_profile import (
     UserProfile,
     DebateThread,
     ArgumentQuality,
     GoodFaithAssessment,
 )
-from .fallacy_analyzer import FallacyProfile, FallacyAnalyzer
-from .archetype_analyzer import ArchetypeResult, MBTIResult, ArchetypeAnalyzer
-from .top_arguments import TopArgumentsResult, TopArgumentsAnalyzer
-from .topic_expertise import TopicExpertiseResult, TopicExpertiseAnalyzer
-from .claude_client import ClaudeClient
+from analysis.fallacy_analyzer import FallacyProfile, FallacyAnalyzer
+from analysis.archetype_analyzer import ArchetypeResult, MBTIResult, ArchetypeAnalyzer
+from analysis.top_arguments import TopArgumentsResult, TopArgumentsAnalyzer
+from analysis.topic_expertise import TopicExpertiseResult, TopicExpertiseAnalyzer
+from analysis.claude_client import ClaudeClient
 
 logger = logging.getLogger(__name__)
 

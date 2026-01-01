@@ -159,31 +159,28 @@ class DebateThread:
 @dataclass
 class ArgumentQuality:
     """Quality assessment of an argument/debate"""
+    # Required fields first (no defaults)
     debate_id: str
     overall_score: int  # 0-100
-
     structure_score: int  # 0-100
     structure_notes: str
-
     evidence_score: int  # 0-100
     evidence_notes: str
-    citation_count: int = 0
-    citations: List[Dict[str, Any]] = field(default_factory=list)
-
     counterargument_score: int  # 0-100
     counterargument_notes: str
+    persuasiveness_score: int  # 0-100
+    civility_score: int  # 0-100
+
+    # Optional fields with defaults
+    citation_count: int = 0
+    citations: List[Dict[str, Any]] = field(default_factory=list)
     addresses_opponent_points: bool = False
     steelmans_opponent: bool = False
     strawmans_opponent: bool = False
-
-    persuasiveness_score: int  # 0-100
     changed_opponent_mind: bool = False
     opponent_concession_quote: Optional[str] = None
-
-    civility_score: int  # 0-100
     personal_attacks: bool = False
     condescension: bool = False
-
     is_top_argument_candidate: bool = False
     top_argument_reasons: List[str] = field(default_factory=list)
 

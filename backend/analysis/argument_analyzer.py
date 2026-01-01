@@ -8,8 +8,8 @@ import logging
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass, field
 
-from .claude_client import ClaudeClient
-from ..models.user_profile import (
+from analysis.claude_client import ClaudeClient
+from models.user_profile import (
     DebateThread,
     ArgumentQuality,
     FallacyInstance,

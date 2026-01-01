@@ -17,14 +17,14 @@ from typing import Optional, Dict, Any, List
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 
-from .config import Config
-from .cache.cache_manager import CacheManager
-from .data.reddit_fetcher import RedditFetcher
-from .analysis.claude_client import ClaudeClient
-from .analysis.debate_identifier import DebateIdentifier
-from .analysis.argument_analyzer import ArgumentAnalyzer
-from .analysis.profile_synthesizer import ProfileSynthesizer, SynthesizedProfile
-from .models.user_profile import (
+from config import Config
+from cache.cache_manager import CacheManager
+from data.reddit_fetcher import RedditFetcher
+from analysis.claude_client import ClaudeClient
+from analysis.debate_identifier import DebateIdentifier
+from analysis.argument_analyzer import ArgumentAnalyzer
+from analysis.profile_synthesizer import ProfileSynthesizer, SynthesizedProfile
+from models.user_profile import (
     UserProfile,
     DebateThread,
     ArgumentQuality,
