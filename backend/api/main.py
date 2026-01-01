@@ -118,17 +118,14 @@ def get_claude_client() -> ClaudeClient:
 
 
 # Health and status endpoints
-@router.get("/health", response_model=HealthResponse)
+@router.get("/health")
 async def health_check():
-    """Health check endpoint"""
-    cache = get_cache_manager()
-
-    return HealthResponse(
-        status="healthy",
-        timestamp=datetime.now(),
-        version="0.1.0",
-        cache_stats=cache.get_cache_stats(),
-    )
+    """Health check endpoint - minimal for Railway"""
+    return {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat(),
+        "version": "0.1.0",
+    }
 
 
 @router.get("/status")
