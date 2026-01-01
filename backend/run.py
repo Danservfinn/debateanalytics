@@ -1,57 +1,76 @@
 """
-Minimal FastAPI app for Railway deployment debugging.
+Entry point for running the FastAPI application.
 """
 import sys
 import os
 
-print("=== MINIMAL STARTUP ===")
+print("=== STARTUP ===")
 print(f"CWD: {os.getcwd()}")
 print(f"Python: {sys.version}")
 
-# List files
-print("Files in current directory:")
-for f in sorted(os.listdir('.')):
-    print(f"  {f}")
+# Add backend directory to path
+backend_dir = os.path.dirname(os.path.abspath(__file__))
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
+print(f"Added to path: {backend_dir}")
 
-# Check for api directory
-if os.path.exists('api'):
-    print("Files in api/:")
-    for f in sorted(os.listdir('api')):
-        print(f"  {f}")
+# Test imports step by step
+print("\nImporting modules...")
 
-# Try basic imports
-print("\nChecking imports...")
 try:
-    import fastapi
-    print(f"  fastapi: {fastapi.__version__}")
+    print("  1. config...")
+    from config import Config
+    print("     OK")
 except Exception as e:
-    print(f"  fastapi FAILED: {e}")
+    print(f"     FAILED: {e}")
+    import traceback
+    traceback.print_exc()
     sys.exit(1)
 
 try:
-    import uvicorn
-    print(f"  uvicorn: OK")
+    print("  2. cache.cache_manager...")
+    from cache.cache_manager import CacheManager
+    print("     OK")
 except Exception as e:
-    print(f"  uvicorn FAILED: {e}")
+    print(f"     FAILED: {e}")
+    import traceback
+    traceback.print_exc()
     sys.exit(1)
 
-# Create minimal app
-print("\nCreating minimal app...")
-from fastapi import FastAPI
+try:
+    print("  3. data.reddit_fetcher...")
+    from data.reddit_fetcher import RedditFetcher
+    print("     OK")
+except Exception as e:
+    print(f"     FAILED: {e}")
+    import traceback
+    traceback.print_exc()
+    sys.exit(1)
 
-app = FastAPI(title="Debug API")
+try:
+    print("  4. analysis.claude_client...")
+    from analysis.claude_client import ClaudeClient
+    print("     OK")
+except Exception as e:
+    print(f"     FAILED: {e}")
+    import traceback
+    traceback.print_exc()
+    sys.exit(1)
 
-@app.get("/")
-async def root():
-    return {"status": "ok", "message": "Minimal app running!"}
+try:
+    print("  5. api.main...")
+    from api.main import app
+    print("     OK")
+except Exception as e:
+    print(f"     FAILED: {e}")
+    import traceback
+    traceback.print_exc()
+    sys.exit(1)
 
-@app.get("/api/v1/health")
-async def health():
-    return {"status": "healthy"}
-
-print("App created successfully!")
+print("\nAll imports successful!")
 
 if __name__ == "__main__":
+    import uvicorn
     port = int(os.environ.get("PORT", 8000))
     print(f"Starting on port {port}...")
     uvicorn.run(app, host="0.0.0.0", port=port)
