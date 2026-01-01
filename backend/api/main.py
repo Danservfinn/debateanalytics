@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # Test imports
 from config import Config
+from cache.cache_manager import CacheManager
 
 logger = logging.getLogger(__name__)
 
