@@ -226,6 +226,20 @@ export function PaymentGate({
               <RefreshCw className="w-4 h-4 mr-2" />
               Try Again
             </Button>
+
+            {/* Skip button for testing */}
+            {allowSkip && (
+              <div className="pt-4 border-t border-border/50 mt-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onPaymentComplete}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Skip for now (testing only)
+                </Button>
+              </div>
+            )}
           </motion.div>
         )
 
