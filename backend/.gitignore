@@ -15,8 +15,11 @@ ENV/
 .vscode/
 *.swp
 
-# Cache directory
-cache/
+# Cache data (but not the Python module)
+cache/users/
+cache/debates/
+cache/analysis/
+cache/*.json
 
 # Logs
 *.log

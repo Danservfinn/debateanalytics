@@ -1,7 +1,4 @@
 """
 Data layer for Reddit fetching
 """
-
-from .reddit_fetcher import RedditFetcher
-
-__all__ = ["RedditFetcher"]
+# No re-exports to avoid import issues on Railway
