@@ -17,13 +17,13 @@ from fastapi import FastAPI, HTTPException, BackgroundTasks, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from ..config import Config
-from ..cache.cache_manager import CacheManager
-from ..data.reddit_fetcher import RedditFetcher
-from ..analysis.claude_client import ClaudeClient
-from ..analysis.debate_identifier import DebateIdentifier
-from ..analysis.argument_analyzer import ArgumentAnalyzer
-from ..analysis.profile_synthesizer import ProfileSynthesizer
+from config import Config
+from cache.cache_manager import CacheManager
+from data.reddit_fetcher import RedditFetcher
+from analysis.claude_client import ClaudeClient
+from analysis.debate_identifier import DebateIdentifier
+from analysis.argument_analyzer import ArgumentAnalyzer
+from analysis.profile_synthesizer import ProfileSynthesizer
 
 logger = logging.getLogger(__name__)
 
