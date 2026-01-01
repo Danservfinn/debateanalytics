@@ -11,6 +11,7 @@ Usage:
     python debate_analyzer_web.py [--port 5000] [--debug]
 """
 
+import os
 import json
 import sqlite3
 import threading
@@ -20,6 +21,13 @@ from datetime import datetime
 from pathlib import Path
 from flask import Flask, render_template_string, jsonify, request, redirect, url_for
 from collections import defaultdict
+
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).parent / ".env")
+except ImportError:
+    pass  # dotenv not installed, rely on system environment
 
 # Import the fetcher module
 from reddit_debate_fetcher import (
