@@ -296,13 +296,33 @@ class ThreadAnalysis:
 # =============================================================================
 
 class RedditThreadFetcher:
-    """Fetches complete Reddit threads."""
+    """Fetches complete Reddit threads using OAuth authentication."""
 
-    USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    # User-Agent for OAuth (Reddit requires descriptive UA for API access)
+    USER_AGENT = "DebateAnalyzer/1.0 (by /u/debate_analyzer_bot)"
 
-    def __init__(self):
+    # OAuth endpoints
+    TOKEN_URL = "https://www.reddit.com/api/v1/access_token"
+    OAUTH_BASE = "https://oauth.reddit.com"
+
+    def __init__(self, client_id: Optional[str] = None, client_secret: Optional[str] = None):
         self.last_request_time = 0
         self.rate_limit_delay = 1.0
+
+        # OAuth credentials from params or environment
+        self.client_id = client_id or os.environ.get('REDDIT_CLIENT_ID')
+        self.client_secret = client_secret or os.environ.get('REDDIT_CLIENT_SECRET')
+
+        # OAuth token cache
+        self._access_token = None
+        self._token_expires_at = 0
+
+        # Check if OAuth is available
+        self.oauth_available = bool(self.client_id and self.client_secret)
+        if self.oauth_available:
+            print(f"Reddit OAuth enabled (client_id: {self.client_id[:8]}...)")
+        else:
+            print("Reddit OAuth not configured - using public API (may be rate limited)")
 
     def _rate_limit(self):
         """Ensure we don't exceed rate limits."""
@@ -311,19 +331,98 @@ class RedditThreadFetcher:
             time.sleep(self.rate_limit_delay - elapsed)
         self.last_request_time = time.time()
 
+    def _get_oauth_token(self) -> Optional[str]:
+        """Get OAuth access token using client credentials grant."""
+        if not self.oauth_available:
+            return None
+
+        # Check if we have a valid cached token
+        if self._access_token and time.time() < self._token_expires_at:
+            return self._access_token
+
+        try:
+            if HAS_REQUESTS:
+                response = requests.post(
+                    self.TOKEN_URL,
+                    auth=(self.client_id, self.client_secret),
+                    data={'grant_type': 'client_credentials'},
+                    headers={'User-Agent': self.USER_AGENT},
+                    timeout=30
+                )
+                response.raise_for_status()
+                token_data = response.json()
+            else:
+                # Fallback without requests
+                import base64
+                credentials = base64.b64encode(
+                    f"{self.client_id}:{self.client_secret}".encode()
+                ).decode()
+                req = urllib.request.Request(
+                    self.TOKEN_URL,
+                    data=b'grant_type=client_credentials',
+                    headers={
+                        'User-Agent': self.USER_AGENT,
+                        'Authorization': f'Basic {credentials}',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    method='POST'
+                )
+                with urllib.request.urlopen(req, context=SSL_CONTEXT, timeout=30) as resp:
+                    token_data = json.loads(resp.read().decode('utf-8'))
+
+            self._access_token = token_data.get('access_token')
+            # Token expires in ~3600 seconds, refresh 5 min early
+            expires_in = token_data.get('expires_in', 3600)
+            self._token_expires_at = time.time() + expires_in - 300
+
+            print(f"OAuth token acquired (expires in {expires_in}s)")
+            return self._access_token
+
+        except Exception as e:
+            print(f"OAuth token acquisition failed: {e}")
+            return None
+
     def _fetch_url(self, url: str) -> dict:
-        """Fetch JSON from URL."""
+        """Fetch JSON from URL, using OAuth if available."""
         self._rate_limit()
 
-        if HAS_REQUESTS:
-            headers = {'User-Agent': self.USER_AGENT}
-            response = requests.get(url, headers=headers, timeout=30)
-            response.raise_for_status()
-            return response.json()
+        # Try OAuth first
+        token = self._get_oauth_token()
+
+        if token:
+            # Convert reddit.com URL to oauth.reddit.com
+            oauth_url = url.replace('https://www.reddit.com', self.OAUTH_BASE)
+            oauth_url = oauth_url.replace('https://reddit.com', self.OAUTH_BASE)
+
+            if HAS_REQUESTS:
+                headers = {
+                    'User-Agent': self.USER_AGENT,
+                    'Authorization': f'Bearer {token}'
+                }
+                response = requests.get(oauth_url, headers=headers, timeout=30)
+                response.raise_for_status()
+                return response.json()
+            else:
+                req = urllib.request.Request(
+                    oauth_url,
+                    headers={
+                        'User-Agent': self.USER_AGENT,
+                        'Authorization': f'Bearer {token}'
+                    }
+                )
+                with urllib.request.urlopen(req, context=SSL_CONTEXT, timeout=30) as resp:
+                    return json.loads(resp.read().decode('utf-8'))
         else:
-            req = urllib.request.Request(url, headers={'User-Agent': self.USER_AGENT})
-            with urllib.request.urlopen(req, context=SSL_CONTEXT, timeout=30) as resp:
-                return json.loads(resp.read().decode('utf-8'))
+            # Fallback to public API (will likely be blocked on datacenter IPs)
+            if HAS_REQUESTS:
+                headers = {'User-Agent': self.USER_AGENT}
+                response = requests.get(url, headers=headers, timeout=30)
+                response.raise_for_status()
+                return response.json()
+            else:
+                req = urllib.request.Request(url, headers={'User-Agent': self.USER_AGENT})
+                with urllib.request.urlopen(req, context=SSL_CONTEXT, timeout=30) as resp:
+                    return json.loads(resp.read().decode('utf-8'))
 
     def fetch_thread(self, thread_url: str) -> tuple:
         """
@@ -899,8 +998,13 @@ Return JSON:
 class ThreadDeepAnalyzer:
     """Complete thread analysis orchestrator."""
 
-    def __init__(self, api_key: Optional[str] = None):
-        self.fetcher = RedditThreadFetcher()
+    def __init__(self, api_key: Optional[str] = None,
+                 reddit_client_id: Optional[str] = None,
+                 reddit_client_secret: Optional[str] = None):
+        self.fetcher = RedditThreadFetcher(
+            client_id=reddit_client_id,
+            client_secret=reddit_client_secret
+        )
         self.claude = ClaudeAnalyzer(api_key) if HAS_ANTHROPIC else None
         self.cache_dir = Path("thread_analysis_cache")
         self.cache_dir.mkdir(exist_ok=True)

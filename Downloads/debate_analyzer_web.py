@@ -291,7 +291,11 @@ def run_thread_analysis(thread_url: str) -> dict:
         return {'error': 'Anthropic API not available. Install anthropic package and set ANTHROPIC_API_KEY'}
 
     try:
-        analyzer = ThreadDeepAnalyzer()
+        # Pass Reddit OAuth credentials for authenticated API access
+        analyzer = ThreadDeepAnalyzer(
+            reddit_client_id=os.environ.get('REDDIT_CLIENT_ID'),
+            reddit_client_secret=os.environ.get('REDDIT_CLIENT_SECRET')
+        )
         analysis = analyzer.analyze_thread(thread_url, use_cache=True)
 
         # Store in database
