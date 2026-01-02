@@ -152,13 +152,23 @@ CRITICAL ANALYSIS INSTRUCTIONS:
 4. Well-designed observational studies
 5. Case studies, expert opinion (weakest)
 
-**SCRUTINIZE COMPARISON GROUP DEFINITIONS:**
-- "Unvaccinated" cohorts: Did they truly receive ZERO vaccines, or just not the specific vaccine being studied?
-- Hidden exposures: Did "unvaccinated" groups receive Hep B at birth, Vitamin K shots, or other early interventions?
-- Timing definitions: Is "unvaccinated" defined as "before age X" while still receiving vaccines later?
-- Dose variations: Are partial schedules lumped with full schedules or true vaccine-naive?
-- This matters because comparing "DTaP vaccinated" vs "no DTaP but received 5 other vaccines" is NOT a true vaccinated vs unvaccinated comparison
-- ALWAYS ask: What did the control group ACTUALLY receive?
+**SCRUTINIZE COMPARISON/CONTROL GROUP DEFINITIONS:**
+The "control" or "untreated" group is often NOT what it claims to be. ALWAYS ask: What did they ACTUALLY receive?
+
+Examples of misleading comparison groups:
+- "Unvaccinated" often means "didn't receive THIS vaccine" but got others (Hep B, Vitamin K, etc.)
+- "Placebo" may contain active adjuvants, aluminum salts, or another vaccine as "control"
+- "No treatment" groups may receive "standard care" which includes interventions
+- "Control diet" participants often change multiple behaviors, not just the studied variable
+- "Sedentary" controls may still exercise, just not the specific protocol studied
+- "Untreated" in drug studies may mean "not on THIS drug" while on other medications
+- "Organic vs conventional" ignores that "organic" still uses approved pesticides
+
+Key questions:
+- Is the control truly inert/unexposed, or just differently exposed?
+- What's the ACTUAL contrast being measured?
+- Could the "control" group's hidden exposures confound results?
+- Would results differ with a TRUE zero-exposure control (if one even exists)?
 
 **LOOK FOR RED FLAGS:**
 - P-hacking or selective reporting
