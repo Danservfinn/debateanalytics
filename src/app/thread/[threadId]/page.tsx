@@ -17,7 +17,8 @@ import {
   TrendingUp,
   CheckCircle,
   Zap,
-  RefreshCw
+  RefreshCw,
+  PenSquare
 } from "lucide-react"
 import { Navbar } from "@/components/layout/Navbar"
 import { FloatingShapes } from "@/components/layout/FloatingShapes"
@@ -41,7 +42,9 @@ import {
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
 import { saveThread, getStoredThread, removeThread } from "@/lib/storage"
+import { ArgumentComposer } from "@/components/argument"
 import type { ThreadAnalysisResult, DebateThread } from "@/types/debate"
+import type { ArgumentContext } from "@/types/argument"
 
 export default function ThreadDetailPage() {
   const params = useParams()
@@ -56,6 +59,7 @@ export default function ThreadDetailPage() {
   const [error, setError] = useState<string | null>(null)
   const [selectedDebate, setSelectedDebate] = useState<DebateThread | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [showArgumentComposer, setShowArgumentComposer] = useState(false)
 
   // Derive position definitions from executive summary
   const positionDefinitions = useMemo((): PositionDefinitions | undefined => {
@@ -67,6 +71,25 @@ export default function ThreadDetailPage() {
       question: summary.centralQuestion.question
     }
   }, [analysis])
+
+  // Build context for argument composer
+  const argumentContext = useMemo((): ArgumentContext | undefined => {
+    if (!analysis || !positionDefinitions?.question) return undefined
+    // Extract top arguments from debates for context
+    const allReplies = analysis.debates.flatMap(d => d.replies)
+    const topArgs = allReplies
+      .sort((a, b) => b.qualityScore - a.qualityScore)
+      .slice(0, 5)
+      .map(r => `[${r.position.toUpperCase()}] ${r.text.slice(0, 150)}...`)
+
+    return {
+      centralQuestion: positionDefinitions.question,
+      proDefinition: positionDefinitions.proDefinition || 'Supporting the proposition',
+      conDefinition: positionDefinitions.conDefinition || 'Opposing the proposition',
+      threadTitle: analysis.title,
+      keyArguments: topArgs
+    }
+  }, [analysis, positionDefinitions])
 
   const handleOpenDebateModal = useCallback((debate: DebateThread) => {
     setSelectedDebate(debate)
@@ -311,6 +334,27 @@ export default function ThreadDetailPage() {
             positionDefinitions={positionDefinitions}
           />
         </motion.section>
+
+        {/* Write Your Argument CTA */}
+        {argumentContext && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
+            <div className="flex items-center justify-center">
+              <Button
+                onClick={() => setShowArgumentComposer(true)}
+                className="gap-2 px-6 py-3 h-auto"
+                size="lg"
+              >
+                <PenSquare className="w-5 h-5" />
+                <span>Write My Argument</span>
+                <span className="text-xs opacity-70 ml-1">Get AI feedback</span>
+              </Button>
+            </div>
+          </motion.section>
+        )}
 
         {/* Main Content Tabs */}
         <motion.section
@@ -568,6 +612,15 @@ export default function ThreadDetailPage() {
         onClose={handleCloseDebateModal}
         threadContext={analysis.title}
       />
+
+      {/* Argument Composer Modal */}
+      {argumentContext && (
+        <ArgumentComposer
+          isOpen={showArgumentComposer}
+          onClose={() => setShowArgumentComposer(false)}
+          context={argumentContext}
+        />
+      )}
     </div>
   )
 }
