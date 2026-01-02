@@ -3,6 +3,12 @@
 import { useMemo } from 'react'
 import { ExternalLink } from 'lucide-react'
 import type { DebateThread, DebateComment } from '@/types/debate'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 interface BattleCardProps {
   debate: DebateThread
@@ -197,6 +203,7 @@ interface ArgumentPreviewProps {
 function ArgumentPreview({ argument, position, isBest, threadUrl }: ArgumentPreviewProps) {
   const borderColor = position === 'pro' ? 'border-success' : 'border-danger'
   const bgColor = position === 'pro' ? 'bg-success/5' : 'bg-danger/5'
+  const isTruncated = argument.text.length > 150
 
   // Construct Reddit comment permalink
   const getRedditCommentUrl = () => {
@@ -223,10 +230,26 @@ function ArgumentPreview({ argument, position, isBest, threadUrl }: ArgumentPrev
           )}
         </div>
       )}
-      <p className="text-xs text-foreground line-clamp-3 leading-relaxed">
-        {argument.text.substring(0, 150)}
-        {argument.text.length > 150 ? '...' : ''}
-      </p>
+      <TooltipProvider delayDuration={300}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <p className={`text-xs text-foreground line-clamp-3 leading-relaxed ${isTruncated ? 'cursor-help' : ''}`}>
+              {argument.text.substring(0, 150)}
+              {isTruncated ? '...' : ''}
+            </p>
+          </TooltipTrigger>
+          {isTruncated && (
+            <TooltipContent
+              side="top"
+              className="max-w-md p-4 text-sm leading-relaxed whitespace-pre-wrap"
+              sideOffset={8}
+            >
+              <p className="text-foreground">{argument.text}</p>
+              <p className="text-muted-foreground text-xs mt-2">— u/{argument.author}</p>
+            </TooltipContent>
+          )}
+        </Tooltip>
+      </TooltipProvider>
       <div className="flex items-center justify-between mt-2">
         <span className="text-[10px] text-muted-foreground">u/{argument.author}</span>
         <span className={`text-[10px] ${position === 'pro' ? 'text-success' : 'text-danger'}`}>
