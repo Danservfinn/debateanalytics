@@ -1,68 +1,88 @@
 'use client'
 
-import { useMemo } from 'react'
-import type { DebateThread, MomentumShift, DebateComment } from '@/types/debate'
+import { useMemo, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { TrendingUp, TrendingDown, ExternalLink, ChevronDown } from 'lucide-react'
+import type { DebateThread, MomentumShift, DebateComment, DebatePosition } from '@/types/debate'
 
 interface MomentumTimelineProps {
   debate: DebateThread
+  onJumpToComment?: (commentId: string) => void
 }
 
 /**
- * MomentumTimeline - Visual debate progression over time
+ * MomentumTimeline - Visual debate progression with clear axes
  *
- * Features:
- * - Horizontal timeline with nodes
- * - Momentum shift indicators
- * - PRO/CON position coloring
- * - Interactive hover states
+ * Redesigned for clarity:
+ * - X-axis: Comment # (1, 2, 3...)
+ * - Y-axis: Score differential (PRO - CON) with numeric scale
+ * - Connected line showing momentum flow
+ * - Clickable nodes to view comment text
  */
-export function MomentumTimeline({ debate }: MomentumTimelineProps) {
-  // Build timeline data from replies sorted by createdAt
+export function MomentumTimeline({ debate, onJumpToComment }: MomentumTimelineProps) {
+  const [selectedNode, setSelectedNode] = useState<number | null>(null)
+  const [hoveredNode, setHoveredNode] = useState<number | null>(null)
+
+  // Build timeline data with running differential
   const timelineData = useMemo(() => {
     const sortedReplies = [...debate.replies].sort((a, b) =>
       new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
     )
 
-    // Track running momentum
-    let proMomentum = 0
-    let conMomentum = 0
+    let runningPro = 0
+    let runningCon = 0
 
     return sortedReplies.map((reply, index) => {
-      // Update momentum based on position and quality
+      // Add to running totals
       if (reply.position === 'pro') {
-        proMomentum += reply.qualityScore
+        runningPro += reply.qualityScore
       } else if (reply.position === 'con') {
-        conMomentum += reply.qualityScore
+        runningCon += reply.qualityScore
       }
 
-      // Calculate relative momentum (-1 to 1, where positive = PRO leading)
-      const totalMomentum = proMomentum + conMomentum
-      const relativeMomentum = totalMomentum > 0
-        ? (proMomentum - conMomentum) / totalMomentum
-        : 0
+      // Running differential: positive = PRO leading, negative = CON leading
+      const differential = runningPro - runningCon
 
-      // Check if this is a momentum shift (using reply number, 1-indexed)
+      // Check for momentum shift
       const shift = debate.momentumShifts?.find(s => s.replyNumber === index + 1)
 
       return {
         reply,
-        index,
-        relativeMomentum,
+        commentNumber: index + 1,
+        differential,
+        runningPro,
+        runningCon,
         shift,
-        proMomentum,
-        conMomentum,
-        timestamp: new Date(reply.createdAt).getTime()
       }
     })
   }, [debate.replies, debate.momentumShifts])
 
-  // Get time range for display
-  const timeRange = useMemo(() => {
-    if (timelineData.length === 0) return { start: 0, end: 0, duration: 0 }
-    const start = timelineData[0].timestamp
-    const end = timelineData[timelineData.length - 1].timestamp
-    return { start, end, duration: end - start }
+  // Calculate Y-axis bounds
+  const yBounds = useMemo(() => {
+    if (timelineData.length === 0) return { min: -10, max: 10 }
+
+    const diffs = timelineData.map(d => d.differential)
+    const maxAbs = Math.max(Math.abs(Math.min(...diffs)), Math.abs(Math.max(...diffs)), 5)
+    // Round up to nice number
+    const bound = Math.ceil(maxAbs / 5) * 5
+    return { min: -bound, max: bound }
   }, [timelineData])
+
+  // Map differential to Y position (0-100%, inverted because Y=0 is top)
+  const getYPosition = (differential: number) => {
+    const range = yBounds.max - yBounds.min
+    return ((yBounds.max - differential) / range) * 100
+  }
+
+  // Generate Y-axis ticks
+  const yTicks = useMemo(() => {
+    const ticks = []
+    const step = Math.ceil((yBounds.max - yBounds.min) / 4)
+    for (let i = yBounds.max; i >= yBounds.min; i -= step) {
+      ticks.push(i)
+    }
+    return ticks
+  }, [yBounds])
 
   if (timelineData.length === 0) {
     return (
@@ -72,97 +92,312 @@ export function MomentumTimeline({ debate }: MomentumTimelineProps) {
     )
   }
 
+  const selectedData = selectedNode !== null ? timelineData[selectedNode] : null
+
   return (
     <div className="card-premium p-6">
-      <h3 className="text-sm font-semibold text-foreground mb-4">Debate Momentum</h3>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
+          <TrendingUp className="w-4 h-4 text-primary" />
+          Debate Momentum
+        </h3>
 
-      {/* Legend */}
-      <div className="flex items-center justify-center gap-6 mb-6 text-xs">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-success" />
-          <span className="text-muted-foreground">PRO</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-danger" />
-          <span className="text-muted-foreground">CON</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-warning" />
-          <span className="text-muted-foreground">Momentum Shift</span>
+        {/* Legend */}
+        <div className="flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-success" />
+            <span className="text-muted-foreground">PRO</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-danger" />
+            <span className="text-muted-foreground">CON</span>
+          </div>
         </div>
       </div>
 
-      {/* Timeline container */}
-      <div className="relative">
-        {/* Central line */}
-        <div className="absolute left-0 right-0 top-1/2 h-0.5 momentum-line -translate-y-1/2" />
-
-        {/* PRO zone indicator */}
-        <div className="absolute left-0 right-0 top-0 h-[45%] bg-success/5 rounded-t-lg border-b border-success/20">
-          <span className="absolute top-2 left-2 text-[10px] text-success/60 uppercase tracking-wider">
-            PRO Leading
-          </span>
+      {/* Chart container */}
+      <div className="relative pl-12 pr-4">
+        {/* Y-axis */}
+        <div className="absolute left-0 top-0 bottom-8 w-10 flex flex-col justify-between items-end pr-2">
+          {yTicks.map(tick => (
+            <div key={tick} className="text-[10px] text-muted-foreground leading-none">
+              {tick > 0 ? `+${tick}` : tick}
+            </div>
+          ))}
         </div>
 
-        {/* CON zone indicator */}
-        <div className="absolute left-0 right-0 bottom-0 h-[45%] bg-danger/5 rounded-b-lg border-t border-danger/20">
-          <span className="absolute bottom-2 left-2 text-[10px] text-danger/60 uppercase tracking-wider">
-            CON Leading
-          </span>
+        {/* Y-axis label */}
+        <div className="absolute -left-2 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] text-muted-foreground whitespace-nowrap">
+          Score Differential (PRO − CON)
         </div>
 
-        {/* Timeline nodes */}
-        <div className="relative h-48 flex items-center">
+        {/* Chart area */}
+        <div className="relative h-48 border-l border-b border-border">
+          {/* PRO zone (above center) */}
+          <div
+            className="absolute left-0 right-0 bg-success/5"
+            style={{
+              top: 0,
+              height: `${getYPosition(0)}%`
+            }}
+          >
+            <span className="absolute top-1 left-1 text-[9px] text-success/50 uppercase tracking-wider">
+              PRO Leading
+            </span>
+          </div>
+
+          {/* CON zone (below center) */}
+          <div
+            className="absolute left-0 right-0 bg-danger/5"
+            style={{
+              top: `${getYPosition(0)}%`,
+              bottom: 0
+            }}
+          >
+            <span className="absolute bottom-1 left-1 text-[9px] text-danger/50 uppercase tracking-wider">
+              CON Leading
+            </span>
+          </div>
+
+          {/* Zero line */}
+          <div
+            className="absolute left-0 right-0 h-px bg-border"
+            style={{ top: `${getYPosition(0)}%` }}
+          />
+
+          {/* Horizontal grid lines */}
+          {yTicks.filter(t => t !== 0).map(tick => (
+            <div
+              key={tick}
+              className="absolute left-0 right-0 h-px bg-border/30"
+              style={{ top: `${getYPosition(tick)}%` }}
+            />
+          ))}
+
+          {/* SVG for connecting line */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            preserveAspectRatio="none"
+          >
+            {/* Path connecting all points */}
+            <motion.path
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 1, ease: 'easeOut' }}
+              d={timelineData.map((data, i) => {
+                const x = timelineData.length > 1
+                  ? (i / (timelineData.length - 1)) * 100
+                  : 50
+                const y = getYPosition(data.differential)
+                return `${i === 0 ? 'M' : 'L'} ${x}% ${y}%`
+              }).join(' ')}
+              fill="none"
+              stroke="url(#lineGradient)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              vectorEffect="non-scaling-stroke"
+            />
+            {/* Gradient definition */}
+            <defs>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="hsl(var(--success))" />
+                <stop offset="50%" stopColor="hsl(var(--primary))" />
+                <stop offset="100%" stopColor="hsl(var(--danger))" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          {/* Data nodes */}
           {timelineData.map((data, i) => {
-            // Position along timeline - use index-based for even distribution
-            // (timestamp-based clusters nodes when comments come in bursts)
             const xPercent = timelineData.length > 1
               ? (i / (timelineData.length - 1)) * 100
               : 50
+            const yPercent = getYPosition(data.differential)
 
-            // Vertical position based on momentum (-1 to 1 mapped to 10% to 90%)
-            const yPercent = 50 - (data.relativeMomentum * 40)
+            const isSelected = selectedNode === i
+            const isHovered = hoveredNode === i
+            const hasShift = !!data.shift
 
-            // Node color
-            const nodeColor = data.reply.position === 'pro' ? 'bg-success' :
-              data.reply.position === 'con' ? 'bg-danger' : 'bg-zinc-500'
+            // Node color based on the comment's position
+            const nodeColor = data.reply.position === 'pro'
+              ? 'bg-success'
+              : data.reply.position === 'con'
+                ? 'bg-danger'
+                : 'bg-zinc-500'
 
-            // Size based on quality
-            const size = 8 + (data.reply.qualityScore / 10) * 8
+            // Size based on quality (8-16px)
+            const baseSize = 8 + (data.reply.qualityScore / 10) * 8
 
             return (
-              <TimelineNode
+              <button
                 key={data.reply.id}
-                data={data}
-                xPercent={xPercent}
-                yPercent={yPercent}
-                nodeColor={nodeColor}
-                size={size}
-              />
+                onClick={() => setSelectedNode(isSelected ? null : i)}
+                onMouseEnter={() => setHoveredNode(i)}
+                onMouseLeave={() => setHoveredNode(null)}
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-transform hover:scale-125 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-full"
+                style={{
+                  left: `${xPercent}%`,
+                  top: `${yPercent}%`,
+                }}
+                title={`Comment #${data.commentNumber} by u/${data.reply.author}`}
+              >
+                {/* Shift indicator ring */}
+                {hasShift && (
+                  <div
+                    className="absolute inset-0 rounded-full bg-warning/50 animate-pulse"
+                    style={{
+                      width: baseSize + 8,
+                      height: baseSize + 8,
+                      left: -4,
+                      top: -4,
+                    }}
+                  />
+                )}
+
+                {/* Node */}
+                <div
+                  className={`rounded-full ${nodeColor} ${isSelected || isHovered ? 'ring-2 ring-white shadow-lg' : ''}`}
+                  style={{ width: baseSize, height: baseSize }}
+                />
+              </button>
             )
           })}
+
+          {/* Hover tooltip */}
+          <AnimatePresence>
+            {hoveredNode !== null && !selectedNode && (
+              <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 5 }}
+                className="absolute z-20 pointer-events-none"
+                style={{
+                  left: `${timelineData.length > 1 ? (hoveredNode / (timelineData.length - 1)) * 100 : 50}%`,
+                  top: `${getYPosition(timelineData[hoveredNode].differential)}%`,
+                  transform: 'translate(-50%, -100%) translateY(-12px)'
+                }}
+              >
+                <div className="bg-card border border-border rounded-lg p-2 shadow-lg text-xs min-w-[150px]">
+                  <div className="font-medium text-foreground">
+                    #{timelineData[hoveredNode].commentNumber} u/{timelineData[hoveredNode].reply.author}
+                  </div>
+                  <div className="text-muted-foreground mt-0.5 line-clamp-2">
+                    {timelineData[hoveredNode].reply.text.substring(0, 80)}...
+                  </div>
+                  <div className="text-[10px] text-muted-foreground mt-1">
+                    Click to expand
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* X-axis labels */}
+        <div className="flex justify-between mt-1 text-[10px] text-muted-foreground">
+          {timelineData.length <= 10
+            ? timelineData.map((_, i) => (
+              <span key={i}>{i + 1}</span>
+            ))
+            : [0, Math.floor(timelineData.length / 2), timelineData.length - 1].map(i => (
+              <span key={i} style={{ position: 'absolute', left: `${(i / (timelineData.length - 1)) * 100}%`, transform: 'translateX(-50%)' }}>
+                {i + 1}
+              </span>
+            ))
+          }
+        </div>
+
+        {/* X-axis label */}
+        <div className="text-center text-[10px] text-muted-foreground mt-2">
+          Comment #
         </div>
       </div>
 
-      {/* Momentum summary */}
-      <div className="mt-6 grid grid-cols-2 gap-4">
-        <div className="text-center">
-          <div className="text-xl font-bold text-success">
-            {timelineData[timelineData.length - 1]?.proMomentum.toFixed(0) || 0}
+      {/* Selected comment detail */}
+      <AnimatePresence>
+        {selectedData && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="mt-4 p-4 rounded-lg bg-secondary/50 border border-border">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                    selectedData.reply.position === 'pro'
+                      ? 'bg-success/20 text-success'
+                      : selectedData.reply.position === 'con'
+                        ? 'bg-danger/20 text-danger'
+                        : 'bg-secondary text-muted-foreground'
+                  }`}>
+                    {selectedData.reply.position.toUpperCase()}
+                  </span>
+                  <span className="text-sm font-medium text-foreground">
+                    Comment #{selectedData.commentNumber}
+                  </span>
+                  <span className="text-sm text-muted-foreground">
+                    by u/{selectedData.reply.author}
+                  </span>
+                </div>
+                <button
+                  onClick={() => setSelectedNode(null)}
+                  className="text-muted-foreground hover:text-foreground p-1"
+                >
+                  <ChevronDown className="w-4 h-4 rotate-180" />
+                </button>
+              </div>
+
+              {/* Comment text */}
+              <div className="mt-3 text-sm text-foreground leading-relaxed whitespace-pre-wrap">
+                {selectedData.reply.text.length > 500
+                  ? selectedData.reply.text.substring(0, 500) + '...'
+                  : selectedData.reply.text}
+              </div>
+
+              {/* Meta info */}
+              <div className="mt-3 pt-3 border-t border-border flex items-center gap-4 text-xs text-muted-foreground">
+                <span>Quality: {selectedData.reply.qualityScore.toFixed(1)}/10</span>
+                <span>Score: {selectedData.differential > 0 ? '+' : ''}{selectedData.differential.toFixed(1)}</span>
+                {selectedData.shift && (
+                  <span className="text-warning">⚡ Momentum Shift: {selectedData.shift.trigger}</span>
+                )}
+                {onJumpToComment && (
+                  <button
+                    onClick={() => onJumpToComment(selectedData.reply.id)}
+                    className="text-primary hover:underline flex items-center gap-1 ml-auto"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    Jump to comment
+                  </button>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Score summary */}
+      <div className="mt-4 grid grid-cols-2 gap-4">
+        <div className="text-center p-3 rounded-lg bg-success/10 border border-success/20">
+          <div className="text-2xl font-bold text-success">
+            {timelineData[timelineData.length - 1]?.runningPro.toFixed(0) || 0}
           </div>
           <div className="text-xs text-muted-foreground">PRO Total Score</div>
         </div>
-        <div className="text-center">
-          <div className="text-xl font-bold text-danger">
-            {timelineData[timelineData.length - 1]?.conMomentum.toFixed(0) || 0}
+        <div className="text-center p-3 rounded-lg bg-danger/10 border border-danger/20">
+          <div className="text-2xl font-bold text-danger">
+            {timelineData[timelineData.length - 1]?.runningCon.toFixed(0) || 0}
           </div>
           <div className="text-xs text-muted-foreground">CON Total Score</div>
         </div>
       </div>
 
-      {/* Momentum shifts */}
+      {/* Momentum shifts list */}
       {debate.momentumShifts && debate.momentumShifts.length > 0 && (
-        <div className="mt-6 pt-4 border-t border-border">
+        <div className="mt-4 pt-4 border-t border-border">
           <h4 className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-3">
             Key Momentum Shifts
           </h4>
@@ -173,80 +408,20 @@ export function MomentumTimeline({ debate }: MomentumTimelineProps) {
           </div>
         </div>
       )}
-    </div>
-  )
-}
 
-interface TimelineNodeProps {
-  data: {
-    reply: DebateComment
-    index: number
-    relativeMomentum: number
-    shift?: MomentumShift
-    proMomentum: number
-    conMomentum: number
-    timestamp: number
-  }
-  xPercent: number
-  yPercent: number
-  nodeColor: string
-  size: number
-}
-
-function TimelineNode({ data, xPercent, yPercent, nodeColor, size }: TimelineNodeProps) {
-  const hasShift = !!data.shift
-
-  return (
-    <div
-      className="absolute group"
-      style={{
-        left: `${xPercent}%`,
-        top: `${yPercent}%`,
-        transform: 'translate(-50%, -50%)'
-      }}
-    >
-      {/* Shift indicator ring */}
-      {hasShift && (
-        <div
-          className="absolute inset-0 rounded-full bg-warning animate-pulse-glow"
-          style={{
-            width: size + 8,
-            height: size + 8,
-            left: -4,
-            top: -4
-          }}
-        />
-      )}
-
-      {/* Node */}
-      <div
-        className={`momentum-node rounded-full ${nodeColor} cursor-pointer`}
-        style={{ width: size, height: size }}
-      />
-
-      {/* Tooltip */}
-      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
-        <div className="glass-strong rounded-lg p-3 text-xs min-w-[180px]">
-          <div className="font-medium text-foreground mb-1">u/{data.reply.author}</div>
-          <div className="text-muted-foreground mb-2 line-clamp-2">
-            {data.reply.text.substring(0, 100)}...
+      {/* Size legend */}
+      <div className="mt-4 pt-4 border-t border-border">
+        <div className="flex items-center justify-center gap-4 text-[10px] text-muted-foreground">
+          <span>Node size = Argument quality</span>
+          <div className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-zinc-500" />
+            <span>Weak</span>
           </div>
-          <div className="flex justify-between text-[10px]">
-            <span className={data.reply.position === 'pro' ? 'text-success' : data.reply.position === 'con' ? 'text-danger' : 'text-zinc-400'}>
-              {data.reply.position.toUpperCase()}
-            </span>
-            <span className="text-muted-foreground">
-              Quality: {data.reply.qualityScore.toFixed(1)}
-            </span>
+          <div className="flex items-center gap-1">
+            <div className="w-3 h-3 rounded-full bg-zinc-500" />
+            <span>Strong</span>
           </div>
-          {hasShift && data.shift && (
-            <div className="mt-2 pt-2 border-t border-border text-warning">
-              <span className="font-medium">Momentum Shift:</span> {data.shift.trigger}
-            </div>
-          )}
         </div>
-        {/* Arrow */}
-        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-secondary" />
       </div>
     </div>
   )
@@ -257,7 +432,6 @@ interface MomentumShiftItemProps {
 }
 
 function MomentumShiftItem({ shift }: MomentumShiftItemProps) {
-  // toPosition is the new position after the shift
   const isPro = shift.toPosition === 'pro'
   const directionColor = isPro ? 'text-success' : 'text-danger'
   const directionBg = isPro ? 'bg-success/10' : 'bg-danger/10'
@@ -265,18 +439,11 @@ function MomentumShiftItem({ shift }: MomentumShiftItemProps) {
   return (
     <div className={`${directionBg} rounded-lg p-3 flex items-start gap-3`}>
       <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${isPro ? 'bg-success/20' : 'bg-danger/20'}`}>
-        <svg
-          className={`w-4 h-4 ${directionColor}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          {isPro ? (
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-          ) : (
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          )}
-        </svg>
+        {isPro ? (
+          <TrendingUp className={`w-3.5 h-3.5 ${directionColor}`} />
+        ) : (
+          <TrendingDown className={`w-3.5 h-3.5 ${directionColor}`} />
+        )}
       </div>
       <div className="flex-1 min-w-0">
         <div className={`text-sm font-medium ${directionColor}`}>

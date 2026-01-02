@@ -34,7 +34,7 @@ import {
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
-import { saveThread } from "@/lib/storage"
+import { saveThread, getStoredThread } from "@/lib/storage"
 import type { ThreadAnalysisResult, DebateThread } from "@/types/debate"
 
 export default function ThreadDetailPage() {
@@ -82,6 +82,16 @@ export default function ThreadDetailPage() {
           }
         }
 
+        // Check localStorage for previously analyzed thread (PRIORITY)
+        const storedThread = getStoredThread(threadId)
+        if (storedThread) {
+          console.log('Using cached thread from localStorage:', threadId)
+          setAnalysis(storedThread)
+          setIsLoading(false)
+          return
+        }
+
+        // Only fetch from API if not cached
         // Build URL for analysis
         const urlParam = originalUrl || `https://reddit.com/r/changemyview/comments/${threadId}`
 
