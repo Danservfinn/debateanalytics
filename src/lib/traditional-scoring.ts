@@ -55,6 +55,15 @@ import {
   classifyClashType as classifyClash
 } from './clash-evaluation'
 
+// Import Phase 4 verdict calculation functions
+import {
+  evaluateSpeakers as evaluateFlowSpeakers,
+  analyzeBurden as analyzeFlowBurden,
+  calculateTraditionalVerdict as calculateFlowVerdict,
+  identifyVotingIssues as identifyFlowVotingIssues,
+  calculateSpeakerPoints as calculateFlowSpeakerPoints
+} from './verdict-calculation'
+
 // =============================================================================
 // FLOW BUILDING
 // =============================================================================
@@ -308,16 +317,17 @@ export async function calculateIssueWeight(
  * Evaluate individual speakers/participants
  * Separate from argument quality - measures communication effectiveness
  *
- * @param arguments - Arguments made by all participants
+ * @param args - Arguments made by all participants
  * @param clashes - All clash evaluations
+ * @param centralQuestion - The main question being debated
  * @returns Speaker evaluations for each participant
  */
 export async function evaluateSpeakers(
   args: FlowArgument[],
-  clashes: ClashEvaluation[]
+  clashes: ClashEvaluation[],
+  centralQuestion: string
 ): Promise<SpeakerEvaluation[]> {
-  // TODO: Implement speaker evaluation
-  throw new Error('evaluateSpeakers not yet implemented')
+  return evaluateFlowSpeakers(args, clashes, centralQuestion)
 }
 
 /**
@@ -327,15 +337,16 @@ export async function evaluateSpeakers(
  * @param author - The participant to evaluate
  * @param theirArguments - Arguments made by this participant
  * @param clashes - Clashes involving their arguments
+ * @param centralQuestion - The main question being debated
  * @returns Speaker evaluation with breakdown
  */
 export async function calculateSpeakerPoints(
   author: string,
   theirArguments: FlowArgument[],
-  clashes: ClashEvaluation[]
+  clashes: ClashEvaluation[],
+  centralQuestion: string
 ): Promise<SpeakerEvaluation> {
-  // TODO: Implement speaker point calculation
-  throw new Error('calculateSpeakerPoints not yet implemented')
+  return calculateFlowSpeakerPoints(author, theirArguments, clashes, centralQuestion)
 }
 
 // =============================================================================
@@ -348,14 +359,15 @@ export async function calculateSpeakerPoints(
  *
  * @param centralQuestion - The main question being debated
  * @param issues - All contested issues
+ * @param args - All arguments in the debate
  * @returns Burden analysis
  */
 export async function analyzeBurden(
   centralQuestion: string,
-  issues: DebateIssue[]
+  issues: DebateIssue[],
+  args: FlowArgument[]
 ): Promise<BurdenAnalysis> {
-  // TODO: Implement burden analysis with Claude
-  throw new Error('analyzeBurden not yet implemented')
+  return analyzeFlowBurden(centralQuestion, issues, args)
 }
 
 // =============================================================================
@@ -366,22 +378,20 @@ export async function analyzeBurden(
  * Calculate the final debate verdict using traditional methodology
  *
  * @param request - Flow analysis request with comments and context
+ * @param args - All arguments in the debate
+ * @param clashes - All clash evaluations
+ * @param issues - All debate issues
  * @param config - Scoring configuration
  * @returns Complete traditional debate verdict
  */
 export async function calculateTraditionalVerdict(
   request: FlowAnalysisRequest,
+  args: FlowArgument[],
+  clashes: ClashEvaluation[],
+  issues: DebateIssue[],
   config: TraditionalScoringConfig = DEFAULT_SCORING_CONFIG
 ): Promise<TraditionalDebateVerdict> {
-  // TODO: Implement full verdict calculation pipeline
-  // 1. Build argument flow
-  // 2. Evaluate individual arguments
-  // 3. Evaluate clashes
-  // 4. Group into issues and determine issue winners
-  // 5. Evaluate speakers
-  // 6. Analyze burden
-  // 7. Determine overall winner based on issues won
-  throw new Error('calculateTraditionalVerdict not yet implemented')
+  return calculateFlowVerdict(request, args, clashes, issues, config)
 }
 
 /**
@@ -395,8 +405,7 @@ export function identifyVotingIssues(
   issues: DebateIssue[],
   winner: 'pro' | 'con' | 'draw'
 ): VotingIssue[] {
-  // TODO: Implement voting issue identification
-  throw new Error('identifyVotingIssues not yet implemented')
+  return identifyFlowVotingIssues(issues, winner)
 }
 
 /**
@@ -451,11 +460,11 @@ export function calculateEvidenceDistribution(
  * Calculate composite scores for UI display
  * Converts issue-based verdict to 0-100 scores
  *
- * @param verdict - The traditional verdict
+ * @param verdict - The traditional verdict (partial, before summary/notes)
  * @returns PRO and CON scores (0-100)
  */
 export function calculateDisplayScores(
-  verdict: Omit<TraditionalDebateVerdict, 'proScore' | 'conScore' | 'margin'>
+  verdict: Omit<TraditionalDebateVerdict, 'proScore' | 'conScore' | 'margin' | 'verdictSummary' | 'judgeNotes'>
 ): { proScore: number; conScore: number; margin: number } {
   // Convert issue wins to percentage-based scores
   const totalIssues = verdict.issuesWonByPro + verdict.issuesWonByCon + verdict.issueDraws
@@ -588,35 +597,31 @@ export async function runFlowAnalysis(
 ): Promise<FlowAnalysisResult> {
   const { centralQuestion } = request
 
-  // Phase 2: Build argument flow (IMPLEMENTED)
+  // Phase 2: Build argument flow
   console.log('[Traditional Scoring] Phase 2: Building argument flow...')
   let args = await buildFlow(request)
 
-  // Phase 3: Evaluate clashes (IMPLEMENTED)
+  // Phase 3: Evaluate clashes
   console.log('[Traditional Scoring] Phase 3: Evaluating clashes...')
   const clashes = await evaluateFlowClashes(args, centralQuestion)
 
   // Update argument statuses based on clash results
   args = updateArgumentStatusesFromClashes(args, clashes)
 
-  // Phase 3: Group into issues and determine winners (IMPLEMENTED)
+  // Phase 3: Group into issues and determine winners
   console.log('[Traditional Scoring] Phase 3: Grouping into issues...')
   let issues = await groupIntoIssues(args, clashes, centralQuestion)
 
   // Determine winners for each issue
   issues = determineIssueWinners(issues)
 
-  // Phase 4: Evaluate speakers (TODO - Phase 4)
-  const speakers: SpeakerEvaluation[] = [] // Will be implemented in Phase 4
+  // Phase 4: Evaluate speakers
+  console.log('[Traditional Scoring] Phase 4: Evaluating speakers...')
+  const speakers = await evaluateFlowSpeakers(args, clashes, centralQuestion)
 
-  // Phase 4: Analyze burden (TODO - Phase 4)
-  const burden: BurdenAnalysis = {
-    affirmativeBurden: 'To prove the proposition',
-    negativeBurden: 'To refute the proposition',
-    presumption: 'con', // Default: burden on PRO
-    burdenMet: { pro: false, con: false },
-    burdenReasoning: 'Burden analysis not yet implemented'
-  }
+  // Phase 4: Analyze burden of proof
+  console.log('[Traditional Scoring] Phase 4: Analyzing burden of proof...')
+  const burden = await analyzeFlowBurden(centralQuestion, issues, args)
 
   console.log('[Traditional Scoring] Flow analysis complete')
   return {
@@ -631,11 +636,11 @@ export async function runFlowAnalysis(
 /**
  * Generate human-readable verdict summary
  *
- * @param verdict - The completed verdict
+ * @param verdict - The verdict with scores calculated
  * @returns Narrative summary of the debate outcome
  */
 export function generateVerdictSummary(
-  verdict: Omit<TraditionalDebateVerdict, 'verdictSummary'>
+  verdict: Omit<TraditionalDebateVerdict, 'verdictSummary' | 'judgeNotes'>
 ): string {
   const winner = verdict.winner
   const confidence = verdict.winnerConfidence
@@ -674,7 +679,7 @@ export function generateVerdictSummary(
 /**
  * Generate judge notes explaining the decision
  *
- * @param verdict - The completed verdict
+ * @param verdict - The verdict with summary generated
  * @returns Detailed judge notes
  */
 export function generateJudgeNotes(
