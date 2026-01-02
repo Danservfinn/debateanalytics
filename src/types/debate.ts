@@ -832,3 +832,35 @@ export interface ExecutiveSummaryData {
   // How the debate evolved
   evolution: DebateEvolution
 }
+
+// ============================================================================
+// Traditional Debate Scoring Types (Re-exports)
+// ============================================================================
+
+// Re-export all traditional scoring types for convenience
+// These types implement flow-based judging methodology
+export type {
+  FlowArgument,
+  ArgumentStatus,
+  ArgumentEvaluation,
+  WarrantType,
+  WarrantQuality,
+  ImpactTimeframe,
+  ImpactReversibility,
+  ClashEvaluation,
+  ClashType,
+  DebateIssue,
+  SpeakerEvaluation,
+  BurdenAnalysis,
+  TraditionalDebateVerdict,
+  VotingIssue,
+  TraditionalThreadVerdict,
+  EvidenceDistribution,
+  LegacyVerdictCompat,
+  FlowAnalysisRequest,
+  FlowComment,
+  FlowAnalysisResult,
+  TraditionalScoringConfig
+} from './debate-scoring'
+
+export { DEFAULT_SCORING_CONFIG } from './debate-scoring'
