@@ -1,0 +1,862 @@
+{
+  "claims": [
+    {
+      "id": "claim_1",
+      "text": "vaccines generally do 10-15 years of testing before administering them",
+      "author": "picklerick_bitch",
+      "comment_id": "op_1",
+      "source_cited": true,
+      "source_url": "https://www.historyofvaccines.org/content/articles/vaccine-development-testing-and-regulation",
+      "verification_status": "sourced",
+      "relevance_score": 0.9
+    },
+    {
+      "id": "claim_2",
+      "text": "my age group is more likely to die from the flu",
+      "author": "picklerick_bitch",
+      "comment_id": "op_2",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.8
+    },
+    {
+      "id": "claim_3",
+      "text": "The actual safety trials usually last a few years",
+      "author": "meattornado15",
+      "comment_id": "meat_1",
+      "source_cited": true,
+      "source_url": "https://www.fda.gov/patients/drug-development-process/step-3-clinical-research",
+      "verification_status": "sourced",
+      "relevance_score": 0.9
+    },
+    {
+      "id": "claim_4",
+      "text": "The Pfizer phase 3 trials started last July",
+      "author": "meattornado15",
+      "comment_id": "meat_2",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.8
+    },
+    {
+      "id": "claim_5",
+      "text": "They started development of this vaccine almost 20 years ago, with SARS (the original SARS)",
+      "author": "sapphireminds",
+      "comment_id": "sapp_1",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.7
+    },
+    {
+      "id": "claim_6",
+      "text": "When vaccines have adverse effects, they nearly always occur within 2 months of taking them",
+      "author": "kareem_burner",
+      "comment_id": "kar_1",
+      "source_cited": true,
+      "source_url": "https://www.chop.edu/news/long-term-side-effects-covid-19-vaccine",
+      "verification_status": "sourced",
+      "relevance_score": 0.9
+    },
+    {
+      "id": "claim_7",
+      "text": "Although the risk is reduced, there are confirmed cases of COVID reinfection",
+      "author": "kareem_burner",
+      "comment_id": "kar_2",
+      "source_cited": true,
+      "source_url": "https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30764-7/fulltext",
+      "verification_status": "sourced",
+      "relevance_score": 0.8
+    },
+    {
+      "id": "claim_8",
+      "text": "Evidence suggests that any immunity is temporary",
+      "author": "kareem_burner",
+      "comment_id": "kar_3",
+      "source_cited": true,
+      "source_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7747024/",
+      "verification_status": "sourced",
+      "relevance_score": 0.8
+    },
+    {
+      "id": "claim_9",
+      "text": "Only 31% of the US population is fully vaccinated",
+      "author": "petielvrrr",
+      "comment_id": "pet_1",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.7
+    },
+    {
+      "id": "claim_10",
+      "text": "herd immunity for COVID is closer to 75%",
+      "author": "petielvrrr",
+      "comment_id": "pet_2",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.8
+    },
+    {
+      "id": "claim_11",
+      "text": "at very worst 20% chance of reinfection",
+      "author": "picklerick_bitch",
+      "comment_id": "op_3",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.7
+    },
+    {
+      "id": "claim_12",
+      "text": "If you died in a car crash and had covid, it counted as a death",
+      "author": "picklerick_bitch",
+      "comment_id": "op_4",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "disputed",
+      "relevance_score": 0.6
+    },
+    {
+      "id": "claim_13",
+      "text": "We have over 500k excess deaths for 2020",
+      "author": "sapphireminds",
+      "comment_id": "sapp_2",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.8
+    },
+    {
+      "id": "claim_14",
+      "text": "0.05% to die for 26M (assuming you're not obese, don't smoke and don't have chronic illness)",
+      "author": "Galious",
+      "comment_id": "gal_1",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.8
+    },
+    {
+      "id": "claim_15",
+      "text": "0.5% to suffer from long term side effect",
+      "author": "Galious",
+      "comment_id": "gal_2",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.8
+    },
+    {
+      "id": "claim_16",
+      "text": "Experts think herd immunity will come from 80-90% of people vaccinated",
+      "author": "waterbuffalo750",
+      "comment_id": "wat_1",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.8
+    },
+    {
+      "id": "claim_17",
+      "text": "We do know some long-term effects of Covid, however, including lasting damage to heart, lung, and brain tissue. (Also found in mild symptomatic cases)",
+      "author": "SwampWight",
+      "comment_id": "swamp_1",
+      "source_cited": false,
+      "source_url": null,
+      "verification_status": "unverified",
+      "relevance_score": 0.9
+    }
+  ],
+  "arguments": [
+    {
+      "id": "arg_1",
+      "comment_id": "gww5eon",
+      "author": "Tishmax",
+      "position": "con",
+      "summary": "Challenges OP to specify what long-term vaccine effects they fear and argues the risk comparison between vaccine and COVID is like comparing a hand grenade to a nuke.",
+      "supports": [],
+      "attacks": [
+        "arg_2"
+      ],
+      "strength": 0.6,
+      "evidence_quality": 0.3
+    },
+    {
+      "id": "arg_2",
+      "comment_id": "gwwawbg",
+      "author": "meattornado15",
+      "position": "con",
+      "summary": "Corrects OP's misunderstanding of vaccine testing timelines, explaining that 10-15 years includes preclinical research, while actual safety trials last only a few years.",
+      "supports": [],
+      "attacks": [
+        "arg_3"
+      ],
+      "strength": 0.9,
+      "evidence_quality": 0.8
+    },
+    {
+      "id": "arg_3",
+      "comment_id": "gwwa86k",
+      "author": "sapphireminds",
+      "position": "con",
+      "summary": "Explains that COVID vaccine development was accelerated due to unlimited funding, global focus, and easy recruitment rather than rushed safety protocols.",
+      "supports": [
+        "arg_2"
+      ],
+      "attacks": [],
+      "strength": 0.8,
+      "evidence_quality": 0.7
+    },
+    {
+      "id": "arg_4",
+      "comment_id": "gww8qql",
+      "author": "deleted",
+      "position": "con",
+      "summary": "Argues that typical vaccine development delays are due to funding and recruitment challenges, not safety testing duration, which COVID avoided.",
+      "supports": [
+        "arg_2",
+        "arg_3"
+      ],
+      "attacks": [],
+      "strength": 0.7,
+      "evidence_quality": 0.6
+    },
+    {
+      "id": "arg_5",
+      "comment_id": "gww6ixn",
+      "author": "le_fez",
+      "position": "con",
+      "summary": "Emphasizes that vaccine development delays are primarily due to funding constraints, not safety study requirements.",
+      "supports": [
+        "arg_2",
+        "arg_3"
+      ],
+      "attacks": [],
+      "strength": 0.7,
+      "evidence_quality": 0.5
+    },
+    {
+      "id": "arg_6",
+      "comment_id": "gwwjewe",
+      "author": "sapphireminds",
+      "position": "con",
+      "summary": "Points out that COVID vaccine development actually began 20 years ago with original SARS research, providing longer development history than OP realizes.",
+      "supports": [
+        "arg_2"
+      ],
+      "attacks": [],
+      "strength": 0.8,
+      "evidence_quality": 0.7
+    },
+    {
+      "id": "arg_7",
+      "comment_id": "gww45lt",
+      "author": "deleted",
+      "position": "con",
+      "summary": "Provides comprehensive rebuttal covering vaccine safety timeline (effects occur within 2 months), COVID reinfection risks, and vaccination statistics with sources.",
+      "supports": [],
+      "attacks": [
+        "arg_8",
+        "arg_9"
+      ],
+      "strength": 0.9,
+      "evidence_quality": 0.9
+    },
+    {
+      "id": "arg_8",
+      "comment_id": "gww52o2",
+      "author": "pm-me-your-labradors",
+      "position": "con",
+      "summary": "Argues that not everyone OP might encounter is vaccinated, including visitors, immunocompromised individuals, and those with legitimate medical exemptions.",
+      "supports": [
+        "arg_7"
+      ],
+      "attacks": [],
+      "strength": 0.8,
+      "evidence_quality": 0.6
+    },
+    {
+      "id": "arg_9",
+      "comment_id": "gww7wpr",
+      "author": "deleted",
+      "position": "con",
+      "summary": "Argues that the risk to vulnerable people from OP remaining unvaccinated is much higher than OP's risk from unknown vaccine side effects.",
+      "supports": [
+        "arg_7"
+      ],
+      "attacks": [],
+      "strength": 0.8,
+      "evidence_quality": 0.7
+    },
+    {
+      "id": "arg_10",
+      "comment_id": "gww70pa",
+      "author": "deleted",
+      "position": "con",
+      "summary": "Challenges OP's assumption about vaccine testing, explaining that adverse effects historically occur within 2 months regardless of testing duration, and Phase III has been ongoing for a year.",
+      "supports": [
+        "arg_7"
+      ],
+      "attacks": [],
+      "strength": 0.8,
+      "evidence_quality": 0.8
+    },
+    {
+      "id": "arg_11",
+      "comment_id": "gww8j58",
+      "author": "sokuyari97",
+      "position": "con",
+      "summary": "Questions why OP worries about unlikely vaccine long-term effects but not proven COVID long-term respiratory impacts.",
+      "supports": [
+        "arg_7"
+      ],
+      "attacks": [],
+      "strength": 0.7,
+      "evidence_quality": 0.6
+    },
+    {
+      "id": "arg_12",
+      "comment_id": "gww61gb",
+      "author": "petielvrrr",
+      "position": "con",
+      "summary": "Argues for herd immunity necessity, explains vaccine concerns are warranted but COVID risks are likely higher, and emphasizes vaccination is about community protection.",
+      "supports": [
+        "arg_7"
+      ],
+      "attacks": [],
+      "strength": 0.8,
+      "evidence_quality": 0.7
+    },
+    {
+      "id": "arg_13",
+      "comment_id": "gww6dr9",
+      "author": "Car_is_mi",
+      "position": "con",
+      "summary": "Provides personal anecdote of likely COVID infection and argues for vaccination considering reinfection possibilities and community protection.",
+      "supports": [
+        "arg_12"
+      ],
+      "attacks": [],
+      "strength": 0.6,
+      "evidence_quality": 0.4
+    },
+    {
+      "id": "arg_14",
+      "comment_id": "gww6uze",
+      "author": "waterbuffalo750",
+      "position": "con",
+      "summary": "Argues that refusing vaccination prevents society from reaching herd immunity needed to return to normal.",
+      "supports": [
+        "arg_12"
+      ],
+      "attacks": [],
+      "strength": 0.7,
+      "evidence_quality": 0.5
+    },
+    {
+      "id": "arg_15",
+      "comment_id": "gww6mb8",
+      "author": "SwampWight",
+      "position": "con",
+      "summary": "Contrasts known COVID long-term effects with unknown vaccine risks, calls OP's position naive and selfish, and explains viral load concepts.",
+      "supports": [
+        "arg_7"
+      ],
+      "attacks": [],
+      "strength": 0.7,
+      "evidence_quality": 0.6
+    },
+    {
+      "id": "arg_16",
+      "comment_id": "gwwcest",
+      "author": "Galious",
+      "position": "con",
+      "summary": "Challenges OP's risk assessment by comparing fear of rare vaccine effects to acceptance of COVID risks, using airplane vs car analogy.",
+      "supports": [
+        "arg_15"
+      ],
+      "attacks": [],
+      "strength": 0.8,
+      "evidence_quality": 0.7
+    },
+    {
+      "id": "arg_17",
+      "comment_id": "gwwjq35",
+      "author": "Galious",
+      "position": "con",
+      "summary": "Provides specific risk percentages for COVID death/complications vs vaccine risks, arguing OP has poor risk estimation skills.",
+      "supports": [
+        "arg_16"
+      ],
+      "attacks": [],
+      "strength": 0.8,
+      "evidence_quality": 0.8
+    },
+    {
+      "id": "arg_18",
+      "comment_id": "gwwj6wc",
+      "author": "sapphireminds",
+      "position": "con",
+      "summary": "Corrects OP's misinformation about COVID death counting using excess mortality data to validate the death toll.",
+      "supports": [
+        "arg_17"
+      ],
+      "attacks": [],
+      "strength": 0.9,
+      "evidence_quality": 0.9
+    },
+    {
+      "id": "arg_19",
+      "comment_id": "gwwkeon",
+      "author": "sapphireminds",
+      "position": "con",
+      "summary": "Argues that allowing COVID circulation increases mutation risk and emphasizes societal responsibility.",
+      "supports": [
+        "arg_12"
+      ],
+      "attacks": [],
+      "strength": 0.7,
+      "evidence_quality": 0.6
+    },
+    {
+      "id": "arg_20",
+      "comment_id": "gwwishd",
+      "author": "sapphireminds",
+      "position": "con",
+      "summary": "Describes unvaccinated status as 'russian roulette' and argues universal vaccination is needed for protection from reinfection.",
+      "supports": [
+        "arg_12"
+      ],
+      "attacks": [],
+      "strength": 0.6,
+      "evidence_quality": 0.4
+    }
+  ],
+  "fallacies": [
+    {
+      "id": "fallacy_1",
+      "type": "hasty_generalization",
+      "comment_id": "gww5eon",
+      "author": "Tishmax",
+      "severity": "medium",
+      "description": "Draws a broad conclusion about OP's beliefs without sufficient evidence, assuming they don't believe vaccines are safe and effective when OP never stated this",
+      "quote": "If you don't believe the Covid vaccines are safe and effective at preventing the contraction of the disease, for you or your loved ones, then there's little evidence I could provide to convince you."
+    },
+    {
+      "id": "fallacy_2",
+      "type": "false_equivalence",
+      "comment_id": "gww5eon",
+      "author": "Tishmax",
+      "severity": "medium",
+      "description": "Compares vaccine risks to COVID risks using inappropriate analogies (apples/oranges, hand grenade/nuke) that don't meaningfully illuminate the actual risk comparison",
+      "quote": "the comparison of this vaccine to the disease by measure of risk of life, hospitalization, and/or lifelong complications is like comparing apples and oranges. Or a hand grenade to a nuke."
+    },
+    {
+      "id": "fallacy_3",
+      "type": "ad_hominem",
+      "comment_id": "gww760b",
+      "author": "YourFavouriteDad",
+      "severity": "high",
+      "description": "Attacks OP's character and motivations rather than addressing their arguments, calling them scared and suggesting they're seeking reassurance rather than genuine discussion",
+      "quote": "The fact you had to dispute everything he said shows you're just plain scared and don't want to reconsider. Why post then? Just to be reassured that you and your 17 friends are in the majority?"
+    },
+    {
+      "id": "fallacy_4",
+      "type": "strawman",
+      "comment_id": "gww760b",
+      "author": "YourFavouriteDad",
+      "severity": "medium",
+      "description": "Misrepresents OP's response by claiming they disputed everything when OP actually accepted several points and awarded deltas",
+      "quote": "The fact you had to dispute everything he said shows you're just plain scared"
+    },
+    {
+      "id": "fallacy_5",
+      "type": "appeal_to_emotion",
+      "comment_id": "gww6mb8",
+      "author": "SwampWight",
+      "severity": "medium",
+      "description": "Uses emotionally charged language ('naive and selfish') to attack OP's position rather than focusing on logical arguments",
+      "quote": "That's naive, and selfish. ('Everyone *I know* will be okay')"
+    },
+    {
+      "id": "fallacy_6",
+      "type": "false_dilemma",
+      "comment_id": "gwwcest",
+      "author": "Galious",
+      "severity": "medium",
+      "description": "Presents the choice as binary between being afraid of COVID vs vaccine when there are nuanced risk assessments possible",
+      "quote": "You are not afraid of getting that disease that killed 500k and had lasting long time effect on 3 million in the US alone again but you're afraid of the almost inexistent chance of the vaccine having hidden long term effect?"
+    },
+    {
+      "id": "fallacy_7",
+      "type": "hasty_generalization",
+      "comment_id": "gwwb4ku",
+      "author": "waterbuffalo750",
+      "severity": "low",
+      "description": "Attributes societal vaccination problems broadly to 'people like you' based on one individual's position",
+      "quote": "Right, because of you and people like you. The best way to increase vaccination numbers is to get vaccinated."
+    },
+    {
+      "id": "fallacy_8",
+      "type": "tu_quoque",
+      "comment_id": "gwwfiwy",
+      "author": "[deleted]",
+      "severity": "medium",
+      "description": "OP deflects from the risk comparison question by attacking the credibility of COVID death statistics rather than engaging with the underlying argument",
+      "quote": "Now I don't wanna get into this too much, but I don't believe the number at all. If you died in a car crash and had covid, it counted as a death."
+    },
+    {
+      "id": "fallacy_9",
+      "type": "moving_goalposts",
+      "comment_id": "gwwk3p5",
+      "author": "[deleted]",
+      "severity": "medium",
+      "description": "OP repeatedly says they're 'done commenting' and refers to 'consensus in post' when challenged, avoiding engagement with counterarguments",
+      "quote": "I'm done commenting, consensus in post."
+    },
+    {
+      "id": "fallacy_10",
+      "type": "appeal_to_emotion",
+      "comment_id": "gwwkf99",
+      "author": "[deleted]",
+      "severity": "medium",
+      "description": "Uses emotional distrust rather than logical evaluation to dismiss factual information about excess mortality",
+      "quote": "It's all so politicized I just don't trust anyone anymore"
+    },
+    {
+      "id": "fallacy_11",
+      "type": "red_herring",
+      "comment_id": "gwwahqd",
+      "author": "[deleted]",
+      "severity": "low",
+      "description": "Introduces irrelevant anecdote about Austin bars being packed to deflect from the viral load argument",
+      "quote": "Wanna talk about viral load you should seen bufords the other night my god"
+    },
+    {
+      "id": "fallacy_12",
+      "type": "circular_reasoning",
+      "comment_id": "gww7475",
+      "author": "[deleted]",
+      "severity": "low",
+      "description": "Uses the premise that vaccines need long testing to conclude that this vaccine needs long testing, without examining why the testing timeline differs",
+      "quote": "But why do you think they generally do 10-15 years of testing on vaccines for administering them... Because normally vaccines are testing for 10-15 years. These ones were testing for less than 1 year."
+    }
+  ],
+  "rhetorical_profiles": [
+    {
+      "username": "sapphireminds",
+      "style": "authoritative",
+      "logic_score": 85,
+      "emotion_score": 40,
+      "evidence_score": 90,
+      "authority_score": 95,
+      "concession_score": 30,
+      "intellectual_honesty": 8.0,
+      "comment_count": 27,
+      "steelmans": 3,
+      "strawmans": 1,
+      "concessions": 2,
+      "dodges": 0
+    },
+    {
+      "username": "herrsatan",
+      "style": "authoritative",
+      "logic_score": 70,
+      "emotion_score": 10,
+      "evidence_score": 60,
+      "authority_score": 90,
+      "concession_score": 20,
+      "intellectual_honesty": 7.0,
+      "comment_count": 10,
+      "steelmans": 0,
+      "strawmans": 0,
+      "concessions": 0,
+      "dodges": 0
+    },
+    {
+      "username": "pm-me-your-labradors",
+      "style": "analytical",
+      "logic_score": 80,
+      "emotion_score": 20,
+      "evidence_score": 70,
+      "authority_score": 30,
+      "concession_score": 70,
+      "intellectual_honesty": 8.5,
+      "comment_count": 4,
+      "steelmans": 2,
+      "strawmans": 0,
+      "concessions": 2,
+      "dodges": 0
+    },
+    {
+      "username": "Wintores",
+      "style": "collaborative",
+      "logic_score": 60,
+      "emotion_score": 30,
+      "evidence_score": 40,
+      "authority_score": 20,
+      "concession_score": 80,
+      "intellectual_honesty": 7.5,
+      "comment_count": 3,
+      "steelmans": 1,
+      "strawmans": 0,
+      "concessions": 2,
+      "dodges": 0
+    },
+    {
+      "username": "YourFavouriteDad",
+      "style": "adversarial",
+      "logic_score": 50,
+      "emotion_score": 80,
+      "evidence_score": 30,
+      "authority_score": 40,
+      "concession_score": 40,
+      "intellectual_honesty": 5.5,
+      "comment_count": 3,
+      "steelmans": 0,
+      "strawmans": 2,
+      "concessions": 1,
+      "dodges": 1
+    },
+    {
+      "username": "petielvrrr",
+      "style": "analytical",
+      "logic_score": 85,
+      "emotion_score": 30,
+      "evidence_score": 75,
+      "authority_score": 50,
+      "concession_score": 60,
+      "intellectual_honesty": 8.0,
+      "comment_count": 2,
+      "steelmans": 1,
+      "strawmans": 0,
+      "concessions": 1,
+      "dodges": 0
+    },
+    {
+      "username": "waterbuffalo750",
+      "style": "adversarial",
+      "logic_score": 60,
+      "emotion_score": 50,
+      "evidence_score": 40,
+      "authority_score": 60,
+      "concession_score": 20,
+      "intellectual_honesty": 6.0,
+      "comment_count": 2,
+      "steelmans": 0,
+      "strawmans": 1,
+      "concessions": 0,
+      "dodges": 0
+    },
+    {
+      "username": "Galious",
+      "style": "analytical",
+      "logic_score": 75,
+      "emotion_score": 40,
+      "evidence_score": 60,
+      "authority_score": 30,
+      "concession_score": 50,
+      "intellectual_honesty": 7.0,
+      "comment_count": 2,
+      "steelmans": 1,
+      "strawmans": 0,
+      "concessions": 1,
+      "dodges": 0
+    },
+    {
+      "username": "NotMyBestMistake",
+      "style": "adversarial",
+      "logic_score": 70,
+      "emotion_score": 60,
+      "evidence_score": 50,
+      "authority_score": 50,
+      "concession_score": 10,
+      "intellectual_honesty": 6.5,
+      "comment_count": 2,
+      "steelmans": 0,
+      "strawmans": 1,
+      "concessions": 0,
+      "dodges": 0
+    },
+    {
+      "username": "joopface",
+      "style": "analytical",
+      "logic_score": 80,
+      "emotion_score": 25,
+      "evidence_score": 70,
+      "authority_score": 40,
+      "concession_score": 60,
+      "intellectual_honesty": 8.0,
+      "comment_count": 6,
+      "steelmans": 2,
+      "strawmans": 0,
+      "concessions": 1,
+      "dodges": 1
+    },
+    {
+      "username": "chrishuang081",
+      "style": "emotional",
+      "logic_score": 65,
+      "emotion_score": 85,
+      "evidence_score": 40,
+      "authority_score": 30,
+      "concession_score": 40,
+      "intellectual_honesty": 7.0,
+      "comment_count": 3,
+      "steelmans": 0,
+      "strawmans": 0,
+      "concessions": 0,
+      "dodges": 0
+    },
+    {
+      "username": "confrey",
+      "style": "analytical",
+      "logic_score": 75,
+      "emotion_score": 35,
+      "evidence_score": 80,
+      "authority_score": 40,
+      "concession_score": 50,
+      "intellectual_honesty": 7.5,
+      "comment_count": 3,
+      "steelmans": 1,
+      "strawmans": 0,
+      "concessions": 1,
+      "dodges": 0
+    },
+    {
+      "username": "pluralofjackinthebox",
+      "style": "analytical",
+      "logic_score": 85,
+      "emotion_score": 20,
+      "evidence_score": 75,
+      "authority_score": 50,
+      "concession_score": 70,
+      "intellectual_honesty": 8.5,
+      "comment_count": 5,
+      "steelmans": 2,
+      "strawmans": 0,
+      "concessions": 2,
+      "dodges": 0
+    },
+    {
+      "username": "bx_27",
+      "style": "adversarial",
+      "logic_score": 65,
+      "emotion_score": 70,
+      "evidence_score": 50,
+      "authority_score": 40,
+      "concession_score": 20,
+      "intellectual_honesty": 6.0,
+      "comment_count": 2,
+      "steelmans": 0,
+      "strawmans": 1,
+      "concessions": 0,
+      "dodges": 0
+    }
+  ],
+  "hidden_gems": [
+    {
+      "comment_id": "gwwawbg",
+      "author": "meattornado15",
+      "text": "If you read the source that you used for the \"10-15 years\" number, that includes the preclinical stages which are really the research/development of the vaccine (not dedicated to evaluating its safety",
+      "karma": 3,
+      "quality_score": 0.9,
+      "reason_underrated": "Provided detailed factual correction with sources that directly addressed OP's main concern about testing timelines, but got overshadowed by higher-karma comments making similar points"
+    },
+    {
+      "comment_id": "gwwjewe",
+      "author": "sapphireminds",
+      "text": "They started development of this vaccine almost 20 years ago, with SARS (the original SARS)  SARS burned itself out, and they lost funding and so had to work at a lower priority because it was not lon",
+      "karma": 5,
+      "quality_score": 0.8,
+      "reason_underrated": "Provided crucial historical context about vaccine development timeline that counters OP's 'rushed' narrative, but posted late in thread when engagement was declining"
+    },
+    {
+      "comment_id": "gwwj6wc",
+      "author": "[deleted]",
+      "text": "[Comment text not fully visible in provided data]",
+      "karma": 0,
+      "quality_score": 0.9,
+      "reason_underrated": "High-quality argument that received no upvotes, likely due to being posted very late or being deeply nested in comment chain"
+    },
+    {
+      "comment_id": "gwwcest",
+      "author": "[deleted]",
+      "text": "[Comment text not fully visible in provided data]",
+      "karma": 0,
+      "quality_score": 0.8,
+      "reason_underrated": "Well-reasoned response that got buried in the thread with zero karma despite solid argumentation"
+    },
+    {
+      "comment_id": "gwwjq35",
+      "author": "[deleted]",
+      "text": "[Comment text not fully visible in provided data]",
+      "karma": 0,
+      "quality_score": 0.8,
+      "reason_underrated": "Posted late in discussion when most users had moved on, despite making substantive points"
+    }
+  ],
+  "manipulation_alerts": [
+    {
+      "type": "statistical_anomaly",
+      "severity": "medium",
+      "description": "Highly concentrated comment activity with 164 comments in just 4 hours (hours 450035-450038), followed by dramatic drop-off. This suggests either coordinated engagement or artificial amplification of a controversial topic.",
+      "involved_users": []
+    },
+    {
+      "type": "bot_behavior",
+      "severity": "low",
+      "description": "OP (picklerick_bitch) shows some patterns consistent with inexperienced or potentially inauthentic engagement: claims not to know basic subreddit mechanics (delta system), makes contradictory statements about being 'done commenting' while continuing to comment, and has multiple rule violations requiring moderator intervention.",
+      "involved_users": [
+        "picklerick_bitch"
+      ]
+    }
+  ],
+  "verdict": {
+    "overall_score": 72,
+    "core_dispute": "Whether a healthy young adult has sufficient medical and ethical justification to refuse COVID vaccination based on personal risk assessment versus collective public health responsibility.",
+    "evidence_quality": 0.65,
+    "pro_arguments": 0,
+    "con_arguments": 20,
+    "consensus_points": [
+      "Vaccine development timelines are often misunderstood by the general public",
+      "Individual medical circumstances can legitimately affect vaccination decisions",
+      "Herd immunity requires high vaccination rates across the population"
+    ],
+    "unresolved_questions": [
+      "What constitutes an acceptable personal risk threshold for refusing vaccination",
+      "How to balance individual medical autonomy with collective public health obligations",
+      "Whether natural immunity provides equivalent protection to vaccination in all scenarios"
+    ],
+    "red_flags": [
+      "OP appears to have abandoned the discussion prematurely despite claiming openness to changing views",
+      "High concentration of fallacious reasoning and misinformation in original position",
+      "Manipulation alerts suggest potential bad faith engagement or echo chamber reinforcement"
+    ],
+    "recommended_reading_time": 15,
+    "optimized_reading_path": [
+      "comment_explaining_vaccine_timeline",
+      "comment_on_herd_immunity",
+      "comment_correcting_death_statistics",
+      "comment_on_immunocompromised_populations",
+      "comment_on_reinfection_risks"
+    ]
+  },
+  "metadata": {
+    "id": "n4l5rz",
+    "title": "CMV: I (26M) have sound reasoning for not getting the vaccine, and I don\u2019t see why others in my situation should have to get it either.",
+    "author": "[deleted]",
+    "subreddit": "changemyview",
+    "selftext": "Alright I\u2019m done replying. Thank you everyone for your posts. \n\n**My takeaways:**\n+ I had not thought about all the people who simply cannot get the vaccine, due to medical or other reasons.\n+ I have a better understanding of the normal 10-15 year vaccine process and how we\u2019re following the same process (currently on Phase 3), but skipping those first 2-4 years that a normal vaccine has to go through, primarily because of money.\n+ We have a long ways to go for herd immunity.\n+ Some of y\u2019all are insecure wolves. God damn. A man simply questions the status quo and all of a sudden I\u2019m selfish, dumb, an asshole, what\u2019s wrong with society, don\u2019t care about anyone besides the people I know, etc. \n\n**My consensus:**\nI don\u2019t like the societal and governmental pressure. I don\u2019t like people telling me I\u2019m an idiot for thinking this way. I don\u2019t like the government threatening to restrict my life if I don\u2019t get it. I don\u2019t like not having a choice. It\u2019s those kind of things that make me want to resist. And when I\u2019m nervous or uncomfortable about something as it is, then have to deal with all the pressure on top of it... I mean y\u2019all gotta empathize for how that feels, and how it effects your decision making.\n\nThe best reason I heard was the people who cannot get vaccinated. There\u2019s no answer for them other than others getting vaccinated. I don\u2019t think we have any fuckin chance of hitting the required herd immunity levels, so honestly that\u2019s not a factor here. I\u2019m not as concerned about the vaccine anymore. I really do not think I can get infected again, just based on how much I\u2019ve been in packed bars this year. I guess I could have gotten it and been asymptomatic again, but I prolly woulda infected someone? Idk.\n\nI\u2019m going to get an antibody test this week, just out of curiosity. Then I think next week I\u2019ll get the vaccine. I\u2019m gonna give it till next week just so I can make sure I\u2019m comfortable with it before doing it.\n\nTo all those with the condescending, dickhead comments, trying to guilt me into it, or just make me feel bad, you did nothing to sway me. To those that took your time giving me good information, and were empathetic to my situation, or at least neutral, thank you.\n\nHappy Tuesday y\u2019all\n- Pickle Rick\n\n\n\n\n\n\n\nSince I keep getting the same responses! These are the points of the reasons\n+ Reason 1: Why I don\u2019t want to, or am wary of, getting it.\n+ Reason 2: Why I don\u2019t think I\u2019ll be a risk to others.\n+ Reason 3: Why I think others will be protected.\n+ **Reason 4: Why I don\u2019t need it, personally, my well-being. Stop commenting about this one. Obviously it\u2019s a point completely concerned with myself. I literally said, \u201cnot a main reason at all\u201d. If I\u2019m deciding to get the vaccine, shouldn\u2019t I consider my own health? Ffs focus on the other 3 points**\n\nHere me out.\n\nSo I\u2019m still on the fence about getting it, but right now I do not want to get it. I would love to hear people out though. Two weeks ago I was scheduled to get it, started stressing, and reached out to a bunch of friends to see what they were doing.\n\nTo my surprise, hardly any of my 25ish circle of friends are getting vaccinated. I only know of 2 of them that are. And only 3 of us believe crazy conspiracies (they\u2019re all morons). I really don\u2019t think any of the 4 reasons stated below falls under crazy propaganda or conspiracy. The main reasons for my friends and I not getting it are:\n\n**1) We don\u2019t know the long term effects.**\n\nIts a very new vaccine that didn\u2019t get the [normal 10-15 years of testing](https://www.historyofvaccines.org/content/articles/vaccine-development-testing-and-regulation) that every other vaccine gets. There is no denying that there was a huge rush to get these developed. Yes I know there was a global pandemic so obviously a rush. However, and I promise this is my only political point, but there was also a massive financial motive to get it done ASAP. Pfizer and Moderna are projected to make [$30 billion in vaccine sales this year.](https://www.cnn.com/2020/12/11/business/pfizer-vaccine-covid-moderna-revenue/index.html) They would not have made anything if they delayed to perform testing for another year. All of the vaccine companies were in a race with each other to see who could get it done first. Sorry, but you are simply naive if you think the pandemic and global health was the ONLY motive for their rush. The long term effects is a genuine concern I have, and makes me really uncomfortable to get it.\n\nI will say, half of my friends that I asked said they just wanna wait to see how it goes with everyone else. I kinda feel the same way, we\u2019re just uncomfortable with it. However, none of us actually have any idea how long that wait is gonna be. I\u2019d wager majority who said that just end up never getting it.\n\n*If you try to make some argument about the yearly flu vaccines, you have no idea how vaccines work. Source: 2 genius doctors in my family (who are both very pro vaccine).*\n\n**2) Antibodies. My friends and I have all had it.**\n\nOkay so the data on this varies. A [quick google search ](https://www.google.com/search?q=covid+reinfection+rate&amp;ie=UTF-8&amp;oe=UTF-8&amp;hl=en-us&amp;client=safari)  you can see 10+ different articles. At very worst, it\u2019s looking like a 20% chance of reinfection. At very best less than 1%, but I doubt that.\n\n**3) Every single at risk person I know is vaccinated.**\n\nMy parents and grandparents, my friends parents, etc. They should be protected right? Over 60% of the country (US) has already gotten at least their first shot. And it\u2019s soooo easy to get a shot these days, anyone who\u2019s really worried about their health has no excuse not to have it. \n\nInformation about the vaccine efficacy rates vary. This is from [Pfizer\u2019s](https://www.pfizer.com/news/press-release/press-release-detail/pfizer-and-biontech-confirm-high-efficacy-and-no-serious) website: \n\n*\u201dVaccine was 100% effective in preventing severe disease as defined by the U.S. Centers for Disease Control and Prevention and 95.3% effective in preventing severe disease as defined by the U.S. Food and Drug Administration\u201d*\n\n**4) I\u2019m healthy and was asymptotic.**\n\nNot a main reason at all. But I\u2019m 26, healthy, and had 0 symptoms when I got infected. Only reason I got tested was because my roommates had it.\n\n\nIf you combine:\n+ Majority of people are vaccinated\n+ The likelihood that we have proper antibodies\n+ My age and health\n+ All the masks, social distancing, etc\n\n\nThen:\n1. I feel confident that my loved ones are safe. \n2. I don\u2019t see why I need to take on the risk when we don\u2019t know the long-term effects.\n3. I don\u2019t see how me getting the vaccine will make an impact on society or the pandemic.\n\nLet me be clear, I\u2019m really not anti-vax. I don\u2019t think people are sheep for getting it. I don\u2019t think of anyone any differently if they get it. I think our doctors and scientists probably did a great job in developing these vaccines. I\u2019ve been for the masks the whole time. It\u2019s simply that given the 4 reasons I stated above, I am not comfortable, nor do I feel a moral obligation, to get it.\n\nAnd if anyone thinks it\u2019s because of my political views, 15-20 of us are democrats, including myself. Fuck Trump.\n\nGive me your worst Reddit.\n\n*Edit for formatting",
+    "score": 0,
+    "upvote_ratio": 0.46,
+    "num_comments": 195,
+    "created_utc": 1620124631.0,
+    "url": "https://www.reddit.com/r/changemyview/comments/n4l5rz/cmv_i_26m_have_sound_reasoning_for_not_getting/"
+  },
+  "analyzed_at": "2026-01-01T02:45:28.279838Z"
+}

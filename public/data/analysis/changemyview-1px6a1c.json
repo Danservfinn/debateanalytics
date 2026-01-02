@@ -1,0 +1,3252 @@
+{
+  "data": {
+    "threadId": "changemyview-1px6a1c",
+    "subreddit": "changemyview",
+    "title": "CMV: Beef tallow is propaganda by Big Beef",
+    "author": "unidentified_lover",
+    "commentCount": 150,
+    "createdAt": "2025-12-27T19:27:39.000Z",
+    "url": "https://reddit.com/r/changemyview/comments/1px6a1c/cmv_beef_tallow_is_propaganda_by_big_beef/",
+    "verdict": {
+      "overallScore": 4.8,
+      "summary": "CON side generally prevails (4 vs 1 debates won)",
+      "evidenceQualityPct": 99,
+      "civilityScore": 8.4,
+      "worthReading": false
+    },
+    "debates": [
+      {
+        "id": "debate_nw8my67",
+        "title": "Is Beef Tallow a Big Beef Marketing Scheme?",
+        "keyClash": "Whether beef tallow's popularity surge is genuine health improvement or corporate manipulation of food waste into profit.",
+        "rootCommentId": "nw8my67",
+        "winner": "con",
+        "winnerReason": "CON arguments stronger (5.5 vs 4.5)",
+        "proScore": 4.5,
+        "conScore": 5.5,
+        "replyCount": 47,
+        "heatLevel": 7.5,
+        "replies": [
+          {
+            "id": "nwd85to",
+            "author": "Adorable-Volume2247",
+            "text": "I'm a butcher. Tallow and fat are the same thing. It is butter and ghee, and your a dick for thinking that is a gotcha.\n\nI own a deep fryer I use all the time. There is 0 difference in taste for anything I've tried, but the price is 3x per ml (I usually use peanut oil). I seriously doubt anyone will see any \"health benefits\" from the oil they fry with. Same thing with \"pink Himalayan salt\"; to get any benefits from that, youd have so eat so much you end up in the hospital.",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 246,
+            "createdAt": "2025-12-28T14:27:06.000Z",
+            "claims": [
+              "Beef fat and tallow are different things",
+              "America uses unhealthy fry oils banned in Europe",
+              "This is a cost saving measure",
+              "Businesses don't throw away byproducts"
+            ],
+            "fallacies": [
+              {
+                "type": "Ad hominem",
+                "quote": "this isnt a product for you",
+                "severity": "low"
+              },
+              {
+                "type": "False premise",
+                "quote": "Businesses never ever throw away byproducts",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwgc51q",
+            "author": "Low_Television_7298",
+            "text": "Americans have an obsession with making unhealthy food healthy, it’s so ridiculous\n\nDon’t deep fry your food in seed oils! Do it in animal fat! We have to take artificial dyes out of our food! Then skittles and hot Cheetos will be so much better! \n\nLike come on dude, I know you’re not getting your daily fruits and veggies so just stop talking about health",
+            "position": "neutral",
+            "positionIntensity": 5,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nwd85to",
+            "depth": 3,
+            "karma": 16,
+            "createdAt": "2025-12-28T23:50:16.000Z",
+            "claims": [
+              "Tallow and fat are the same thing",
+              "There is no taste difference but price is 3x higher",
+              "No health benefits from frying oil choice",
+              "Pink Himalayan salt comparison"
+            ],
+            "fallacies": [
+              {
+                "type": "Ad hominem",
+                "quote": "your a dick for thinking that is a gotcha",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwedk79",
+            "author": "BigMax",
+            "text": "\\&gt; Tallow and fat are the same thing.\n\nExactly.   Granted, tallow is a 'purified' version generally.  You can say \"beef fat\" and it's just a pile of the discarded fat bits from trimming beef.  Tallow is generally that same thing, but melted down and strained/purified to be more just pure fat.",
+            "position": "pro",
+            "positionIntensity": 8,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nwd85to",
+            "depth": 3,
+            "karma": 55,
+            "createdAt": "2025-12-28T18:02:03.000Z",
+            "claims": [
+              "Americans obsess over making unhealthy food healthy",
+              "People focus on wrong health aspects while ignoring basics like fruits and vegetables"
+            ],
+            "fallacies": [
+              {
+                "type": "Strawman",
+                "quote": "I know you're not getting your daily fruits and veggies",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwhmfgf",
+            "author": "Whatusedtobeisnomore",
+            "text": "Is it not specifically fat from around the kidneys? I swear I read that ages ago when I was trying a traditional British recipe. It was impossible at the time to track down tallow, now it's everywhere.",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nwedk79",
+            "depth": 4,
+            "karma": 3,
+            "createdAt": "2025-12-29T04:13:57.000Z",
+            "claims": [
+              "Tallow is purified beef fat",
+              "Tallow is melted down and strained fat trimmings"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwhwc7v",
+            "author": "Fats_Tetromino",
+            "text": "That's called suet",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nwhmfgf",
+            "depth": 5,
+            "karma": 12,
+            "createdAt": "2025-12-29T05:18:58.000Z",
+            "claims": [
+              "Tallow might be specifically fat from around kidneys",
+              "Tallow was hard to find before but is everywhere now"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwxy3fe",
+            "author": "Adorable-Volume2247",
+            "text": "&gt;specifically fat from around the kidneys?\n\nSuet. All suet is tallow, now all tallow is suet. That is the best fat, same with pigs where they call it \"leaf lard\". \nSome stores mark fat trimmings as suet. That is wrong.",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nwhmfgf",
+            "depth": 5,
+            "karma": 1,
+            "createdAt": "2025-12-31T17:08:56.000Z",
+            "claims": [
+              "Kidney fat is called suet"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nweh2la",
+            "author": "classic4life",
+            "text": "It's heated. That's it. Any assumptions of purification are on the consumer.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nwedk79",
+            "depth": 4,
+            "karma": 17,
+            "createdAt": "2025-12-28T18:18:35.000Z",
+            "claims": [
+              "All suet is tallow but not all tallow is suet",
+              "Suet is the best fat",
+              "Some stores incorrectly label fat trimmings as suet"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwesjyo",
+            "author": "looshface",
+            "text": "It's purified as in the meat bits are strained out so it is pure lipid from the beef. It is factually purified. Pure is not some code for healthy. White sugar is also purified. That's what purification means.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nweh2la",
+            "depth": 5,
+            "karma": 28,
+            "createdAt": "2025-12-28T19:11:36.000Z",
+            "claims": [
+              "Tallow is just heated fat",
+              "Purification assumptions are on the consumer"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwfwuj2",
+            "author": "BigMax",
+            "text": "Exactly.  It's wrong to just say \"it's heated\" because heating it up wouldn't do anything at all really.  There is *some* purification as you say, to remove meat bits and other things.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nwesjyo",
+            "depth": 6,
+            "karma": 11,
+            "createdAt": "2025-12-28T22:28:57.000Z",
+            "claims": [
+              "Tallow is purified by straining out meat bits",
+              "Pure doesn't mean healthy",
+              "White sugar is also purified"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwgbsxf",
+            "author": "abarcsa",
+            "text": "Right, and milk is just heated, that obviously makes no difference in the end product compared to raw milk. Wait you can’t make cheese out of UHT milk.\n\nDid you know that tallow is used in some shaving soaps? If you think that pure fat straight trimmed from the meat gives the same result you’re not thinking straight.",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nweh2la",
+            "depth": 5,
+            "karma": 7,
+            "createdAt": "2025-12-28T23:48:27.000Z",
+            "claims": [
+              "Processing fat into tallow creates a different product with different properties",
+              "Tallow has legitimate uses in products like shaving soaps",
+              "Raw beef fat and rendered tallow are not functionally equivalent"
+            ],
+            "fallacies": [
+              {
+                "type": "false analogy",
+                "quote": "Right, and milk is just heated, that obviously makes no difference in the end product compared to raw milk",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwux3l8",
+            "author": "classic4life",
+            "text": "Rendering the fat doesn't change that tallow is beef fat.\nAnd frankly slathering raw beef fat on your face isn't much dumber than melting it first and slathering your face with it and pretending it's shaving cream. The distinction between cold fat and tallow isn't relevant.",
+            "position": "pro",
+            "positionIntensity": 6,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nwgbsxf",
+            "depth": 6,
+            "karma": 1,
+            "createdAt": "2025-12-31T04:09:18.000Z",
+            "claims": [
+              "Rendering fat doesn't fundamentally change that tallow is beef fat",
+              "Using tallow in skincare products is questionable regardless of processing"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwgjlkp",
+            "author": "Conscious_Zucchini96",
+            "text": "Probably related question: \n\n\nHow good is animal fat for industrial uses like machine lubricants and conversion to biodiesel?",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nwedk79",
+            "depth": 4,
+            "karma": 1,
+            "createdAt": "2025-12-29T00:29:29.000Z",
+            "claims": [
+              "Animal fat has potential industrial applications like machine lubricants and biodiesel"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwhdwol",
+            "author": "navigationallyaided",
+            "text": "It takes some extra processing but slaughterhouse waste is a feedstock for “renewable” diesel. If they can crack the code, renewable gasoline. That’s why if you been behind a diesel truck/bus/car and it smells like fast food/french fries, it’s burning biodiesel/renewable diesel. \n\nIn CA/OR/WA, petroleum diesel is blended with up to 20% biodiesel, but some stations(and all 76 stations) sell renewable diesel. \n\nWhale oil was an important ingredient in transmission fluid, GM and Ford(Borg-Warner) saw failures when whale oil was outlawed.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nwgjlkp",
+            "depth": 5,
+            "karma": 1,
+            "createdAt": "2025-12-29T03:22:19.000Z",
+            "claims": [
+              "Slaughterhouse waste is used as feedstock for renewable diesel",
+              "Biodiesel can be identified by its french fry smell",
+              "Whale oil was historically important in transmission fluid"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwi5z23",
+            "author": "Voldemort57",
+            "text": "It’s not fully renewable gasoline. Corn-based gasoline (ethanol) is marketed as green and renewable, but it consumes approximately the same amount of water as fracking and drilling for fossil fuels. This is because corn takes a lot of water to grow, as well as the distillation process. \n\nConverting energy from corn to cow via animal feed is extremely inefficient, and it takes magnitudes more water to raise livestock. This means fossil fuel production actually consume LESS water than gasoline derived from animal products. \n\nFuel from animal products is a good supplement to current supplies, but certainly nothing more than that. It’s not economical, it’s not resource efficient, and it’s harder to manufacture than the alternatives.",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nwhdwol",
+            "depth": 6,
+            "karma": 2,
+            "createdAt": "2025-12-29T06:35:06.000Z",
+            "claims": [
+              "Animal-derived fuels consume more water than fossil fuels due to livestock water requirements",
+              "Converting energy from corn to cow is extremely inefficient",
+              "Animal product fuel is not economical or resource efficient"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwe0aot",
+            "author": "chucknorrisinator",
+            "text": "It’s really funny watching people argue that there’s a healthy way to fry stuff. Goofy AF. Just enjoy your French fries.",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nwd85to",
+            "depth": 3,
+            "karma": 42,
+            "createdAt": "2025-12-28T16:56:46.000Z",
+            "claims": [
+              "There's no truly healthy way to fry food",
+              "People should just enjoy fried foods without health pretenses"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwgndik",
+            "author": "Working_Cucumber_437",
+            "text": "I mean but have you tried an air fryer? Amazing.",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 2,
+            "isConcession": false,
+            "parentId": "nwe0aot",
+            "depth": 4,
+            "karma": 3,
+            "createdAt": "2025-12-29T00:49:16.000Z",
+            "claims": [
+              "Air fryers are a good cooking method"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwm6qpf",
+            "author": "MakAttacks",
+            "text": "Ghee and butter are not the same thing and have different properties when cooking",
+            "position": "con",
+            "positionIntensity": 4,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nwd85to",
+            "depth": 3,
+            "karma": 2,
+            "createdAt": "2025-12-29T21:25:07.000Z",
+            "claims": [
+              "Ghee and butter have different cooking properties despite being related products"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwm8bcr",
+            "author": "Kampurz",
+            "text": "They're not though. Tallow is a processed product. Fat is a raw material. \n\nIt's like saying serum and blood are the same thing.",
+            "position": "con",
+            "positionIntensity": 6,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nwd85to",
+            "depth": 3,
+            "karma": 1,
+            "createdAt": "2025-12-29T21:32:41.000Z",
+            "claims": [
+              "Tallow is a processed product while fat is raw material",
+              "Processing creates meaningful distinctions between related products"
+            ],
+            "fallacies": [
+              {
+                "type": "false analogy",
+                "quote": "It's like saying serum and blood are the same thing",
+                "severity": "low"
+              }
+            ]
+          },
+          {
+            "id": "nwaoiul",
+            "author": "crek42",
+            "text": "That’s a very tall claim — what widely used frying oils are used in the US that are banned in the EU? \n\nSpecifically, which oil, and how you’re quantifying that they’re widely used.",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 104,
+            "createdAt": "2025-12-28T02:23:37.000Z",
+            "claims": [
+              "Requests specific evidence about which frying oils are banned in EU but used in US"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwcb521",
+            "author": "Johnny_bubblegum",
+            "text": "Obviously the red40 chemtrail seed oils big pharma shoves down our throats!!!!",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 1,
+            "isConcession": false,
+            "parentId": "nwaoiul",
+            "depth": 3,
+            "karma": 60,
+            "createdAt": "2025-12-28T10:02:05.000Z",
+            "claims": [
+              "Red40 and seed oils are being pushed by big pharma"
+            ],
+            "fallacies": [
+              {
+                "type": "strawman",
+                "quote": "Obviously the red40 chemtrail seed oils big pharma shoves down our throats!!!!",
+                "severity": "high"
+              }
+            ]
+          },
+          {
+            "id": "nwd4bbd",
+            "author": "ManielDullen",
+            "text": "They didn’t ban them in the EU. They put regulations in place to make them impractical for large business, which is essentially a ban. I’m not science-brained enough to remember what oils they were exactly, but I definitely remember reading the negotiations at the time (History/PoliSci student).",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nwaoiul",
+            "depth": 3,
+            "karma": -6,
+            "createdAt": "2025-12-28T14:03:01.000Z",
+            "claims": [
+              "EU put regulations on certain oils making them impractical for large business",
+              "This is essentially a ban"
+            ],
+            "fallacies": [
+              {
+                "type": "appeal to authority",
+                "quote": "I'm not science-brained enough to remember what oils they were exactly, but I definitely remember reading the negotiations at the time (History/PoliSci student)",
+                "severity": "low"
+              }
+            ]
+          },
+          {
+            "id": "nwdxjpa",
+            "author": "hansuluthegrey",
+            "text": "&gt;Dude, you thinking beef fat and tallow are the same thing, is exactly why this isnt a product for you.\n\nIts impressive how wrong some people are while still being assholes",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 2,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 52,
+            "createdAt": "2025-12-28T16:43:10.000Z",
+            "claims": [
+              "Someone is incorrectly equating beef fat and tallow"
+            ],
+            "fallacies": [
+              {
+                "type": "ad hominem",
+                "quote": "Its impressive how wrong some people are while still being assholes",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwe9k8c",
+            "author": "frotc914",
+            "text": "That guy has made like 30 claims in this thread and all of them are wrong, he never goes back and edits or responds. I think we found RFK's Reddit account.",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nwdxjpa",
+            "depth": 3,
+            "karma": 41,
+            "createdAt": "2025-12-28T17:42:52.000Z",
+            "claims": [
+              "Someone made 30 wrong claims in the thread",
+              "They never go back to edit or respond"
+            ],
+            "fallacies": [
+              {
+                "type": "ad hominem",
+                "quote": "I think we found RFK's Reddit account",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwg7r7b",
+            "author": "Sevuhrow",
+            "text": "Pro-RFK, blatantly wrong, confidentially incorrect, upvoted a lot. Reddit moment",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 2,
+            "isConcession": false,
+            "parentId": "nwdxjpa",
+            "depth": 3,
+            "karma": 13,
+            "createdAt": "2025-12-28T23:26:45.000Z",
+            "claims": [
+              "Someone is pro-RFK and confidently incorrect",
+              "They are being upvoted despite being wrong"
+            ],
+            "fallacies": [
+              {
+                "type": "ad hominem",
+                "quote": "Pro-RFK, blatantly wrong, confidentially incorrect",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwc4yen",
+            "author": "AdOk1598",
+            "text": "How is beef fat different from tallow? Tallow is rendered and purified beef fat? Why draw a distinction?",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 30,
+            "createdAt": "2025-12-28T09:01:27.000Z",
+            "claims": [
+              "Beef fat and tallow should not be considered different",
+              "Tallow is rendered and purified beef fat"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwetb2w",
+            "author": "looshface",
+            "text": "Same reason we hold butter and ghee different. If you cook with unrefined beef fat there's a solid chance you get burned bits of the beef in it( this is not nessecarily always a had thing but it can be if you don't want it. For example: donuts\n\nTallow is a refined product. But that doesn't make it healthy. It's pure saturated fat. Everything in the kitchen has its place, and in the right amounts. Remember the dosage makes the poison",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nwc4yen",
+            "depth": 3,
+            "karma": 9,
+            "createdAt": "2025-12-28T19:15:10.000Z",
+            "claims": [
+              "Butter and ghee are held as different for same reason as beef fat and tallow",
+              "Unrefined beef fat can contain burned bits",
+              "Tallow is a refined product",
+              "Tallow is pure saturated fat",
+              "Everything has its place in the kitchen in right amounts"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwfqo4w",
+            "author": "Ok_Comment2621",
+            "text": "I just wanted to say that burned bits of beef on my donut sounds amazing. Proceed",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nwetb2w",
+            "depth": 4,
+            "karma": 9,
+            "createdAt": "2025-12-28T21:57:39.000Z",
+            "claims": [
+              "Burned bits of beef on donuts sounds amazing"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8nfut",
+            "author": "TheVioletBarry",
+            "text": "What frying oils do we regularly use that are banned in Europe?",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 87,
+            "createdAt": "2025-12-27T19:35:07.000Z",
+            "claims": [
+              "Asking what frying oils are banned in Europe"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8o44u",
+            "author": "Fluffy_Most_662",
+            "text": "Cottonseed is the best oil, but is rarely used even in the US. Its outright banned in Europe though. \n\n\nAny Hexane fraction, Hydrogenated, bleached, deodorized oil, or RBD oils, are also outright banned and they're commonplace in the US. \n\n\nThe most common oil used, soybean, is highly discouraged for quality reasons more than safety but is also largely nonexistent as a result unless youre buying otc or off the shelf. ",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8nfut",
+            "depth": 3,
+            "karma": 9,
+            "createdAt": "2025-12-27T19:38:42.000Z",
+            "claims": [
+              "Cottonseed is the best oil but rarely used in US",
+              "Cottonseed oil is banned in Europe",
+              "Hexane fraction, hydrogenated, bleached, deodorized oils are banned in Europe",
+              "These oils are commonplace in US",
+              "Soybean oil is highly discouraged in Europe for quality reasons",
+              "Soybean oil is largely nonexistent in Europe except off the shelf"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwap1ak",
+            "author": "crek42",
+            "text": "Yea I’ve seen this US vs EU debate parroted all over Reddit and once you dig into any specific examples it falls apart. \n\nAre there certain ingredients we’re consuming that are banned in EU, I’m sure that’s the case. But it becomes a much different argument when the add “widely used” to it.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nw8qhlm",
+            "depth": 5,
+            "karma": 62,
+            "createdAt": "2025-12-28T02:26:41.000Z",
+            "claims": [
+              "Cottonseed oil is sold and used in both the EU and US",
+              "Claims about US vs EU food regulations are often exaggerated",
+              "Partially hydrogenated cottonseed oil is not recognized as safe in US or EU"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8wggy",
+            "author": "TheVioletBarry",
+            "text": "Could you give me a specific example of a frying oil regularly used in the US that is banned in Europe so that I can look into it? I'm having trouble finding specific things to look for",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8o44u",
+            "depth": 4,
+            "karma": 42,
+            "createdAt": "2025-12-27T20:23:24.000Z",
+            "claims": [
+              "US vs EU food regulation debates on Reddit often fall apart under scrutiny",
+              "Some ingredients may be banned in EU but not widely used in US"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwhe9gt",
+            "author": "navigationallyaided",
+            "text": "Hexane gets flashed off during the vacuum distillation and washing processes of commercial edible oil processing. If it’s an “organic” expeller-pressed oil, the processes are different?",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nw8o44u",
+            "depth": 4,
+            "karma": 1,
+            "createdAt": "2025-12-29T03:24:27.000Z",
+            "claims": [
+              "Requesting specific examples of frying oils banned in Europe but used in US"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwgn5lj",
+            "author": "Working_Cucumber_437",
+            "text": "Tallow is not healthier than seed/veggie oils. What kills you is the saturated fat.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 8,
+            "createdAt": "2025-12-29T00:48:02.000Z",
+            "claims": [
+              "Hexane is removed during commercial oil processing",
+              "Organic expeller-pressed oils use different processes"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwy55e1",
+            "author": "Freizeit20",
+            "text": "Heart disease rates skyrocketed once we introduced seed oils into the American diet",
+            "position": "con",
+            "positionIntensity": 6,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nwgn5lj",
+            "depth": 3,
+            "karma": 1,
+            "createdAt": "2025-12-31T17:44:01.000Z",
+            "claims": [
+              "Tallow is not healthier than seed/vegetable oils",
+              "Saturated fat is what causes health problems"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwygz8x",
+            "author": "Working_Cucumber_437",
+            "text": "If true and not explained by other changes to the way we eat (primarily the rise of fast food and fewer people cooking at home, larger portions, cheap unhealthy snack foods at convenience stores), more sedentary lifestyles, the rise in heart disease would be that people are using too much of any oil in their cooking. They underestimate the amount of calories and fat in cooking oil and oil-based salad dressings. There’s no scientific consensus that seed oils cause heart disease. \n\nThe same is true of red meat consumption. It’s not the red meat, it’s the high amount of animal (saturated) fat.",
+            "position": "pro",
+            "positionIntensity": 7,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nwy55e1",
+            "depth": 4,
+            "karma": 1,
+            "createdAt": "2025-12-31T18:42:41.000Z",
+            "claims": [
+              "Heart disease rates increased after seed oils were introduced to American diet"
+            ],
+            "fallacies": [
+              {
+                "type": "post hoc ergo propter hoc",
+                "quote": "Heart disease rates skyrocketed once we introduced seed oils into the American diet",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nw8niay",
+            "author": "unidentified_lover",
+            "text": "I mean, tallow is rendered beef fat isn’t it? Took a by-product and altered it a bit to suit the market? Can’t just slap a label on a jar of beef fat BUT could maybe make people think it’s different if we do a little sprucing up.",
+            "position": "con",
+            "positionIntensity": 8,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 27,
+            "createdAt": "2025-12-27T19:35:29.000Z",
+            "claims": [
+              "Heart disease rise explained by lifestyle changes not seed oils",
+              "No scientific consensus that seed oils cause heart disease",
+              "Saturated fat from red meat is the real problem",
+              "People underestimate calories in cooking oils"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8nx7r",
+            "author": "rhinokick",
+            "text": "Tallow is made from the beef fat found around the kidneys (suet). It’s firmer, more nutrient-dense, and has a higher melting point than fat from other parts of the animal. I’m not saying there isn’t some marketing involved, but beef tallow isn’t just generic rendered beef fat, it’s the highest-quality form of it.",
+            "position": "pro",
+            "positionIntensity": 6,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nw8niay",
+            "depth": 3,
+            "karma": -24,
+            "createdAt": "2025-12-27T19:37:41.000Z",
+            "claims": [
+              "Tallow is rendered beef fat with minimal processing",
+              "Marketing makes beef fat seem different by calling it tallow"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8yr9r",
+            "author": "Blicktar",
+            "text": "No it's fucking not, suet is suet. Tallow is tallow. Some specific brand might only use suet in their tallow, but most tallow a normal person is gonna find is literally any rendered beef fat.",
+            "position": "con",
+            "positionIntensity": 5,
+            "qualityScore": 6,
+            "isConcession": true,
+            "parentId": "nw8nx7r",
+            "depth": 4,
+            "karma": 62,
+            "createdAt": "2025-12-27T20:36:09.000Z",
+            "claims": [
+              "Tallow is made from specific kidney fat (suet)",
+              "Tallow has higher quality properties than generic beef fat",
+              "Some marketing is involved but tallow has legitimate differences"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8q3kb",
+            "author": "RangerRick4971",
+            "text": "Tallow is the rendered fat from any beef fat, not just suet.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nw8nx7r",
+            "depth": 4,
+            "karma": 60,
+            "createdAt": "2025-12-27T19:49:13.000Z",
+            "claims": [
+              "Tallow is the rendered fat from any beef fat, not just suet"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8vdy3",
+            "author": "SysError404",
+            "text": "Suet is the most readily accessible fat used in Tallow. It's not from all the rendered fat, it's specifically the hard white fat (like the suet that is found around the kidney region). It can certainly be found in other areas of Beef or Mutton, but the kidney region is where it is the most abundant.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 6,
+            "parentId": "nw8q3kb",
+            "depth": 5,
+            "karma": -10,
+            "createdAt": "2025-12-27T20:17:33.000Z",
+            "claims": [
+              "Suet is the most readily accessible fat used in Tallow",
+              "Tallow is specifically made from hard white fat around the kidney region",
+              "Suet can be found in other areas but is most abundant around kidneys"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwgx1g6",
+            "author": "yuumigod69",
+            "text": "Beef fat and beef tallow are the same thing.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 4,
+            "createdAt": "2025-12-29T01:44:39.000Z",
+            "claims": [
+              "Beef fat and beef tallow are the same thing"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwb7mtu",
+            "author": "porizj",
+            "text": "&gt;fat check\n \nTee hee.",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 1,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 4,
+            "createdAt": "2025-12-28T04:20:38.000Z",
+            "claims": [],
+            "fallacies": []
+          },
+          {
+            "id": "nx4dxif",
+            "author": "Jdevers77",
+            "text": "Most American fried food is fried in soybean oil.  Soybean oil is not banned for use in Europe as food, it IS banned for use as biodiesel stock because it (and palm oil) are not very environmentally friendly in the context of European imports of both (palm oil and soybean oil are often produced after areas of forest are clear cut).  This isn’t a concern in the US for three different reasons: we grow vast amounts of soybeans as our climate and land is far more useable for it than anywhere in Europe, we consume far less biodiesel  in consumer cars than Europe, and as a nation we also seemingly don’t give a fuck about the environment.\n\nNone of this has anything to do with healthiness as food though. Soybean oil is absolutely consumed in Europe and can be used as a frying oil, it just isn’t economically sound to do so like it is in the US so it is less commonly done.\n\nAlso, beef fat and beef tallow are the same thing basically.  Take beef fat, heat it slowly, collect oil, let it cool, now you have beef tallow.",
+            "position": "con",
+            "positionIntensity": 4,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 1,
+            "createdAt": "2026-01-01T18:57:37.000Z",
+            "claims": [
+              "Most American fried food is fried in soybean oil",
+              "Soybean oil is not banned for use as food in Europe",
+              "Soybean oil is banned for biodiesel use in Europe due to environmental concerns",
+              "US grows vast amounts of soybeans",
+              "US consumes less biodiesel than Europe",
+              "Soybean oil is consumed in Europe but less economically sound for frying",
+              "Beef fat and beef tallow are basically the same thing"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwclknn",
+            "author": "Artanis_Creed",
+            "text": "Why is \"banned in X country\" a metric we should care about?",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 4,
+            "createdAt": "2025-12-28T11:40:45.000Z",
+            "claims": [
+              "Countries banning something is not necessarily a relevant metric for evaluation"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwaxuzf",
+            "author": "Moonshot_00",
+            "text": "Yet another Euro making stupid ass claims, how trite.",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 2,
+            "isConcession": false,
+            "parentId": "nw8my67",
+            "depth": 2,
+            "karma": 1,
+            "createdAt": "2025-12-28T03:19:31.000Z",
+            "claims": [
+              "Europeans make unfounded claims"
+            ],
+            "fallacies": [
+              {
+                "type": "ad hominem",
+                "quote": "Yet another Euro making stupid ass claims",
+                "severity": "medium"
+              }
+            ]
+          }
+        ],
+        "momentumShifts": [
+          {
+            "replyNumber": 45,
+            "fromPosition": "pro",
+            "toPosition": "con",
+            "trigger": "Strong con argument (7/10) following weaker pro argument (3/10)",
+            "qualityDelta": 4
+          }
+        ]
+      },
+      {
+        "id": "debate_nw8nyon",
+        "title": "Beef Tallow: Corporate Manipulation vs Market Innovation",
+        "keyClash": "Whether the rise of beef tallow represents manipulative corporate propaganda to monetize waste products or legitimate market innovation that creates value from previously unused resources.",
+        "rootCommentId": "nw8nyon",
+        "winner": "draw",
+        "winnerReason": "Close debate (PRO: 5.7 vs CON: 5.9)",
+        "proScore": 5.666666666666667,
+        "conScore": 5.875,
+        "replyCount": 23,
+        "heatLevel": 8.7,
+        "replies": [
+          {
+            "id": "nw8zjt9",
+            "author": "SadBurritoBoys",
+            "text": "I'll play devil's advocate: \n\nA corporation takes \"using every part of the animal\" and applies it to humans as \"squeeze out every penny\", this is another way for them to do so.\n\n\"Supply and demand\" (as it exists today) is fucking nonsense - costs raise because of greed, people see that they *can* charge more money, so they do so. \"Supply and demand\" is a convenient excuse.\n\nThis only applies in the modern era, where humanity as a whole can supply enough for everyone, back when the best tech we had were wooden ships there was absolutely a solid limit on what we could achieve, Supply and Demand were legitimate forces",
+            "position": "con",
+            "positionIntensity": 6,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8nyon",
+            "depth": 2,
+            "karma": 2,
+            "createdAt": "2025-12-27T20:40:32.000Z",
+            "claims": [
+              "Creating more value from an already killed animal is inherently good",
+              "Good outcomes cannot be considered propaganda"
+            ],
+            "fallacies": [
+              {
+                "type": "false dichotomy",
+                "quote": "If it is good, can we still call it propaganda?",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwb1gik",
+            "author": "lionsden08",
+            "text": "&gt; Costs [are raised] because of greed \n\n\nBut if nobody wants this product (no demand), and I raise this cost, nobody will buy it and I make no money. \n\nOlives are not native to California and nobody used to grow it there. Then, olive oil became more popular due to health claims and just generally good taste. Higher demand = higher prices = incentives for producers. Californian farmers started planting olive trees because of the mediterranean-like weather. Greed? sure, if you want to call it that. Supply and demand? 100%.",
+            "position": "pro",
+            "positionIntensity": 8,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nw8zjt9",
+            "depth": 3,
+            "karma": 20,
+            "createdAt": "2025-12-28T03:41:29.000Z",
+            "claims": [
+              "Corporations squeeze every penny from consumers",
+              "Modern supply and demand is driven by greed rather than legitimate market forces",
+              "Historical supply and demand was more legitimate due to technological limitations"
+            ],
+            "fallacies": [
+              {
+                "type": "sweeping generalization",
+                "quote": "Supply and demand (as it exists today) is fucking nonsense",
+                "severity": "high"
+              },
+              {
+                "type": "appeal to the past",
+                "quote": "back when the best tech we had were wooden ships there was absolutely a solid limit",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwie1s0",
+            "author": "thegunnersdream",
+            "text": "Yeah they have a fundamental misunderstanding on supply and demand.  Also, the major flaw in the greed argument is... Did something suddenly happen to make companies greedy? Of course not. Companies have operated at the maximum level of greed they possibly can get away with since literally forever, so that is a constant.  If that is constant, why wouldn't things just always cost infinite money... Also did... Every single business owner and board get together and collude to raise prices all at the exact same time every time prices increase? Across every industry? If so, why raise prices right now? Why not last week or just every day from now on forever?\n\nIt's such a frustrating argument because a. I 100% agree companies, and particularly corporations, are ruthless, money making machines that operate at maximum greed at all times and b. It has nothing to do with the overall cost of things.  It also offers effectively no solution because if the problem is insurmountable human nature, you can't force people to suddenly become altruistic.  It's just the easy emotional response to prices people don't like and is always followed up with just 'tax companies more' (which is always wild to me because is... The greedy company just going to eat that loss of profit or pass that onto the consumer...) or price controls which will get me started on an entirely different rant  I don't need to go on right now.",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nwb1gik",
+            "depth": 4,
+            "karma": 1,
+            "createdAt": "2025-12-29T07:45:56.000Z",
+            "claims": [
+              "Without demand, higher prices lead to no sales",
+              "California olive farming demonstrates legitimate supply and demand dynamics",
+              "Market incentives drive production decisions"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw96k81",
+            "author": "Ayjayz",
+            "text": "&gt; people see that they can charge more money, so they do so. \"Supply and demand\" is a convenient excuse.\n\nSupply and demand is *why* they can charge more money. You don't understand the concept you're decrying. Obviously greed is in play - the whole field of economics is the study of how greedy producers and greedy consumers interact. Consumers greedily want the most product for the least money; producers greedily want the most money for the least amount of product. Greed is and always has been the driving force behind all market action.\n\nYou're not playing devil's advocate. It seems like you've just discovered the field of economics.",
+            "position": "con",
+            "positionIntensity": 8,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nw8zjt9",
+            "depth": 3,
+            "karma": 18,
+            "createdAt": "2025-12-27T21:19:05.000Z",
+            "claims": [
+              "Companies have always operated at maximum greed levels",
+              "If greed were the only factor, prices would be infinite",
+              "The greed argument offers no practical solutions"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwapmjh",
+            "author": "crek42",
+            "text": "If you say “supply and demand is nonsense” then there’s no merit to anything else you’ve stated. That’s like saying water isn’t wet. It’s a foundational component of economic studies. I’ll venture a guess and say you have no knowledge or background in economics, which makes it more puzzling as to why you’d even comment.",
+            "position": "con",
+            "positionIntensity": 9,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nw8zjt9",
+            "depth": 3,
+            "karma": 11,
+            "createdAt": "2025-12-28T02:30:11.000Z",
+            "claims": [
+              "Supply and demand explains why companies can charge more",
+              "Greed is the fundamental driving force in all market interactions",
+              "Economics studies the interaction between greedy producers and consumers"
+            ],
+            "fallacies": [
+              {
+                "type": "ad hominem",
+                "quote": "It seems like you've just discovered the field of economics",
+                "severity": "low"
+              }
+            ]
+          },
+          {
+            "id": "nwedsdy",
+            "author": "BrooklynSmash",
+            "text": "&gt;If you say “supply and demand is nonsense”\n\nDo you believe the consumer and the supplier have equal power over one another? Not in a theoretical or metaphorical sense, but in practice.",
+            "position": "con",
+            "positionIntensity": 8,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nwapmjh",
+            "depth": 4,
+            "karma": 1,
+            "createdAt": "2025-12-28T18:03:07.000Z",
+            "claims": [
+              "Supply and demand is a foundational component of economics",
+              "Denying supply and demand invalidates other economic arguments"
+            ],
+            "fallacies": [
+              {
+                "type": "ad hominem",
+                "quote": "I'll venture a guess and say you have no knowledge or background in economics",
+                "severity": "medium"
+              },
+              {
+                "type": "false analogy",
+                "quote": "That's like saying water isn't wet",
+                "severity": "low"
+              }
+            ]
+          },
+          {
+            "id": "nwh8vqt",
+            "author": "Vincitus",
+            "text": "&gt;I'll play devil's advocate \n\nOh thank god. No one seems to want to do that on reddit.",
+            "position": "pro",
+            "positionIntensity": 5,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nw8zjt9",
+            "depth": 3,
+            "karma": 3,
+            "createdAt": "2025-12-29T02:52:35.000Z",
+            "claims": [
+              "Consumer and supplier power is unequal in practice"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwesurx",
+            "author": "Kashmir1089",
+            "text": "Supply and demand isn't nonsense, there are just few players that got large enough to *control* the supply",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 2,
+            "isConcession": false,
+            "parentId": "nw8zjt9",
+            "depth": 3,
+            "karma": 2,
+            "createdAt": "2025-12-28T19:13:02.000Z",
+            "claims": [
+              "Devil's advocate positions are rare on Reddit"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwgdzmi",
+            "author": "abarcsa",
+            "text": "Except we have been using every part of animals we eat for a long time before corporate capitalism. It’s extremely common to cook with or use animal fat in many form of consumption to this day all over the planet.\n\nIf a country finds it yucky and corporations try to re-brand it might be the unicorn of it being a re-branding capitalist scheme that isn’t unethical from the get go.",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8zjt9",
+            "depth": 3,
+            "karma": 1,
+            "createdAt": "2025-12-28T23:59:57.000Z",
+            "claims": [
+              "Supply and demand is valid but can be manipulated by large players",
+              "Market concentration allows supply control"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwcwn6u",
+            "author": "Winderige_Garnaal",
+            "text": "Is beef tallow actually better for our health? ",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 2,
+            "isConcession": false,
+            "parentId": "nw8nyon",
+            "depth": 2,
+            "karma": 3,
+            "createdAt": "2025-12-28T13:11:51.000Z",
+            "claims": [
+              "OP lacks proper economic understanding",
+              "Social science requires formal study not intuition"
+            ],
+            "fallacies": [
+              {
+                "type": "ad hominem",
+                "quote": "You can't vibe your way through social science",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwhcjmm",
+            "author": "Dr_Horrible_PhD",
+            "text": "It decidedly is not. It’s worse. When whoever runs the HHS Twitter account tried to do beef tallow propaganda for the healthiness of beef tallow, they literally just cited shelf life studies because they couldn’t find in vivo studies in humans or even animals",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nwcwn6u",
+            "depth": 3,
+            "karma": 9,
+            "createdAt": "2025-12-29T03:14:09.000Z",
+            "claims": [
+              "Questions whether beef tallow has health benefits"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwg0bjl",
+            "author": "Altruistic-Web13",
+            "text": "I dislike it when its being propped up by the government, hey if we can find a good use for a byproduct great, saves money, reduces prices, breeds innovation, and its better for the planet (usually). But when the government starts picking winners and losers either out of corruption or whatever weird trend the cross between trad lifers, gym bros, and the far right led to beef tallow im skeptical.",
+            "position": "pro",
+            "positionIntensity": 8,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nw8nyon",
+            "depth": 2,
+            "karma": 1,
+            "createdAt": "2025-12-28T22:46:49.000Z",
+            "claims": [
+              "Beef tallow is not healthier",
+              "Government health agencies lack proper studies supporting beef tallow",
+              "Only shelf life studies exist, no human or animal health studies"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwx5h1s",
+            "author": "PandaMime_421",
+            "text": "It's fine, so long as they aren't pushing propaganda that convinces people that it provides a benefit it does not and provided the industry isn't lobbying the government to push for it's use over other existing products.",
+            "position": "pro",
+            "positionIntensity": 6,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8nyon",
+            "depth": 2,
+            "karma": 1,
+            "createdAt": "2025-12-31T14:44:06.000Z",
+            "claims": [
+              "Government promotion of beef tallow is problematic",
+              "Repurposing byproducts is generally good",
+              "Government picking winners and losers raises corruption concerns",
+              "Beef tallow trend linked to political movements"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8ojck",
+            "author": "unidentified_lover",
+            "text": "I don’t think its a bad thing. I just think from a marketing point of view it’s an interesting push that’s come to be. I think propaganda can be used for good or bad tbh. But it doesn’t negate the fact it’s propaganda.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nw8nyon",
+            "depth": 2,
+            "karma": 2,
+            "createdAt": "2025-12-27T19:40:56.000Z",
+            "claims": [
+              "Beef tallow use is acceptable if not falsely promoted",
+              "Industry shouldn't lobby government for preferential treatment"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwepz7l",
+            "author": "VeganKiwiGuy",
+            "text": "It’s absolutely a bad thing. 12% of all greenhouse gas emissions according to the UN comes from animal agriculture, and the culture now supports animal agriculture even further. \n\nIf you think climate change is negative, you already think this greater support for “beef tallow” is pretty horrible. \n\nI won’t go into why it’s stupid with respect to animal protection and animal exploitation, as it’s obvious. Everyone should be following a plant-based diet already based off of that. \n\nBut don’t get bullied into thinking it’s somehow a neutral thing or a good thing by these animal consuming carnists. And I’m specifically avoiding the health aspects, but I’ll add that animal consumption is associated with greater risk of ischemic heart disease and cancer incidence compared to vegan and vegetarian diets, primarily because of how animal fats, with their higher saturated fat content, is so unhealthy. ",
+            "position": "pro",
+            "positionIntensity": 5,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nw8ojck",
+            "depth": 3,
+            "karma": 6,
+            "createdAt": "2025-12-28T18:59:49.000Z",
+            "claims": [
+              "Beef tallow promotion is propaganda",
+              "Propaganda can be good or bad but is still propaganda",
+              "The marketing push is interesting from business perspective"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8p7d2",
+            "author": "razvanght",
+            "text": "Propaganda is a such a strong word and loaded word.\n\nFor you, is a pharmaceutical company promoting a miracle cure they discovered also doing propaganda?",
+            "position": "pro",
+            "positionIntensity": 9,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8ojck",
+            "depth": 3,
+            "karma": 5,
+            "createdAt": "2025-12-27T19:44:28.000Z",
+            "claims": [
+              "Beef tallow promotion increases harmful animal agriculture",
+              "12% of greenhouse gases come from animal agriculture",
+              "Animal consumption increases disease risk",
+              "Plant-based diets are healthier"
+            ],
+            "fallacies": [
+              {
+                "type": "loaded language",
+                "quote": "carnists",
+                "severity": "low"
+              }
+            ]
+          },
+          {
+            "id": "nw8qf33",
+            "author": "unidentified_lover",
+            "text": "For me, “propaganda” can include so many things. Propaganda is used to make people lean one side over the other (traditionally) or to hold a belief that one thing is better. “X brand is the best!” “Y brand doesn’t stand a chance” rings the same as “X army is the best!” Just on a smaller scale with smaller impact.",
+            "position": "con",
+            "positionIntensity": 4,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nw8p7d2",
+            "depth": 4,
+            "karma": -1,
+            "createdAt": "2025-12-27T19:50:55.000Z",
+            "claims": [
+              "Propaganda is too strong a term",
+              "Pharmaceutical promotion analogy challenges OP's framing"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8r2m3",
+            "author": "razvanght",
+            "text": "Do you see any difference between promoting something and generating propaganda for that same thing?",
+            "position": "pro",
+            "positionIntensity": 6,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nw8qf33",
+            "depth": 5,
+            "karma": 2,
+            "createdAt": "2025-12-27T19:54:23.000Z",
+            "claims": [
+              "Propaganda includes commercial promotion",
+              "Brand promotion operates similarly to political propaganda",
+              "Scale and impact differ but mechanism is same"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwb65uu",
+            "author": "freshwaddurshark",
+            "text": "No because they are synonym, here's webster's:\n\n&gt;propaganda\n\n&gt;[noun](https://www.merriam-webster.com/dictionary/noun)\n\n&gt;pro·​pa·​gan·​da [ˌprä-pə-ˈgan-də ](https://www.merriam-webster.com/dictionary/propaganda?pronunciation&amp;lang=en_us&amp;dir=p&amp;file=propag01) \n\n&gt;1: ideas, facts, or allegations spread deliberately to further one's cause or to damage an opposing cause  \n2**:** the spreading of ideas, information, or rumors for the purpose of helping or injuring an institution, a cause, or a person\n\n[https://www.merriam-webster.com/dictionary/propaganda](https://www.merriam-webster.com/dictionary/propaganda)\n\nThe whole point is either promoting your shit or denigrating the competition.",
+            "position": "pro",
+            "positionIntensity": 6,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8r2m3",
+            "depth": 6,
+            "karma": 3,
+            "createdAt": "2025-12-28T04:10:45.000Z",
+            "claims": [
+              "Propaganda and marketing are synonymous according to Webster's dictionary",
+              "Both propaganda and marketing involve promoting one's cause or damaging opposing causes"
+            ],
+            "fallacies": [
+              {
+                "type": "semantic overreach",
+                "quote": "The whole point is either promoting your shit or denigrating the competition",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwc5ail",
+            "author": "razvanght",
+            "text": "I think the definition is too vague. If I go to an interview or a date, I am not engaging in propaganda, even if I am trying to promote myself. By this definition, the word loses the typical way in which most people use the word.",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nwb65uu",
+            "depth": 7,
+            "karma": 2,
+            "createdAt": "2025-12-28T09:04:41.000Z",
+            "claims": [
+              "The dictionary definition of propaganda is too vague to be useful",
+              "Personal promotion in interviews or dates is not propaganda despite fitting the definition",
+              "Using such a broad definition makes the word lose its typical meaning"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8s3sn",
+            "author": "unidentified_lover",
+            "text": "I think the difference for me was not only were they promoting beef tallow, but they are also “putting down” any other form of oil or the like. “Beef tallow is great! XYX oil is bad and scary!” Moving it from promotion territory by scare tactic.",
+            "position": "pro",
+            "positionIntensity": 8,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nw8r2m3",
+            "depth": 6,
+            "karma": 1,
+            "createdAt": "2025-12-27T19:59:53.000Z",
+            "claims": [
+              "Beef tallow marketing goes beyond simple promotion by using scare tactics",
+              "The marketing actively denigrates other oils as 'bad and scary'",
+              "The use of fear-based messaging distinguishes this from regular promotion"
+            ],
+            "fallacies": []
+          }
+        ],
+        "momentumShifts": [
+          {
+            "replyNumber": 9,
+            "fromPosition": "con",
+            "toPosition": "pro",
+            "trigger": "Strong pro argument (5/10) following weaker con argument (8/10)",
+            "qualityDelta": -3
+          }
+        ]
+      },
+      {
+        "id": "debate_nw8o4wj",
+        "title": "Beef Tallow: Marketing Trend or Traditional Comeback?",
+        "keyClash": "The debate centers on whether beef tallow's popularity is manufactured by industry propaganda or represents a natural return to traditional cooking practices.",
+        "rootCommentId": "nw8o4wj",
+        "winner": "con",
+        "winnerReason": "CON arguments stronger (7.2 vs 0.0)",
+        "proScore": 0,
+        "conScore": 7.166666666666667,
+        "replyCount": 14,
+        "heatLevel": 7.3,
+        "replies": [
+          {
+            "id": "nw8o4wj",
+            "author": "Myrmodus",
+            "text": "Tallow has been around a very long time, just like lard. McDonald’s used to use it in the 90s to fry their French fries at what might have been the height of their popularity. It didn’t come out of some marketing professionals head suddenly, it re-emerged as a function of changing product preferences. We are only a couple generations removed from every household having jars of bacon grease as a core pantry staple. \n\nWith a rise in health consciousness and vegetarianism, the use of animal fats diminished. Now some are against seed oils and animal fats are re-emerging as viable alternatives. If there is a market and a moment for a product, who is to argue about it being sold. You could easily go make your own from beef fat, but most consumers don’t want the hassle of doing that.",
+            "position": "con",
+            "positionIntensity": 8,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "1px6a1c",
+            "depth": 1,
+            "karma": 84,
+            "createdAt": "2025-12-27T19:38:48.000Z",
+            "claims": [
+              "Tallow has been around a very long time and was previously popular",
+              "McDonald's used tallow for frying in the 90s at height of popularity",
+              "Households commonly kept bacon grease as pantry staple until recently",
+              "Animal fats diminished due to health consciousness and vegetarianism",
+              "Current popularity is due to anti-seed oil sentiment, not marketing manipulation"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw9ts66",
+            "author": "Tibbaryllis2",
+            "text": "&gt; We are only a couple generations removed from every household having jars of bacon grease as a core pantry staple.\n\nMy family gets a pig butchered every year from a local farmer/butcher. On the order sheet, I can elect to get the lard from it or not. It doesn’t change the price for me, but they will sell the lard at the butcher if I elect not to take it. The butcher doesn’t charge people like us for it because so many people will just not take the lard because they turn their nose up at it so they get a ton to sell to other customers. \n\nI also get usable organ tissues for making dogfood. \n\nIt’s sad that a lot of people don’t realize we’ve used these products for a very long time and only recently has there been a push to waste half the carcass because of *modern sensibilities*.",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nw8o4wj",
+            "depth": 2,
+            "karma": 45,
+            "createdAt": "2025-12-27T23:25:35.000Z",
+            "claims": [
+              "Many people reject lard from butchered animals due to modern sensibilities",
+              "Butchers don't charge for lard because people don't want it",
+              "There's a recent push to waste half the carcass due to modern attitudes",
+              "Animal byproducts have been used for a very long time"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwbcnm9",
+            "author": "Vospader998",
+            "text": "I just want to add - there's additional uses for animal products beyond just food too. \n\nAnimal fat in particular is excellent for soap-making. I used lard to make my own laundry soap recently. Soap is suprisingly easy to make. \n\nOther uses include:\n\n-Skin/Hide for leather, which makes for an incredibly durable fabric. \n\n-Bone marrow for gelitin used in food, cosmetics, and pharmaceuticals.\n\n-Hair/Fur for brushes, clothes, insulation, or sometimes even air filters.\n\n-Bones for tools and bone char. Bone char is used in sugar refining, as well as making a water filter that can capture heavy metals that charcoal filters cannot. \n\n-Fat for soap, candles, fuel, preservatives lubricants, solvent, moisturizers, and many more I'm probably missing \n\n-Hooves for glue\n\n-Feathers for insulation and pillows.\n\nI'm sure there's many I'm missing here too.",
+            "position": "con",
+            "positionIntensity": 6,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nw9ts66",
+            "depth": 3,
+            "karma": 10,
+            "createdAt": "2025-12-28T04:55:28.000Z",
+            "claims": [
+              "Animal fat is excellent for soap-making",
+              "Animal products have extensive traditional uses beyond food",
+              "Every part of animals can be utilized for various practical purposes",
+              "These uses include leather, gelatin, brushes, tools, candles, fuel, and glue"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwbf421",
+            "author": "Tibbaryllis2",
+            "text": "I make bonemeal for my garden from chicken carcasses. Seems to work well.",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nwbcnm9",
+            "depth": 4,
+            "karma": 2,
+            "createdAt": "2025-12-28T05:13:16.000Z",
+            "claims": [
+              "Chicken carcasses can be made into bonemeal for gardening",
+              "This practice works well"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwbdq5x",
+            "author": "StManTiS",
+            "text": "Back where I’m from in Siberia we used everything. We even made soup from blood. When there isn’t much to go around you use it all. When you are rich like here in America you get to choose. It’s not modern sensibility, it’s modern economics.",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nw9ts66",
+            "depth": 3,
+            "karma": 3,
+            "createdAt": "2025-12-28T05:03:06.000Z",
+            "claims": [
+              "Complete animal utilization is traditional in resource-scarce environments",
+              "Americans can afford to be choosy about animal parts",
+              "Waste is driven by modern economics rather than modern sensibilities"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw9xnzi",
+            "author": "Myrmodus",
+            "text": "I wish we had something similar up around me. Whole animal butchery should be the standard. There’s a lot of meat in animals that go to waste while the price of the preferred stuff skyrockets. I feel like a lot of times a knowledgeable butcher can point you toward something new and delicious with the right prep.",
+            "position": "con",
+            "positionIntensity": 6,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw9ts66",
+            "depth": 3,
+            "karma": 4,
+            "createdAt": "2025-12-27T23:47:45.000Z",
+            "claims": [
+              "Whole animal butchery should be the standard",
+              "Many animal parts go to waste while preferred cuts become expensive",
+              "Knowledgeable butchers can guide consumers to underutilized cuts"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwa9zh8",
+            "author": "Tibbaryllis2",
+            "text": "I agree that it should be more the norm, but also I regret a little that social media and cooking type influencers popularized some of the less well known cuts and they’ve increased dramatically in price.",
+            "position": "neutral",
+            "positionIntensity": 4,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw9xnzi",
+            "depth": 4,
+            "karma": 3,
+            "createdAt": "2025-12-28T00:57:03.000Z",
+            "claims": [
+              "Whole animal butchery should be more common",
+              "Social media influencers have caused price increases for lesser-known cuts"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwb0rzz",
+            "author": "Arthur_Edens",
+            "text": "&gt; You could easily go make your own from beef fat, but most consumers don’t want the hassle of doing that.\n\nI wasn't aware of the new fad, but this is a holiday tradition in my household... rendering tallow for a few different uses for Christmas dinner. I do (and have for years) seen it as a luxury compared to oils or even butter. Shit's not particularly healthy for you, but delicious AF for special occasions.",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nw8o4wj",
+            "depth": 2,
+            "karma": 5,
+            "createdAt": "2025-12-28T03:37:23.000Z",
+            "claims": [
+              "Rendering tallow is a traditional holiday practice",
+              "Tallow is a luxury compared to oils or butter",
+              "Tallow is not particularly healthy but delicious for special occasions"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwbhtxp",
+            "author": "Vospader998",
+            "text": "&gt;Shit's not particularly healthy for you, but delicious AF for special occasions.\n\nThere's increasing evidence that saturated fats aren't nearly as unhealthy as once believed. The myth that saturated fat increases risk of cardiovascular disease dates back to Ancel Keys' *Seven Countries Study* published in 1960. Keys engaged in disingenuous reasearch by cherry-picking examples that matched his theories. The media of the 1970s and 1980s sensationalized his bad reasearch, and saterated fat became the enemy. \n\nQuality studies on human diet are notoriously difficult, but if there's a link between saterated fat and cardiovascular disease, it has yet to be seen.",
+            "position": "con",
+            "positionIntensity": 5,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nwb0rzz",
+            "depth": 3,
+            "karma": 2,
+            "createdAt": "2025-12-28T05:34:00.000Z",
+            "claims": [
+              "Saturated fats aren't as unhealthy as once believed",
+              "The myth about saturated fat comes from flawed 1960 research by Ancel Keys",
+              "Keys cherry-picked data to support his theories",
+              "Media sensationalized the bad research in the 1970s-80s",
+              "No clear link between saturated fat and cardiovascular disease has been established"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nweutqt",
+            "author": "Arthur_Edens",
+            "text": "Meh... \"The [American Heart Association recommends](https://www.heart.org/en/healthy-living/healthy-eating/eat-smart/fats/saturated-fats) aiming for a dietary pattern that achieves less than 6% of total calories from saturated fat. For example, if you need about 2,000 calories a day, no more than 120 of them should come from saturated fat.\"\n\n&gt; [In summary, randomized controlled trials](https://www.ahajournals.org/doi/10.1161/cir.0000000000000510) that lowered intake of dietary saturated fat and replaced it with polyunsaturated vegetable oil reduced CVD by ≈30%, similar to the reduction achieved by statin treatment. Prospective observational studies in many populations showed that lower intake of saturated fat coupled with higher intake of polyunsaturated and monounsaturated fat is associated with lower rates of CVD and of other major causes of death and all-cause mortality. In contrast, replacement of saturated fat with mostly refined carbohydrates and sugars is not associated with lower rates of CVD and did not reduce CVD in clinical trials. Replacement of saturated with unsaturated fats lowers low-density lipoprotein cholesterol, a cause of atherosclerosis, linking biological evidence with incidence of CVD in populations and in clinical trials. Taking into consideration the totality of the scientific evidence, satisfying rigorous criteria for causality, we conclude strongly that lowering intake of saturated fat and replacing it with unsaturated fats, especially polyunsaturated fats, will lower the incidence of CVD.",
+            "position": "neutral",
+            "positionIntensity": 4,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nwbhtxp",
+            "depth": 4,
+            "karma": 7,
+            "createdAt": "2025-12-28T19:22:21.000Z",
+            "claims": [
+              "American Heart Association recommends less than 6% of calories from saturated fat",
+              "Randomized controlled trials show 30% CVD reduction when replacing saturated fat with polyunsaturated oils",
+              "Observational studies show lower CVD rates with less saturated fat intake",
+              "Replacing saturated fat with refined carbohydrates shows no benefit"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nweye8c",
+            "author": "Vospader998",
+            "text": "This study falls for the same pitfall that every other study on CVD does. It strictly looks at lowering or raising LDL and acts under the assumption that increased LDL increases risk of CVD. Which would be fine if that were actually true, expect high levels LDL on its own has 0 correlation with a cardiovascular event.",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nweutqt",
+            "depth": 5,
+            "karma": 1,
+            "createdAt": "2025-12-28T19:39:31.000Z",
+            "claims": [
+              "CVD studies incorrectly assume that increased LDL increases CVD risk",
+              "High levels of LDL have zero correlation with cardiovascular events"
+            ],
+            "fallacies": [
+              {
+                "type": "hasty generalization",
+                "quote": "every other study on CVD does. It strictly looks at lowering or raising LDL",
+                "severity": "medium"
+              },
+              {
+                "type": "false claim",
+                "quote": "high levels LDL on its own has 0 correlation with a cardiovascular event",
+                "severity": "high"
+              }
+            ]
+          },
+          {
+            "id": "nwhp99h",
+            "author": "Arthur_Edens",
+            "text": "What study are you talking about? The link was to a lit review of over 100. There are about 20 in [the section that describes LDL as a cause of CVD](https://www.ahajournals.org/doi/10.1161/cir.0000000000000510#sec-6).",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nweye8c",
+            "depth": 6,
+            "karma": 3,
+            "createdAt": "2025-12-29T04:31:58.000Z",
+            "claims": [
+              "The referenced material is a literature review of over 100 studies",
+              "There are about 20 studies in the section describing LDL as a cause of CVD"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwj11d5",
+            "author": "Vospader998",
+            "text": "OK, and go to the actual studies cited and let me know which actually show said correlation. And don't show me the conclusions, show me the actual data.",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nwhp99h",
+            "depth": 7,
+            "karma": 1,
+            "createdAt": "2025-12-29T11:19:04.000Z",
+            "claims": [
+              "The cited studies do not actually show correlation between LDL and CVD",
+              "Study conclusions should be distinguished from actual data"
+            ],
+            "fallacies": [
+              {
+                "type": "burden of proof shifting",
+                "quote": "go to the actual studies cited and let me know which actually show said correlation",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwk48ul",
+            "author": "Arthur_Edens",
+            "text": "I provided literature review through a reputable medical organization, conducted by actual doctors, that have the matter clearly laid out with hyperlinks in the footnotes to the actual studies with the raw data. That's about the extent I'm willing to put in for an internet stranger. If you can't click through two hyperlinks to read the studies, it's not going to do anything for me to copy them here for you.\n\nIf you want something from outside the US, the Wikipedia page has links to the [same conclusions reached by health authorities across the world.](https://en.wikipedia.org/wiki/Saturated_fat#Cardiovascular_disease) This isn't a \"the science is unsettled\" question.",
+            "position": "neutral",
+            "positionIntensity": 1,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nwj11d5",
+            "depth": 8,
+            "karma": 3,
+            "createdAt": "2025-12-29T15:30:44.000Z",
+            "claims": [
+              "Provided literature review is from a reputable medical organization conducted by actual doctors",
+              "The science on saturated fat and CVD is settled across international health authorities",
+              "This is not an unsettled scientific question"
+            ],
+            "fallacies": []
+          }
+        ],
+        "momentumShifts": []
+      },
+      {
+        "id": "debate_nw8nw2p",
+        "title": "Is Beef Tallow's Popularity Real or Manufactured?",
+        "keyClash": "Whether beef tallow's current market presence represents genuine consumer demand or corporate marketing manipulation.",
+        "rootCommentId": "nw8nw2p",
+        "winner": "pro",
+        "winnerReason": "PRO arguments stronger (6.7 vs 4.0)",
+        "proScore": 6.666666666666667,
+        "conScore": 4,
+        "replyCount": 8,
+        "heatLevel": 7.9,
+        "replies": [
+          {
+            "id": "nw8nw2p",
+            "author": "YardageSardage",
+            "text": "&gt;Beef tallow is everywhere.\n\n\nUm... I've seen like maybe one person mention it in the past three months. Maybe this is a \"your algorithm\" problem?",
+            "position": "con",
+            "positionIntensity": 6,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "1px6a1c",
+            "depth": 1,
+            "karma": 22,
+            "createdAt": "2025-12-27T19:37:31.000Z",
+            "claims": [
+              "Beef tallow is not everywhere as OP claims",
+              "This may be an algorithm-specific phenomenon affecting OP's perception"
+            ],
+            "fallacies": [
+              {
+                "type": "anecdotal evidence",
+                "quote": "I've seen like maybe one person mention it in the past three months",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nw9flkn",
+            "author": "Fabulous_Night_1164",
+            "text": "There is evidence that it is surging in popularity. Not just ops imagination.\n\nThe Return of Beef Tallow: 2025’s Must-Watch Ingredient | US Foods https://share.google/aR1WhBA5j9fUPAPXD\n\nThe Growing Popularity of Beef Tallow: A Culinary and Health Renaissan – IVS https://share.google/xjVaJDbQX1qvvpVBs\n\nThe Golden Age of beef tallow | The National Provisioner https://share.google/1qmXKI00wfg1EuLId\n\nAs some restaurants ditch seed oils for beef tallow, UPEI prof warns it's no health upgrade | CBC News https://share.google/JgVfmevbdWfuB00B0",
+            "position": "pro",
+            "positionIntensity": 7,
+            "qualityScore": 9,
+            "isConcession": false,
+            "parentId": "nw8nw2p",
+            "depth": 2,
+            "karma": 21,
+            "createdAt": "2025-12-27T22:07:11.000Z",
+            "claims": [
+              "Beef tallow is genuinely surging in popularity",
+              "Multiple sources document this trend",
+              "The popularity is real and measurable"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw956oi",
+            "author": "Miserable-Dig-5344",
+            "text": "I've definitely noticed it a lot more in grocery stores than I did even a year or two ago, with whole end caps having nothing but different flavors of beef tallow on them.",
+            "position": "pro",
+            "positionIntensity": 5,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8nw2p",
+            "depth": 2,
+            "karma": 10,
+            "createdAt": "2025-12-27T21:11:37.000Z",
+            "claims": [
+              "Beef tallow products have increased significantly in grocery stores",
+              "The trend is observable in retail environments with dedicated display space"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwj22sa",
+            "author": "despoticGoat",
+            "text": "I work in a grocery store and see an increased number of people buying it. Sad because\nIt’s decidedly worse then seed oils in virtually every aspect",
+            "position": "pro",
+            "positionIntensity": 6,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nw8nw2p",
+            "depth": 2,
+            "karma": 1,
+            "createdAt": "2025-12-29T11:28:14.000Z",
+            "claims": [
+              "More people are buying beef tallow",
+              "Beef tallow is inferior to seed oils in virtually every aspect"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8pehn",
+            "author": "unidentified_lover",
+            "text": "Possibly! It could simply be a case of confirmation bias when I see videos using it pop up!",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 3,
+            "isConcession": true,
+            "parentId": "nw8nw2p",
+            "depth": 2,
+            "karma": 1,
+            "createdAt": "2025-12-27T19:45:32.000Z",
+            "claims": [
+              "The increased visibility could be due to confirmation bias"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8w0c3",
+            "author": "FunGuy8618",
+            "text": "It's so cheap too. My butcher gives me 5-10 lbs of beef fat trimmings, I toss it all in the instant pot for half a day, strain, and I've got cooking oil for months.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "nw8pehn",
+            "depth": 3,
+            "karma": 4,
+            "createdAt": "2025-12-27T20:20:57.000Z",
+            "claims": [
+              "Beef tallow can be obtained very cheaply from butchers",
+              "Making beef tallow at home is simple and cost-effective",
+              "Large quantities can provide cooking oil for months"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwas4mv",
+            "author": "cortesoft",
+            "text": "This post is literally the first time I have heard beef tallow mentioned as a product. I am sure I will see this everywhere now, though.\n\n[Baader-Meinhof Effect](https://en.wikipedia.org/wiki/Frequency_illusion)",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8pehn",
+            "depth": 3,
+            "karma": 1,
+            "createdAt": "2025-12-28T02:44:57.000Z",
+            "claims": [
+              "This is the first exposure to beef tallow as a marketed product",
+              "The Baader-Meinhof Effect explains why people notice things more after first hearing about them"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwz78d8",
+            "author": "lia_bean",
+            "text": "Pretty sure this post is my first time hearing of it",
+            "position": "con",
+            "positionIntensity": 5,
+            "qualityScore": 2,
+            "isConcession": false,
+            "parentId": "nw8nw2p",
+            "depth": 2,
+            "karma": 1,
+            "createdAt": "2025-12-31T21:01:58.000Z",
+            "claims": [
+              "This post represents first exposure to beef tallow trend"
+            ],
+            "fallacies": [
+              {
+                "type": "anecdotal evidence",
+                "quote": "Pretty sure this post is my first time hearing of it",
+                "severity": "low"
+              }
+            ]
+          }
+        ],
+        "momentumShifts": [
+          {
+            "replyNumber": 2,
+            "fromPosition": "con",
+            "toPosition": "pro",
+            "trigger": "unidentified_lover conceded a point",
+            "qualityDelta": 0
+          },
+          {
+            "replyNumber": 6,
+            "fromPosition": "pro",
+            "toPosition": "con",
+            "trigger": "Strong con argument (6/10) following weaker pro argument (9/10)",
+            "qualityDelta": -3
+          },
+          {
+            "replyNumber": 8,
+            "fromPosition": "pro",
+            "toPosition": "con",
+            "trigger": "Strong con argument (2/10) following weaker pro argument (5/10)",
+            "qualityDelta": -3
+          }
+        ]
+      },
+      {
+        "id": "debate_nw8nkyi",
+        "title": "Beef Tallow: Corporate Marketing or Legitimate Health Trend?",
+        "keyClash": "Whether beef tallow's popularity surge represents genuine health benefits or manufactured demand by the meat industry to monetize waste products.",
+        "rootCommentId": "nw8nkyi",
+        "winner": "con",
+        "winnerReason": "CON arguments stronger (5.0 vs 0.0)",
+        "proScore": 0,
+        "conScore": 5,
+        "replyCount": 8,
+        "heatLevel": 8.6,
+        "replies": [
+          {
+            "id": "nwaqjtt",
+            "author": "crek42",
+            "text": "So are they sponsored by the beef industry..? OPs claim is that it’s propaganda that’s pushed by big beef. \n\nDo you know of any sponsored MAGA influencers for their beef commentary",
+            "position": "con",
+            "positionIntensity": 6,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nw8nkyi",
+            "depth": 2,
+            "karma": 2,
+            "createdAt": "2025-12-28T02:35:36.000Z",
+            "claims": [
+              "Beef tallow is only pushed by MAGA geriatrics",
+              "These people missed previous diet fads",
+              "The health discussion is no longer relevant"
+            ],
+            "fallacies": [
+              {
+                "type": "ad hominem",
+                "quote": "maga geriatrics",
+                "severity": "medium"
+              },
+              {
+                "type": "hasty generalization",
+                "quote": "only being pushed by a small group of maga geriatrics",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nw8u6g7",
+            "author": "jwrig",
+            "text": "Maga centric geriatrics?  Hahah. No. The current fad around beef tallow is more from social media influencers pushing a \"seed oils are bad\" narrative.",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8nkyi",
+            "depth": 2,
+            "karma": 6,
+            "createdAt": "2025-12-27T20:11:02.000Z",
+            "claims": [
+              "Asking for evidence of beef industry sponsorship",
+              "Questioning if MAGA influencers are sponsored for beef commentary"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8uqyd",
+            "author": "EnvyRepresentative94",
+            "text": "Who? That fad ended years ago, if you actively look up the people pushing the beef tallow narrative rn, it's RFK.",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 5,
+            "isConcession": false,
+            "parentId": "nw8u6g7",
+            "depth": 3,
+            "karma": 6,
+            "createdAt": "2025-12-27T20:14:06.000Z",
+            "claims": [
+              "Current beef tallow fad comes from social media influencers",
+              "The narrative is driven by 'seed oils are bad' messaging",
+              "It's not driven by MAGA geriatrics"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8x65v",
+            "author": "jwrig",
+            "text": "It isn't.  Beef tallow has been pushed for over five years at this point. It was being pushed long before RFK came into office.\n\nThe recent resurgence is really from kitchens shifting off of vegetable and seed oils, and short form video from social media influencers. This doesn't mean RFK hasn't used his platform to go after seed and vegetable oils, especially given his tendency to go after synthetic food does, but this is not some maga driven bullshit.\n\nWe started to see it grow in popularity right before the pandemic.\n\nThe St. Louis Fed has been tracking lard and non edible tallow production.\n\nhttps://fred.stlouisfed.org/series/PCU3116133116132",
+            "position": "con",
+            "positionIntensity": 6,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nw8uqyd",
+            "depth": 4,
+            "karma": 1,
+            "createdAt": "2025-12-27T20:27:24.000Z",
+            "claims": [
+              "The seed oils fad ended years ago",
+              "RFK is currently pushing the beef tallow narrative"
+            ],
+            "fallacies": [
+              {
+                "type": "appeal to authority",
+                "quote": "it's RFK",
+                "severity": "low"
+              }
+            ]
+          },
+          {
+            "id": "nw8qeeq",
+            "author": "Three-Sixteen-M7-7",
+            "text": "I hate to be the one to break it to you, but tallow basically goes back as far as humans have been processing animals. It’s become trendier recently but it isn’t new, and has seen constant use, the bump in recognition comes from increased newcomer usage, that’s all.",
+            "position": "con",
+            "positionIntensity": 8,
+            "qualityScore": 8,
+            "isConcession": false,
+            "parentId": "nw8nkyi",
+            "depth": 2,
+            "karma": -1,
+            "createdAt": "2025-12-27T19:50:49.000Z",
+            "claims": [
+              "Beef tallow has been pushed for over five years",
+              "Recent resurgence comes from kitchens avoiding seed oils",
+              "Social media influencers drive the trend",
+              "Popularity grew before the pandemic",
+              "RFK's influence is recent and not the primary driver"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nw8qoai",
+            "author": "EnvyRepresentative94",
+            "text": "&gt;increased newcomer usage\n\nRight, and what group is pushing it?",
+            "position": "con",
+            "positionIntensity": 8,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8qeeq",
+            "depth": 3,
+            "karma": 7,
+            "createdAt": "2025-12-27T19:52:16.000Z",
+            "claims": [
+              "Tallow has been used as long as humans have processed animals",
+              "It's not new, just trendier recently",
+              "The bump comes from increased newcomer usage"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwosr6v",
+            "author": "couldbemage",
+            "text": "Hipsters.\n\nThe first places advertising using tallow instead of vegetable oils were concentrated in the trendiest parts of the city.",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nw8qoai",
+            "depth": 4,
+            "karma": 1,
+            "createdAt": "2025-12-30T06:26:20.000Z",
+            "claims": [
+              "Asking which group is pushing increased tallow usage"
+            ],
+            "fallacies": []
+          }
+        ],
+        "momentumShifts": []
+      },
+      {
+        "id": "debate_nw8x2bb",
+        "title": "Beef Tallow: Corporate Marketing or Organic Health Trend?",
+        "keyClash": "Whether beef tallow's popularity stems from Big Beef's profit-driven marketing campaign or from grassroots health influencers and anti-seed oil movements.",
+        "rootCommentId": "nw8x2bb",
+        "winner": "con",
+        "winnerReason": "CON arguments stronger (7.0 vs 6.0)",
+        "proScore": 6,
+        "conScore": 7,
+        "replyCount": 5,
+        "heatLevel": 8.1,
+        "replies": [
+          {
+            "id": "nw8x2bb",
+            "author": "viewerfromthemiddle",
+            "text": "The push for beef tallow has been bubbling up to toward the mainstream for eight years or so. A lot of right-coded men's health influencers have long touted beef tallow as an alternative to seed oils (on which they blame any number of ills). So beef tallow became associated not just with a \"carnivore diet\" but with affirmative manhood, along with other such trappings as testosterone boosters, stoicism, raw milk, vaccine refusal, and anti-wokeness. Podcast bros (Joe Rogan, Adam Carolla, Theo Von, et al) platformed and promoted these views for years. RFK and MAHA are the current culmination of this movement. When a business is advertising beef tallow today, it is appealing to a specific political tribe.",
+            "position": "con",
+            "positionIntensity": 7,
+            "qualityScore": 7,
+            "isConcession": false,
+            "parentId": "1px6a1c",
+            "depth": 1,
+            "karma": 14,
+            "createdAt": "2025-12-27T20:26:48.000Z",
+            "claims": [
+              "Beef tallow popularity has been growing for eight years through men's health influencers",
+              "The trend is associated with opposition to seed oils rather than Big Beef marketing",
+              "Beef tallow has become tied to specific political and cultural identities",
+              "Podcast influencers have been promoting these views for years"
+            ],
+            "fallacies": [
+              {
+                "type": "guilt by association",
+                "quote": "beef tallow became associated not just with a 'carnivore diet' but with affirmative manhood, along with other such trappings as testosterone boosters, stoicism, raw milk, vaccine refusal, and anti-wokeness",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwah9w4",
+            "author": "HotSauceRainfall",
+            "text": "There’s a ton of grift involved in supplements, and byproducts of beef rendering is no exception.\n\nYou can go online and buy supplement packs of beef tallow, powdered beef testicles (in capsules, for “male enhancement”), and freeze dried beef liver. All of these things are cheap because there’s not a ton of demand relative to muscle meats…so the grifters purchase the materials for Pennie’s, come up with a handful of deeply questionable “studies,” put small amounts into gelcaps, and sell it at a 400% markup. \n\nAnd yes, it’s strongly associated with far-right political belief or the granola to alt-right pipeline. ",
+            "position": "pro",
+            "positionIntensity": 6,
+            "qualityScore": 6,
+            "isConcession": false,
+            "parentId": "nw8x2bb",
+            "depth": 2,
+            "karma": 6,
+            "createdAt": "2025-12-28T01:40:44.000Z",
+            "claims": [
+              "There is significant grift involved in beef byproduct supplements",
+              "Companies buy cheap materials and sell at 400% markup using questionable studies",
+              "Beef tallow supplements are associated with far-right political beliefs"
+            ],
+            "fallacies": [
+              {
+                "type": "guilt by association",
+                "quote": "strongly associated with far-right political belief or the granola to alt-right pipeline",
+                "severity": "medium"
+              }
+            ]
+          },
+          {
+            "id": "nwcbihp",
+            "author": "datbackup",
+            "text": "I always wonder when I see “far right”, in your mind what prominent figure comes to mind that is “right” but not “far right”?",
+            "position": "neutral",
+            "positionIntensity": 3,
+            "qualityScore": 3,
+            "isConcession": false,
+            "parentId": "nwah9w4",
+            "depth": 3,
+            "karma": 2,
+            "createdAt": "2025-12-28T10:05:38.000Z",
+            "claims": [
+              "Questions the definition and usage of 'far right' terminology"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwd58iv",
+            "author": "HotSauceRainfall",
+            "text": "The Nick Fuentes of the world, versus the Chuck Schumers (right) and Mitt Romneys (farther right than Schumer but has one foot firmly in the bounds of demonstrable reality).",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 4,
+            "isConcession": false,
+            "parentId": "nwcbihp",
+            "depth": 4,
+            "karma": 3,
+            "createdAt": "2025-12-28T14:08:51.000Z",
+            "claims": [
+              "Nick Fuentes represents far-right politics",
+              "Chuck Schumer represents right-wing politics",
+              "Mitt Romney is farther right than Schumer but within bounds of reality"
+            ],
+            "fallacies": []
+          },
+          {
+            "id": "nwidb0q",
+            "author": "67_SixSeven_67",
+            "text": "&gt; versus the Chuck Schumers (right)\n\nBy what metric?",
+            "position": "neutral",
+            "positionIntensity": 2,
+            "qualityScore": 2,
+            "isConcession": false,
+            "parentId": "nwd58iv",
+            "depth": 5,
+            "karma": 1,
+            "createdAt": "2025-12-29T07:39:17.000Z",
+            "claims": [
+              "Questions the characterization of Chuck Schumer as right-wing"
+            ],
+            "fallacies": []
+          }
+        ],
+        "momentumShifts": []
+      }
+    ],
+    "participants": [
+      {
+        "username": "Adorable-Volume2247",
+        "commentCount": 2,
+        "averageQuality": 4.5,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Low_Television_7298",
+        "commentCount": 1,
+        "averageQuality": 7,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "BigMax",
+        "commentCount": 2,
+        "averageQuality": 6.5,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "Whatusedtobeisnomore",
+        "commentCount": 1,
+        "averageQuality": 8,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Fats_Tetromino",
+        "commentCount": 1,
+        "averageQuality": 4,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "classic4life",
+        "commentCount": 2,
+        "averageQuality": 6,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "looshface",
+        "commentCount": 2,
+        "averageQuality": 5.5,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "abarcsa",
+        "commentCount": 2,
+        "averageQuality": 6,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Conscious_Zucchini96",
+        "commentCount": 1,
+        "averageQuality": 3,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "navigationallyaided",
+        "commentCount": 2,
+        "averageQuality": 6,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Voldemort57",
+        "commentCount": 1,
+        "averageQuality": 8,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "chucknorrisinator",
+        "commentCount": 1,
+        "averageQuality": 4,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Working_Cucumber_437",
+        "commentCount": 3,
+        "averageQuality": 3.6666666666666665,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "MakAttacks",
+        "commentCount": 1,
+        "averageQuality": 3,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Kampurz",
+        "commentCount": 1,
+        "averageQuality": 5,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "crek42",
+        "commentCount": 4,
+        "averageQuality": 5.75,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Johnny_bubblegum",
+        "commentCount": 1,
+        "averageQuality": 1,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "ManielDullen",
+        "commentCount": 1,
+        "averageQuality": 4,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "hansuluthegrey",
+        "commentCount": 1,
+        "averageQuality": 2,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "frotc914",
+        "commentCount": 1,
+        "averageQuality": 3,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Sevuhrow",
+        "commentCount": 1,
+        "averageQuality": 2,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "AdOk1598",
+        "commentCount": 1,
+        "averageQuality": 5,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Ok_Comment2621",
+        "commentCount": 1,
+        "averageQuality": 3,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "TheVioletBarry",
+        "commentCount": 2,
+        "averageQuality": 5,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Fluffy_Most_662",
+        "commentCount": 1,
+        "averageQuality": 6,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Freizeit20",
+        "commentCount": 1,
+        "averageQuality": 4,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "unidentified_lover",
+        "commentCount": 5,
+        "averageQuality": 5.4,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "rhinokick",
+        "commentCount": 1,
+        "averageQuality": 5,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "Blicktar",
+        "commentCount": 1,
+        "averageQuality": 6,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "RangerRick4971",
+        "commentCount": 1,
+        "averageQuality": 4,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "SysError404",
+        "commentCount": 1,
+        "averageQuality": 6,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "yuumigod69",
+        "commentCount": 1,
+        "averageQuality": 3,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "porizj",
+        "commentCount": 1,
+        "averageQuality": 1,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Jdevers77",
+        "commentCount": 1,
+        "averageQuality": 7,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Artanis_Creed",
+        "commentCount": 1,
+        "averageQuality": 3,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Moonshot_00",
+        "commentCount": 1,
+        "averageQuality": 2,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "SadBurritoBoys",
+        "commentCount": 1,
+        "averageQuality": 6,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "lionsden08",
+        "commentCount": 1,
+        "averageQuality": 5,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "thegunnersdream",
+        "commentCount": 1,
+        "averageQuality": 8,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Ayjayz",
+        "commentCount": 1,
+        "averageQuality": 7,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "BrooklynSmash",
+        "commentCount": 1,
+        "averageQuality": 5,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Vincitus",
+        "commentCount": 1,
+        "averageQuality": 4,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "Kashmir1089",
+        "commentCount": 1,
+        "averageQuality": 2,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Winderige_Garnaal",
+        "commentCount": 1,
+        "averageQuality": 2,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Dr_Horrible_PhD",
+        "commentCount": 1,
+        "averageQuality": 3,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "Altruistic-Web13",
+        "commentCount": 1,
+        "averageQuality": 7,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "PandaMime_421",
+        "commentCount": 1,
+        "averageQuality": 6,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "VeganKiwiGuy",
+        "commentCount": 1,
+        "averageQuality": 4,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "razvanght",
+        "commentCount": 3,
+        "averageQuality": 6,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "freshwaddurshark",
+        "commentCount": 1,
+        "averageQuality": 6,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "Myrmodus",
+        "commentCount": 2,
+        "averageQuality": 7,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Tibbaryllis2",
+        "commentCount": 3,
+        "averageQuality": 6,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Vospader998",
+        "commentCount": 4,
+        "averageQuality": 5.5,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "StManTiS",
+        "commentCount": 1,
+        "averageQuality": 7,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Arthur_Edens",
+        "commentCount": 4,
+        "averageQuality": 7,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "YardageSardage",
+        "commentCount": 1,
+        "averageQuality": 4,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Fabulous_Night_1164",
+        "commentCount": 1,
+        "averageQuality": 9,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "Miserable-Dig-5344",
+        "commentCount": 1,
+        "averageQuality": 6,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "despoticGoat",
+        "commentCount": 1,
+        "averageQuality": 5,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "FunGuy8618",
+        "commentCount": 1,
+        "averageQuality": 7,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "cortesoft",
+        "commentCount": 1,
+        "averageQuality": 6,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "lia_bean",
+        "commentCount": 1,
+        "averageQuality": 2,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "jwrig",
+        "commentCount": 2,
+        "averageQuality": 4.5,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "EnvyRepresentative94",
+        "commentCount": 2,
+        "averageQuality": 5.5,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "Three-Sixteen-M7-7",
+        "commentCount": 1,
+        "averageQuality": 8,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "couldbemage",
+        "commentCount": 1,
+        "averageQuality": 4,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "viewerfromthemiddle",
+        "commentCount": 1,
+        "averageQuality": 7,
+        "position": "con",
+        "isCached": false
+      },
+      {
+        "username": "HotSauceRainfall",
+        "commentCount": 2,
+        "averageQuality": 5,
+        "position": "pro",
+        "isCached": false
+      },
+      {
+        "username": "datbackup",
+        "commentCount": 1,
+        "averageQuality": 3,
+        "position": "neutral",
+        "isCached": false
+      },
+      {
+        "username": "67_SixSeven_67",
+        "commentCount": 1,
+        "averageQuality": 2,
+        "position": "neutral",
+        "isCached": false
+      }
+    ],
+    "claims": [
+      {
+        "id": "claim_0",
+        "text": "Beef fat and tallow are different things",
+        "author": "Adorable-Volume2247",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_1",
+        "text": "America uses unhealthy fry oils banned in Europe",
+        "author": "Adorable-Volume2247",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_2",
+        "text": "This is a cost saving measure",
+        "author": "Adorable-Volume2247",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_3",
+        "text": "Businesses don't throw away byproducts",
+        "author": "Adorable-Volume2247",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_4",
+        "text": "Tallow and fat are the same thing",
+        "author": "Low_Television_7298",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_5",
+        "text": "There is no taste difference but price is 3x higher",
+        "author": "Low_Television_7298",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_6",
+        "text": "No health benefits from frying oil choice",
+        "author": "Low_Television_7298",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_7",
+        "text": "Pink Himalayan salt comparison",
+        "author": "Low_Television_7298",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_8",
+        "text": "Americans obsess over making unhealthy food healthy",
+        "author": "BigMax",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_9",
+        "text": "People focus on wrong health aspects while ignoring basics like fruits and vegetables",
+        "author": "BigMax",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_10",
+        "text": "Tallow is purified beef fat",
+        "author": "Whatusedtobeisnomore",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_11",
+        "text": "Tallow is melted down and strained fat trimmings",
+        "author": "Whatusedtobeisnomore",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_12",
+        "text": "Tallow might be specifically fat from around kidneys",
+        "author": "Fats_Tetromino",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_13",
+        "text": "Tallow was hard to find before but is everywhere now",
+        "author": "Fats_Tetromino",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_14",
+        "text": "Kidney fat is called suet",
+        "author": "Adorable-Volume2247",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_15",
+        "text": "All suet is tallow but not all tallow is suet",
+        "author": "classic4life",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_16",
+        "text": "Suet is the best fat",
+        "author": "classic4life",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_17",
+        "text": "Some stores incorrectly label fat trimmings as suet",
+        "author": "classic4life",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_18",
+        "text": "Tallow is just heated fat",
+        "author": "looshface",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_19",
+        "text": "Purification assumptions are on the consumer",
+        "author": "looshface",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_20",
+        "text": "Tallow is purified by straining out meat bits",
+        "author": "BigMax",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_21",
+        "text": "Pure doesn't mean healthy",
+        "author": "BigMax",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_22",
+        "text": "White sugar is also purified",
+        "author": "BigMax",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_23",
+        "text": "Processing fat into tallow creates a different product with different properties",
+        "author": "abarcsa",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_24",
+        "text": "Tallow has legitimate uses in products like shaving soaps",
+        "author": "abarcsa",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_25",
+        "text": "Raw beef fat and rendered tallow are not functionally equivalent",
+        "author": "abarcsa",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_26",
+        "text": "Rendering fat doesn't fundamentally change that tallow is beef fat",
+        "author": "classic4life",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_27",
+        "text": "Using tallow in skincare products is questionable regardless of processing",
+        "author": "classic4life",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_28",
+        "text": "Animal fat has potential industrial applications like machine lubricants and biodiesel",
+        "author": "Conscious_Zucchini96",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_29",
+        "text": "Slaughterhouse waste is used as feedstock for renewable diesel",
+        "author": "navigationallyaided",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_30",
+        "text": "Biodiesel can be identified by its french fry smell",
+        "author": "navigationallyaided",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_31",
+        "text": "Whale oil was historically important in transmission fluid",
+        "author": "navigationallyaided",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_32",
+        "text": "Animal-derived fuels consume more water than fossil fuels due to livestock water requirements",
+        "author": "Voldemort57",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_33",
+        "text": "Converting energy from corn to cow is extremely inefficient",
+        "author": "Voldemort57",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_34",
+        "text": "Animal product fuel is not economical or resource efficient",
+        "author": "Voldemort57",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_35",
+        "text": "There's no truly healthy way to fry food",
+        "author": "chucknorrisinator",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_36",
+        "text": "People should just enjoy fried foods without health pretenses",
+        "author": "chucknorrisinator",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_37",
+        "text": "Air fryers are a good cooking method",
+        "author": "Working_Cucumber_437",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_38",
+        "text": "Ghee and butter have different cooking properties despite being related products",
+        "author": "MakAttacks",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_39",
+        "text": "Tallow is a processed product while fat is raw material",
+        "author": "Kampurz",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_40",
+        "text": "Processing creates meaningful distinctions between related products",
+        "author": "Kampurz",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_41",
+        "text": "Requests specific evidence about which frying oils are banned in EU but used in US",
+        "author": "crek42",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_42",
+        "text": "Red40 and seed oils are being pushed by big pharma",
+        "author": "Johnny_bubblegum",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_43",
+        "text": "EU put regulations on certain oils making them impractical for large business",
+        "author": "ManielDullen",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_44",
+        "text": "This is essentially a ban",
+        "author": "ManielDullen",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_45",
+        "text": "Someone is incorrectly equating beef fat and tallow",
+        "author": "hansuluthegrey",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_46",
+        "text": "Someone made 30 wrong claims in the thread",
+        "author": "frotc914",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_47",
+        "text": "They never go back to edit or respond",
+        "author": "frotc914",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_48",
+        "text": "Someone is pro-RFK and confidently incorrect",
+        "author": "Sevuhrow",
+        "verdict": "unverified",
+        "confidence": 0.5
+      },
+      {
+        "id": "claim_49",
+        "text": "They are being upvoted despite being wrong",
+        "author": "Sevuhrow",
+        "verdict": "unverified",
+        "confidence": 0.5
+      }
+    ],
+    "fallacies": [
+      {
+        "id": "fallacy_0",
+        "type": "Ad hominem",
+        "author": "Adorable-Volume2247",
+        "quote": "this isnt a product for you",
+        "severity": "low"
+      },
+      {
+        "id": "fallacy_1",
+        "type": "False premise",
+        "author": "Adorable-Volume2247",
+        "quote": "Businesses never ever throw away byproducts",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_2",
+        "type": "Ad hominem",
+        "author": "Low_Television_7298",
+        "quote": "your a dick for thinking that is a gotcha",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_3",
+        "type": "Strawman",
+        "author": "BigMax",
+        "quote": "I know you're not getting your daily fruits and veggies",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_4",
+        "type": "false analogy",
+        "author": "abarcsa",
+        "quote": "Right, and milk is just heated, that obviously makes no difference in the end product compared to raw milk",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_5",
+        "type": "false analogy",
+        "author": "Kampurz",
+        "quote": "It's like saying serum and blood are the same thing",
+        "severity": "low"
+      },
+      {
+        "id": "fallacy_6",
+        "type": "strawman",
+        "author": "Johnny_bubblegum",
+        "quote": "Obviously the red40 chemtrail seed oils big pharma shoves down our throats!!!!",
+        "severity": "high"
+      },
+      {
+        "id": "fallacy_7",
+        "type": "appeal to authority",
+        "author": "ManielDullen",
+        "quote": "I'm not science-brained enough to remember what oils they were exactly, but I definitely remember reading the negotiations at the time (History/PoliSci student)",
+        "severity": "low"
+      },
+      {
+        "id": "fallacy_8",
+        "type": "ad hominem",
+        "author": "hansuluthegrey",
+        "quote": "Its impressive how wrong some people are while still being assholes",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_9",
+        "type": "ad hominem",
+        "author": "frotc914",
+        "quote": "I think we found RFK's Reddit account",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_10",
+        "type": "ad hominem",
+        "author": "Sevuhrow",
+        "quote": "Pro-RFK, blatantly wrong, confidentially incorrect",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_11",
+        "type": "post hoc ergo propter hoc",
+        "author": "Working_Cucumber_437",
+        "quote": "Heart disease rates skyrocketed once we introduced seed oils into the American diet",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_12",
+        "type": "ad hominem",
+        "author": "Moonshot_00",
+        "quote": "Yet another Euro making stupid ass claims",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_13",
+        "type": "false dichotomy",
+        "author": "SadBurritoBoys",
+        "quote": "If it is good, can we still call it propaganda?",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_14",
+        "type": "sweeping generalization",
+        "author": "lionsden08",
+        "quote": "Supply and demand (as it exists today) is fucking nonsense",
+        "severity": "high"
+      },
+      {
+        "id": "fallacy_15",
+        "type": "appeal to the past",
+        "author": "lionsden08",
+        "quote": "back when the best tech we had were wooden ships there was absolutely a solid limit",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_16",
+        "type": "ad hominem",
+        "author": "crek42",
+        "quote": "It seems like you've just discovered the field of economics",
+        "severity": "low"
+      },
+      {
+        "id": "fallacy_17",
+        "type": "ad hominem",
+        "author": "BrooklynSmash",
+        "quote": "I'll venture a guess and say you have no knowledge or background in economics",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_18",
+        "type": "false analogy",
+        "author": "BrooklynSmash",
+        "quote": "That's like saying water isn't wet",
+        "severity": "low"
+      },
+      {
+        "id": "fallacy_19",
+        "type": "ad hominem",
+        "author": "Winderige_Garnaal",
+        "quote": "You can't vibe your way through social science",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_20",
+        "type": "loaded language",
+        "author": "razvanght",
+        "quote": "carnists",
+        "severity": "low"
+      },
+      {
+        "id": "fallacy_21",
+        "type": "semantic overreach",
+        "author": "freshwaddurshark",
+        "quote": "The whole point is either promoting your shit or denigrating the competition",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_22",
+        "type": "hasty generalization",
+        "author": "Vospader998",
+        "quote": "every other study on CVD does. It strictly looks at lowering or raising LDL",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_23",
+        "type": "false claim",
+        "author": "Vospader998",
+        "quote": "high levels LDL on its own has 0 correlation with a cardiovascular event",
+        "severity": "high"
+      },
+      {
+        "id": "fallacy_24",
+        "type": "burden of proof shifting",
+        "author": "Vospader998",
+        "quote": "go to the actual studies cited and let me know which actually show said correlation",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_25",
+        "type": "anecdotal evidence",
+        "author": "YardageSardage",
+        "quote": "I've seen like maybe one person mention it in the past three months",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_26",
+        "type": "anecdotal evidence",
+        "author": "lia_bean",
+        "quote": "Pretty sure this post is my first time hearing of it",
+        "severity": "low"
+      },
+      {
+        "id": "fallacy_27",
+        "type": "ad hominem",
+        "author": "crek42",
+        "quote": "maga geriatrics",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_28",
+        "type": "hasty generalization",
+        "author": "crek42",
+        "quote": "only being pushed by a small group of maga geriatrics",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_29",
+        "type": "appeal to authority",
+        "author": "jwrig",
+        "quote": "it's RFK",
+        "severity": "low"
+      },
+      {
+        "id": "fallacy_30",
+        "type": "guilt by association",
+        "author": "viewerfromthemiddle",
+        "quote": "beef tallow became associated not just with a 'carnivore diet' but with affirmative manhood, along with other such trappings as testosterone boosters, stoicism, raw milk, vaccine refusal, and anti-wokeness",
+        "severity": "medium"
+      },
+      {
+        "id": "fallacy_31",
+        "type": "guilt by association",
+        "author": "HotSauceRainfall",
+        "quote": "strongly associated with far-right political belief or the granola to alt-right pipeline",
+        "severity": "medium"
+      }
+    ],
+    "topics": [
+      "beef_tallow_marketing",
+      "meat_industry_propaganda",
+      "food_trends_manipulation",
+      "corporate_food_marketing"
+    ]
+  },
+  "cachedAt": 1767320300048
+}

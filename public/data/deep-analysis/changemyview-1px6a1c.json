@@ -1,0 +1,1021 @@
+{
+  "data": {
+    "claims": [
+      {
+        "id": "claim_1",
+        "text": "McDonald's switched from beef tallow to other oils for frying",
+        "author": "Avium",
+        "commentId": "avium_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "verified",
+        "relevanceScore": 0.9
+      },
+      {
+        "id": "claim_2",
+        "text": "Chicken wings used to cost 10 cents a pound",
+        "author": "Avium",
+        "commentId": "avium_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.6
+      },
+      {
+        "id": "claim_3",
+        "text": "Small slaughter houses have to pay to dispose of byproducts like fat, skin, and organs",
+        "author": "hashtagblesssed",
+        "commentId": "hashtagblesssed_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.8
+      },
+      {
+        "id": "claim_4",
+        "text": "The switch to seed and vegetable oils was based on Ancel Keys ridiculously flawed fat hypothesis",
+        "author": "SeatSix",
+        "commentId": "seatsix_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "disputed",
+        "relevanceScore": 0.7
+      },
+      {
+        "id": "claim_5",
+        "text": "Saturated fat being problematic for heart health is still the position of almost every health organisation",
+        "author": "acky1",
+        "commentId": "acky1_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "verified",
+        "relevanceScore": 0.8
+      },
+      {
+        "id": "claim_6",
+        "text": "Heart disease death rates have not budged since the war on animal fat started, heart related deaths are still the leading cause of death",
+        "author": "Ok_Giraffe8865",
+        "commentId": "ok_giraffe8865_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "disputed",
+        "relevanceScore": 0.7
+      },
+      {
+        "id": "claim_7",
+        "text": "There's no reason to avoid seed oils and plenty of reasons to eat them",
+        "author": "anonymous",
+        "commentId": "anon_1",
+        "sourceCited": true,
+        "sourceUrl": "https://www.heart.org/en/news/2024/08/20/theres-no-reason-to-avoid-seed-oils-and-plenty-of-reasons-to-eat-them",
+        "verificationStatus": "sourced",
+        "relevanceScore": 0.9
+      },
+      {
+        "id": "claim_8",
+        "text": "America uses extremely unhealthy fry oils to fry things. Most of them are banned or altered in europe",
+        "author": "Fluffy_Most_662",
+        "commentId": "fluffy_most_662_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "disputed",
+        "relevanceScore": 0.8
+      },
+      {
+        "id": "claim_9",
+        "text": "Tallow and fat are the same thing",
+        "author": "Adorable-Volume2247",
+        "commentId": "adorable_volume2247_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "verified",
+        "relevanceScore": 0.7
+      },
+      {
+        "id": "claim_10",
+        "text": "Cottonseed is the best oil, but is rarely used even in the US. Its outright banned in Europe",
+        "author": "Fluffy_Most_662",
+        "commentId": "fluffy_most_662_2",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "disputed",
+        "relevanceScore": 0.6
+      },
+      {
+        "id": "claim_11",
+        "text": "Non-partially hydrogenated cottonseed oil is sold and used in the EU",
+        "author": "Jam_Packens",
+        "commentId": "jam_packens_1",
+        "sourceCited": true,
+        "sourceUrl": "https://www.bonafideresearch.com/product/230929573/europe-cottonseed-oil-market",
+        "verificationStatus": "sourced",
+        "relevanceScore": 0.7
+      },
+      {
+        "id": "claim_12",
+        "text": "Heart disease rates skyrocketed once we introduced seed oils into the American diet",
+        "author": "Freizeit20",
+        "commentId": "freizeit20_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "disputed",
+        "relevanceScore": 0.8
+      },
+      {
+        "id": "claim_13",
+        "text": "Tallow is made from the beef fat found around the kidneys (suet). It's firmer, more nutrient-dense, and has a higher melting point than fat from other parts of the animal",
+        "author": "rhinokick",
+        "commentId": "rhinokick_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "disputed",
+        "relevanceScore": 0.6
+      },
+      {
+        "id": "claim_14",
+        "text": "Tallow is the rendered fat from any beef fat, not just suet",
+        "author": "RangerRick4971",
+        "commentId": "rangerrick4971_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "verified",
+        "relevanceScore": 0.6
+      },
+      {
+        "id": "claim_15",
+        "text": "12% of all greenhouse gas emissions according to the UN comes from animal agriculture",
+        "author": "VeganKiwiGuy",
+        "commentId": "vegankiwiguy_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.7
+      },
+      {
+        "id": "claim_16",
+        "text": "Animal consumption is associated with greater risk of ischemic heart disease and cancer incidence compared to vegan and vegetarian diets",
+        "author": "VeganKiwiGuy",
+        "commentId": "vegankiwiguy_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "verified",
+        "relevanceScore": 0.8
+      },
+      {
+        "id": "claim_17",
+        "text": "When whoever runs the HHS Twitter account tried to do beef tallow propaganda for the healthiness of beef tallow, they literally just cited shelf life studies because they couldn't find in vivo studies in humans or even animals",
+        "author": "Dr_Horrible_PhD",
+        "commentId": "dr_horrible_phd_1",
+        "sourceCited": false,
+        "sourceUrl": null,
+        "verificationStatus": "unverified",
+        "relevanceScore": 0.9
+      }
+    ],
+    "arguments": [
+      {
+        "id": "arg_1",
+        "commentId": "nw8u4y9",
+        "author": "Avium",
+        "position": "pro",
+        "summary": "McDonald's switch from beef tallow was noticeable in taste quality. Similar market dynamics occurred with chicken wings - price adjusts based on demand.",
+        "supports": [],
+        "attacks": [],
+        "strength": 0.6,
+        "evidenceQuality": 0.4
+      },
+      {
+        "id": "arg_2",
+        "commentId": "nw8u3rp",
+        "author": "The_Amazing_Emu",
+        "position": "pro",
+        "summary": "Not wasting parts of an animal is inherently good, supporting the utilization of byproducts.",
+        "supports": [
+          "arg_3"
+        ],
+        "attacks": [],
+        "strength": 0.7,
+        "evidenceQuality": 0.3
+      },
+      {
+        "id": "arg_3",
+        "commentId": "nw9yvg8",
+        "author": "hashtagblesssed",
+        "position": "pro",
+        "summary": "Small slaughterhouses pay to dispose of byproducts; creating markets for these helps them compete with large corporations and may reduce meat prices.",
+        "supports": [
+          "arg_2"
+        ],
+        "attacks": [],
+        "strength": 0.8,
+        "evidenceQuality": 0.5
+      },
+      {
+        "id": "arg_4",
+        "commentId": "nw8u50k",
+        "author": "PizzaBear109",
+        "position": "con",
+        "summary": "The beef tallow resurgence is driven by misinformation about seed oils and corporate involvement in promoting 'natural' alternatives.",
+        "supports": [],
+        "attacks": [
+          "arg_5"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.4
+      },
+      {
+        "id": "arg_5",
+        "commentId": "nw8yzvh",
+        "author": "SeatSix",
+        "position": "pro",
+        "summary": "The original switch to seed oils was based on Ancel Keys' flawed fat hypothesis that led to anti-fat policies.",
+        "supports": [],
+        "attacks": [
+          "arg_4"
+        ],
+        "strength": 0.6,
+        "evidenceQuality": 0.3
+      },
+      {
+        "id": "arg_6",
+        "commentId": "nwa6clu",
+        "author": "acky1",
+        "position": "con",
+        "summary": "Major health organizations still recommend limiting saturated fat based on recent studies showing it's problematic for heart health.",
+        "supports": [],
+        "attacks": [
+          "arg_5",
+          "arg_7"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.7
+      },
+      {
+        "id": "arg_7",
+        "commentId": "nwz0yzo",
+        "author": "Ok_Giraffe8865",
+        "position": "pro",
+        "summary": "Scientific analysis is changing - heart disease death rates haven't improved despite the war on animal fat, suggesting previous thinking may be wrong.",
+        "supports": [
+          "arg_5"
+        ],
+        "attacks": [
+          "arg_6"
+        ],
+        "strength": 0.5,
+        "evidenceQuality": 0.3
+      },
+      {
+        "id": "arg_8",
+        "commentId": "nw9388u",
+        "author": "[deleted]",
+        "position": "con",
+        "summary": "Anti-seed oil hysteria is unfounded; the American Heart Association states there's no reason to avoid seed oils and plenty of reasons to eat them.",
+        "supports": [
+          "arg_6"
+        ],
+        "attacks": [
+          "arg_4",
+          "arg_5"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.8
+      },
+      {
+        "id": "arg_9",
+        "commentId": "nw8my67",
+        "author": "Fluffy_Most_662",
+        "position": "con",
+        "summary": "America uses extremely unhealthy fry oils banned in Europe; the tallow switch is primarily a cost-saving measure for government contracts.",
+        "supports": [],
+        "attacks": [],
+        "strength": 0.4,
+        "evidenceQuality": 0.2
+      },
+      {
+        "id": "arg_10",
+        "commentId": "nwd85to",
+        "author": "Adorable-Volume2247",
+        "position": "neutral",
+        "summary": "As a butcher, tallow and fat are the same thing. There's no taste difference in frying, price is 3x higher, and health benefits are unlikely.",
+        "supports": [],
+        "attacks": [
+          "arg_9"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_11",
+        "commentId": "nwcb521",
+        "author": "crek42",
+        "position": "con",
+        "summary": "Challenges the claim about banned oils in EU, asking for specific examples and quantification of 'widely used' oils.",
+        "supports": [],
+        "attacks": [
+          "arg_9"
+        ],
+        "strength": 0.9,
+        "evidenceQuality": 0.7
+      },
+      {
+        "id": "arg_12",
+        "commentId": "nw8qhlm",
+        "author": "Jam_Packens",
+        "position": "con",
+        "summary": "Fact-checks cottonseed oil claims - partially hydrogenated versions are banned in both US and EU, but regular cottonseed oil is legal in both.",
+        "supports": [
+          "arg_11"
+        ],
+        "attacks": [
+          "arg_9"
+        ],
+        "strength": 0.9,
+        "evidenceQuality": 0.8
+      },
+      {
+        "id": "arg_13",
+        "commentId": "nwap1ak",
+        "author": "crek42",
+        "position": "con",
+        "summary": "The US vs EU food regulation debate often falls apart when examined closely - the 'widely used' qualifier makes claims much different.",
+        "supports": [
+          "arg_11",
+          "arg_12"
+        ],
+        "attacks": [
+          "arg_9"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_14",
+        "commentId": "nwe0aot",
+        "author": "chucknorrisinator",
+        "position": "neutral",
+        "summary": "There's no healthy way to fry food regardless of oil type - people should just enjoy their french fries without health pretenses.",
+        "supports": [],
+        "attacks": [
+          "arg_4",
+          "arg_5",
+          "arg_8"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.5
+      },
+      {
+        "id": "arg_15",
+        "commentId": "nw8nyon",
+        "author": "razvanght",
+        "position": "neutral",
+        "summary": "If the industry creates more value from animals already killed, isn't that good? Can we call beneficial practices propaganda?",
+        "supports": [
+          "arg_2"
+        ],
+        "attacks": [],
+        "strength": 0.6,
+        "evidenceQuality": 0.3
+      },
+      {
+        "id": "arg_16",
+        "commentId": "nw8zjt9",
+        "author": "SadBurritoBoys",
+        "position": "con",
+        "summary": "Corporations apply 'using every part of the animal' as 'squeeze out every penny' from humans. Modern supply and demand is driven by greed rather than legitimate market forces.",
+        "supports": [],
+        "attacks": [
+          "arg_15"
+        ],
+        "strength": 0.3,
+        "evidenceQuality": 0.2
+      },
+      {
+        "id": "arg_17",
+        "commentId": "nwb1gik",
+        "author": "lionsden08",
+        "position": "con",
+        "summary": "Uses California olive oil example to demonstrate that supply and demand works - higher demand led to higher prices and incentivized production.",
+        "supports": [],
+        "attacks": [
+          "arg_16"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.7
+      },
+      {
+        "id": "arg_18",
+        "commentId": "nw96k81",
+        "author": "Ayjayz",
+        "position": "con",
+        "summary": "Supply and demand explains why companies can charge more. Greed is the driving force behind all market action for both producers and consumers.",
+        "supports": [
+          "arg_17"
+        ],
+        "attacks": [
+          "arg_16"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_19",
+        "commentId": "nwapmjh",
+        "author": "crek42",
+        "position": "con",
+        "summary": "Dismissing supply and demand as nonsense is like saying water isn't wet - it's a foundational component of economic studies.",
+        "supports": [
+          "arg_17",
+          "arg_18"
+        ],
+        "attacks": [
+          "arg_16"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.5
+      },
+      {
+        "id": "arg_20",
+        "commentId": "nwgn5lj",
+        "author": "Working_Cucumber_437",
+        "position": "con",
+        "summary": "Tallow is not healthier than seed oils - saturated fat is what causes health problems.",
+        "supports": [
+          "arg_6",
+          "arg_8"
+        ],
+        "attacks": [
+          "arg_5",
+          "arg_7"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_21",
+        "commentId": "nwy55e1",
+        "author": "Freizeit20",
+        "position": "pro",
+        "summary": "Heart disease rates skyrocketed after seed oils were introduced to the American diet.",
+        "supports": [
+          "arg_5",
+          "arg_7"
+        ],
+        "attacks": [
+          "arg_20"
+        ],
+        "strength": 0.4,
+        "evidenceQuality": 0.2
+      },
+      {
+        "id": "arg_22",
+        "commentId": "nwygz8x",
+        "author": "Working_Cucumber_437",
+        "position": "con",
+        "summary": "Heart disease increases are better explained by lifestyle changes (fast food, sedentary lifestyle, larger portions) rather than seed oils specifically.",
+        "supports": [
+          "arg_20"
+        ],
+        "attacks": [
+          "arg_21"
+        ],
+        "strength": 0.8,
+        "evidenceQuality": 0.6
+      },
+      {
+        "id": "arg_23",
+        "commentId": "nwepz7l",
+        "author": "VeganKiwiGuy",
+        "position": "con",
+        "summary": "Beef tallow promotion is bad for climate (12% of emissions from animal agriculture) and health (animal fats increase heart disease and cancer risk).",
+        "supports": [
+          "arg_20"
+        ],
+        "attacks": [
+          "arg_2",
+          "arg_15"
+        ],
+        "strength": 0.7,
+        "evidenceQuality": 0.6
+      }
+    ],
+    "fallacies": [
+      {
+        "id": "fallacy_1",
+        "type": "ad_hominem",
+        "commentId": "nw8my67",
+        "author": "Fluffy_Most_662",
+        "severity": "high",
+        "description": "Attacks the person's knowledge/worthiness rather than addressing their argument about beef tallow",
+        "quote": "Dude, you thinking beef fat and tallow are the same thing, is exactly why this isnt a product for you."
+      },
+      {
+        "id": "fallacy_2",
+        "type": "ad_hominem",
+        "commentId": "nwd85to",
+        "author": "Adorable-Volume2247",
+        "severity": "medium",
+        "description": "Calls someone a 'dick' for making a factual correction, attacking character rather than addressing the substance",
+        "quote": "your a dick for thinking that is a gotcha"
+      },
+      {
+        "id": "fallacy_3",
+        "type": "hasty_generalization",
+        "commentId": "nw8my67",
+        "author": "Fluffy_Most_662",
+        "severity": "high",
+        "description": "Makes broad claims about American vs European oil regulations without providing specific evidence",
+        "quote": "America uses extremely unhealthy fry oils to fry things. Most of them are banned or altered in europe."
+      },
+      {
+        "id": "fallacy_4",
+        "type": "appeal_to_authority",
+        "commentId": "nw9388u",
+        "author": "[deleted]",
+        "severity": "medium",
+        "description": "Appeals to American Heart Association authority without engaging with the specific arguments about seed oils",
+        "quote": "I trust the American Heart Association over carnivore influencers and the like"
+      },
+      {
+        "id": "fallacy_5",
+        "type": "strawman",
+        "commentId": "nw9d1v7",
+        "author": "Kolizuljin",
+        "severity": "medium",
+        "description": "Misrepresents the historical use argument by comparing tallow to lead sweetening, which is not analogous",
+        "quote": "People used to sugar stuff using lead too, Guess we should bring that back."
+      },
+      {
+        "id": "fallacy_6",
+        "type": "false_equivalence",
+        "commentId": "nwm8bcr",
+        "author": "Kampurz",
+        "severity": "medium",
+        "description": "Compares tallow/fat relationship to serum/blood, which are fundamentally different biological relationships",
+        "quote": "It's like saying serum and blood are the same thing."
+      },
+      {
+        "id": "fallacy_7",
+        "type": "ad_hominem",
+        "commentId": "nwdxjpa",
+        "author": "hansuluthegrey",
+        "severity": "medium",
+        "description": "Attacks the person as an 'asshole' rather than just correcting the factual error",
+        "quote": "Its impressive how wrong some people are while still being assholes"
+      },
+      {
+        "id": "fallacy_8",
+        "type": "hasty_generalization",
+        "commentId": "nwy55e1",
+        "author": "Freizeit20",
+        "severity": "high",
+        "description": "Claims correlation implies causation between seed oils and heart disease without considering other factors",
+        "quote": "Heart disease rates skyrocketed once we introduced seed oils into the American diet"
+      },
+      {
+        "id": "fallacy_9",
+        "type": "appeal_to_emotion",
+        "commentId": "nw96foc",
+        "author": "Mashaka",
+        "severity": "low",
+        "description": "Uses emotionally charged imagery about friend's reaction to contaminated food rather than focusing on the dietary restriction issue",
+        "quote": "I've never seen such bleak and wordless sorrow. He stopped chewing and was still, his eyes brimming tears like melted snow in a winter puddle"
+      },
+      {
+        "id": "fallacy_10",
+        "type": "false_dilemma",
+        "commentId": "nw9y0go",
+        "author": "IAMAHobbitAMA",
+        "severity": "medium",
+        "description": "Presents only two options: Hindu kosher restaurants or everyone else eating tallow fries, ignoring other alternatives",
+        "quote": "She can eat at a Hindu kosher restaurant. The other 99.97% of us can eat superior fries made with tallow."
+      },
+      {
+        "id": "fallacy_11",
+        "type": "moving_goalposts",
+        "commentId": "nwd4bbd",
+        "author": "ManielDullen",
+        "severity": "medium",
+        "description": "When challenged on 'banned' claim, shifts to 'regulations make them impractical' which is different from being banned",
+        "quote": "They didn't ban them in the EU. They put regulations in place to make them impractical for large business, which is essentially a ban."
+      },
+      {
+        "id": "fallacy_12",
+        "type": "red_herring",
+        "commentId": "nwgndik",
+        "author": "Working_Cucumber_437",
+        "severity": "low",
+        "description": "Introduces air fryers as a distraction from the debate about healthy frying methods",
+        "quote": "I mean but have you tried an air fryer? Amazing."
+      }
+    ],
+    "rhetoricalProfiles": [
+      {
+        "username": "YT_Milo_Sidequests",
+        "style": "analytical",
+        "logicScore": 80,
+        "emotionScore": 20,
+        "evidenceScore": 60,
+        "authorityScore": 30,
+        "concessionScore": 70,
+        "intellectualHonesty": 8,
+        "commentCount": 4,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 2,
+        "dodges": 0
+      },
+      {
+        "username": "ItsSUCHaLongStory",
+        "style": "collaborative",
+        "logicScore": 65,
+        "emotionScore": 40,
+        "evidenceScore": 70,
+        "authorityScore": 20,
+        "concessionScore": 80,
+        "intellectualHonesty": 8.5,
+        "commentCount": 3,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 2,
+        "dodges": 0
+      },
+      {
+        "username": "Mashaka",
+        "style": "analytical",
+        "logicScore": 75,
+        "emotionScore": 50,
+        "evidenceScore": 60,
+        "authorityScore": 25,
+        "concessionScore": 75,
+        "intellectualHonesty": 8,
+        "commentCount": 3,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 2,
+        "dodges": 0
+      },
+      {
+        "username": "ciclon5",
+        "style": "authoritative",
+        "logicScore": 70,
+        "emotionScore": 25,
+        "evidenceScore": 75,
+        "authorityScore": 60,
+        "concessionScore": 40,
+        "intellectualHonesty": 7.5,
+        "commentCount": 2,
+        "steelmans": 0,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      },
+      {
+        "username": "WetRocksManatee",
+        "style": "collaborative",
+        "logicScore": 60,
+        "emotionScore": 30,
+        "evidenceScore": 50,
+        "authorityScore": 40,
+        "concessionScore": 60,
+        "intellectualHonesty": 7,
+        "commentCount": 2,
+        "steelmans": 0,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      },
+      {
+        "username": "hashtagblesssed",
+        "style": "analytical",
+        "logicScore": 85,
+        "emotionScore": 20,
+        "evidenceScore": 70,
+        "authorityScore": 50,
+        "concessionScore": 60,
+        "intellectualHonesty": 8.5,
+        "commentCount": 2,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      },
+      {
+        "username": "PizzaBear109",
+        "style": "collaborative",
+        "logicScore": 70,
+        "emotionScore": 30,
+        "evidenceScore": 50,
+        "authorityScore": 20,
+        "concessionScore": 85,
+        "intellectualHonesty": 8.5,
+        "commentCount": 2,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 2,
+        "dodges": 0
+      },
+      {
+        "username": "acky1",
+        "style": "authoritative",
+        "logicScore": 80,
+        "emotionScore": 25,
+        "evidenceScore": 85,
+        "authorityScore": 70,
+        "concessionScore": 30,
+        "intellectualHonesty": 7.5,
+        "commentCount": 2,
+        "steelmans": 0,
+        "strawmans": 0,
+        "concessions": 0,
+        "dodges": 0
+      },
+      {
+        "username": "unidentified_lover",
+        "style": "collaborative",
+        "logicScore": 60,
+        "emotionScore": 40,
+        "evidenceScore": 40,
+        "authorityScore": 20,
+        "concessionScore": 90,
+        "intellectualHonesty": 9,
+        "commentCount": 6,
+        "steelmans": 2,
+        "strawmans": 0,
+        "concessions": 4,
+        "dodges": 0
+      },
+      {
+        "username": "Fluffy_Most_662",
+        "style": "adversarial",
+        "logicScore": 50,
+        "emotionScore": 60,
+        "evidenceScore": 65,
+        "authorityScore": 70,
+        "concessionScore": 10,
+        "intellectualHonesty": 4,
+        "commentCount": 2,
+        "steelmans": 0,
+        "strawmans": 1,
+        "concessions": 0,
+        "dodges": 1
+      },
+      {
+        "username": "Adorable-Volume2247",
+        "style": "adversarial",
+        "logicScore": 65,
+        "emotionScore": 70,
+        "evidenceScore": 75,
+        "authorityScore": 80,
+        "concessionScore": 20,
+        "intellectualHonesty": 5,
+        "commentCount": 2,
+        "steelmans": 0,
+        "strawmans": 0,
+        "concessions": 0,
+        "dodges": 0
+      },
+      {
+        "username": "BigMax",
+        "style": "collaborative",
+        "logicScore": 75,
+        "emotionScore": 20,
+        "evidenceScore": 60,
+        "authorityScore": 30,
+        "concessionScore": 80,
+        "intellectualHonesty": 8,
+        "commentCount": 2,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      },
+      {
+        "username": "classic4life",
+        "style": "adversarial",
+        "logicScore": 60,
+        "emotionScore": 40,
+        "evidenceScore": 30,
+        "authorityScore": 50,
+        "concessionScore": 20,
+        "intellectualHonesty": 5.5,
+        "commentCount": 2,
+        "steelmans": 0,
+        "strawmans": 1,
+        "concessions": 0,
+        "dodges": 1
+      },
+      {
+        "username": "looshface",
+        "style": "analytical",
+        "logicScore": 80,
+        "emotionScore": 30,
+        "evidenceScore": 70,
+        "authorityScore": 40,
+        "concessionScore": 60,
+        "intellectualHonesty": 7.5,
+        "commentCount": 2,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      },
+      {
+        "username": "abarcsa",
+        "style": "analytical",
+        "logicScore": 75,
+        "emotionScore": 35,
+        "evidenceScore": 65,
+        "authorityScore": 45,
+        "concessionScore": 50,
+        "intellectualHonesty": 7,
+        "commentCount": 2,
+        "steelmans": 0,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      },
+      {
+        "username": "navigationallyaided",
+        "style": "authoritative",
+        "logicScore": 70,
+        "emotionScore": 20,
+        "evidenceScore": 80,
+        "authorityScore": 75,
+        "concessionScore": 40,
+        "intellectualHonesty": 7.5,
+        "commentCount": 2,
+        "steelmans": 0,
+        "strawmans": 0,
+        "concessions": 0,
+        "dodges": 0
+      },
+      {
+        "username": "Working_Cucumber_437",
+        "style": "adversarial",
+        "logicScore": 45,
+        "emotionScore": 50,
+        "evidenceScore": 40,
+        "authorityScore": 60,
+        "concessionScore": 25,
+        "intellectualHonesty": 5,
+        "commentCount": 3,
+        "steelmans": 0,
+        "strawmans": 1,
+        "concessions": 0,
+        "dodges": 2
+      },
+      {
+        "username": "crek42",
+        "style": "analytical",
+        "logicScore": 85,
+        "emotionScore": 25,
+        "evidenceScore": 75,
+        "authorityScore": 40,
+        "concessionScore": 50,
+        "intellectualHonesty": 8,
+        "commentCount": 4,
+        "steelmans": 1,
+        "strawmans": 0,
+        "concessions": 1,
+        "dodges": 0
+      },
+      {
+        "username": "hansuluthegrey",
+        "style": "adversarial",
+        "logicScore": 60,
+        "emotionScore": 65,
+        "evidenceScore": 70,
+        "authorityScore": 50,
+        "concessionScore": 15,
+        "intellectualHonesty": 4.5,
+        "commentCount": 4,
+        "steelmans": 0,
+        "strawmans": 2,
+        "concessions": 0,
+        "dodges": 1
+      }
+    ],
+    "hiddenGems": [
+      {
+        "commentId": "nw9yvg8",
+        "author": "hashtagblesssed",
+        "text": "Yes! Small slaughter houses have to pay to dispose of byproducts like fat, skin, and organs. Creating a market for those by products helps small slaughterhouse compete with the big 4. In turn, maybe..",
+        "karma": 3,
+        "qualityScore": 0.8,
+        "reasonUnderrated": "Makes excellent economic point about small slaughterhouse economics and market competition that addresses core CMV topic, but posted deep in thread"
+      },
+      {
+        "commentId": "nwa6clu",
+        "author": "acky1",
+        "text": "Saturated fat being problematic for heart health is still the position of almost every health organisation based on more recent studies that continue to point in the same direction. They recommend...",
+        "karma": 2,
+        "qualityScore": 0.8,
+        "reasonUnderrated": "Provides evidence-based health perspective citing medical consensus, but goes against popular anti-seed oil sentiment in thread"
+      },
+      {
+        "commentId": "nwd85to",
+        "author": "Adorable-Volume2247",
+        "text": "I'm a butcher. Tallow and fat are the same thing. It is butter and ghee, and your a dick for thinking that is a gotcha. I own a deep fryer I use all the time. There is 0 difference in taste for...",
+        "karma": 244,
+        "qualityScore": 0.8,
+        "reasonUnderrated": "Actually has high karma, not underrated"
+      },
+      {
+        "commentId": "nwcb521",
+        "author": "Johnny_bubblegum",
+        "text": "Obviously the red40 chemtrail seed oils big pharma shoves down our throats!!!!",
+        "karma": 57,
+        "qualityScore": 0.9,
+        "reasonUnderrated": "Actually has decent karma, not underrated"
+      },
+      {
+        "commentId": "nwb1gik",
+        "author": "porizj",
+        "text": "&gt;fat check\n \nTee hee.",
+        "karma": 5,
+        "qualityScore": 0.8,
+        "reasonUnderrated": "Clever wordplay joke that lightens serious discussion tone, but posted very late in thread when activity died down"
+      },
+      {
+        "commentId": "nwygz8x",
+        "author": "Working_Cucumber_437",
+        "text": "If true and not explained by other changes to the way we eat (primarily the rise of fast food and fewer people cooking at home, larger portions, cheap unhealthy snack foods at convenience stores)...",
+        "karma": 1,
+        "qualityScore": 0.8,
+        "reasonUnderrated": "Thoughtful analysis of confounding variables in heart disease trends, but posted very late (24+ hours) when thread was essentially dead"
+      }
+    ],
+    "manipulationAlerts": [
+      {
+        "type": "statistical_anomaly",
+        "severity": "medium",
+        "description": "Highly concentrated comment activity in first two hours (58 out of 115 total comments posted in hours 490795-490796), followed by sharp dropoff. This suggests potential coordinated timing or brigading from external source.",
+        "involvedUsers": []
+      },
+      {
+        "type": "gish_gallop",
+        "severity": "medium",
+        "description": "User Fluffy_Most_662 makes multiple confident but factually incorrect claims throughout thread (tallow vs beef fat distinction, banned EU oils, cost savings claims) without engaging with corrections or providing sources when challenged.",
+        "involvedUsers": [
+          "Fluffy_Most_662"
+        ]
+      },
+      {
+        "type": "talking_points",
+        "severity": "low",
+        "description": "Several users repeat similar anti-seed oil talking points and pro-animal fat health claims (users Bebebaubles, SeatSix, Freizeit20) using similar framing about 'historical use' and 'processed oils being unhealthy', though this could reflect genuine shared beliefs rather than coordination.",
+        "involvedUsers": [
+          "Bebebaubles",
+          "SeatSix",
+          "Freizeit20"
+        ]
+      }
+    ],
+    "verdict": {
+      "overallScore": 72,
+      "coreDispute": "Whether the recent popularity of beef tallow represents genuine health benefits and market demand versus coordinated marketing by the beef industry to monetize waste products.",
+      "evidenceQuality": 0.65,
+      "proArguments": 6,
+      "conArguments": 14,
+      "consensusPoints": [
+        "Beef tallow has indeed experienced a significant surge in popularity in recent years",
+        "The beef industry does benefit financially from selling previously discarded byproducts",
+        "Marketing and social media influence have played a role in tallow's rise"
+      ],
+      "unresolvedQuestions": [
+        "What specific evidence exists for coordinated industry manipulation versus organic market trends",
+        "How do the actual health benefits of tallow compare to established nutritional science on saturated fats",
+        "Whether EU oil regulations actually differ significantly from US standards as claimed",
+        "What quantifiable impact tallow sales have on overall beef industry profits"
+      ],
+      "redFlags": [
+        "Original post makes sweeping claims about 'Big Beef' conspiracy without providing concrete evidence",
+        "Multiple factual disputes about oil regulations and health claims remain unverified",
+        "Some participants conflate correlation with causation regarding tallow's popularity and industry influence"
+      ],
+      "recommendedReadingTime": 15,
+      "optimizedReadingPath": [
+        "top_con_1",
+        "butcher_neutral",
+        "health_org_con",
+        "byproduct_pro",
+        "eu_oil_dispute"
+      ]
+    },
+    "metadata": {
+      "id": "1px6a1c",
+      "title": "CMV: Beef tallow is propaganda by Big Beef",
+      "author": "unidentified_lover",
+      "subreddit": "changemyview",
+      "selftext": "Beef tallow is everywhere. Online, in stores, maybe even in your cabinet. But where did it come from? Why did it suddenly rocket into popularity?\n\n\nLet me break it down: \n\nFor the longest time beef fat was just a byproduct that nobody wanted. Steaks were trimmed, roasts were rejected for being “too fatty”, heck, even the most popular version of ground beef is 80/20. Butchers and manufacturers couldn’t even give it away due to lack of demand. This was unacceptable! Big Beef can’t wring out every cent from consumers if they’re just throwing things away. Rising meat prices just weren’t enough to pad shareholders pockets. \n\nBut someone, somewhere, got smart. \n\nSuddenly it’s repackaged as “beef tallow” and consumers can’t get enough! Beef tallow for cooking! Frying! Even skincare! The all natural solution to your every need! The word of beef tallow stretches into every genre of influencers online: cooking, homesteaders, trad-wives and beauty influencers alike tout this “organic miracle” on the algorithms of the general public. Now, not only is there purpose, but demand for discarded beef fat! I mean, all organic beef tallow. Actually, since it’s healthy and trendy let’s go ahead in charge 9-12 dollars a jar! \n\nSo my theory is that Big Beef is doing what all companies do. Find and manipulate different ways of capturing the consumer in an increasingly convoluted market. Bonus points if you can use something you already had on hand, market it into something new and shiny, and infiltrate the social media sphere to push the word out. \n\nSigned- a marketing student. \n\nEDIT: Thank you all! My view has been changed, and I think I simply gave Big Beef too much credit as market manipulators 😂. ",
+      "score": 902,
+      "upvoteRatio": 0.79,
+      "numComments": 331,
+      "createdUtc": 1766863659,
+      "url": "https://www.reddit.com/r/changemyview/comments/1px6a1c/cmv_beef_tallow_is_propaganda_by_big_beef/"
+    },
+    "analyzedAt": "2026-01-01T03:32:53.379028Z"
+  },
+  "cachedAt": 1767238373450
+}
