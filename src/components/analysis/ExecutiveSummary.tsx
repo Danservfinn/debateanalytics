@@ -673,21 +673,65 @@ export function deriveExecutiveSummary(
   const sortedPro = [...proReplies].sort((a, b) => b.qualityScore - a.qualityScore)
   const sortedCon = [...conReplies].sort((a, b) => b.qualityScore - a.qualityScore)
 
-  // Derive central question from thread title
-  // Strip common patterns like "CMV:", "I don't see", etc.
-  let question = threadTitle
-    .replace(/^CMV:\s*/i, '')
-    .replace(/\?+\s*I don't see it\.?$/i, '')
-    .replace(/\?+$/i, '')
+  // Derive central question from thread title or debate content
+  // Some titles are NOT propositions (e.g., "Debate me on X", "Thoughts on X", "AMA")
+  // In those cases, derive the question from the actual debate content
 
-  // If it's a statement, convert to question
-  if (!question.includes('?')) {
-    question = `Is it true that ${question.toLowerCase()}?`
+  const isNonPropositionTitle = /^(respectfully\s+)?debate\s+me|^discuss(ion)?|^thoughts\s+on|^ama\b|^what\s+do\s+you\s+think|^let'?s\s+talk/i.test(threadTitle)
+
+  let question: string
+  let proDefinition: string
+  let conDefinition: string
+
+  if (isNonPropositionTitle && debates.length > 0 && debates[0].keyClash) {
+    // Extract the actual debate topic from the key clash
+    const keyClash = debates[0].keyClash
+
+    // Convert the key clash into a question format
+    // The keyClash usually describes the disagreement, e.g., "whether X or Y"
+    if (keyClash.toLowerCase().startsWith('whether ')) {
+      question = keyClash.replace(/^whether\s+/i, '').replace(/\.$/, '') + '?'
+      // Capitalize first letter
+      question = question.charAt(0).toUpperCase() + question.slice(1)
+    } else {
+      // Make it a question about the key clash topic
+      question = `Is it the case that ${keyClash.toLowerCase().replace(/\.$/, '')}?`
+    }
+
+    // Extract topic for PRO/CON definitions
+    const topic = threadTitle
+      .replace(/^(respectfully\s+)?debate\s+me\s+(on|about)\s*/i, '')
+      .replace(/^discuss(ion)?\s*(on|about)?\s*/i, '')
+      .replace(/^thoughts\s+on\s*/i, '')
+
+    proDefinition = `Supports the affirmative position on ${topic || 'the topic'}`
+    conDefinition = `Opposes the affirmative position on ${topic || 'the topic'}`
+  } else {
+    // Standard title-based question derivation
+    // Strip common patterns like "CMV:", "I don't see", etc.
+    let cleanedTitle = threadTitle
+      .replace(/^CMV:\s*/i, '')
+      .replace(/\?+\s*I don't see it\.?$/i, '')
+      .replace(/\?+$/i, '')
+
+    // If it's a statement, convert to question
+    if (!cleanedTitle.includes('?')) {
+      question = `Is it true that ${cleanedTitle.toLowerCase()}?`
+    } else {
+      question = cleanedTitle
+    }
+
+    // Determine PRO/CON definitions based on thread sentiment
+    // If thread title is skeptical ("I don't see it"), CON aligns with OP
+    const isSkepticalTitle = /don't see|not convinced|disagree|wrong|false/i.test(threadTitle)
+
+    proDefinition = isSkepticalTitle
+      ? `Defends the position against OP's skepticism`
+      : `Supports the claim made in the thread`
+    conDefinition = isSkepticalTitle
+      ? `Agrees with OP's skepticism`
+      : `Opposes the claim made in the thread`
   }
-
-  // Determine PRO/CON definitions based on thread sentiment
-  // If thread title is skeptical ("I don't see it"), CON aligns with OP
-  const isSkepticalTitle = /don't see|not convinced|disagree|wrong|false/i.test(threadTitle)
 
   // Calculate wins
   const proWins = debates.filter(d => d.winner === 'pro').length
@@ -763,12 +807,8 @@ export function deriveExecutiveSummary(
     centralQuestion: {
       question,
       threadTitle,
-      proDefinition: isSkepticalTitle
-        ? `Defends the position against OP's skepticism`
-        : `Supports the claim made in the thread`,
-      conDefinition: isSkepticalTitle
-        ? `Agrees with OP's skepticism`
-        : `Opposes the claim made in the thread`
+      proDefinition,
+      conDefinition
     },
 
     strongestProArguments: sortedPro.slice(0, 2).map(r => ({
