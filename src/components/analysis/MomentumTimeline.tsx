@@ -114,10 +114,11 @@ export function MomentumTimeline({ debate }: MomentumTimelineProps) {
         {/* Timeline nodes */}
         <div className="relative h-48 flex items-center">
           {timelineData.map((data, i) => {
-            // Position along timeline
-            const xPercent = timeRange.duration > 0
-              ? ((data.timestamp - timeRange.start) / timeRange.duration) * 100
-              : (i / (timelineData.length - 1 || 1)) * 100
+            // Position along timeline - use index-based for even distribution
+            // (timestamp-based clusters nodes when comments come in bursts)
+            const xPercent = timelineData.length > 1
+              ? (i / (timelineData.length - 1)) * 100
+              : 50
 
             // Vertical position based on momentum (-1 to 1 mapped to 10% to 90%)
             const yPercent = 50 - (data.relativeMomentum * 40)
