@@ -130,40 +130,46 @@ function extractThesis(title: string, verdict: ThreadVerdict, createdAt: string)
 function analyzePositions(debates: DebateThread[], _participants: ThreadParticipant[]): NarrativeData['positions'] {
   const proArgs: ArgumentSummary[] = [];
   const conArgs: ArgumentSummary[] = [];
+  const allProArgs: ArgumentSummary[] = [];
+  const allConArgs: ArgumentSummary[] = [];
   let proDebaters = new Set<string>();
   let conDebaters = new Set<string>();
 
   debates.forEach(debate => {
     debate.replies.forEach(reply => {
+      const argSummary: ArgumentSummary = {
+        text: truncateText(reply.text, 120),
+        strength: reply.qualityScore,
+        icon: getArgumentIcon(reply),
+        author: reply.author,
+        commentId: reply.id,
+      };
+
       if (reply.position === 'pro') {
         proDebaters.add(reply.author);
+        allProArgs.push(argSummary);
         if (reply.qualityScore >= 7) {
-          proArgs.push({
-            text: truncateText(reply.text, 120),
-            strength: reply.qualityScore,
-            icon: getArgumentIcon(reply),
-            author: reply.author,
-            commentId: reply.id,
-          });
+          proArgs.push(argSummary);
         }
       } else if (reply.position === 'con') {
         conDebaters.add(reply.author);
+        allConArgs.push(argSummary);
         if (reply.qualityScore >= 7) {
-          conArgs.push({
-            text: truncateText(reply.text, 120),
-            strength: reply.qualityScore,
-            icon: getArgumentIcon(reply),
-            author: reply.author,
-            commentId: reply.id,
-          });
+          conArgs.push(argSummary);
         }
       }
     });
   });
 
-  // Sort by strength and take top 3
+  // Sort by strength
   proArgs.sort((a, b) => b.strength - a.strength);
   conArgs.sort((a, b) => b.strength - a.strength);
+  allProArgs.sort((a, b) => b.strength - a.strength);
+  allConArgs.sort((a, b) => b.strength - a.strength);
+
+  // If no strong arguments found but there are debaters, show top arguments anyway
+  const finalProArgs = proArgs.length > 0 ? proArgs : allProArgs;
+  const finalConArgs = conArgs.length > 0 ? conArgs : allConArgs;
 
   const proWins = debates.filter(d => d.winner === 'pro').length;
   const conWins = debates.filter(d => d.winner === 'con').length;
@@ -180,11 +186,11 @@ function analyzePositions(debates: DebateThread[], _participants: ThreadParticip
   return {
     pro: {
       debaterCount: proDebaters.size,
-      keyArguments: proArgs.slice(0, 3),
+      keyArguments: finalProArgs.slice(0, 3),
     },
     con: {
       debaterCount: conDebaters.size,
-      keyArguments: conArgs.slice(0, 3),
+      keyArguments: finalConArgs.slice(0, 3),
     },
     summary,
   };

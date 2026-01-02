@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Link2, ArrowRight, Loader2, FileJson, Info, ChevronDown, ChevronUp } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { DiscountCodeInput } from "@/components/credits"
 import { cn } from "@/lib/utils"
 
 type InputMode = "url" | "json"
@@ -19,6 +20,13 @@ export function ThreadSearch() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showInstructions, setShowInstructions] = useState(false)
+  const [discountCode, setDiscountCode] = useState<string | null>(null)
+  const [discountPercent, setDiscountPercent] = useState(0)
+
+  const handleDiscountApplied = (code: string | null, percent: number) => {
+    setDiscountCode(code)
+    setDiscountPercent(percent)
+  }
 
   const handleAnalyzeUrl = async () => {
     const trimmedUrl = url.trim()
@@ -38,7 +46,12 @@ export function ThreadSearch() {
     const match = trimmedUrl.match(/\/r\/(\w+)\/comments\/(\w+)/)
     if (match) {
       const [, subreddit, threadId] = match
-      router.push(`/thread/${subreddit}-${threadId}?url=${encodeURIComponent(trimmedUrl)}`)
+      const params = new URLSearchParams()
+      params.set('url', trimmedUrl)
+      if (discountCode) {
+        params.set('discountCode', discountCode)
+      }
+      router.push(`/thread/${subreddit}-${threadId}?${params.toString()}`)
     }
   }
 
@@ -109,7 +122,13 @@ export function ThreadSearch() {
           rawThreadData: parsedJson
         }
         sessionStorage.setItem(cacheKey, JSON.stringify(dataWithRaw))
-        router.push(`/thread/${subreddit}-${threadId}?url=${encodeURIComponent(trimmedUrl)}&fromJson=true`)
+        const params = new URLSearchParams()
+        params.set('url', trimmedUrl)
+        params.set('fromJson', 'true')
+        if (discountCode) {
+          params.set('discountCode', discountCode)
+        }
+        router.push(`/thread/${subreddit}-${threadId}?${params.toString()}`)
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Analysis failed')
@@ -342,6 +361,21 @@ export function ThreadSearch() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Discount code input */}
+        <div className="mt-6 pt-4 border-t border-border/50">
+          <DiscountCodeInput
+            onCodeApplied={handleDiscountApplied}
+            className="max-w-sm mx-auto"
+          />
+          {discountPercent > 0 && (
+            <p className="text-xs text-center text-success mt-2">
+              {discountPercent === 100
+                ? "🎉 This analysis will be free!"
+                : `💰 ${discountPercent}% off this analysis`}
+            </p>
+          )}
+        </div>
 
         {/* Error message */}
         {error && (

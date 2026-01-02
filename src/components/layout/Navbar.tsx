@@ -3,8 +3,9 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
-import { BarChart3, Users, MessageSquare, Trophy } from "lucide-react"
+import { BarChart3, MessageSquare, Trophy } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { CreditBadge } from "@/components/credits"
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: BarChart3 },
@@ -65,11 +66,9 @@ export function Navbar() {
           })}
         </div>
 
-        {/* Right side - could add theme toggle, etc */}
-        <div className="flex items-center gap-2">
-          <div className="text-xs text-muted-foreground">
-            Powered by AI Analysis
-          </div>
+        {/* Right side - Credits and actions */}
+        <div className="flex items-center gap-4">
+          <CreditBadge />
         </div>
       </nav>
     </motion.header>
