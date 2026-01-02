@@ -29,7 +29,8 @@ import {
   BattleCard,
   MomentumTimeline,
   ParticipantList,
-  ClickableClaimCard
+  ClickableClaimCard,
+  DebateDetailModal
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
@@ -45,6 +46,18 @@ export default function ThreadDetailPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [selectedDebate, setSelectedDebate] = useState<DebateThread | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenDebateModal = useCallback((debate: DebateThread) => {
+    setSelectedDebate(debate)
+    setIsModalOpen(true)
+  }, [])
+
+  const handleCloseDebateModal = useCallback(() => {
+    setIsModalOpen(false)
+    // Delay clearing debate to allow exit animation
+    setTimeout(() => setSelectedDebate(null), 300)
+  }, [])
 
   useEffect(() => {
     async function loadData() {
@@ -292,48 +305,30 @@ export default function ThreadDetailPage() {
             <TabsContent value="debates" className="space-y-6">
               {analysis.debates.length > 0 ? (
                 <>
-                  {/* Selected Debate Detail */}
-                  {selectedDebate && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="space-y-6"
-                    >
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-semibold">{selectedDebate.title}</h3>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setSelectedDebate(null)}
-                        >
-                          Back to list
-                        </Button>
-                      </div>
-                      <div className="grid lg:grid-cols-2 gap-6">
-                        <BattleCard debate={selectedDebate} />
-                        <MomentumTimeline debate={selectedDebate} />
-                      </div>
-                    </motion.div>
-                  )}
+                  {/* Info banner */}
+                  <div className="flex items-center gap-2 p-3 rounded-lg bg-primary/10 border border-primary/20">
+                    <Sparkles className="w-4 h-4 text-primary shrink-0" />
+                    <span className="text-sm text-muted-foreground">
+                      Click any debate card to open full conversation with advanced AI analysis
+                    </span>
+                  </div>
 
-                  {/* Debate List */}
-                  {!selectedDebate && (
-                    <motion.div
-                      variants={staggerContainer}
-                      initial="hidden"
-                      animate="visible"
-                      className="grid gap-4 md:grid-cols-2"
-                    >
-                      {analysis.debates.map((debate, idx) => (
-                        <DebateThreadCard
-                          key={debate.id}
-                          debate={debate}
-                          index={idx}
-                          onClick={() => setSelectedDebate(debate)}
-                        />
-                      ))}
-                    </motion.div>
-                  )}
+                  {/* Debate Grid */}
+                  <motion.div
+                    variants={staggerContainer}
+                    initial="hidden"
+                    animate="visible"
+                    className="grid gap-4 md:grid-cols-2"
+                  >
+                    {analysis.debates.map((debate, idx) => (
+                      <DebateThreadCard
+                        key={debate.id}
+                        debate={debate}
+                        index={idx}
+                        onClick={() => handleOpenDebateModal(debate)}
+                      />
+                    ))}
+                  </motion.div>
                 </>
               ) : (
                 <EmptyState
@@ -422,6 +417,14 @@ export default function ThreadDetailPage() {
           <p>Debate Analytics - AI-Powered Reddit Analysis</p>
         </footer>
       </main>
+
+      {/* Debate Detail Modal */}
+      <DebateDetailModal
+        debate={selectedDebate}
+        isOpen={isModalOpen}
+        onClose={handleCloseDebateModal}
+        threadContext={analysis.title}
+      />
     </div>
   )
 }

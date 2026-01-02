@@ -12,3 +12,8 @@ export { BattleCard } from './BattleCard'
 export { MomentumTimeline } from './MomentumTimeline'
 export { ParticipantCard, ParticipantList } from './ParticipantCard'
 export { ClickableClaimCard } from './ClickableClaimCard'
+
+// Phase 4: Debate Detail Modal components
+export { DebateDetailModal } from './DebateDetailModal'
+export { ConversationThread } from './ConversationThread'
+export { AnalysisPanel } from './AnalysisPanel'
