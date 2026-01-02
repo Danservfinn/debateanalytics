@@ -6,11 +6,18 @@
 import { kv } from '@vercel/kv'
 import type { DiscountCode, DiscountValidationResult } from '@/types/credits'
 
-// Admin codes stored in environment (never in code, always 100% off)
-const ADMIN_CODES = (process.env.ADMIN_DISCOUNT_CODES || '')
+// Admin codes stored in environment
+// Format: CODE1:percent,CODE2:percent (e.g., ADMIN100:100,ADMIN50:50)
+const ADMIN_CODES_MAP = new Map<string, number>()
+;(process.env.ADMIN_DISCOUNT_CODES || '')
   .split(',')
-  .map((c) => c.trim().toUpperCase())
   .filter(Boolean)
+  .forEach((entry) => {
+    const [code, percent] = entry.split(':')
+    if (code && percent) {
+      ADMIN_CODES_MAP.set(code.trim().toUpperCase(), parseInt(percent, 10))
+    }
+  })
 
 /**
  * Check if Vercel KV is configured
@@ -32,10 +39,11 @@ export async function validateDiscountCode(
 
   const normalizedCode = code.trim().toUpperCase()
 
-  // Check admin codes first (from env, always 100% off, unlimited)
-  if (ADMIN_CODES.includes(normalizedCode)) {
-    await logDiscountUsage(normalizedCode, 'admin', action, 100)
-    return { valid: true, discountPercent: 100, code: normalizedCode }
+  // Check admin codes first (from env, unlimited uses)
+  if (ADMIN_CODES_MAP.has(normalizedCode)) {
+    const discountPercent = ADMIN_CODES_MAP.get(normalizedCode)!
+    await logDiscountUsage(normalizedCode, 'admin', action, discountPercent)
+    return { valid: true, discountPercent, code: normalizedCode }
   }
 
   // If KV not configured, only admin codes work
