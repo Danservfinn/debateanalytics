@@ -30,11 +30,25 @@ AI-powered Reddit debate analysis platform that identifies arguments, tracks mom
 - **AI**: Claude API for debate analysis
 - **Data Fetching**: Reddit JSON API via Python scraper
 
+## Usage
+
+### URL Mode (Local Development)
+Enter a Reddit thread URL directly to analyze. Works on localhost where residential IPs are not blocked by Reddit.
+
+### JSON Paste Mode (Production)
+Reddit blocks API requests from cloud server IPs (Vercel, AWS, etc.). Use JSON paste mode as a workaround:
+
+1. Go to any Reddit thread in your browser
+2. Add `.json` to the end of the URL (e.g., `reddit.com/r/changemyview/comments/abc123/.json`)
+3. Press `Ctrl+A` to select all, then `Ctrl+C` to copy
+4. Switch to "Paste JSON" mode on the Debate Analytics homepage
+5. Enter the original thread URL and paste the JSON data
+6. Click "Analyze JSON Data"
+
 ## Getting Started
 
 ### Prerequisites
 - Node.js 18+
-- Python 3.8+ (for Reddit scraper)
 - Anthropic API key
 
 ### Installation
@@ -93,7 +107,7 @@ src/
 ## API Endpoints
 
 ### `GET /api/analyze-thread`
-Analyzes a Reddit thread for debates.
+Analyzes a Reddit thread by fetching data from Reddit API.
 
 **Query Parameters:**
 - `url`: Reddit thread URL (required)
@@ -104,6 +118,29 @@ Analyzes a Reddit thread for debates.
   "debates": [...],
   "participants": [...],
   "threadMeta": {...}
+}
+```
+
+### `POST /api/analyze-thread`
+Analyzes a Reddit thread using pre-fetched JSON data (for production use).
+
+**Request Body:**
+```json
+{
+  "url": "https://reddit.com/r/changemyview/comments/abc123/...",
+  "threadData": [/* Reddit JSON array */]
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "debates": [...],
+    "participants": [...],
+    "threadMeta": {...}
+  }
 }
 ```
 
@@ -194,6 +231,12 @@ vercel --prod
 ```
 
 ## Recent Updates
+
+### JSON Paste Mode for Production (Jan 2026)
+- Added JSON paste mode to bypass Reddit's IP blocking on cloud servers
+- Implemented sessionStorage caching for seamless page transitions
+- Added TypeScript Reddit fetcher for local development
+- Created in-memory API cache for serverless function optimization
 
 ### Phase 3 - Premium UI Components (Jan 2026)
 - Added expandable DebateThreadCard with two-column PRO/CON layout
