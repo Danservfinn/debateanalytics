@@ -690,3 +690,94 @@ export function getQualityColor(score: number): string {
   if (score >= 2) return '#f97316'  // orange
   return '#ef4444'                   // red
 }
+
+// ============================================================================
+// Executive Summary Types (NEW)
+// ============================================================================
+
+export interface StrongestArgument {
+  text: string
+  author: string
+  qualityScore: number
+  position: DebatePosition
+  upvotes?: number
+  evidenceCited?: string[]
+  commentId: string
+}
+
+export interface EvidenceItem {
+  source: string
+  citationCount: number
+  position: DebatePosition
+}
+
+export interface EvidenceLandscape {
+  proEvidence: EvidenceItem[]
+  conEvidence: EvidenceItem[]
+  proEvidenceTypes: {
+    academic: number
+    historical: number
+    anecdotal: number
+    statistical: number
+  }
+  conEvidenceTypes: {
+    academic: number
+    historical: number
+    anecdotal: number
+    statistical: number
+  }
+}
+
+export type EstablishedType = 'concession_pro' | 'concession_con' | 'mutual_agreement' | 'correction_accepted' | 'clarification'
+
+export interface EstablishedItem {
+  type: EstablishedType
+  text: string
+  source?: string  // Who said it or acknowledged it
+  commentId?: string
+}
+
+export interface DebateEvolution {
+  phases: Array<{
+    label: string
+    description: string
+    position: DebatePosition | 'neutral'
+  }>
+  turningPoint?: {
+    commentNumber: number
+    description: string
+    impact: string
+  }
+}
+
+export interface ExecutiveSummaryData {
+  // TL;DR - objective summary
+  tldr: string
+
+  // Central Question derived from thread title
+  centralQuestion: {
+    question: string
+    threadTitle: string
+    proDefinition: string  // What PRO means in this context
+    conDefinition: string  // What CON means in this context
+  }
+
+  // Strongest arguments from each side
+  strongestProArguments: StrongestArgument[]
+  strongestConArguments: StrongestArgument[]
+
+  // Evidence breakdown by side
+  evidenceLandscape: EvidenceLandscape
+
+  // Points where both sides agreed
+  pointsOfAgreement: string[]
+
+  // Core irreconcilable disagreements
+  coreDisagreements: string[]
+
+  // What was established through discussion
+  established: EstablishedItem[]
+
+  // How the debate evolved
+  evolution: DebateEvolution
+}

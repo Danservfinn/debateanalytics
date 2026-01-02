@@ -17,3 +17,6 @@ export { ClickableClaimCard } from './ClickableClaimCard'
 export { DebateDetailModal } from './DebateDetailModal'
 export { ConversationThread } from './ConversationThread'
 export { AnalysisPanel } from './AnalysisPanel'
+
+// Phase 5: Executive Summary
+export { ExecutiveSummary, deriveExecutiveSummary } from './ExecutiveSummary'

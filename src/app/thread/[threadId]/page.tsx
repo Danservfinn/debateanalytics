@@ -30,7 +30,9 @@ import {
   MomentumTimeline,
   ParticipantList,
   ClickableClaimCard,
-  DebateDetailModal
+  DebateDetailModal,
+  ExecutiveSummary,
+  deriveExecutiveSummary
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
@@ -256,6 +258,13 @@ export default function ThreadDetailPage() {
 
             {/* Overview Tab */}
             <TabsContent value="overview" className="space-y-6">
+              {/* Executive Summary - Primary Analysis */}
+              {analysis.debates.length > 0 && (
+                <ExecutiveSummary
+                  data={deriveExecutiveSummary(analysis.debates, analysis.title)}
+                />
+              )}
+
               {/* Quick Stats */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <QuickStat
