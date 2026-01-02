@@ -380,7 +380,11 @@ export default function ThreadDetailPage() {
             {/* Participants Tab */}
             <TabsContent value="participants" className="space-y-6">
               {analysis.participants.length > 0 ? (
-                <ParticipantList participants={analysis.participants} maxDisplay={20} />
+                <ParticipantList
+                  participants={analysis.participants}
+                  maxDisplay={20}
+                  allReplies={analysis.debates.flatMap(d => d.replies)}
+                />
               ) : (
                 <EmptyState
                   icon={Users}
