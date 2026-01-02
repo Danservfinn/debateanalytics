@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   CheckCircle,
@@ -49,6 +49,7 @@ interface ClickableClaimCardProps {
   claim: ClaimData
   index: number
   threadContext?: string
+  threadId?: string  // Thread ID for caching verifications
 }
 
 const verdictConfig = {
@@ -110,17 +111,47 @@ const verdictConfig = {
   }
 }
 
-export function ClickableClaimCard({ claim, index, threadContext }: ClickableClaimCardProps) {
+export function ClickableClaimCard({ claim, index, threadContext, threadId }: ClickableClaimCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isVerifying, setIsVerifying] = useState(false)
   const [verification, setVerification] = useState<ClaimVerificationResult | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [isCached, setIsCached] = useState(false)
+  const [isCheckingCache, setIsCheckingCache] = useState(true)
 
   // Response generation state
   const [isGeneratingResponse, setIsGeneratingResponse] = useState(false)
   const [generatedResponse, setGeneratedResponse] = useState<string | null>(null)
   const [responseError, setResponseError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+
+  // Check for cached verification on mount
+  useEffect(() => {
+    async function checkCache() {
+      if (!threadId) {
+        setIsCheckingCache(false)
+        return
+      }
+
+      try {
+        const response = await fetch(
+          `/api/get-verifications?threadId=${encodeURIComponent(threadId)}&claimText=${encodeURIComponent(claim.text)}`
+        )
+        const result = await response.json()
+
+        if (result.success && result.cached && result.data) {
+          setVerification(result.data)
+          setIsCached(true)
+        }
+      } catch (err) {
+        console.error('Failed to check verification cache:', err)
+      } finally {
+        setIsCheckingCache(false)
+      }
+    }
+
+    checkCache()
+  }, [threadId, claim.text])
 
   const currentVerdict = verification?.verdict || claim.verdict || 'unverified'
   const config = verdictConfig[currentVerdict as keyof typeof verdictConfig] || verdictConfig.unverified
@@ -143,7 +174,8 @@ export function ClickableClaimCard({ claim, index, threadContext }: ClickableCla
         body: JSON.stringify({
           claim: claim.text,
           author: claim.author,
-          context: threadContext
+          context: threadContext,
+          threadId: threadId  // Include threadId for caching
         })
       })
 
@@ -151,6 +183,7 @@ export function ClickableClaimCard({ claim, index, threadContext }: ClickableCla
 
       if (result.success && result.data) {
         setVerification(result.data)
+        setIsCached(result.cached || false)
       } else {
         setError(result.error || 'Failed to verify claim')
       }
@@ -247,7 +280,12 @@ export function ClickableClaimCard({ claim, index, threadContext }: ClickableCla
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            {isVerifying ? (
+            {isCheckingCache ? (
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary/50 text-muted-foreground">
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span className="text-xs font-medium">Loading...</span>
+              </div>
+            ) : isVerifying ? (
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary">
                 <Loader2 className="w-4 h-4 animate-spin" />
                 <span className="text-xs font-medium">Verifying...</span>
@@ -256,6 +294,7 @@ export function ClickableClaimCard({ claim, index, threadContext }: ClickableCla
               <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full ${config.bg} ${config.color}`}>
                 <Icon className="w-4 h-4" />
                 <span className="text-xs font-medium">{config.label}</span>
+                {isCached && <CheckCircle className="w-3 h-3 ml-0.5 opacity-60" />}
                 {isExpanded ? (
                   <ChevronUp className="w-3 h-3 ml-1" />
                 ) : (
@@ -395,9 +434,17 @@ export function ClickableClaimCard({ claim, index, threadContext }: ClickableCla
                     </div>
                   )}
 
-                  {/* Timestamp */}
-                  <div className="text-xs text-muted-foreground/60 text-right pt-2 border-t border-border">
-                    Verified at {new Date(verification.verifiedAt).toLocaleString()}
+                  {/* Timestamp and cache indicator */}
+                  <div className="flex items-center justify-between text-xs text-muted-foreground/60 pt-2 border-t border-border">
+                    <span>
+                      Verified at {new Date(verification.verifiedAt).toLocaleString()}
+                    </span>
+                    {isCached && (
+                      <span className="flex items-center gap-1 text-success">
+                        <CheckCircle className="w-3 h-3" />
+                        Cached result
+                      </span>
+                    )}
                   </div>
 
                   {/* Write Response Section */}

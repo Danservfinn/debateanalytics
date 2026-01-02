@@ -431,6 +431,7 @@ export default function ThreadDetailPage() {
                         claim={claim}
                         index={idx}
                         threadContext={analysis.title}
+                        threadId={threadId}
                       />
                     ))}
                   </div>
@@ -514,6 +515,7 @@ export default function ThreadDetailPage() {
                         claim={claim}
                         index={idx}
                         threadContext={analysis.title}
+                        threadId={threadId}
                       />
                     ))}
                   </div>

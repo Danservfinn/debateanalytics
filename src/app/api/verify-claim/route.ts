@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import {
+  getVerification,
+  saveVerification,
+  type StoredVerification
+} from '@/lib/verification-storage'
 
 const anthropic = new Anthropic()
 
@@ -7,6 +12,8 @@ export interface ClaimVerificationRequest {
   claim: string
   author: string
   context?: string  // Additional context from the thread
+  threadId?: string // Thread ID for caching
+  userId?: string   // User who triggered verification (for analytics)
 }
 
 export interface VerificationSource {
@@ -31,6 +38,7 @@ export interface ClaimVerificationResult {
  * POST /api/verify-claim
  *
  * AI-powered claim verification with web search for sources
+ * Results are cached and shared across all users
  */
 export async function POST(request: NextRequest) {
   try {
@@ -43,11 +51,47 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check for cached verification if threadId provided
+    if (body.threadId) {
+      const cached = await getVerification(body.threadId, body.claim)
+      if (cached) {
+        console.log('Returning cached verification for claim in thread:', body.threadId)
+        return NextResponse.json({
+          success: true,
+          data: {
+            verdict: cached.verdict,
+            confidence: cached.confidence,
+            summary: cached.summary,
+            explanation: cached.explanation,
+            sources: cached.sources,
+            keyEvidence: cached.keyEvidence,
+            nuances: cached.nuances,
+            verifiedAt: cached.verifiedAt
+          },
+          cached: true
+        })
+      }
+    }
+
+    // No cache hit - perform verification
     const verification = await verifyClaim(body)
+
+    // Cache the result if threadId provided
+    if (body.threadId) {
+      await saveVerification(
+        body.threadId,
+        body.claim,
+        body.author || 'unknown',
+        verification,
+        body.userId
+      )
+      console.log('Cached verification for claim in thread:', body.threadId)
+    }
 
     return NextResponse.json({
       success: true,
-      data: verification
+      data: verification,
+      cached: false
     })
 
   } catch (error) {
