@@ -1,25 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { exec } from 'child_process'
-import { promisify } from 'util'
-import { readFile, mkdir, writeFile } from 'fs/promises'
-import path from 'path'
 import { detectDebates } from '@/lib/debate-detection'
 import { storeThreadAnalysis, getBatchUserStatus } from '@/lib/neo4j'
+import { fetchRedditThread, parseRedditUrl } from '@/lib/reddit-fetcher'
 import type { ThreadAnalysisResult, DebatePosition, DebaterArchetype } from '@/types/debate'
 
-const execAsync = promisify(exec)
-
-// Cache directories
-const RAW_CACHE_DIR = path.join(process.cwd(), 'public', 'data', 'threads')
-const ANALYSIS_CACHE_DIR = path.join(process.cwd(), 'public', 'data', 'analysis')
+// In-memory cache for serverless environments
+const analysisCache = new Map<string, { data: ThreadAnalysisResult; cachedAt: number }>()
 
 // Cache expiry: 1 hour for analysis
 const CACHE_EXPIRY_MS = 60 * 60 * 1000
-
-interface CachedAnalysis {
-  data: ThreadAnalysisResult
-  cachedAt: number
-}
 
 interface AnalyzeThreadResponse {
   success: boolean
@@ -29,98 +18,34 @@ interface AnalyzeThreadResponse {
   analysisTime?: number
 }
 
-interface RawComment {
-  id: string
-  author: string
-  body: string
-  score: number
-  created_utc: number
-  parent_id: string
-  depth?: number
+/**
+ * Check if cached analysis exists and is valid (in-memory)
+ */
+function getCachedAnalysis(cacheKey: string): ThreadAnalysisResult | null {
+  const cached = analysisCache.get(cacheKey)
+  if (cached && Date.now() - cached.cachedAt < CACHE_EXPIRY_MS) {
+    return cached.data
+  }
+  if (cached) {
+    analysisCache.delete(cacheKey) // Clean up expired entry
+  }
+  return null
 }
 
 /**
- * Parse Reddit API response into flat comment list
+ * Cache the analysis result (in-memory)
  */
-function parseComments(data: unknown[], depth: number = 0): RawComment[] {
-  const comments: RawComment[] = []
-
-  for (const item of data) {
-    const itemData = item as { kind?: string; data?: Record<string, unknown> }
-    if (itemData.kind === 't1' && itemData.data) {
-      const comment = itemData.data as {
-        id?: string
-        author?: string
-        body?: string
-        score?: number
-        created_utc?: number
-        parent_id?: string
-        replies?: { data?: { children?: unknown[] } } | string
-      }
-
-      if (comment.author !== '[deleted]' && comment.body && comment.body !== '[removed]') {
-        comments.push({
-          id: String(comment.id || ''),
-          author: String(comment.author || ''),
-          body: String(comment.body || ''),
-          score: Number(comment.score || 0),
-          created_utc: Number(comment.created_utc || 0),
-          parent_id: String(comment.parent_id || ''),
-          depth
-        })
-
-        // Parse nested replies
-        if (comment.replies && typeof comment.replies === 'object') {
-          const repliesData = comment.replies as { data?: { children?: unknown[] } }
-          if (repliesData.data?.children) {
-            comments.push(...parseComments(repliesData.data.children, depth + 1))
-          }
-        }
-      }
-    } else if (itemData.kind === 'Listing' && itemData.data) {
-      const listingData = itemData.data as { children?: unknown[] }
-      if (listingData.children) {
-        comments.push(...parseComments(listingData.children, depth))
-      }
+function cacheAnalysis(cacheKey: string, data: ThreadAnalysisResult): void {
+  // Limit cache size to prevent memory issues
+  if (analysisCache.size > 100) {
+    // Remove oldest entries
+    const entries = Array.from(analysisCache.entries())
+    entries.sort((a, b) => a[1].cachedAt - b[1].cachedAt)
+    for (let i = 0; i < 20; i++) {
+      analysisCache.delete(entries[i][0])
     }
   }
-
-  return comments
-}
-
-/**
- * Check if cached analysis exists and is valid
- */
-async function getCachedAnalysis(cacheKey: string): Promise<ThreadAnalysisResult | null> {
-  try {
-    const cacheFile = path.join(ANALYSIS_CACHE_DIR, `${cacheKey}.json`)
-    const data = await readFile(cacheFile, 'utf-8')
-    const cached: CachedAnalysis = JSON.parse(data)
-
-    if (Date.now() - cached.cachedAt < CACHE_EXPIRY_MS) {
-      return cached.data
-    }
-    return null
-  } catch {
-    return null
-  }
-}
-
-/**
- * Cache the analysis result
- */
-async function cacheAnalysis(cacheKey: string, data: ThreadAnalysisResult): Promise<void> {
-  try {
-    await mkdir(ANALYSIS_CACHE_DIR, { recursive: true })
-    const cacheFile = path.join(ANALYSIS_CACHE_DIR, `${cacheKey}.json`)
-    const cached: CachedAnalysis = {
-      data,
-      cachedAt: Date.now()
-    }
-    await writeFile(cacheFile, JSON.stringify(cached, null, 2))
-  } catch (error) {
-    console.error('Failed to cache analysis:', error)
-  }
+  analysisCache.set(cacheKey, { data, cachedAt: Date.now() })
 }
 
 /**
@@ -128,6 +53,9 @@ async function cacheAnalysis(cacheKey: string, data: ThreadAnalysisResult): Prom
  *
  * Free tier thread analysis with AI debate segmentation.
  * Fetches Reddit thread, detects debates, classifies positions, and scores arguments.
+ *
+ * Now uses pure TypeScript/fetch - no Python dependency required.
+ * Works in serverless environments (Vercel, etc.)
  */
 export async function GET(request: NextRequest): Promise<NextResponse<AnalyzeThreadResponse>> {
   const startTime = Date.now()
@@ -141,23 +69,21 @@ export async function GET(request: NextRequest): Promise<NextResponse<AnalyzeThr
     )
   }
 
-  // Validate Reddit URL
-  const redditUrlPattern = /(?:https?:\/\/)?(?:www\.)?(?:old\.)?(?:new\.)?reddit\.com\/r\/(\w+)\/comments\/(\w+)/i
-  const match = url.match(redditUrlPattern)
-
-  if (!match) {
+  // Validate and parse Reddit URL
+  const parsed = parseRedditUrl(url)
+  if (!parsed) {
     return NextResponse.json(
       { success: false, error: 'Invalid Reddit URL' },
       { status: 400 }
     )
   }
 
-  const [, subreddit, threadId] = match
+  const { subreddit, threadId } = parsed
   const cacheKey = `${subreddit}-${threadId}`
 
   try {
-    // Check cache first
-    const cached = await getCachedAnalysis(cacheKey)
+    // Check cache first (in-memory)
+    const cached = getCachedAnalysis(cacheKey)
     if (cached) {
       return NextResponse.json({
         success: true,
@@ -167,48 +93,22 @@ export async function GET(request: NextRequest): Promise<NextResponse<AnalyzeThr
       })
     }
 
-    // Ensure cache directories exist
-    await mkdir(RAW_CACHE_DIR, { recursive: true })
-    await mkdir(ANALYSIS_CACHE_DIR, { recursive: true })
-
-    // Fetch raw thread data using Python script
-    const scriptPath = path.join(process.cwd(), 'scripts', 'reddit_debate_fetcher.py')
-    const outputPath = path.join(RAW_CACHE_DIR, cacheKey)
-    const command = `python3 "${scriptPath}" "${url}" --output "${outputPath}" --raw`
-
     console.log(`Fetching thread: ${url}`)
 
+    // Fetch thread data using TypeScript fetcher
+    let threadData
     try {
-      await execAsync(command, {
-        timeout: 60000,
-        maxBuffer: 10 * 1024 * 1024
-      })
-    } catch (execError: unknown) {
-      const error = execError as { message?: string; stderr?: string }
-      console.error('Script execution error:', error)
+      threadData = await fetchRedditThread(url)
+    } catch (fetchError: unknown) {
+      const error = fetchError as Error
+      console.error('Reddit fetch error:', error.message)
       return NextResponse.json(
-        { success: false, error: 'Failed to fetch thread data. Please try again.' },
+        { success: false, error: error.message || 'Failed to fetch thread data. Please try again.' },
         { status: 500 }
       )
     }
 
-    // Read the raw JSON file
-    const jsonFile = `${outputPath}.json`
-    const rawData = await readFile(jsonFile, 'utf-8')
-    const threadData = JSON.parse(rawData)
-
-    // Extract post data
-    const post = threadData[0]?.data?.children?.[0]?.data
-    if (!post) {
-      return NextResponse.json(
-        { success: false, error: 'Could not parse thread data' },
-        { status: 500 }
-      )
-    }
-
-    // Parse all comments
-    const commentsData = threadData[1]?.data?.children || []
-    const comments = parseComments(commentsData, 1)
+    const { post, comments } = threadData
 
     console.log(`Parsed ${comments.length} comments, running debate detection...`)
 
@@ -337,8 +237,8 @@ export async function GET(request: NextRequest): Promise<NextResponse<AnalyzeThr
       })
     }
 
-    // Cache the analysis
-    await cacheAnalysis(cacheKey, analysis)
+    // Cache the analysis (in-memory)
+    cacheAnalysis(cacheKey, analysis)
 
     console.log(`Analysis complete: ${debates.length} debates detected in ${Date.now() - startTime}ms`)
 
