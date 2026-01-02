@@ -14,9 +14,16 @@ export interface Claim {
   commentId: string
   sourceCited: boolean
   sourceUrl: string | null
-  verificationStatus: 'verified' | 'unverified' | 'disputed' | 'false'
+  verificationStatus: 'verified' | 'unverified' | 'disputed' | 'false' | 'sourced'
   refutedBy: string[]
   relevanceScore: number
+  // Provenance tracking (sticky verification)
+  fromCache?: boolean           // True if this verification came from claims registry
+  registryId?: string           // Hash ID in claims registry
+  verifiedAt?: string           // ISO timestamp of verification
+  verifiedBy?: 'claude' | 'grok' | 'manual'
+  verificationSources?: string[] // Sources used to verify
+  sticky?: boolean              // If true, this verification is permanent
 }
 
 export interface ClaimAnalysis {

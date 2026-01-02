@@ -3,19 +3,26 @@ import { exec } from 'child_process'
 import { promisify } from 'util'
 import { readFile, writeFile, mkdir } from 'fs/promises'
 import path from 'path'
-import type { DeepAnalysis, DeepAnalysisResponse } from '@/types/analysis'
+import type { DeepAnalysis, DeepAnalysisResponse, Claim } from '@/types/analysis'
+import {
+  loadRegistry,
+  saveRegistry,
+  hashClaim,
+  lookupClaim,
+  registerClaim
+} from '@/lib/claims-registry'
 
 const execAsync = promisify(exec)
 
-// Cache directory for deep analysis results
+// Cache directory for deep analysis results (PUBLIC - available to all users)
 const CACHE_DIR = path.join(process.cwd(), 'public', 'data', 'deep-analysis')
 
-// Cache expiry: 24 hours
-const CACHE_EXPIRY_MS = 24 * 60 * 60 * 1000
-
+// NO expiry - analyses are permanent and public
 interface CachedAnalysis {
   data: DeepAnalysis
   cachedAt: number
+  publiclyAvailable: boolean  // Always true - all analyses are public
+  contributedBy?: string      // Optional: track who ran the analysis
 }
 
 function convertSnakeToCamel(obj: Record<string, unknown>): Record<string, unknown> {
@@ -44,11 +51,9 @@ async function getCachedAnalysis(threadId: string): Promise<DeepAnalysis | null>
     const data = await readFile(cacheFile, 'utf-8')
     const cached: CachedAnalysis = JSON.parse(data)
 
-    // Check if cache is still valid
-    if (Date.now() - cached.cachedAt < CACHE_EXPIRY_MS) {
-      return cached.data
-    }
-    return null
+    // Analyses are PERMANENT - no expiry check
+    // Once analyzed, always available to everyone
+    return cached.data
   } catch {
     return null
   }
@@ -60,12 +65,68 @@ async function cacheAnalysis(threadId: string, data: DeepAnalysis): Promise<void
     const cacheFile = path.join(CACHE_DIR, `${threadId}.json`)
     const cached: CachedAnalysis = {
       data,
-      cachedAt: Date.now()
+      cachedAt: Date.now(),
+      publiclyAvailable: true  // All analyses are public
     }
     await writeFile(cacheFile, JSON.stringify(cached, null, 2))
   } catch (error) {
     console.error('Failed to cache analysis:', error)
   }
+}
+
+/**
+ * Register all verified claims from an analysis to the global claims registry.
+ * Once registered, these verifications become "sticky" and reusable.
+ */
+async function registerClaimsFromAnalysis(
+  analysis: DeepAnalysis,
+  threadId: string
+): Promise<{ registered: number; fromCache: number }> {
+  let registered = 0
+  let fromCache = 0
+
+  if (!analysis.claims || analysis.claims.length === 0) {
+    return { registered, fromCache }
+  }
+
+  for (const claim of analysis.claims) {
+    // Skip unverified claims - they can be re-checked later
+    if (claim.verificationStatus === 'unverified') {
+      continue
+    }
+
+    // Check if already in registry
+    const existing = await lookupClaim(claim.text)
+    if (existing) {
+      // Mark this claim as from cache and add provenance
+      claim.fromCache = true
+      claim.registryId = existing.id
+      claim.verifiedAt = existing.verifiedAt
+      claim.sticky = true
+      fromCache++
+    } else {
+      // Register new claim
+      const registered_claim = await registerClaim(
+        claim.text,
+        claim.verificationStatus as 'verified' | 'disputed' | 'false' | 'sourced',
+        {
+          confidence: Math.round(claim.relevanceScore),
+          sources: claim.sourceUrl ? [claim.sourceUrl] : [],
+          threadId,
+          verifiedBy: 'claude'
+        }
+      )
+
+      // Update claim with registry info
+      claim.fromCache = false
+      claim.registryId = registered_claim.id
+      claim.verifiedAt = registered_claim.verifiedAt
+      claim.sticky = true
+      registered++
+    }
+  }
+
+  return { registered, fromCache }
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse<DeepAnalysisResponse>> {
@@ -152,15 +213,21 @@ export async function POST(request: NextRequest): Promise<NextResponse<DeepAnaly
       // Convert snake_case to camelCase for frontend
       const analysis = convertSnakeToCamel(snakeCaseData) as unknown as DeepAnalysis
 
-      // Cache the result
+      // Register verified claims to the global registry (makes them "sticky")
+      const { registered, fromCache } = await registerClaimsFromAnalysis(analysis, cacheKey)
+      console.log(`Claims registered: ${registered} new, ${fromCache} from cache`)
+
+      // Cache the result (PERMANENT & PUBLIC - available to all users)
       await cacheAnalysis(cacheKey, analysis)
 
       return NextResponse.json({
         success: true,
         data: analysis,
         cached: false,
-        analysisTime: Date.now() - startTime
-      })
+        analysisTime: Date.now() - startTime,
+        claimsRegistered: registered,
+        claimsFromCache: fromCache
+      } as DeepAnalysisResponse & { claimsRegistered: number; claimsFromCache: number })
 
     } catch (execError: unknown) {
       const error = execError as { message?: string; stderr?: string; stdout?: string }
