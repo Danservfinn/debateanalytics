@@ -122,7 +122,7 @@ export async function detectDebates(
   const debates: DebateThread[] = []
 
   for (const root of debateRoots) {
-    const debate = await processDebate(root, opText)
+    const debate = await processDebate(root, opText, threadTitle)
     if (debate) {
       debates.push(debate)
     }
@@ -215,7 +215,8 @@ function countDescendants(tree: CommentTree): number {
 
 async function processDebate(
   tree: CommentTree,
-  opText: string
+  opText: string,
+  threadTitle: string
 ): Promise<DebateThread | null> {
   // Flatten tree to get all comments
   const allComments = flattenTree(tree)
@@ -225,7 +226,7 @@ async function processDebate(
   }
 
   // Classify positions and score arguments using Claude
-  const scoredComments = await classifyAndScoreComments(allComments, opText)
+  const scoredComments = await classifyAndScoreComments(allComments, opText, threadTitle)
 
   // Determine winner based on quality
   const { winner, winnerReason, proScore, conScore } = determineWinner(scoredComments)
@@ -269,7 +270,8 @@ function flattenTree(tree: CommentTree): RawComment[] {
 
 async function classifyAndScoreComments(
   comments: RawComment[],
-  opText: string
+  opText: string,
+  threadTitle: string
 ): Promise<DebateComment[]> {
   const client = getAnthropicClient()
 
@@ -282,8 +284,11 @@ async function classifyAndScoreComments(
 
     const prompt = `You are analyzing Reddit comments in a debate thread. Be very careful about position classification.
 
-ORIGINAL POST (OP) POSITION:
-${opText.substring(0, 2000)}
+DEBATE TOPIC/PROPOSITION (from thread title):
+"${threadTitle}"
+
+ORIGINAL POST (OP) CONTEXT:
+${opText.substring(0, 1500)}
 
 COMMENTS TO ANALYZE:
 ${batch.map((c, idx) => `
@@ -312,28 +317,39 @@ For EACH comment, provide analysis in JSON format:
 
 CRITICAL: POSITION CLASSIFICATION RULES
 
-The thread topic is typically a normative question (what SHOULD happen). Carefully distinguish:
+**BASE POSITIONS ON THE THREAD TITLE PROPOSITION, NOT THE OP's PERSONAL STANCE**
 
-1. FACTUAL/DESCRIPTIVE STATEMENTS ("what IS") vs NORMATIVE STATEMENTS ("what SHOULD BE")
-   - "You cannot revoke citizenship for crimes" = FACTUAL claim about current law → NEUTRAL
-   - "We should not revoke citizenship" = NORMATIVE position → CON
-   - "The law says X" without advocating = NEUTRAL
-   - "The law should be changed to X" = NORMATIVE → PRO or CON
+The thread title states a proposition or question. Classify comments relative to THAT proposition:
 
-2. POSITION DEFINITIONS:
-   - PRO: Explicitly ADVOCATES for or ENDORSES OP's normative position. Must contain clear support language like "I agree", "you're right", "we should", "it's good that"
-   - CON: Explicitly OPPOSES or CHALLENGES OP's normative position. Must contain clear opposition language like "I disagree", "that's wrong", "we shouldn't", "actually"
-   - NEUTRAL: DEFAULT for any of these:
-     * Purely factual/legal/definitional statements without advocacy
-     * Questions asked without taking a stance
-     * "Devil's advocate" framing without committing
-     * Explaining both sides without choosing
-     * Providing context or information neutrally
-     * Statements that could support either side equally
+1. INTERPRETING THE PROPOSITION:
+   - If the title is a question like "Is X good?" → PRO = "Yes, X is good", CON = "No, X is not good"
+   - If the title is "CMV: X is true" → PRO = agrees X is true, CON = disagrees X is true
+   - If the title is a statement like "X should happen" → PRO = supports X, CON = opposes X
 
-3. KEY PRINCIPLE: When in doubt, classify as NEUTRAL. Only assign PRO/CON when there is EXPLICIT advocacy language showing the author personally endorses or opposes the OP's view.
+2. POSITION DEFINITIONS (relative to the TITLE PROPOSITION):
+   - PRO: AFFIRMS or SUPPORTS the proposition in the title
+     * For "${threadTitle}": PRO means arguing YES/in favor of this proposition
+     * Examples: "I agree that...", "This is correct because...", "X is essential because..."
 
-4. Watch for INDIRECT opposition: If someone provides facts that UNDERMINE OP's position but doesn't explicitly disagree, consider context. If the clear rhetorical purpose is to argue against OP, it's CON. If they're just stating facts, it's NEUTRAL.
+   - CON: NEGATES or OPPOSES the proposition in the title
+     * For "${threadTitle}": CON means arguing NO/against this proposition
+     * Examples: "I disagree...", "This is wrong because...", "X is NOT essential because...", "We don't need X..."
+
+   - NEUTRAL: Does not clearly affirm or negate the title proposition:
+     * Purely factual statements without advocacy
+     * Questions without taking a stance
+     * Context or information provided neutrally
+     * Arguments that don't directly address the title proposition
+
+3. IMPORTANT: The OP may argue FOR or AGAINST their own title. Do NOT assume the OP agrees with the title.
+   - "CMV" (Change My View) posts: OP states a view they want challenged
+   - Question titles: OP may be neutral or have a stance
+   - Classify each comment based on whether it AFFIRMS or NEGATES the title, regardless of OP's position
+
+4. FACTUAL vs NORMATIVE:
+   - Factual statements about what IS (without advocacy) → NEUTRAL
+   - Normative statements about what SHOULD BE → PRO or CON based on title
+   - Factual statements used rhetorically to support/oppose the title → PRO or CON
 
 QUALITY SCORING (1-10):
 - Evidence (0-3 points): Sources, statistics, concrete examples

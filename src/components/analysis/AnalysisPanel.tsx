@@ -262,13 +262,32 @@ export function AnalysisPanel({
     unresolved: { label: 'ONGOING', color: 'text-muted-foreground', bg: 'bg-secondary', icon: '🔄' }
   }[debate.winner]
 
-  // Reasoning chain (mock - would come from actual analysis)
-  const reasoningChain = [
-    { step: 1, text: 'PRO established initial claim with quality score 7.2/10', commentId: debate.replies[0]?.id },
-    { step: 2, text: 'CON challenged with counter-evidence (6.8/10)', commentId: debate.replies[1]?.id },
-    { step: 3, text: 'PRO provided additional sourcing and strengthened position (8.1/10)', commentId: debate.replies[2]?.id },
-    { step: 4, text: 'CON made partial concession, weakening overall position', commentId: debate.replies[3]?.id }
-  ]
+  // Reasoning chain - build from actual debate data
+  const reasoningChain = debate.replies.slice(0, 8).map((reply, index) => {
+    const qualityLabel = reply.qualityScore >= 7 ? 'strong' : reply.qualityScore >= 5 ? 'solid' : 'weaker'
+    const positionLabel = reply.position === 'pro' ? 'PRO' : reply.position === 'con' ? 'CON' : 'NEUTRAL'
+
+    let action = ''
+    if (index === 0) {
+      action = 'established initial claim'
+    } else if (reply.isConcession) {
+      action = 'made a concession'
+    } else if (reply.position !== debate.replies[index - 1]?.position) {
+      action = 'challenged with counter-argument'
+    } else {
+      action = 'reinforced position'
+    }
+
+    return {
+      step: index + 1,
+      text: `${positionLabel} ${action} with ${qualityLabel} argument (${reply.qualityScore.toFixed(1)}/10)`,
+      commentId: reply.id,
+      commentText: reply.text,
+      author: reply.author,
+      position: reply.position,
+      qualityScore: reply.qualityScore
+    }
+  })
 
   return (
     <div className={`space-y-4 ${compact ? 'text-sm' : ''}`}>
@@ -318,26 +337,10 @@ export function AnalysisPanel({
           icon={<Brain className="w-4 h-4 text-primary" />}
           defaultOpen={!compact}
         >
-          <div className="space-y-2">
-            {reasoningChain.map(item => (
-              <div key={item.step} className="flex items-start gap-2">
-                <span className="shrink-0 w-5 h-5 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center">
-                  {item.step}
-                </span>
-                <div className="flex-1">
-                  <p className="text-sm text-foreground">{item.text}</p>
-                  {item.commentId && (
-                    <button
-                      onClick={() => onJumpToComment(item.commentId!)}
-                      className="text-xs text-primary hover:underline flex items-center gap-1 mt-0.5"
-                    >
-                      Jump to comment <ExternalLink className="w-3 h-3" />
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+          <ReasoningChainList
+            items={reasoningChain}
+            onJumpToComment={onJumpToComment}
+          />
         </CollapsibleSection>
       </div>
 

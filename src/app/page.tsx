@@ -103,13 +103,15 @@ export default function Dashboard() {
           transition={{ duration: 0.5 }}
           className="text-center py-12 space-y-4"
         >
+          <p className="text-sm font-medium tracking-widest text-primary uppercase">
+            Elevating Public Discourse
+          </p>
           <h1 className="text-4xl md:text-5xl font-heading font-bold">
             Reddit{" "}
             <span className="text-primary text-glow">Debate Analytics</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            AI-powered analysis of Reddit debates. Track argument quality,
-            detect logical fallacies, and compare debaters across threads.
+            AI-powered analysis of online debates. Separate signal from noise.
           </p>
         </motion.section>
 
