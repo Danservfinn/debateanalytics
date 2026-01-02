@@ -36,6 +36,14 @@ import type {
 
 import { DEFAULT_SCORING_CONFIG } from '@/types/debate-scoring'
 
+// Import Phase 2 flow analysis functions
+import {
+  buildArgumentFlow as buildFlow,
+  extractArgumentsFromComments,
+  evaluateArguments as evaluateFlowArguments,
+  linkArgumentResponses as linkResponses
+} from './flow-analysis'
+
 // =============================================================================
 // FLOW BUILDING
 // =============================================================================
@@ -46,19 +54,21 @@ import { DEFAULT_SCORING_CONFIG } from '@/types/debate-scoring'
  *
  * @param comments - Raw comments from the thread
  * @param centralQuestion - The main question being debated
+ * @param positionDefinitions - Optional PRO/CON definitions for context
  * @returns Array of structured FlowArguments
  */
 export async function buildArgumentFlow(
   comments: FlowComment[],
-  centralQuestion: string
+  centralQuestion: string,
+  positionDefinitions?: { proDefinition: string; conDefinition: string }
 ): Promise<FlowArgument[]> {
-  // TODO: Implement with Claude API call to extract arguments
-  // This will use extended thinking to identify:
-  // 1. Each distinct claim made
-  // 2. Supporting warrants/evidence
-  // 3. Stated or implied impacts
-  // 4. Which argument each response addresses
-  throw new Error('buildArgumentFlow not yet implemented')
+  // Delegate to flow-analysis module
+  return buildFlow({
+    comments,
+    centralQuestion,
+    threadTitle: '', // Will be populated by caller
+    positionDefinitions
+  })
 }
 
 /**
@@ -94,18 +104,9 @@ export async function extractToulminComponents(
  * Link response arguments to their parent arguments
  * Creates the flow structure showing argument chains
  *
- * @param arguments - Unlinked arguments
- * @param comments - Original comments for reply structure
- * @returns Arguments with respondsTo and responses populated
+ * Re-exports from flow-analysis module
  */
-export function linkArgumentResponses(
-  args: FlowArgument[],
-  comments: FlowComment[]
-): FlowArgument[] {
-  // TODO: Use comment parent/child relationships to link arguments
-  // An argument responds to the argument in its parent comment
-  throw new Error('linkArgumentResponses not yet implemented')
-}
+export { linkArgumentResponses } from './flow-analysis'
 
 // =============================================================================
 // ARGUMENT EVALUATION
@@ -121,9 +122,28 @@ export function linkArgumentResponses(
 export async function evaluateArgument(
   argument: FlowArgument
 ): Promise<ArgumentEvaluation> {
-  // TODO: Implement argument evaluation with Claude
-  // Evaluate: claim clarity, warrant quality, impact magnitude/probability
-  throw new Error('evaluateArgument not yet implemented')
+  // Use the flow-analysis module to evaluate a single argument
+  const evaluations = await evaluateFlowArguments([argument])
+  const evaluation = evaluations.get(argument.id)
+
+  if (evaluation) {
+    return evaluation
+  }
+
+  // Return default evaluation if API call fails
+  return {
+    claimClarity: 5,
+    claimRelevance: 5,
+    warrantPresent: !!argument.warrant,
+    warrantType: argument.finalEvaluation?.warrantType || 'none',
+    warrantQuality: null,
+    impactMagnitude: 5,
+    impactProbability: 5,
+    impactTimeframe: 'speculative',
+    impactReversibility: 'unknown',
+    internalLinkStrength: 5,
+    overallStrength: 5
+  }
 }
 
 /**
@@ -568,14 +588,34 @@ function calculateEvidenceQualityPct(dist: EvidenceDistribution): number {
 export async function runFlowAnalysis(
   request: FlowAnalysisRequest
 ): Promise<FlowAnalysisResult> {
-  // TODO: Implement full analysis pipeline
-  // 1. buildArgumentFlow
-  // 2. evaluateArguments
-  // 3. evaluateClashes
-  // 4. groupArgumentsIntoIssues
-  // 5. evaluateSpeakers
-  // 6. analyzeBurden
-  throw new Error('runFlowAnalysis not yet implemented')
+  // Phase 2: Build argument flow (IMPLEMENTED)
+  const args = await buildFlow(request)
+
+  // Phase 3: Evaluate clashes (TODO - Phase 3)
+  const clashes: ClashEvaluation[] = [] // Will be implemented in Phase 3
+
+  // Phase 3: Group into issues (TODO - Phase 3)
+  const issues: DebateIssue[] = [] // Will be implemented in Phase 3
+
+  // Phase 4: Evaluate speakers (TODO - Phase 4)
+  const speakers: SpeakerEvaluation[] = [] // Will be implemented in Phase 4
+
+  // Phase 4: Analyze burden (TODO - Phase 4)
+  const burden: BurdenAnalysis = {
+    affirmativeBurden: 'To prove the proposition',
+    negativeBurden: 'To refute the proposition',
+    presumption: 'con', // Default: burden on PRO
+    burdenMet: { pro: false, con: false },
+    burdenReasoning: 'Burden analysis not yet implemented'
+  }
+
+  return {
+    arguments: args,
+    clashes,
+    issues,
+    speakers,
+    burden
+  }
 }
 
 /**
