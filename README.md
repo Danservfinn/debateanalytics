@@ -1,36 +1,214 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Debate Analytics
+
+AI-powered Reddit debate analysis platform that identifies arguments, tracks momentum shifts, and evaluates argument quality in discussion threads.
+
+## Features
+
+### Core Analysis
+- **Debate Detection**: AI-powered identification of distinct debates within Reddit threads
+- **Argument Classification**: Automatic PRO/CON/Neutral position detection
+- **Quality Scoring**: 1-10 argument quality assessment based on evidence, logic, and civility
+- **Winner Determination**: AI-evaluated debate outcomes with supporting rationale
+
+### Visualization Components
+- **HeroVerdictCard**: Thread-level verdict with animated score ring
+- **BattleCard**: Side-by-side PRO vs CON comparison with best arguments
+- **DebateThreadCard**: Expandable debate cards with full argument threads
+- **MomentumTimeline**: Visual debate progression showing momentum shifts
+- **ParticipantCard**: User profiles with debate statistics
+
+### Data Products
+- **Thread Analysis**: Deep analysis of Reddit CMV threads
+- **User Profiling**: Debate participation history and performance metrics
+- **Claim Extraction**: Factual claims identified for fact-checking
+
+## Tech Stack
+
+- **Framework**: Next.js 16.1.1 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS with custom design system
+- **AI**: Claude API for debate analysis
+- **Data Fetching**: Reddit JSON API via Python scraper
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+
+- Python 3.8+ (for Reddit scraper)
+- Anthropic API key
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/Danservfinn/debateanalytics.git
+cd debate-analytics
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Add your ANTHROPIC_API_KEY to .env.local
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+ANTHROPIC_API_KEY=your_api_key_here
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── api/               # API routes
+│   │   ├── analyze-thread/    # Thread analysis endpoint
+│   │   └── user/             # User profile endpoints
+│   ├── thread/[threadId]/    # Thread detail page
+│   └── page.tsx              # Home page
+├── components/
+│   ├── analysis/          # Analysis visualization components
+│   │   ├── BattleCard.tsx
+│   │   ├── DebateThreadCard.tsx
+│   │   ├── HeroVerdictCard.tsx
+│   │   ├── MomentumTimeline.tsx
+│   │   └── ParticipantCard.tsx
+│   └── ui/                # Shared UI components
+├── lib/
+│   ├── debate-detection.ts   # AI debate analysis logic
+│   └── neo4j.ts              # Database connection
+├── types/
+│   └── debate.ts            # TypeScript type definitions
+└── scripts/
+    └── reddit_debate_fetcher.py  # Reddit data scraper
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API Endpoints
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### `GET /api/analyze-thread`
+Analyzes a Reddit thread for debates.
 
-## Deploy on Vercel
+**Query Parameters:**
+- `url`: Reddit thread URL (required)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Response:**
+```json
+{
+  "debates": [...],
+  "participants": [...],
+  "threadMeta": {...}
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### `GET /api/user/[username]/status`
+Gets user profile and debate history.
+
+## Key Components
+
+### DebateThreadCard
+Expandable card showing debate summary with full PRO/CON argument breakdown.
+
+```tsx
+<DebateThreadCard
+  debate={debate}
+  index={0}
+  isExpanded={expanded}
+  onCollapse={() => setExpanded(false)}
+/>
+```
+
+### MomentumTimeline
+Visual timeline showing debate progression with momentum shifts.
+
+```tsx
+<MomentumTimeline debate={selectedDebate} />
+```
+
+### BattleCard
+Side-by-side comparison of PRO and CON positions.
+
+```tsx
+<BattleCard debate={debate} />
+```
+
+## Data Types
+
+### DebateThread
+```typescript
+interface DebateThread {
+  id: string
+  title: string
+  rootArgument: string
+  winner: 'pro' | 'con' | 'draw' | 'unresolved'
+  heatLevel: number
+  keyClash: string
+  replies: DebateComment[]
+  momentumShifts?: MomentumShift[]
+}
+```
+
+### DebateComment
+```typescript
+interface DebateComment {
+  id: string
+  author: string
+  text: string
+  position: 'pro' | 'con' | 'neutral'
+  qualityScore: number
+  claims?: string[]
+  createdAt: string
+}
+```
+
+## Development
+
+```bash
+# Run development server
+npm run dev
+
+# Type check
+npm run type-check
+
+# Lint
+npm run lint
+
+# Build for production
+npm run build
+```
+
+## Deployment
+
+The application is deployed on Vercel:
+- Production: https://debate-analytics.vercel.app
+
+```bash
+# Deploy to Vercel
+vercel --prod
+```
+
+## Recent Updates
+
+### Phase 3 - Premium UI Components (Jan 2026)
+- Added expandable DebateThreadCard with two-column PRO/CON layout
+- Fixed MomentumTimeline node clustering with index-based positioning
+- Added ArgumentCard component for individual argument display
+- Implemented JSON response cleaning for Claude API
+
+## License
+
+MIT
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
