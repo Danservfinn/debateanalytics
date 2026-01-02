@@ -65,46 +65,78 @@ async function verifyClaim(request: ClaimVerificationRequest): Promise<ClaimVeri
   // First, do a web search to find relevant sources
   const searchResults = await searchForEvidence(claim)
 
-  // Then analyze with Claude using the search results
+  // Then analyze with Claude using the search results - with CRITICAL analysis
   const response = await anthropic.messages.create({
     model: 'claude-sonnet-4-20250514',
-    max_tokens: 2000,
+    max_tokens: 2500,
     messages: [{
       role: 'user',
-      content: `You are an objective fact-checker. Analyze this claim and provide a well-sourced verdict.
+      content: `You are a CRITICAL ANALYST, not a simple fact-checker. Your job is to independently evaluate evidence and draw your own conclusions—NOT to accept study conclusions or source claims at face value.
 
-CLAIM: "${claim}"
+CLAIM TO ANALYZE: "${claim}"
 MADE BY: u/${author}
 ${context ? `CONTEXT: ${context}` : ''}
 
-SEARCH RESULTS FOR EVIDENCE:
+EVIDENCE TO CRITICALLY EVALUATE:
 ${searchResults.map((r, i) => `[${i + 1}] ${r.title}\nURL: ${r.url}\nSnippet: ${r.snippet}`).join('\n\n')}
 
-Analyze the claim objectively. Consider:
-1. Is the claim factually accurate?
-2. What evidence supports or refutes it?
-3. Are there important nuances or caveats?
-4. How confident can we be in the verdict?
+CRITICAL ANALYSIS INSTRUCTIONS:
+
+**DISTINGUISH DATA FROM CONCLUSIONS:**
+- What does the RAW DATA actually show vs what do the authors CLAIM it shows?
+- Are the conclusions logically supported by the data presented?
+- Could the same data support different conclusions?
+
+**EVALUATE METHODOLOGY:**
+- Study design: RCT, observational, case study, survey, meta-analysis?
+- Sample size: Is it statistically powered? (n<100 for medical claims = weak)
+- Control groups: Were there proper controls? Placebo? Blinding?
+- Confounders: What variables weren't controlled for?
+- Replication: Has this been replicated by independent researchers?
+- Publication bias: Are we seeing all studies or just positive results?
+
+**ASSESS SOURCE QUALITY:**
+- Peer review status: Published in reputable journals?
+- Funding sources: Industry-funded studies may have conflicts
+- Author credentials: Relevant expertise?
+- Recency: Is this current or outdated science?
+
+**WEIGHT EVIDENCE HIERARCHY:**
+1. Large, replicated RCTs (strongest)
+2. Meta-analyses of quality studies
+3. Smaller RCTs
+4. Well-designed observational studies
+5. Case studies, expert opinion (weakest)
+
+**LOOK FOR RED FLAGS:**
+- P-hacking or selective reporting
+- Overgeneralized conclusions
+- Correlation presented as causation
+- Small effect sizes hyped as significant
+- Missing confidence intervals
+
+DRAW YOUR OWN CONCLUSIONS based on your critical analysis. Do NOT simply defer to what sources claim—evaluate whether their claims are actually supported by their evidence.
 
 Respond with a JSON object:
 {
   "verdict": "true" | "mostly_true" | "mixed" | "mostly_false" | "false" | "unverifiable",
   "confidence": <0-100>,
-  "summary": "<one sentence verdict summary>",
-  "explanation": "<2-3 paragraph detailed explanation with reasoning>",
+  "summary": "<one sentence CRITICAL verdict - what YOU conclude from the evidence>",
+  "explanation": "<2-3 paragraphs explaining your critical analysis: what the data shows, methodology assessment, where you agree/disagree with source conclusions, and YOUR independent conclusion>",
   "sources": [
     {
       "title": "<source title>",
       "url": "<source url>",
-      "snippet": "<relevant quote or finding>",
+      "snippet": "<what this source's DATA actually shows, not just its conclusion>",
       "credibility": "high" | "medium" | "low"
     }
   ],
-  "keyEvidence": ["<key fact 1>", "<key fact 2>", ...],
-  "nuances": ["<important caveat 1>", "<important caveat 2>", ...]
+  "keyEvidence": ["<key DATA POINT 1 - actual finding>", "<key DATA POINT 2>", ...],
+  "nuances": ["<methodological limitation 1>", "<alternative interpretation>", "<important caveat>", ...]
 }
 
-Be objective and cite your sources. If evidence is insufficient, mark as "unverifiable".
+Remember: Your verdict should reflect what the EVIDENCE actually supports, not what sources claim. If studies have weak methodology, say so. If conclusions are overstated relative to data, note that. Be the critical reviewer the user deserves.
+
 Return ONLY valid JSON, no markdown.`
     }]
   })
@@ -156,15 +188,29 @@ async function searchForEvidence(claim: string): Promise<Array<{ title: string; 
       }],
       messages: [{
         role: 'user',
-        content: `Search for authoritative sources to fact-check this claim: "${claim}"
+        content: `Search for evidence to CRITICALLY ANALYZE this claim: "${claim}"
 
-Find:
-1. Scientific studies or research papers if applicable
-2. News articles from reputable outlets
-3. Official government or institutional sources
-4. Expert opinions from credible sources
+IMPORTANT: We need RAW DATA and METHODOLOGY details, not just conclusions.
 
-Focus on recent, authoritative sources. Search for evidence both supporting AND refuting the claim to be objective.`
+Find sources that include:
+1. SCIENTIFIC STUDIES with actual data:
+   - Sample sizes and study design (RCT, observational, etc.)
+   - Actual effect sizes and confidence intervals
+   - Control groups and methodology details
+   - Funding sources if mentioned
+
+2. META-ANALYSES or systematic reviews
+   - How many studies included?
+   - What was the overall effect across studies?
+
+3. CONTRADICTING EVIDENCE
+   - Studies that found different results
+   - Criticisms of methodologies
+   - Replication attempts
+
+4. Expert analysis that CRITIQUES methodology, not just restates conclusions
+
+Search for evidence both supporting AND refuting the claim. Prioritize sources that show actual data over those that just state conclusions.`
       }]
     })
 
@@ -207,27 +253,33 @@ Focus on recent, authoritative sources. Search for evidence both supporting AND 
  * Fallback: Generate search context without actual web search
  */
 async function fallbackSearch(claim: string): Promise<Array<{ title: string; url: string; snippet: string }>> {
-  // Create a research-focused prompt to get Claude's knowledge
+  // Create a research-focused prompt to get Claude's knowledge with methodology focus
   const response = await anthropic.messages.create({
     model: 'claude-sonnet-4-20250514',
-    max_tokens: 1000,
+    max_tokens: 1500,
     messages: [{
       role: 'user',
-      content: `For fact-checking the claim: "${claim}"
+      content: `For CRITICALLY ANALYZING the claim: "${claim}"
 
-What are the most authoritative sources that would be relevant? List 3-5 specific sources with:
-- Organization/publication name
-- Type of source (research paper, government agency, news outlet)
-- What they would likely say about this claim based on established facts
+Identify the most relevant scientific evidence. For each source, provide:
+- Study name and publication
+- Study design (RCT, observational, meta-analysis, etc.)
+- Sample size if known
+- ACTUAL DATA/FINDINGS (not just conclusions)
+- Known limitations or criticisms
+
+Important: Focus on what the DATA shows, not what authors claim. Include studies with contradicting results if they exist.
 
 Format as JSON array:
 [
   {
-    "title": "<source name and document>",
-    "url": "<likely URL or placeholder>",
-    "snippet": "<what this source establishes>"
+    "title": "<study name, authors, journal, year>",
+    "url": "<DOI or likely URL>",
+    "snippet": "<ACTUAL DATA: e.g., 'N=5000, RCT design, found 15% reduction (95% CI: 10-20%), funded by NIH' NOT just 'study found X is effective'>"
   }
 ]
+
+Include 3-5 sources. Include at least one source that challenges or contradicts the claim if such evidence exists.
 
 Return ONLY JSON.`
     }]
