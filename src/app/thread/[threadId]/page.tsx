@@ -276,7 +276,7 @@ export default function ThreadDetailPage() {
                     <TrendingUp className="w-5 h-5 text-primary" />
                     Featured Debate
                   </h3>
-                  <BattleCard debate={analysis.debates[0]} />
+                  <BattleCard debate={analysis.debates[0]} threadUrl={analysis.url} />
                 </div>
               )}
 
