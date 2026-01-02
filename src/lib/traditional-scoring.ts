@@ -44,6 +44,17 @@ import {
   linkArgumentResponses as linkResponses
 } from './flow-analysis'
 
+// Import Phase 3 clash evaluation functions
+import {
+  evaluateClashes as evaluateFlowClashes,
+  evaluateSingleClash,
+  groupArgumentsIntoIssues as groupIntoIssues,
+  determineIssueWinner as calculateIssueWinner,
+  determineIssueWinners,
+  updateArgumentStatusesFromClashes,
+  classifyClashType as classifyClash
+} from './clash-evaluation'
+
 // =============================================================================
 // FLOW BUILDING
 // =============================================================================
@@ -206,30 +217,19 @@ export function determineArgumentStatus(
  * Identify and evaluate all clashes in the debate
  * A clash occurs when one argument directly responds to another
  *
- * @param arguments - All arguments in the debate
+ * @param args - All arguments in the debate
+ * @param centralQuestion - The main question being debated
  * @returns Array of clash evaluations
  */
 export async function evaluateClashes(
-  args: FlowArgument[]
+  args: FlowArgument[],
+  centralQuestion: string
 ): Promise<ClashEvaluation[]> {
-  // TODO: Implement clash evaluation with Claude
-  throw new Error('evaluateClashes not yet implemented')
+  return evaluateFlowClashes(args, centralQuestion)
 }
 
-/**
- * Evaluate a single clash between two arguments
- *
- * @param attacker - The responding/attacking argument
- * @param defender - The original argument being attacked
- * @returns Clash evaluation with winner determination
- */
-export async function evaluateSingleClash(
-  attacker: FlowArgument,
-  defender: FlowArgument
-): Promise<ClashEvaluation> {
-  // TODO: Implement single clash evaluation
-  throw new Error('evaluateSingleClash not yet implemented')
-}
+// Re-export evaluateSingleClash from clash-evaluation module
+export { evaluateSingleClash } from './clash-evaluation'
 
 /**
  * Classify the type of clash/refutation
@@ -238,13 +238,11 @@ export async function evaluateSingleClash(
  * @param defender - The defending argument
  * @returns Type of clash
  */
-export async function classifyClashType(
+export function classifyClashType(
   attacker: FlowArgument,
   defender: FlowArgument
-): Promise<ClashType> {
-  // TODO: Implement clash type classification
-  // Types: denial, mitigation, turn, outweigh, no_link, counterplan, talking_past
-  throw new Error('classifyClashType not yet implemented')
+): ClashType {
+  return classifyClash(attacker, defender)
 }
 
 // =============================================================================
@@ -255,17 +253,17 @@ export async function classifyClashType(
  * Group arguments into contested issues
  * An issue is a distinct topic of contention in the debate
  *
- * @param arguments - All arguments in the debate
+ * @param args - All arguments in the debate
  * @param clashes - All evaluated clashes
+ * @param centralQuestion - The main question being debated
  * @returns Array of debate issues with grouped arguments
  */
 export async function groupArgumentsIntoIssues(
   args: FlowArgument[],
-  clashes: ClashEvaluation[]
+  clashes: ClashEvaluation[],
+  centralQuestion: string
 ): Promise<DebateIssue[]> {
-  // TODO: Implement issue grouping with Claude
-  // Cluster arguments by topic/theme
-  throw new Error('groupArgumentsIntoIssues not yet implemented')
+  return groupIntoIssues(args, clashes, centralQuestion)
 }
 
 /**
@@ -280,13 +278,12 @@ export function determineIssueWinner(
   issue: DebateIssue,
   config: TraditionalScoringConfig = DEFAULT_SCORING_CONFIG
 ): DebateIssue {
-  // TODO: Implement issue winner determination
-  // Consider: clash wins, dropped arguments, argument quality
-  throw new Error('determineIssueWinner not yet implemented')
+  return calculateIssueWinner(issue, config)
 }
 
 /**
  * Calculate the weight/importance of an issue
+ * Weight is determined during issue grouping based on centrality to question
  *
  * @param issue - The issue to weigh
  * @param centralQuestion - The main debate question
@@ -298,8 +295,9 @@ export async function calculateIssueWeight(
   centralQuestion: string,
   config: TraditionalScoringConfig = DEFAULT_SCORING_CONFIG
 ): Promise<number> {
-  // TODO: Implement issue weight calculation
-  throw new Error('calculateIssueWeight not yet implemented')
+  // Issue weight is already calculated during grouping
+  // This function allows recalculation if needed
+  return issue.issueWeight
 }
 
 // =============================================================================
@@ -588,14 +586,25 @@ function calculateEvidenceQualityPct(dist: EvidenceDistribution): number {
 export async function runFlowAnalysis(
   request: FlowAnalysisRequest
 ): Promise<FlowAnalysisResult> {
+  const { centralQuestion } = request
+
   // Phase 2: Build argument flow (IMPLEMENTED)
-  const args = await buildFlow(request)
+  console.log('[Traditional Scoring] Phase 2: Building argument flow...')
+  let args = await buildFlow(request)
 
-  // Phase 3: Evaluate clashes (TODO - Phase 3)
-  const clashes: ClashEvaluation[] = [] // Will be implemented in Phase 3
+  // Phase 3: Evaluate clashes (IMPLEMENTED)
+  console.log('[Traditional Scoring] Phase 3: Evaluating clashes...')
+  const clashes = await evaluateFlowClashes(args, centralQuestion)
 
-  // Phase 3: Group into issues (TODO - Phase 3)
-  const issues: DebateIssue[] = [] // Will be implemented in Phase 3
+  // Update argument statuses based on clash results
+  args = updateArgumentStatusesFromClashes(args, clashes)
+
+  // Phase 3: Group into issues and determine winners (IMPLEMENTED)
+  console.log('[Traditional Scoring] Phase 3: Grouping into issues...')
+  let issues = await groupIntoIssues(args, clashes, centralQuestion)
+
+  // Determine winners for each issue
+  issues = determineIssueWinners(issues)
 
   // Phase 4: Evaluate speakers (TODO - Phase 4)
   const speakers: SpeakerEvaluation[] = [] // Will be implemented in Phase 4
@@ -609,6 +618,7 @@ export async function runFlowAnalysis(
     burdenReasoning: 'Burden analysis not yet implemented'
   }
 
+  console.log('[Traditional Scoring] Flow analysis complete')
   return {
     arguments: args,
     clashes,
