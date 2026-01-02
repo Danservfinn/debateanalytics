@@ -279,11 +279,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<AnalyzeTh
     const body = await request.json()
     const { url, threadData } = body
 
-    console.log('[POST] Received request - url:', !!url, 'threadData:', !!threadData, 'type:', typeof threadData)
-
     // If threadData is provided, use it directly (manual JSON feeding)
     if (threadData && url) {
-      console.log('[POST] Using manual JSON feeding path')
       const parsed = parseRedditUrl(url)
       if (!parsed) {
         return NextResponse.json(
@@ -485,14 +482,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<AnalyzeTh
       })
     }
 
-    // Traditional URL-based fetch
+    // Traditional URL-based fetch (falls through to GET handler)
     if (!url) {
       return NextResponse.json(
-        { success: false, error: `URL is required in request body (${API_VERSION})` },
+        { success: false, error: 'URL is required in request body' },
         { status: 400 }
       )
     }
-    console.log('[POST] Falling through to GET handler (no threadData)')
 
     // Create a mock GET request with the URL
     const mockUrl = new URL(request.url)
