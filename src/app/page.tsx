@@ -12,11 +12,12 @@ import { ThreadCard } from "@/components/dashboard/ThreadCard"
 import { SkeletonMetricCard, SkeletonThreadCard } from "@/components/ui/skeleton"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { loadManifest, loadAllThreads } from "@/lib/data"
+import { getStoredThreads, getStoredStats } from "@/lib/storage"
 import { staggerContainer } from "@/lib/animations"
-import type { ThreadAnalysis, GlobalStats } from "@/types/debate"
+import type { ThreadAnalysis, GlobalStats, ThreadAnalysisResult } from "@/types/debate"
 
 export default function Dashboard() {
-  const [threads, setThreads] = useState<ThreadAnalysis[]>([])
+  const [threads, setThreads] = useState<ThreadAnalysisResult[]>([])
   const [stats, setStats] = useState<GlobalStats | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -24,12 +25,65 @@ export default function Dashboard() {
     async function loadData() {
       setIsLoading(true)
       try {
+        // Load from localStorage first (persisted analyses)
+        const storedThreads = getStoredThreads()
+        const storedStats = getStoredStats()
+
+        // Also try to load from remote manifest (if configured)
         const manifest = await loadManifest()
-        const allThreads = await loadAllThreads()
+        const remoteThreads = await loadAllThreads()
+
+        // Combine: stored threads take priority, then remote
+        const allThreads = [...storedThreads]
+        remoteThreads.forEach(rt => {
+          if (!allThreads.find(t => t.threadId === rt.metadata?.id)) {
+            // Convert ThreadAnalysis to ThreadAnalysisResult format if needed
+            allThreads.push({
+              threadId: rt.metadata.id,
+              subreddit: rt.metadata.subreddit,
+              title: rt.metadata.title,
+              author: rt.metadata.author,
+              commentCount: rt.metadata.numComments,
+              createdAt: new Date(rt.metadata.createdUtc * 1000).toISOString(),
+              url: rt.metadata.url,
+              verdict: {
+                overallScore: rt.statistics.avgArgumentQuality || 5,
+                summary: '',
+                evidenceQualityPct: 50,
+                civilityScore: 7,
+                worthReading: true
+              },
+              debates: [],
+              participants: [],
+              claims: [],
+              fallacies: []
+            })
+          }
+        })
+
         setThreads(allThreads)
-        setStats(manifest?.globalStats || null)
+
+        // Merge stats
+        setStats({
+          totalThreads: storedStats.totalThreads + (manifest?.globalStats?.totalThreads || 0),
+          totalUsers: storedStats.totalUsers + (manifest?.globalStats?.totalUsers || 0),
+          avgQualityScore: manifest?.globalStats?.avgQualityScore || 5,
+          totalArguments: storedStats.totalArguments + (manifest?.globalStats?.totalArguments || 0),
+          totalFallacies: storedStats.totalFallacies + (manifest?.globalStats?.totalFallacies || 0)
+        })
       } catch (error) {
         console.error('Failed to load data:', error)
+        // Fall back to localStorage only
+        const storedThreads = getStoredThreads()
+        const storedStats = getStoredStats()
+        setThreads(storedThreads)
+        setStats({
+          totalThreads: storedStats.totalThreads,
+          totalUsers: storedStats.totalUsers,
+          avgQualityScore: 5,
+          totalArguments: storedStats.totalArguments,
+          totalFallacies: storedStats.totalFallacies
+        })
       }
       setIsLoading(false)
     }
@@ -162,7 +216,7 @@ export default function Dashboard() {
               </>
             ) : threads.length > 0 ? (
               threads.map((thread, i) => (
-                <ThreadCard key={thread.id} thread={thread} index={i} />
+                <ThreadCard key={thread.threadId} thread={thread} index={i} />
               ))
             ) : (
               <div className="col-span-full text-center py-12 text-muted-foreground">

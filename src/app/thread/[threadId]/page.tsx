@@ -34,6 +34,7 @@ import {
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
+import { saveThread } from "@/lib/storage"
 import type { ThreadAnalysisResult, DebateThread } from "@/types/debate"
 
 export default function ThreadDetailPage() {
@@ -71,7 +72,9 @@ export default function ThreadDetailPage() {
           const cacheKey = `thread-analysis-${threadId}`
           const cachedData = sessionStorage.getItem(cacheKey)
           if (cachedData) {
-            setAnalysis(JSON.parse(cachedData))
+            const parsed = JSON.parse(cachedData) as ThreadAnalysisResult
+            setAnalysis(parsed)
+            saveThread(parsed) // Persist to localStorage
             setIsLoading(false)
             // Clear from sessionStorage after use
             sessionStorage.removeItem(cacheKey)
@@ -87,6 +90,7 @@ export default function ThreadDetailPage() {
 
         if (result.success && result.data) {
           setAnalysis(result.data)
+          saveThread(result.data) // Persist to localStorage
         } else {
           setError(result.error || "Could not analyze thread. Please try again.")
         }
