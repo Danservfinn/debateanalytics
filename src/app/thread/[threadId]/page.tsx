@@ -34,7 +34,8 @@ import {
   DebateDetailModal,
   ExecutiveSummary,
   deriveExecutiveSummary,
-  AIThinkSection
+  AIThinkSection,
+  ThreadNarrative
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
@@ -325,6 +326,18 @@ export default function ThreadDetailPage() {
 
             {/* Overview Tab */}
             <TabsContent value="overview" className="space-y-6">
+              {/* Thread Narrative - Story of the Debate */}
+              {analysis.debates.length > 0 && (
+                <ThreadNarrative
+                  title={analysis.title}
+                  verdict={analysis.verdict}
+                  debates={analysis.debates}
+                  participants={analysis.participants}
+                  createdAt={analysis.createdAt}
+                  threadUrl={analysis.url}
+                />
+              )}
+
               {/* Executive Summary - Primary Analysis */}
               {analysis.debates.length > 0 && (
                 <ExecutiveSummary
