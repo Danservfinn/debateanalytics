@@ -657,6 +657,64 @@ function EvolutionSection({ evolution }: { evolution: DebateEvolution }) {
 }
 
 // ============================================================================
+// Helper to convert a statement into a grammatically correct question
+// ============================================================================
+
+function convertStatementToQuestion(statement: string): string {
+  const s = statement.trim()
+
+  // If already a question, just ensure it ends with ?
+  if (s.endsWith('?')) {
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+
+  // Check for common verb patterns and add appropriate question words
+  const lowerS = s.toLowerCase()
+
+  // Pattern: "X is/are Y" -> "Is/Are X Y?"
+  const isAreMatch = s.match(/^(.+?)\s+(is|are)\s+(.+)$/i)
+  if (isAreMatch) {
+    const [, subject, verb, rest] = isAreMatch
+    const capitalVerb = verb.charAt(0).toUpperCase() + verb.slice(1).toLowerCase()
+    return `${capitalVerb} ${subject.toLowerCase()} ${rest}?`
+  }
+
+  // Pattern: "X has/have Y" -> "Does/Do X have Y?"
+  const hasHaveMatch = s.match(/^(.+?)\s+(has|have)\s+(.+)$/i)
+  if (hasHaveMatch) {
+    const [, subject, verb, rest] = hasHaveMatch
+    const doWord = verb.toLowerCase() === 'has' ? 'Does' : 'Do'
+    return `${doWord} ${subject.toLowerCase()} have ${rest}?`
+  }
+
+  // Pattern: "X can/could/should/would/will Y" -> "Can/Could/Should/Would/Will X Y?"
+  const modalMatch = s.match(/^(.+?)\s+(can|could|should|would|will|may|might|must)\s+(.+)$/i)
+  if (modalMatch) {
+    const [, subject, modal, rest] = modalMatch
+    const capitalModal = modal.charAt(0).toUpperCase() + modal.slice(1).toLowerCase()
+    return `${capitalModal} ${subject.toLowerCase()} ${rest}?`
+  }
+
+  // Pattern: Subject + verb (general action verbs) -> "Do/Does subject verb?"
+  // Detect third person singular by common noun endings or simple heuristics
+  const verbMatch = s.match(/^(.+?)\s+(outweigh|exceed|cause|prevent|reduce|increase|affect|impact|help|hurt|benefit|harm|support|oppose|prove|disprove|show|demonstrate|justify|warrant|require|need|deserve|merit)s?\s+(.+)$/i)
+  if (verbMatch) {
+    const [, subject, verb, rest] = verbMatch
+    // Check if verb ends in 's' (third person singular)
+    const originalVerb = s.match(new RegExp(`${verb}s?`, 'i'))?.[0] || verb
+    const isThirdPerson = originalVerb.endsWith('s') && !originalVerb.endsWith('ss')
+    const doWord = isThirdPerson ? 'Do' : 'Do'
+    const baseVerb = verb.toLowerCase()
+    return `${doWord} ${subject.toLowerCase()} ${baseVerb} ${rest}?`
+  }
+
+  // Default: prepend "Do" for general statements
+  // Lowercase first letter of statement since we're adding "Do"
+  const lowercaseStatement = s.charAt(0).toLowerCase() + s.slice(1)
+  return `Do ${lowercaseStatement}?`
+}
+
+// ============================================================================
 // Helper to derive Executive Summary from debates (for components that need it)
 // ============================================================================
 
@@ -685,17 +743,17 @@ export function deriveExecutiveSummary(
 
   if (isNonPropositionTitle && debates.length > 0 && debates[0].keyClash) {
     // Extract the actual debate topic from the key clash
-    const keyClash = debates[0].keyClash
+    const keyClash = debates[0].keyClash.replace(/\.$/, '').trim()
 
-    // Convert the key clash into a question format
-    // The keyClash usually describes the disagreement, e.g., "whether X or Y"
+    // Convert the key clash into a grammatically correct question
+    // Handle different sentence structures properly
     if (keyClash.toLowerCase().startsWith('whether ')) {
-      question = keyClash.replace(/^whether\s+/i, '').replace(/\.$/, '') + '?'
-      // Capitalize first letter
-      question = question.charAt(0).toUpperCase() + question.slice(1)
+      // "whether X" -> "X?"
+      const statement = keyClash.replace(/^whether\s+/i, '')
+      question = convertStatementToQuestion(statement)
     } else {
-      // Make it a question about the key clash topic
-      question = `Is it the case that ${keyClash.toLowerCase().replace(/\.$/, '')}?`
+      // Direct statement -> proper question
+      question = convertStatementToQuestion(keyClash)
     }
 
     // Extract topic for PRO/CON definitions
