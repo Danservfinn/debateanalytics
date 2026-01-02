@@ -28,7 +28,8 @@ import {
   DebateThreadCard,
   BattleCard,
   MomentumTimeline,
-  ParticipantList
+  ParticipantList,
+  ClickableClaimCard
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
@@ -263,16 +264,24 @@ export default function ThreadDetailPage() {
                 </div>
               )}
 
-              {/* Top claims preview */}
+              {/* Top claims preview - clickable for AI verification */}
               {analysis.claims.length > 0 && (
                 <div className="space-y-4">
                   <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-primary" />
                     Key Claims
+                    <span className="text-xs font-normal text-muted-foreground ml-2">
+                      Click to verify with AI
+                    </span>
                   </h3>
                   <div className="grid gap-3">
                     {analysis.claims.slice(0, 5).map((claim, idx) => (
-                      <ClaimPreviewCard key={claim.id} claim={claim} index={idx} />
+                      <ClickableClaimCard
+                        key={claim.id}
+                        claim={claim}
+                        index={idx}
+                        threadContext={analysis.title}
+                      />
                     ))}
                   </div>
                 </div>
@@ -350,15 +359,26 @@ export default function ThreadDetailPage() {
 
             {/* Fact-Check Tab */}
             <TabsContent value="factcheck" className="space-y-6">
-              {/* Claims */}
+              {/* Claims - with AI verification */}
               {analysis.claims.length > 0 ? (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    Claims ({analysis.claims.length})
-                  </h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      Claims ({analysis.claims.length})
+                    </h3>
+                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <Sparkles className="w-3 h-3" />
+                      Click any claim to verify with AI
+                    </span>
+                  </div>
                   <div className="grid gap-3">
                     {analysis.claims.map((claim, idx) => (
-                      <ClaimPreviewCard key={claim.id} claim={claim} index={idx} />
+                      <ClickableClaimCard
+                        key={claim.id}
+                        claim={claim}
+                        index={idx}
+                        threadContext={analysis.title}
+                      />
                     ))}
                   </div>
                 </div>
@@ -385,16 +405,13 @@ export default function ThreadDetailPage() {
                 </div>
               )}
 
-              {/* Upgrade CTA for detailed fact-checking */}
+              {/* AI Verification info */}
               <div className="card-featured p-6 text-center">
-                <Zap className="w-8 h-8 mx-auto mb-3 text-primary" />
-                <h4 className="text-lg font-semibold mb-2">Want detailed fact-checking?</h4>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Unlock AI-powered claim verification with sources for $5/thread
+                <Sparkles className="w-8 h-8 mx-auto mb-3 text-primary" />
+                <h4 className="text-lg font-semibold mb-2">AI-Powered Fact Checking</h4>
+                <p className="text-sm text-muted-foreground">
+                  Click any claim above to get instant AI verification with sources and evidence analysis.
                 </p>
-                <Button className="bg-primary hover:bg-primary/90">
-                  Upgrade to Full Analysis
-                </Button>
               </div>
             </TabsContent>
           </Tabs>
