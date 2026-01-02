@@ -696,7 +696,8 @@ export function getQualityColor(score: number): string {
 // ============================================================================
 
 export interface StrongestArgument {
-  text: string
+  text: string           // Truncated preview text
+  fullText: string       // Full untruncated text
   author: string
   qualityScore: number
   position: DebatePosition

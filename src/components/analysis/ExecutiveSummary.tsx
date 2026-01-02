@@ -211,6 +211,7 @@ function StrongestArgumentsSection({
                       key={idx}
                       argument={arg}
                       onJumpToComment={onJumpToComment}
+                      fullText={arg.fullText}
                     />
                   ))}
                 </div>
@@ -228,6 +229,7 @@ function StrongestArgumentsSection({
                       key={idx}
                       argument={arg}
                       onJumpToComment={onJumpToComment}
+                      fullText={arg.fullText}
                     />
                   ))}
                 </div>
@@ -242,20 +244,56 @@ function StrongestArgumentsSection({
 
 function ArgumentCard({
   argument,
-  onJumpToComment
+  onJumpToComment,
+  fullText
 }: {
   argument: StrongestArgument
   onJumpToComment?: (commentId: string) => void
+  fullText?: string
 }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+
   const positionColor = argument.position === 'pro'
-    ? 'border-success/30 bg-success/5'
-    : 'border-danger/30 bg-danger/5'
+    ? 'border-success/30 bg-success/5 hover:bg-success/10'
+    : 'border-danger/30 bg-danger/5 hover:bg-danger/10'
+
+  // Check if text is truncated (ends with ...)
+  const isTruncated = argument.text.endsWith('...')
+  const displayText = isExpanded && fullText ? fullText : argument.text
 
   return (
-    <div className={`p-3 rounded-lg border ${positionColor}`}>
+    <div
+      className={`p-3 rounded-lg border ${positionColor} transition-colors ${isTruncated ? 'cursor-pointer' : ''}`}
+      onClick={() => isTruncated && setIsExpanded(!isExpanded)}
+      title={isTruncated && !isExpanded ? 'Click to expand full argument' : undefined}
+    >
       <p className="text-sm text-foreground leading-relaxed mb-2">
-        "{argument.text}"
+        "{displayText}"
       </p>
+
+      {/* Expand/collapse hint */}
+      {isTruncated && (
+        <button
+          className="text-[10px] text-primary hover:underline mb-2 flex items-center gap-1"
+          onClick={(e) => {
+            e.stopPropagation()
+            setIsExpanded(!isExpanded)
+          }}
+        >
+          {isExpanded ? (
+            <>
+              <ChevronUp className="w-3 h-3" />
+              Show less
+            </>
+          ) : (
+            <>
+              <ChevronDown className="w-3 h-3" />
+              Show full argument
+            </>
+          )}
+        </button>
+      )}
+
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <div className="flex items-center gap-2">
           <span>u/{argument.author}</span>
@@ -270,7 +308,10 @@ function ArgumentCard({
         </div>
         {onJumpToComment && (
           <button
-            onClick={() => onJumpToComment(argument.commentId)}
+            onClick={(e) => {
+              e.stopPropagation()
+              onJumpToComment(argument.commentId)
+            }}
             className="text-primary hover:underline flex items-center gap-1"
           >
             View <ExternalLink className="w-3 h-3" />
@@ -732,6 +773,7 @@ export function deriveExecutiveSummary(
 
     strongestProArguments: sortedPro.slice(0, 2).map(r => ({
       text: r.text.length > 200 ? r.text.substring(0, 200) + '...' : r.text,
+      fullText: r.text,
       author: r.author,
       qualityScore: r.qualityScore,
       position: 'pro' as const,
@@ -741,6 +783,7 @@ export function deriveExecutiveSummary(
 
     strongestConArguments: sortedCon.slice(0, 2).map(r => ({
       text: r.text.length > 200 ? r.text.substring(0, 200) + '...' : r.text,
+      fullText: r.text,
       author: r.author,
       qualityScore: r.qualityScore,
       position: 'con' as const,
