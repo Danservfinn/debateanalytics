@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, Info } from 'lucide-react'
 import type { DebateThread, DebateComment } from '@/types/debate'
 import {
   Tooltip,
@@ -9,10 +9,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { PositionLegend, type PositionDefinitions } from './PositionLegend'
 
 interface BattleCardProps {
   debate: DebateThread
   threadUrl?: string
+  positionDefinitions?: PositionDefinitions
 }
 
 /**
@@ -24,7 +26,7 @@ interface BattleCardProps {
  * - Quality comparison bars
  * - Winner highlight with glow
  */
-export function BattleCard({ debate, threadUrl }: BattleCardProps) {
+export function BattleCard({ debate, threadUrl, positionDefinitions }: BattleCardProps) {
   // Get best arguments from each side
   const { bestPro, bestCon, proStats, conStats } = useMemo(() => {
     const proReplies = debate.replies.filter(r => r.position === 'pro')
@@ -77,6 +79,12 @@ export function BattleCard({ debate, threadUrl }: BattleCardProps) {
           <p className="text-xs text-muted-foreground text-center mt-1">
             This debate ended in a draw
           </p>
+        )}
+        {/* Position Legend */}
+        {positionDefinitions && (
+          <div className="mt-3 flex justify-center">
+            <PositionLegend definitions={positionDefinitions} variant="tooltip" />
+          </div>
         )}
       </div>
 

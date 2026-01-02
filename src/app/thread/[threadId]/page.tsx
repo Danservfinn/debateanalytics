@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useMemo } from "react"
 import { useParams, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import Link from "next/link"
@@ -35,7 +35,8 @@ import {
   ExecutiveSummary,
   deriveExecutiveSummary,
   AIThinkSection,
-  ThreadNarrative
+  ThreadNarrative,
+  type PositionDefinitions
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
@@ -55,6 +56,17 @@ export default function ThreadDetailPage() {
   const [error, setError] = useState<string | null>(null)
   const [selectedDebate, setSelectedDebate] = useState<DebateThread | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  // Derive position definitions from executive summary
+  const positionDefinitions = useMemo((): PositionDefinitions | undefined => {
+    if (!analysis || analysis.debates.length === 0) return undefined
+    const summary = deriveExecutiveSummary(analysis.debates, analysis.title)
+    return {
+      proDefinition: summary.centralQuestion.proDefinition,
+      conDefinition: summary.centralQuestion.conDefinition,
+      question: summary.centralQuestion.question
+    }
+  }, [analysis])
 
   const handleOpenDebateModal = useCallback((debate: DebateThread) => {
     setSelectedDebate(debate)

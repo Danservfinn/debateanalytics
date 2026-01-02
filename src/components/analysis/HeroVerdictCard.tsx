@@ -9,6 +9,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { Trophy, Lightbulb, FileText } from 'lucide-react'
+import { PositionLegend, type PositionDefinitions } from './PositionLegend'
 
 interface HeroVerdictCardProps {
   verdict: ThreadVerdict
@@ -17,6 +18,7 @@ interface HeroVerdictCardProps {
   title: string
   debates?: DebateThread[]  // Optional: pass debates to derive executive summary
   centralQuestion?: string  // The central question being debated
+  positionDefinitions?: PositionDefinitions  // What PRO/CON mean in this context
 }
 
 /**
@@ -34,7 +36,8 @@ export function HeroVerdictCard({
   commentCount,
   title,
   debates = [],
-  centralQuestion
+  centralQuestion,
+  positionDefinitions
 }: HeroVerdictCardProps) {
   // Calculate ring offset based on score (0-10 scale)
   const ringOffset = useMemo(() => {
@@ -261,6 +264,12 @@ export function HeroVerdictCard({
                 <p className="text-lg md:text-xl font-heading font-semibold text-foreground">
                   {centralQuestion}
                 </p>
+                {/* Position Legend */}
+                {positionDefinitions && (
+                  <div className="mt-3 pt-3 border-t border-primary/20">
+                    <PositionLegend definitions={positionDefinitions} variant="compact" />
+                  </div>
+                )}
               </div>
             )}
 

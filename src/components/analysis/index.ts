@@ -27,3 +27,7 @@ export { AIThinkSection } from './AIThinkSection'
 // Phase 7: Narrative Flow - Thread Summary
 export { ThreadNarrative, deriveNarrativeData } from './ThreadNarrative'
 export type { ThreadNarrativeProps, NarrativeData, TurningPoint, ArgumentSummary, ThreadParticipant } from './ThreadNarrative'
+
+// Shared Components
+export { PositionLegend } from './PositionLegend'
+export type { PositionDefinitions } from './PositionLegend'

@@ -16,10 +16,12 @@ import {
   Info
 } from 'lucide-react'
 import type { AIAnalysis, AISource } from '@/types/debate'
+import { PositionLegend, type PositionDefinitions } from './PositionLegend'
 
 interface AIThinkSectionProps {
   analysis: AIAnalysis
   onJumpToComment?: (commentId: string) => void
+  positionDefinitions?: PositionDefinitions
 }
 
 /**
@@ -28,7 +30,7 @@ interface AIThinkSectionProps {
  * Displays AI's structured argument answering the central question
  * with premises, evidence, counterarguments addressed, and conclusion.
  */
-export function AIThinkSection({ analysis, onJumpToComment }: AIThinkSectionProps) {
+export function AIThinkSection({ analysis, onJumpToComment, positionDefinitions }: AIThinkSectionProps) {
   const [isExpanded, setIsExpanded] = useState(true)
   const [showPremises, setShowPremises] = useState(true)
   const [showEvidence, setShowEvidence] = useState(true)
@@ -112,6 +114,12 @@ export function AIThinkSection({ analysis, onJumpToComment }: AIThinkSectionProp
                 <p className="text-sm font-medium text-foreground">
                   {analysis.centralQuestion}
                 </p>
+                {/* Position Legend */}
+                {positionDefinitions && (
+                  <div className="mt-3 pt-3 border-t border-border/50">
+                    <PositionLegend definitions={positionDefinitions} variant="inline" />
+                  </div>
+                )}
               </div>
 
               {/* Conclusion (highlighted) */}

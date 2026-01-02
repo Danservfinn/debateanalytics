@@ -13,7 +13,10 @@ import {
   ChevronUp,
   Sparkles,
   Shield,
-  Scale
+  Scale,
+  MessageSquare,
+  Copy,
+  Check
 } from 'lucide-react'
 
 interface VerificationSource {
@@ -113,6 +116,12 @@ export function ClickableClaimCard({ claim, index, threadContext }: ClickableCla
   const [verification, setVerification] = useState<ClaimVerificationResult | null>(null)
   const [error, setError] = useState<string | null>(null)
 
+  // Response generation state
+  const [isGeneratingResponse, setIsGeneratingResponse] = useState(false)
+  const [generatedResponse, setGeneratedResponse] = useState<string | null>(null)
+  const [responseError, setResponseError] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
+
   const currentVerdict = verification?.verdict || claim.verdict || 'unverified'
   const config = verdictConfig[currentVerdict as keyof typeof verdictConfig] || verdictConfig.unverified
   const Icon = config.icon
@@ -162,6 +171,58 @@ export function ClickableClaimCard({ claim, index, threadContext }: ClickableCla
         return <span className="text-[10px] px-1.5 py-0.5 rounded bg-danger/20 text-danger">Low</span>
       default:
         return null
+    }
+  }
+
+  const handleGenerateResponse = async () => {
+    if (!verification) return
+
+    setIsGeneratingResponse(true)
+    setResponseError(null)
+
+    try {
+      const response = await fetch('/api/generate-factcheck-response', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          claim: claim.text,
+          author: claim.author,
+          verification,
+          context: threadContext
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success && result.data?.response) {
+        setGeneratedResponse(result.data.response)
+      } else {
+        setResponseError(result.error || 'Failed to generate response')
+      }
+    } catch (err) {
+      setResponseError('Failed to connect to response generation service')
+    } finally {
+      setIsGeneratingResponse(false)
+    }
+  }
+
+  const handleCopyResponse = async () => {
+    if (!generatedResponse) return
+
+    try {
+      await navigator.clipboard.writeText(generatedResponse)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea')
+      textarea.value = generatedResponse
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      document.body.removeChild(textarea)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
     }
   }
 
@@ -337,6 +398,74 @@ export function ClickableClaimCard({ claim, index, threadContext }: ClickableCla
                   {/* Timestamp */}
                   <div className="text-xs text-muted-foreground/60 text-right pt-2 border-t border-border">
                     Verified at {new Date(verification.verifiedAt).toLocaleString()}
+                  </div>
+
+                  {/* Write Response Section */}
+                  <div className="mt-4 pt-4 border-t border-border">
+                    {!generatedResponse && !isGeneratingResponse && (
+                      <button
+                        onClick={handleGenerateResponse}
+                        className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-primary/20 to-purple-500/20 border border-primary/30 text-primary hover:from-primary/30 hover:to-purple-500/30 transition-all"
+                      >
+                        <MessageSquare className="w-5 h-5" />
+                        <span className="font-medium">Write my response</span>
+                      </button>
+                    )}
+
+                    {isGeneratingResponse && (
+                      <div className="flex flex-col items-center justify-center py-6 gap-3">
+                        <div className="relative">
+                          <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                        </div>
+                        <p className="text-sm text-muted-foreground">Crafting your response...</p>
+                      </div>
+                    )}
+
+                    {responseError && (
+                      <div className="flex items-center gap-2 p-3 rounded-lg bg-danger/10 text-danger">
+                        <AlertCircle className="w-5 h-5 shrink-0" />
+                        <p className="text-sm">{responseError}</p>
+                      </div>
+                    )}
+
+                    {generatedResponse && (
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <h5 className="text-sm font-semibold text-foreground flex items-center gap-2">
+                            <MessageSquare className="w-4 h-4 text-primary" />
+                            Your Response
+                          </h5>
+                          <button
+                            onClick={handleCopyResponse}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                              copied
+                                ? 'bg-success/20 text-success'
+                                : 'bg-secondary hover:bg-secondary/80 text-foreground'
+                            }`}
+                          >
+                            {copied ? (
+                              <>
+                                <Check className="w-3.5 h-3.5" />
+                                Copied!
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="w-3.5 h-3.5" />
+                                Copy to clipboard
+                              </>
+                            )}
+                          </button>
+                        </div>
+                        <div className="p-4 rounded-lg bg-secondary/30 border border-border">
+                          <p className="text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed">
+                            {generatedResponse}
+                          </p>
+                        </div>
+                        <p className="text-xs text-muted-foreground/60 text-center">
+                          Review and personalize before posting. AI-generated responses may need adjustments.
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </>
               )}
