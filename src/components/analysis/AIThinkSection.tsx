@@ -303,6 +303,24 @@ export function AIThinkSection({ analysis, onJumpToComment, positionDefinitions 
                 </div>
               </CollapsibleSection>
 
+              {/* Methodological Critique */}
+              {analysis.methodologicalCritique && analysis.methodologicalCritique.length > 0 && (
+                <div className="p-3 rounded-lg bg-info/10 border border-info/20">
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Scale className="w-3.5 h-3.5 text-info" />
+                    <span className="text-xs font-medium text-info">Critical Analysis of Evidence</span>
+                  </div>
+                  <ul className="space-y-1">
+                    {analysis.methodologicalCritique.map((critique, idx) => (
+                      <li key={idx} className="text-xs text-foreground flex items-start gap-1.5">
+                        <span className="text-info">•</span>
+                        {critique}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Limitations */}
               {analysis.limitations.length > 0 && (
                 <div className="p-3 rounded-lg bg-warning/10 border border-warning/20">

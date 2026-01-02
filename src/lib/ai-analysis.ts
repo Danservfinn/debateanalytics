@@ -109,7 +109,9 @@ ${conArguments.map((a, i) => `${i + 1}. [Quality: ${a.quality.toFixed(1)}/10] u/
           role: 'user',
           content: `You are an expert analyst tasked with answering a central question based on a Reddit debate thread.
 
-CRITICAL REQUIREMENTS FOR UNBIASED ANALYSIS:
+CRITICAL REQUIREMENTS FOR UNBIASED, RIGOROUS ANALYSIS:
+
+**INTELLECTUAL HONESTY:**
 - You MUST NOT use any preconceived or preprogrammed conclusions
 - You MUST derive your position ONLY from the arguments presented in this thread
 - You MUST reason from first principles using logic and evidence
@@ -117,6 +119,40 @@ CRITICAL REQUIREMENTS FOR UNBIASED ANALYSIS:
 - You MUST give equal consideration to all sides before forming a position
 - You MUST acknowledge uncertainty where it exists
 - If the arguments on both sides are roughly equal in strength, your position should be "nuanced" with confidence around 50%
+
+**CRITICAL EVALUATION OF EVIDENCE (apply to ALL claims cited in the thread):**
+
+1. DISTINGUISH DATA FROM CONCLUSIONS:
+   - What does the raw data actually show vs what do authors claim it shows?
+   - Are conclusions logically supported by the data presented?
+   - Could the same data support different conclusions?
+
+2. SCRUTINIZE COMPARISON/CONTROL GROUPS:
+   - The "control" or "untreated" group is often NOT what it claims to be
+   - "Unvaccinated" often means "didn't receive THIS vaccine" but got others
+   - "Placebo" may contain active ingredients or other treatments
+   - "Control diet" participants often change multiple behaviors
+   - ALWAYS ask: What did the control group ACTUALLY receive?
+   - Note if no TRUE zero-exposure control exists
+
+3. EVALUATE METHODOLOGY:
+   - Study design: RCT, observational, case study, meta-analysis?
+   - Sample size: Adequate statistical power?
+   - Confounders: What variables weren't controlled?
+   - Replication: Has this been independently replicated?
+   - Publication bias: Are we seeing all studies or just positive ones?
+
+4. ASSESS SOURCE CREDIBILITY:
+   - Peer review status and journal quality
+   - Funding sources and potential conflicts
+   - Expert consensus vs outlier positions
+
+5. LOOK FOR RED FLAGS:
+   - Correlation presented as causation
+   - Small effect sizes hyped as significant
+   - Overgeneralized conclusions
+   - Missing confidence intervals
+   - Misleading comparison group labels
 
 ${threadContext}
 
@@ -173,7 +209,16 @@ Respond with a JSON object matching this exact structure:
     }
   ],
   "conclusion": "<your final answer to the central question in 2-3 sentences>",
-  "limitations": ["<things you couldn't verify>", "<areas of uncertainty>"]
+  "methodologicalCritique": [
+    "<critique of study design, control groups, or evidence quality from thread arguments>",
+    "<note any misleading comparison groups or missing true controls>",
+    "<flag correlation-as-causation or other logical issues>"
+  ],
+  "limitations": [
+    "<things you couldn't verify>",
+    "<control group definition issues if applicable>",
+    "<areas of uncertainty>"
+  ]
 }
 
 Requirements:
@@ -183,6 +228,8 @@ Requirements:
 - Address at least 2 counterarguments
 - Be intellectually honest about limitations
 - Cite specific arguments from the thread where relevant
+- ALWAYS include methodological critique of evidence cited in arguments
+- If studies are mentioned, note whether they have true control groups
 
 Return ONLY the JSON object, no additional text.`
         }
@@ -235,6 +282,7 @@ Return ONLY the JSON object, no additional text.`
         rebuttal: c.rebuttal
       })),
       conclusion: parsed.conclusion || '',
+      methodologicalCritique: parsed.methodologicalCritique || [],
       limitations: parsed.limitations || [],
       sources: [] // Will be populated below
     }

@@ -580,6 +580,9 @@ export interface AIAnalysis {
 
   conclusion: string
 
+  // Critical Analysis
+  methodologicalCritique?: string[]  // Critique of study designs, control groups, evidence quality
+
   // Meta
   limitations: string[]     // What the AI couldn't determine
   sources: AISource[]       // All sources used
