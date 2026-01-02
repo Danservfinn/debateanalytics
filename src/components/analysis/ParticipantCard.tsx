@@ -49,11 +49,26 @@ export function ParticipantCard({ participant, rank, replies = [], onJumpToComme
     ? ARCHETYPE_CONFIG[participant.archetype]
     : null
 
-  const positionColor = useMemo(() => {
+  const positionConfig = useMemo(() => {
     switch (participant.position) {
-      case 'pro': return 'text-success'
-      case 'con': return 'text-danger'
-      default: return 'text-muted-foreground'
+      case 'pro': return {
+        label: 'PRO',
+        textColor: 'text-green-400',
+        bgColor: 'bg-green-500/20',
+        borderColor: 'border-green-500/30'
+      }
+      case 'con': return {
+        label: 'CON',
+        textColor: 'text-red-400',
+        bgColor: 'bg-red-500/20',
+        borderColor: 'border-red-500/30'
+      }
+      default: return {
+        label: 'NEUTRAL',
+        textColor: 'text-zinc-400',
+        bgColor: 'bg-zinc-500/20',
+        borderColor: 'border-zinc-500/30'
+      }
     }
   }, [participant.position])
 
@@ -96,7 +111,15 @@ export function ParticipantCard({ participant, rank, replies = [], onJumpToComme
             )}
           </div>
 
-          <div className="flex items-center gap-3 mt-1 text-xs">
+          <div className="flex items-center gap-2 mt-1 text-xs flex-wrap">
+            {/* Position Badge - Prominent */}
+            <span className={`
+              px-2 py-0.5 rounded-full font-semibold text-[10px] border
+              ${positionConfig.bgColor} ${positionConfig.textColor} ${positionConfig.borderColor}
+            `}>
+              {positionConfig.label}
+            </span>
+
             {/* Archetype */}
             {archetypeConfig && (
               <span
@@ -107,11 +130,6 @@ export function ParticipantCard({ participant, rank, replies = [], onJumpToComme
                 <span>{archetypeConfig.label}</span>
               </span>
             )}
-
-            {/* Position */}
-            <span className={positionColor}>
-              {participant.position.toUpperCase()}
-            </span>
 
             {/* Comment count */}
             <span className="text-muted-foreground">
