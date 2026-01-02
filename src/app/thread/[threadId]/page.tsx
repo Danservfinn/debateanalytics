@@ -307,9 +307,8 @@ export default function ThreadDetailPage() {
             commentCount={analysis.commentCount}
             title={analysis.title}
             debates={analysis.debates}
-            centralQuestion={analysis.debates.length > 0
-              ? deriveExecutiveSummary(analysis.debates, analysis.title).centralQuestion.question
-              : undefined}
+            centralQuestion={positionDefinitions?.question}
+            positionDefinitions={positionDefinitions}
           />
         </motion.section>
 
@@ -362,7 +361,7 @@ export default function ThreadDetailPage() {
 
               {/* AI Analysis - What Does AI Think? */}
               {analysis.aiAnalysis && (
-                <AIThinkSection analysis={analysis.aiAnalysis} />
+                <AIThinkSection analysis={analysis.aiAnalysis} positionDefinitions={positionDefinitions} />
               )}
 
               {/* Quick Stats */}
@@ -400,7 +399,7 @@ export default function ThreadDetailPage() {
                     <TrendingUp className="w-5 h-5 text-primary" />
                     Featured Debate
                   </h3>
-                  <BattleCard debate={analysis.debates[0]} threadUrl={analysis.url} />
+                  <BattleCard debate={analysis.debates[0]} threadUrl={analysis.url} positionDefinitions={positionDefinitions} />
                 </div>
               )}
 
