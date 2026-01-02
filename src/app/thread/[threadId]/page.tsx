@@ -41,6 +41,7 @@ export default function ThreadDetailPage() {
   const searchParams = useSearchParams()
   const threadId = params.threadId as string
   const originalUrl = searchParams.get('url')
+  const fromJson = searchParams.get('fromJson') === 'true'
 
   const [analysis, setAnalysis] = useState<ThreadAnalysisResult | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -65,6 +66,19 @@ export default function ThreadDetailPage() {
       setError(null)
 
       try {
+        // Check sessionStorage first if coming from JSON paste
+        if (fromJson) {
+          const cacheKey = `thread-analysis-${threadId}`
+          const cachedData = sessionStorage.getItem(cacheKey)
+          if (cachedData) {
+            setAnalysis(JSON.parse(cachedData))
+            setIsLoading(false)
+            // Clear from sessionStorage after use
+            sessionStorage.removeItem(cacheKey)
+            return
+          }
+        }
+
         // Build URL for analysis
         const urlParam = originalUrl || `https://reddit.com/r/changemyview/comments/${threadId}`
 
@@ -85,7 +99,7 @@ export default function ThreadDetailPage() {
     }
 
     loadData()
-  }, [threadId, originalUrl])
+  }, [threadId, originalUrl, fromJson])
 
   if (isLoading) {
     return (
