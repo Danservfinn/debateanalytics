@@ -307,3 +307,120 @@ h1, h2, h3, h4, h5, h6 {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* ============================================
+   ANIMATED GRADIENT BORDER
+   ============================================ */
+
+@keyframes gradient-rotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes ring-fill {
+  from {
+    stroke-dashoffset: 282.7;
+  }
+  to {
+    stroke-dashoffset: var(--ring-offset, 0);
+  }
+}
+
+.animated-gradient-border {
+  position: relative;
+  background: var(--card);
+  border-radius: var(--radius);
+  z-index: 1;
+}
+
+.animated-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius) + 2px);
+  background: linear-gradient(
+    90deg,
+    #a855f7,
+    #ec4899,
+    #3b82f6,
+    #22c55e,
+    #a855f7
+  );
+  background-size: 300% 100%;
+  animation: gradient-rotate 4s linear infinite;
+  z-index: -1;
+  opacity: 0.8;
+}
+
+.animated-gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--card);
+  border-radius: var(--radius);
+  z-index: -1;
+}
+
+/* Score ring animation */
+.score-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+.score-ring-bg {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.score-ring-fill {
+  stroke-dasharray: 282.7;
+  stroke-dashoffset: 282.7;
+  animation: ring-fill 1.5s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+/* Heat indicator */
+.heat-bar {
+  background: linear-gradient(90deg, #22c55e, #f59e0b, #ef4444);
+}
+
+/* Position indicators */
+.position-pro {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.05));
+  border-left: 3px solid var(--success);
+}
+
+.position-con {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.05));
+  border-left: 3px solid var(--danger);
+}
+
+.position-neutral {
+  background: linear-gradient(135deg, rgba(113, 113, 122, 0.2), rgba(113, 113, 122, 0.05));
+  border-left: 3px solid var(--muted-foreground);
+}
+
+/* Momentum timeline */
+.momentum-line {
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary),
+    transparent
+  );
+}
+
+.momentum-node {
+  transition: all 0.3s ease;
+}
+
+.momentum-node:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px var(--primary);
+}
+
+/* Winner badge glow */
+.winner-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+  box-shadow: 0 0 20px currentColor;
+}

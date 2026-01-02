@@ -313,3 +313,376 @@ export function getFallacyDisplayName(type: FallacyType): string {
   }
   return names[type]
 }
+
+// ============================================================================
+// Debater Archetypes (NEW)
+// ============================================================================
+
+export type DebaterArchetype =
+  | 'the_professor'      // Evidence-heavy, cites sources, structured arguments
+  | 'the_lawyer'         // Logic-focused, finds loopholes, precedent-based
+  | 'the_philosopher'    // Big-picture, ethics, first principles
+  | 'the_warrior'        // Aggressive, rarely concedes, attacks weak points
+  | 'the_diplomat'       // Seeks common ground, offers compromises
+  | 'the_socratic'       // Questions rather than asserts
+  | 'the_devils_advocate' // Takes contrarian positions
+
+export const ARCHETYPE_DESCRIPTIONS: Record<DebaterArchetype, {
+  label: string
+  description: string
+  icon: string
+  effectiveAgainst: DebaterArchetype[]
+  weakAgainst: DebaterArchetype[]
+}> = {
+  the_professor: {
+    label: 'The Professor',
+    description: 'Evidence-heavy debater who cites sources and structures arguments methodically',
+    icon: '🎓',
+    effectiveAgainst: ['the_warrior', 'the_devils_advocate'],
+    weakAgainst: ['the_philosopher', 'the_socratic']
+  },
+  the_lawyer: {
+    label: 'The Lawyer',
+    description: 'Logic-focused, finds loopholes and uses precedent-based arguments',
+    icon: '⚖️',
+    effectiveAgainst: ['the_professor', 'the_diplomat'],
+    weakAgainst: ['the_philosopher', 'the_socratic']
+  },
+  the_philosopher: {
+    label: 'The Philosopher',
+    description: 'Big-picture thinker who argues from ethics and first principles',
+    icon: '🤔',
+    effectiveAgainst: ['the_lawyer', 'the_professor'],
+    weakAgainst: ['the_warrior', 'the_devils_advocate']
+  },
+  the_warrior: {
+    label: 'The Warrior',
+    description: 'Aggressive debater who rarely concedes and attacks weak points',
+    icon: '⚔️',
+    effectiveAgainst: ['the_diplomat', 'the_philosopher'],
+    weakAgainst: ['the_professor', 'the_lawyer']
+  },
+  the_diplomat: {
+    label: 'The Diplomat',
+    description: 'Seeks common ground and offers compromises',
+    icon: '🤝',
+    effectiveAgainst: ['the_warrior', 'the_socratic'],
+    weakAgainst: ['the_lawyer', 'the_devils_advocate']
+  },
+  the_socratic: {
+    label: 'The Socratic',
+    description: 'Questions rather than asserts, leads opponent to contradictions',
+    icon: '❓',
+    effectiveAgainst: ['the_professor', 'the_lawyer'],
+    weakAgainst: ['the_warrior', 'the_diplomat']
+  },
+  the_devils_advocate: {
+    label: "The Devil's Advocate",
+    description: 'Takes contrarian positions to test arguments',
+    icon: '😈',
+    effectiveAgainst: ['the_diplomat', 'the_philosopher'],
+    weakAgainst: ['the_professor', 'the_warrior']
+  }
+}
+
+// ============================================================================
+// Debate Detection Types (NEW)
+// ============================================================================
+
+export type DebatePosition = 'pro' | 'con' | 'neutral'
+export type DebateWinner = 'pro' | 'con' | 'draw' | 'unresolved'
+
+export interface DebateComment {
+  id: string
+  author: string
+  text: string
+  position: DebatePosition
+  positionIntensity: number  // 1-10
+  qualityScore: number       // 1-10
+  isConcession: boolean
+  parentId: string | null
+  depth: number
+  karma: number
+  createdAt: string
+  claims?: string[]
+  fallacies?: Array<{
+    type: string
+    quote: string
+    severity: 'low' | 'medium' | 'high'
+  }>
+}
+
+export interface MomentumShift {
+  replyNumber: number
+  fromPosition: DebatePosition
+  toPosition: DebatePosition
+  trigger: string           // What caused the shift
+  qualityDelta: number      // Quality difference that triggered it
+}
+
+export interface DebateThread {
+  id: string
+  title: string             // LLM-generated title
+  keyClash: string          // Core point of disagreement
+  rootCommentId: string
+  winner: DebateWinner
+  winnerReason: string
+  proScore: number          // Average quality of PRO arguments
+  conScore: number          // Average quality of CON arguments
+  replyCount: number
+  heatLevel: number         // 0-10, how heated the debate got
+  replies: DebateComment[]
+  momentumShifts?: MomentumShift[]
+}
+
+export interface EnhancedDebateThread extends DebateThread {
+  momentumShifts: MomentumShift[]
+  proStrategies: string[]
+  conStrategies: string[]
+  keyTurningPoints: string[]
+}
+
+// ============================================================================
+// User Profile Types (NEW)
+// ============================================================================
+
+export interface UserProfile {
+  username: string
+  archetype: DebaterArchetype
+  archetypeConfidence: number  // 0-1
+  overallScore: number         // 0-10
+  debatesAnalyzed?: number
+  signatureMoves?: string[]
+  knownWeaknesses?: string[]
+  topicPreferences?: string[]
+  effectiveApproaches?: string[]
+}
+
+export interface UserStatus {
+  cached: boolean
+  cachedAt?: string
+  overallScore?: number
+  archetype?: {
+    primary: string
+    confidence?: number
+  }
+  debatesAnalyzed?: number
+}
+
+export interface BatchUserStatus {
+  [username: string]: {
+    cached: boolean
+    archetype?: string
+    overallScore?: number
+    signatureMoves?: string[]
+  }
+}
+
+// ============================================================================
+// Thread Analysis Result (NEW)
+// ============================================================================
+
+export interface ThreadVerdict {
+  overallScore: number        // 0-10
+  summary: string
+  evidenceQualityPct: number  // 0-100
+  civilityScore: number       // 0-10
+  worthReading: boolean
+}
+
+export interface ThreadAnalysisResult {
+  threadId: string
+  subreddit: string
+  title: string
+  author: string
+  commentCount: number
+  createdAt: string
+  url: string
+
+  // Core analysis
+  verdict: ThreadVerdict
+  debates: DebateThread[]
+  participants: Array<{
+    username: string
+    commentCount: number
+    averageQuality: number
+    position: DebatePosition
+    archetype?: DebaterArchetype
+    isCached: boolean
+  }>
+
+  // Claims & Fallacies
+  claims: Array<{
+    id: string
+    text: string
+    author: string
+    verdict: 'true' | 'mostly_true' | 'mixed' | 'mostly_false' | 'false' | 'unverified'
+    confidence: number
+  }>
+  fallacies: Array<{
+    id: string
+    type: string
+    author: string
+    quote: string
+    severity: 'low' | 'medium' | 'high'
+  }>
+
+  // Topics (dynamic, LLM-generated)
+  topics?: string[]
+}
+
+// ============================================================================
+// Argument Fingerprinting (NEW)
+// ============================================================================
+
+export type ClaimType = 'factual' | 'policy' | 'value' | 'causal' | 'definitional'
+
+export interface ArgumentFingerprint {
+  hash: string
+  coreClaim: string
+  originalText?: string
+  claimType: ClaimType
+  commentId?: string
+  subject?: string
+  predicate?: string
+  object?: string
+  modifiers?: string[]
+  semanticTags: string[]
+  threadId?: string
+  author?: string
+  timestamp?: string
+  frequency?: number
+  similarity?: number
+  similarArguments?: Array<{
+    hash: string
+    coreClaim: string
+    similarity: number
+    threadId: string
+  }>
+}
+
+// ============================================================================
+// Reply Coach Types (NEW)
+// ============================================================================
+
+export interface ReplySource {
+  title: string
+  url: string
+  relevantQuote: string
+  credibilityScore: number  // 0-10
+  publishDate?: string
+  credibility: 'high' | 'medium' | 'low'
+}
+
+export type ReplyStrategyType =
+  | 'challenge_framing'
+  | 'counter_evidence'
+  | 'partial_agreement'
+  | 'socratic_question'
+  | 'steelman_then_counter'
+
+export interface ResearchedReplyStrategy {
+  type: ReplyStrategyType
+  suggestedReply: string
+  sources: ReplySource[]
+  logicalStructure: {
+    premise: string
+    reasoning: string
+    conclusion: string
+  }
+  strengthScore: number
+  riskLevel: 'low' | 'medium' | 'high'
+  effectivenessWithArchetype: Record<DebaterArchetype, number>
+  editableVersion: string
+}
+
+export interface ReplyCoachResult {
+  strategies: ResearchedReplyStrategy[]
+  tacticsToAvoid: string[]
+  opponentProfile?: {
+    archetype: DebaterArchetype
+    knownWeaknesses: string[]
+    effectiveApproaches: string[]
+  }
+}
+
+// ============================================================================
+// Fact Check Types (NEW)
+// ============================================================================
+
+export type FactCheckVerdict =
+  | 'true'
+  | 'mostly_true'
+  | 'mixed'
+  | 'mostly_false'
+  | 'false'
+
+export interface FactCheckResult {
+  verdict: FactCheckVerdict
+  confidence: number
+  explanation: string
+  nuancePoints: string[]
+  sources: ReplySource[]
+  relatedClaims: Array<{
+    claim: string
+    verdict: string
+    source: string
+  }>
+}
+
+// ============================================================================
+// New Helper Functions
+// ============================================================================
+
+export function getArchetypeInfo(archetype: DebaterArchetype) {
+  return ARCHETYPE_DESCRIPTIONS[archetype]
+}
+
+export function getWinnerLabel(winner: DebateWinner): string {
+  switch (winner) {
+    case 'pro': return 'Pro Side Wins'
+    case 'con': return 'Con Side Wins'
+    case 'draw': return 'Draw'
+    case 'unresolved': return 'Unresolved'
+  }
+}
+
+export function getPositionLabel(position: DebatePosition): string {
+  switch (position) {
+    case 'pro': return 'Supports OP'
+    case 'con': return 'Opposes OP'
+    case 'neutral': return 'Neutral'
+  }
+}
+
+export function getPositionBgColor(position: DebatePosition): string {
+  switch (position) {
+    case 'pro': return 'bg-success/10'
+    case 'con': return 'bg-danger/10'
+    case 'neutral': return 'bg-secondary/10'
+  }
+}
+
+export function getPositionTextColor(position: DebatePosition): string {
+  switch (position) {
+    case 'pro': return 'text-success'
+    case 'con': return 'text-danger'
+    case 'neutral': return 'text-muted-foreground'
+  }
+}
+
+export function getQualityLabel(score: number): string {
+  if (score >= 8) return 'Excellent'
+  if (score >= 6) return 'Good'
+  if (score >= 4) return 'Fair'
+  if (score >= 2) return 'Weak'
+  return 'Poor'
+}
+
+export function getQualityColor(score: number): string {
+  if (score >= 8) return '#22c55e'  // green
+  if (score >= 6) return '#84cc16'  // lime
+  if (score >= 4) return '#f59e0b'  // amber
+  if (score >= 2) return '#f97316'  // orange
+  return '#ef4444'                   // red
+}
