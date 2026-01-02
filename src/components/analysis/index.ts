@@ -28,6 +28,10 @@ export { AIThinkSection } from './AIThinkSection'
 export { ThreadNarrative, deriveNarrativeData } from './ThreadNarrative'
 export type { ThreadNarrativeProps, NarrativeData, TurningPoint, ArgumentSummary, ThreadParticipant } from './ThreadNarrative'
 
+// Phase 8: Traditional Debate Scoring UI
+export { FlowSheet } from './FlowSheet'
+export { VerdictBreakdown } from './VerdictBreakdown'
+
 // Shared Components
 export { PositionLegend } from './PositionLegend'
 export type { PositionDefinitions } from './PositionLegend'
