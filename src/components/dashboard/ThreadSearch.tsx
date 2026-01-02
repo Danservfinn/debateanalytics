@@ -105,7 +105,19 @@ export function ThreadSearch() {
         })
       })
 
-      const result = await response.json()
+      // Check if response is JSON before parsing
+      const contentType = response.headers.get('content-type') || ''
+      if (!contentType.includes('application/json')) {
+        // Vercel returned an error page (HTML) instead of JSON - likely timeout
+        throw new Error('Server error: Analysis timed out. Try a smaller thread or wait a moment and try again.')
+      }
+
+      let result
+      try {
+        result = await response.json()
+      } catch {
+        throw new Error('Server returned invalid response. Analysis may have timed out.')
+      }
 
       if (!response.ok || !result.success) {
         throw new Error(result.error || 'Analysis failed')
