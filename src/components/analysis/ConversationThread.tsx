@@ -11,9 +11,53 @@ import {
   Sparkles,
   Brain,
   ThumbsUp,
-  ThumbsDown
+  ThumbsDown,
+  Loader2,
+  CheckCircle,
+  XCircle,
+  Scale,
+  Shield,
+  Target,
+  ExternalLink,
+  X
 } from 'lucide-react'
 import type { DebateComment, DebatePosition } from '@/types/debate'
+
+interface DeepAnalysisResult {
+  claims: Array<{
+    text: string
+    verdict: string
+    confidence: number
+    sources: Array<{ title: string; url: string; snippet: string; credibility: string }>
+    nuance?: string
+  }>
+  argumentStructure: {
+    type: string
+    premises: string[]
+    conclusion: string
+    impliedAssumptions: string[]
+    validity: string
+    validityReason: string
+  }
+  soundness: {
+    score: number
+    strengths: string[]
+    weaknesses: string[]
+    potentialRebuttals: string[]
+  }
+  rhetoricalTechniques: Array<{
+    technique: string
+    quote: string
+    effect: string
+    effectiveness: string
+  }>
+  logosScore: number
+  ethosScore: number
+  pathosScore: number
+  overallQuality: number
+  summary: string
+  analyzedAt: string
+}
 
 interface ConversationThreadProps {
   replies: DebateComment[]
@@ -280,15 +324,51 @@ export function ConversationThread({
   onCommentClick
 }: ConversationThreadProps) {
   const [analyzingComment, setAnalyzingComment] = useState<DebateComment | null>(null)
+  const [isAnalyzing, setIsAnalyzing] = useState(false)
+  const [analysisResult, setAnalysisResult] = useState<DeepAnalysisResult | null>(null)
+  const [analysisError, setAnalysisError] = useState<string | null>(null)
 
   // Find root-level comments (no parent or parent not in this thread)
   const replyIds = new Set(replies.map(r => r.id))
   const rootReplies = replies.filter(r => !r.parentId || !replyIds.has(r.parentId))
 
-  const handleAnalyze = useCallback((comment: DebateComment) => {
+  const handleAnalyze = useCallback(async (comment: DebateComment) => {
     setAnalyzingComment(comment)
-    // TODO: Open analysis modal/panel
-    console.log('Analyze comment:', comment.id)
+    setIsAnalyzing(true)
+    setAnalysisResult(null)
+    setAnalysisError(null)
+
+    try {
+      const response = await fetch('/api/analyze-comment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          commentId: comment.id,
+          commentText: comment.text,
+          author: comment.author,
+          position: comment.position,
+          threadContext: threadContext || ''
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success && result.data) {
+        setAnalysisResult(result.data)
+      } else {
+        setAnalysisError(result.error || 'Analysis failed')
+      }
+    } catch (err) {
+      setAnalysisError('Failed to connect to analysis service')
+    } finally {
+      setIsAnalyzing(false)
+    }
+  }, [threadContext])
+
+  const closeAnalysisModal = useCallback(() => {
+    setAnalyzingComment(null)
+    setAnalysisResult(null)
+    setAnalysisError(null)
   }, [])
 
   if (replies.length === 0) {
@@ -332,55 +412,288 @@ export function ConversationThread({
         ))}
       </div>
 
-      {/* Per-comment analysis modal placeholder */}
+      {/* Per-comment analysis modal */}
       <AnimatePresence>
         {analyzingComment && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-4"
-            onClick={() => setAnalyzingComment(null)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60] flex items-center justify-center p-4"
+            onClick={closeAnalysisModal}
           >
             <motion.div
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="bg-background rounded-xl border border-border shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto p-6"
+              className="bg-background rounded-xl border border-border shadow-2xl max-w-3xl w-full max-h-[85vh] overflow-hidden flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <Brain className="w-5 h-5 text-primary" />
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 border-b border-border shrink-0">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    <Brain className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-foreground">Deep AI Analysis</h3>
+                    <p className="text-sm text-muted-foreground">
+                      u/{analyzingComment.author} • {analyzingComment.position.toUpperCase()}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-foreground">Deep AI Analysis</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Analyzing argument by u/{analyzingComment.author}
-                  </p>
-                </div>
+                <button
+                  onClick={closeAnalysisModal}
+                  className="p-2 rounded-lg hover:bg-secondary transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
 
-              <div className="p-4 rounded-lg bg-secondary/30 border border-border mb-4">
-                <p className="text-sm text-foreground italic">"{analyzingComment.text}"</p>
-              </div>
-
-              <div className="text-center py-8">
-                <div className="inline-flex items-center gap-2 text-primary">
-                  <Sparkles className="w-5 h-5 animate-pulse" />
-                  <span>Premium feature - Coming soon</span>
+              {/* Modal Content */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                {/* Original comment */}
+                <div className="p-4 rounded-lg bg-secondary/30 border border-border">
+                  <p className="text-sm text-foreground">{analyzingComment.text}</p>
                 </div>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Deep analysis with source verification requires Claude Agent SDK
-                </p>
-              </div>
 
-              <button
-                onClick={() => setAnalyzingComment(null)}
-                className="w-full py-2 rounded-lg bg-secondary hover:bg-secondary/80 text-foreground font-medium transition-colors"
-              >
-                Close
-              </button>
+                {/* Loading state */}
+                {isAnalyzing && (
+                  <div className="flex flex-col items-center justify-center py-12 gap-4">
+                    <div className="relative">
+                      <Loader2 className="w-12 h-12 animate-spin text-primary" />
+                      <Brain className="w-6 h-6 text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                    </div>
+                    <div className="text-center">
+                      <p className="text-foreground font-medium">Analyzing argument...</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Extracting claims, evaluating logic, checking sources
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-2">
+                        <CheckCircle className="w-3 h-3 text-success" /> Extracting claims
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <Loader2 className="w-3 h-3 animate-spin" /> Analyzing argument structure
+                      </span>
+                      <span className="flex items-center gap-2 opacity-50">
+                        <span className="w-3 h-3" /> Evaluating soundness
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Error state */}
+                {analysisError && (
+                  <div className="flex items-center gap-3 p-4 rounded-lg bg-danger/10 text-danger">
+                    <AlertTriangle className="w-5 h-5 shrink-0" />
+                    <div>
+                      <p className="font-medium">Analysis failed</p>
+                      <p className="text-sm opacity-80">{analysisError}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Analysis results */}
+                {analysisResult && (
+                  <div className="space-y-6">
+                    {/* Summary & Quality Score */}
+                    <div className="p-4 rounded-lg bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20">
+                      <div className="flex items-start justify-between gap-4 mb-3">
+                        <div>
+                          <h4 className="font-bold text-foreground mb-1">Analysis Summary</h4>
+                          <p className="text-sm text-muted-foreground">{analysisResult.summary}</p>
+                        </div>
+                        <div className="text-center shrink-0">
+                          <div className="text-3xl font-bold text-primary">{analysisResult.overallQuality.toFixed(1)}</div>
+                          <div className="text-xs text-muted-foreground">Quality</div>
+                        </div>
+                      </div>
+
+                      {/* Appeal scores */}
+                      <div className="grid grid-cols-3 gap-3 pt-3 border-t border-border">
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-blue-500">{analysisResult.logosScore}%</div>
+                          <div className="text-xs text-muted-foreground">Logos</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-amber-500">{analysisResult.ethosScore}%</div>
+                          <div className="text-xs text-muted-foreground">Ethos</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-rose-500">{analysisResult.pathosScore}%</div>
+                          <div className="text-xs text-muted-foreground">Pathos</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Claims */}
+                    {analysisResult.claims.length > 0 && (
+                      <div>
+                        <h4 className="font-bold text-foreground mb-3 flex items-center gap-2">
+                          <CheckCircle className="w-4 h-4 text-info" />
+                          Claims Extracted ({analysisResult.claims.length})
+                        </h4>
+                        <div className="space-y-2">
+                          {analysisResult.claims.map((claim, i) => {
+                            const verdictConfig: Record<string, { color: string; icon: typeof CheckCircle }> = {
+                              true: { color: 'text-success', icon: CheckCircle },
+                              mostly_true: { color: 'text-success', icon: CheckCircle },
+                              mixed: { color: 'text-warning', icon: Scale },
+                              mostly_false: { color: 'text-danger', icon: XCircle },
+                              false: { color: 'text-danger', icon: XCircle },
+                              unverifiable: { color: 'text-muted-foreground', icon: AlertTriangle }
+                            }
+                            const config = verdictConfig[claim.verdict] || verdictConfig.unverifiable
+                            const VerdictIcon = config.icon
+
+                            return (
+                              <div key={i} className="p-3 rounded-lg bg-secondary/30 border border-border">
+                                <div className="flex items-start justify-between gap-3 mb-2">
+                                  <p className="text-sm text-foreground">{claim.text}</p>
+                                  <div className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium shrink-0 ${config.color}`}>
+                                    <VerdictIcon className="w-3 h-3" />
+                                    {claim.verdict.replace(/_/g, ' ')}
+                                  </div>
+                                </div>
+                                {claim.nuance && (
+                                  <p className="text-xs text-muted-foreground italic">{claim.nuance}</p>
+                                )}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Argument Structure */}
+                    <div>
+                      <h4 className="font-bold text-foreground mb-3 flex items-center gap-2">
+                        <Target className="w-4 h-4 text-purple-500" />
+                        Argument Structure
+                      </h4>
+                      <div className="p-4 rounded-lg bg-secondary/30 border border-border space-y-3">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-medium px-2 py-0.5 rounded bg-purple-500/20 text-purple-400">
+                            {analysisResult.argumentStructure.type.toUpperCase()}
+                          </span>
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded ${
+                            analysisResult.argumentStructure.validity === 'valid'
+                              ? 'bg-success/20 text-success'
+                              : analysisResult.argumentStructure.validity === 'invalid'
+                              ? 'bg-danger/20 text-danger'
+                              : 'bg-warning/20 text-warning'
+                          }`}>
+                            {analysisResult.argumentStructure.validity.toUpperCase()}
+                          </span>
+                        </div>
+
+                        {analysisResult.argumentStructure.premises.length > 0 && (
+                          <div>
+                            <p className="text-xs text-muted-foreground mb-1">Premises:</p>
+                            <ul className="space-y-1">
+                              {analysisResult.argumentStructure.premises.map((p, i) => (
+                                <li key={i} className="text-sm text-foreground flex items-start gap-2">
+                                  <span className="text-primary shrink-0">P{i + 1}:</span>
+                                  {p}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        <div>
+                          <p className="text-xs text-muted-foreground mb-1">Conclusion:</p>
+                          <p className="text-sm text-foreground font-medium">
+                            ∴ {analysisResult.argumentStructure.conclusion}
+                          </p>
+                        </div>
+
+                        <p className="text-xs text-muted-foreground italic">
+                          {analysisResult.argumentStructure.validityReason}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Soundness */}
+                    <div>
+                      <h4 className="font-bold text-foreground mb-3 flex items-center gap-2">
+                        <Shield className="w-4 h-4 text-cyan-500" />
+                        Soundness ({analysisResult.soundness.score}/10)
+                      </h4>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="p-3 rounded-lg bg-success/10 border border-success/20">
+                          <p className="text-xs font-medium text-success mb-2">Strengths</p>
+                          <ul className="space-y-1">
+                            {analysisResult.soundness.strengths.map((s, i) => (
+                              <li key={i} className="text-sm text-foreground flex items-start gap-2">
+                                <CheckCircle className="w-3 h-3 text-success shrink-0 mt-0.5" />
+                                {s}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div className="p-3 rounded-lg bg-danger/10 border border-danger/20">
+                          <p className="text-xs font-medium text-danger mb-2">Weaknesses</p>
+                          <ul className="space-y-1">
+                            {analysisResult.soundness.weaknesses.map((w, i) => (
+                              <li key={i} className="text-sm text-foreground flex items-start gap-2">
+                                <XCircle className="w-3 h-3 text-danger shrink-0 mt-0.5" />
+                                {w}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      {analysisResult.soundness.potentialRebuttals.length > 0 && (
+                        <div className="mt-3 p-3 rounded-lg bg-warning/10 border border-warning/20">
+                          <p className="text-xs font-medium text-warning mb-2">Potential Rebuttals</p>
+                          <ul className="space-y-1">
+                            {analysisResult.soundness.potentialRebuttals.map((r, i) => (
+                              <li key={i} className="text-sm text-foreground">• {r}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Rhetorical Techniques */}
+                    {analysisResult.rhetoricalTechniques.length > 0 && (
+                      <div>
+                        <h4 className="font-bold text-foreground mb-3 flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-amber-500" />
+                          Rhetorical Techniques
+                        </h4>
+                        <div className="space-y-2">
+                          {analysisResult.rhetoricalTechniques.map((tech, i) => (
+                            <div key={i} className="p-3 rounded-lg bg-secondary/30 border border-border">
+                              <div className="flex items-center justify-between mb-1">
+                                <span className="text-sm font-medium text-foreground">{tech.technique}</span>
+                                <span className={`text-xs px-2 py-0.5 rounded ${
+                                  tech.effectiveness === 'high' ? 'bg-success/20 text-success' :
+                                  tech.effectiveness === 'medium' ? 'bg-warning/20 text-warning' :
+                                  'bg-secondary text-muted-foreground'
+                                }`}>
+                                  {tech.effectiveness}
+                                </span>
+                              </div>
+                              <p className="text-xs text-muted-foreground italic mb-1">"{tech.quote}"</p>
+                              <p className="text-xs text-muted-foreground">{tech.effect}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Timestamp */}
+                    <div className="text-xs text-muted-foreground/60 text-right pt-2 border-t border-border">
+                      Analyzed at {new Date(analysisResult.analyzedAt).toLocaleString()}
+                    </div>
+                  </div>
+                )}
+              </div>
             </motion.div>
           </motion.div>
         )}
