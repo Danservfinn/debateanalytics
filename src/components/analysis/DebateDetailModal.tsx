@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Swords, ExternalLink } from 'lucide-react'
 import type { DebateThread, DebateComment } from '@/types/debate'
@@ -15,8 +16,17 @@ interface DebateDetailModalProps {
 }
 
 export function DebateDetailModal({ debate, isOpen, onClose, threadContext }: DebateDetailModalProps) {
+  const router = useRouter()
   const [highlightedCommentId, setHighlightedCommentId] = useState<string | null>(null)
   const [isMobileAnalysisOpen, setIsMobileAnalysisOpen] = useState(false)
+
+  const handleOpenArena = useCallback(() => {
+    if (debate) {
+      onClose()
+      // Use debate ID as arena ID
+      router.push(`/arena/${debate.id}`)
+    }
+  }, [debate, onClose, router])
 
   // Handle ESC key to close
   useEffect(() => {
@@ -104,10 +114,7 @@ export function DebateDetailModal({ debate, isOpen, onClose, threadContext }: De
                 {/* Arena button */}
                 <button
                   className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-                  onClick={() => {
-                    // TODO: Navigate to arena
-                    console.log('Open arena for debate:', debate.id)
-                  }}
+                  onClick={handleOpenArena}
                 >
                   <Swords className="w-4 h-4" />
                   <span className="text-sm font-medium">Debate Arena</span>

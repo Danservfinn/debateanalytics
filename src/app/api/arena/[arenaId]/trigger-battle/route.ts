@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import type { DebateArena, BattleRound, BattleResult, ArenaSubmission } from '@/types/arena'
+import { arenaStore } from '@/lib/arena-store'
 
 const anthropic = new Anthropic()
-
-// Reference shared arena store
-const arenaStore = new Map<string, DebateArena>()
 
 /**
  * POST /api/arena/[arenaId]/trigger-battle

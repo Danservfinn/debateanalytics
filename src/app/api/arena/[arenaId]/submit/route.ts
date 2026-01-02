@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import type { ArenaSubmission } from '@/types/arena'
-
-// Reference the same store (in production, this would be a database)
-const arenaStore = new Map()
+import { arenaStore, getOrCreateArena } from '@/lib/arena-store'
 
 /**
  * POST /api/arena/[arenaId]/submit
@@ -46,28 +44,7 @@ export async function POST(
     }
 
     // Get or create arena
-    let arena = arenaStore.get(arenaId)
-    if (!arena) {
-      // Create a minimal arena if it doesn't exist
-      arena = {
-        id: arenaId,
-        threadId: arenaId,
-        topic: 'Debate Topic',
-        description: '',
-        createdAt: new Date().toISOString(),
-        createdBy: 'system',
-        status: 'active',
-        submissions: [],
-        battles: [],
-        totalBattles: 0,
-        pendingNewArguments: 0,
-        proCount: 0,
-        conCount: 0,
-        minSubmissionsPerSide: 2,
-        battleCostUsd: 2
-      }
-      arenaStore.set(arenaId, arena)
-    }
+    const arena = getOrCreateArena(arenaId)
 
     // Create submission
     const submission: ArenaSubmission = {

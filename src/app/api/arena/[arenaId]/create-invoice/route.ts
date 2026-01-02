@@ -1,16 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-// In-memory invoice store
-const invoiceStore = new Map<string, {
-  id: string
-  arenaId: string
-  amountSats: number
-  amountUsd: number
-  bolt11: string
-  status: 'pending' | 'paid' | 'expired'
-  expiresAt: string
-  createdAt: string
-}>()
+import { invoiceStore } from '@/lib/arena-store'
 
 /**
  * POST /api/arena/[arenaId]/create-invoice
@@ -80,5 +69,3 @@ export async function POST(
   }
 }
 
-// Export the invoice store for other routes to use
-export { invoiceStore }

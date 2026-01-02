@@ -1,16 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-// In-memory invoice store (shared with create-invoice)
-const invoiceStore = new Map<string, {
-  id: string
-  arenaId: string
-  amountSats: number
-  amountUsd: number
-  bolt11: string
-  status: 'pending' | 'paid' | 'expired'
-  expiresAt: string
-  createdAt: string
-}>()
+import { invoiceStore } from '@/lib/arena-store'
 
 /**
  * GET /api/arena/[arenaId]/check-payment
@@ -61,5 +50,3 @@ export async function GET(
   }
 }
 
-// Export for sharing with other routes
-export { invoiceStore }

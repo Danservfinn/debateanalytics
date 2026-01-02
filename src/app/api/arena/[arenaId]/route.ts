@@ -1,38 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import type { DebateArena } from '@/types/arena'
-
-// In-memory store for demo purposes
-// In production, this would be a database
-const arenaStore = new Map<string, DebateArena>()
-
-// Initialize with some sample data
-function getOrCreateArena(arenaId: string): DebateArena {
-  if (arenaStore.has(arenaId)) {
-    return arenaStore.get(arenaId)!
-  }
-
-  // Create new arena from threadId
-  const newArena: DebateArena = {
-    id: arenaId,
-    threadId: arenaId,
-    topic: 'Is beef tallow a healthy cooking fat?',
-    description: 'Debate the health benefits and risks of using beef tallow as a primary cooking fat compared to vegetable oils.',
-    createdAt: new Date().toISOString(),
-    createdBy: 'system',
-    status: 'active',
-    submissions: [],
-    battles: [],
-    totalBattles: 0,
-    pendingNewArguments: 0,
-    proCount: 0,
-    conCount: 0,
-    minSubmissionsPerSide: 2,
-    battleCostUsd: 2
-  }
-
-  arenaStore.set(arenaId, newArena)
-  return newArena
-}
+import { arenaStore, getOrCreateArena } from '@/lib/arena-store'
 
 /**
  * GET /api/arena/[arenaId]
