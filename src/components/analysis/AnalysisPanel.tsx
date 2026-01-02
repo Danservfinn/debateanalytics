@@ -18,6 +18,7 @@ import {
   ArrowRight
 } from 'lucide-react'
 import type { DebateThread, DebateComment, DebatePosition } from '@/types/debate'
+import { ExpandableText } from '@/components/ui/expandable-text'
 
 interface AnalysisPanelProps {
   debate: DebateThread
@@ -271,6 +272,14 @@ export function AnalysisPanel({
 
   return (
     <div className={`space-y-4 ${compact ? 'text-sm' : ''}`}>
+      {/* Key Clash Summary - At Top */}
+      <div className="p-4 rounded-xl bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20">
+        <h4 className="font-bold text-foreground mb-2 flex items-center gap-2">
+          <span className="text-lg">&#9876;</span> Core Disagreement
+        </h4>
+        <p className="text-sm text-foreground leading-relaxed">{debate.keyClash}</p>
+      </div>
+
       {/* Interactive Verdict */}
       <div className={`p-4 rounded-xl ${winnerConfig.bg} border border-current/20`}>
         <div className="flex items-center gap-3 mb-3">
@@ -355,24 +364,36 @@ export function AnalysisPanel({
             {allFallacies.map((fallacy, i) => (
               <div
                 key={i}
-                className="p-2 rounded-lg bg-warning/10 border border-warning/20 cursor-pointer hover:bg-warning/20 transition-colors"
-                onClick={() => onJumpToComment(fallacy.commentId)}
+                className="p-2 rounded-lg bg-warning/10 border border-warning/20"
               >
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm font-medium text-warning capitalize">
                     {fallacy.type.replace(/_/g, ' ')}
                   </span>
-                  <span className={`text-xs px-1.5 py-0.5 rounded ${
-                    fallacy.severity === 'high' ? 'bg-danger/20 text-danger' :
-                    fallacy.severity === 'medium' ? 'bg-warning/20 text-warning' :
-                    'bg-secondary text-muted-foreground'
-                  }`}>
-                    {fallacy.severity}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs px-1.5 py-0.5 rounded ${
+                      fallacy.severity === 'high' ? 'bg-danger/20 text-danger' :
+                      fallacy.severity === 'medium' ? 'bg-warning/20 text-warning' :
+                      'bg-secondary text-muted-foreground'
+                    }`}>
+                      {fallacy.severity}
+                    </span>
+                    <button
+                      onClick={() => onJumpToComment(fallacy.commentId)}
+                      className="text-xs text-primary hover:underline flex items-center gap-1"
+                    >
+                      Jump <ExternalLink className="w-3 h-3" />
+                    </button>
+                  </div>
                 </div>
-                <p className="text-xs text-muted-foreground">by u/{fallacy.author}</p>
+                <p className="text-xs text-muted-foreground mb-1">by u/{fallacy.author}</p>
                 {fallacy.quote && (
-                  <p className="text-xs italic mt-1 text-foreground/70">"{fallacy.quote}"</p>
+                  <ExpandableText
+                    text={`"${fallacy.quote}"`}
+                    className="text-xs italic text-foreground/70"
+                    lineClamp={2}
+                    author={fallacy.author}
+                  />
                 )}
               </div>
             ))}
@@ -444,31 +465,37 @@ export function AnalysisPanel({
             {concessions.map(comment => (
               <div
                 key={comment.id}
-                className="p-2 rounded-lg bg-primary/10 border border-primary/20 cursor-pointer hover:bg-primary/20 transition-colors"
-                onClick={() => onJumpToComment(comment.id)}
+                className="p-2 rounded-lg bg-primary/10 border border-primary/20"
               >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className={`text-xs px-1.5 py-0.5 rounded ${
-                    comment.position === 'pro' ? 'bg-success/20 text-success' : 'bg-danger/20 text-danger'
-                  }`}>
-                    {comment.position.toUpperCase()}
-                  </span>
-                  <span className="text-sm text-muted-foreground">u/{comment.author}</span>
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs px-1.5 py-0.5 rounded ${
+                      comment.position === 'pro' ? 'bg-success/20 text-success' : 'bg-danger/20 text-danger'
+                    }`}>
+                      {comment.position.toUpperCase()}
+                    </span>
+                    <span className="text-sm text-muted-foreground">u/{comment.author}</span>
+                  </div>
+                  <button
+                    onClick={() => onJumpToComment(comment.id)}
+                    className="text-xs text-primary hover:underline flex items-center gap-1"
+                  >
+                    Jump <ExternalLink className="w-3 h-3" />
+                  </button>
                 </div>
-                <p className="text-sm text-foreground line-clamp-2">{comment.text}</p>
+                <ExpandableText
+                  text={comment.text}
+                  className="text-sm text-foreground"
+                  lineClamp={2}
+                  author={comment.author}
+                  position={comment.position}
+                />
               </div>
             ))}
           </div>
         </CollapsibleSection>
       )}
 
-      {/* Key Clash Summary */}
-      <div className="p-4 rounded-xl bg-gradient-to-br from-primary/10 to-purple-500/10 border border-primary/20">
-        <h4 className="font-bold text-foreground mb-2 flex items-center gap-2">
-          ⚔️ Core Disagreement
-        </h4>
-        <p className="text-sm text-muted-foreground">{debate.keyClash}</p>
-      </div>
     </div>
   )
 }

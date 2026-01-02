@@ -214,6 +214,7 @@ export default function ThreadDetailPage() {
             debateCount={analysis.debates.length}
             commentCount={analysis.commentCount}
             title={analysis.title}
+            debates={analysis.debates}
           />
         </motion.section>
 

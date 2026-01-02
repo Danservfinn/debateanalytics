@@ -488,6 +488,10 @@ export interface ThreadVerdict {
   evidenceQualityPct: number  // 0-100
   civilityScore: number       // 0-10
   worthReading: boolean
+  // Executive summary fields (optional for backward compatibility)
+  keyTakeaways?: string[]     // Array of key points from the debate
+  conclusion?: string         // Final verdict/conclusion statement
+  winningPosition?: 'pro' | 'con' | 'draw' | 'unresolved'  // Which side generally won
 }
 
 export interface ThreadAnalysisResult {
