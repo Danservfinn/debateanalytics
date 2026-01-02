@@ -1,8 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { detectDebates } from '@/lib/debate-detection'
+import { generateAIAnalysis } from '@/lib/ai-analysis'
 import { storeThreadAnalysis, getBatchUserStatus } from '@/lib/neo4j'
 import { fetchRedditThread, parseRedditUrl } from '@/lib/reddit-fetcher'
-import type { ThreadAnalysisResult, DebatePosition, DebaterArchetype } from '@/types/debate'
+import type { ThreadAnalysisResult, DebatePosition, DebaterArchetype, AIAnalysis } from '@/types/debate'
+
+/**
+ * Derive the central question from thread title
+ */
+function deriveCentralQuestion(threadTitle: string): string {
+  // Strip common patterns
+  let question = threadTitle
+    .replace(/^CMV:\s*/i, '')
+    .replace(/\?+\s*I don't see it\.?$/i, '')
+    .replace(/\?+$/i, '')
+
+  // If it's a statement, convert to question
+  if (!question.includes('?')) {
+    question = `Is it true that ${question.toLowerCase()}?`
+  }
+
+  return question
+}
 
 // API Version marker for deployment verification
 const API_VERSION = 'v2-manual-json-feeding'
@@ -128,6 +147,8 @@ export async function GET(request: NextRequest): Promise<NextResponse<AnalyzeThr
     }
     let topics: string[] = []
 
+    let aiAnalysis: AIAnalysis | null = null
+
     if (hasClaudeKey && comments.length > 0) {
       // Run AI debate detection
       const opText = `${post.title}\n\n${post.selftext || ''}`
@@ -135,6 +156,12 @@ export async function GET(request: NextRequest): Promise<NextResponse<AnalyzeThr
       debates = detection.debates
       verdict = detection.verdict
       topics = detection.topics
+
+      // Generate AI analysis (What Does AI Think?)
+      if (debates.length > 0) {
+        const centralQuestion = deriveCentralQuestion(post.title)
+        aiAnalysis = await generateAIAnalysis(debates, post.title, centralQuestion, opText)
+      }
     }
 
     // Get unique authors and check for cached profiles
@@ -230,7 +257,8 @@ export async function GET(request: NextRequest): Promise<NextResponse<AnalyzeThr
       participants,
       claims: claims.slice(0, 50), // Limit to top 50 claims
       fallacies: fallacies.slice(0, 50), // Limit to top 50 fallacies
-      topics
+      topics,
+      aiAnalysis: aiAnalysis || undefined
     }
 
     // Store in Neo4j for research data collection (async, don't block response)
@@ -390,6 +418,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<AnalyzeTh
         worthReading: comments.length > 10
       }
       let topics: string[] = []
+      let aiAnalysisPost: AIAnalysis | null = null
 
       if (hasClaudeKey && comments.length > 0) {
         const opText = `${post.title}\n\n${post.selftext || ''}`
@@ -397,6 +426,12 @@ export async function POST(request: NextRequest): Promise<NextResponse<AnalyzeTh
         debates = detection.debates
         verdict = detection.verdict
         topics = detection.topics
+
+        // Generate AI analysis (What Does AI Think?)
+        if (debates.length > 0) {
+          const centralQuestion = deriveCentralQuestion(post.title)
+          aiAnalysisPost = await generateAIAnalysis(debates, post.title, centralQuestion, opText)
+        }
       }
 
       // Get unique authors and check for cached profiles
@@ -463,7 +498,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<AnalyzeTh
         participants,
         claims: claims.slice(0, 50),
         fallacies: fallacies.slice(0, 50),
-        topics
+        topics,
+        aiAnalysis: aiAnalysisPost || undefined
       }
 
       // Store and cache

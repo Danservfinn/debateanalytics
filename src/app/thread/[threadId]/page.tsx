@@ -33,7 +33,8 @@ import {
   ClickableClaimCard,
   DebateDetailModal,
   ExecutiveSummary,
-  deriveExecutiveSummary
+  deriveExecutiveSummary,
+  AIThinkSection
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
@@ -329,6 +330,11 @@ export default function ThreadDetailPage() {
                 <ExecutiveSummary
                   data={deriveExecutiveSummary(analysis.debates, analysis.title)}
                 />
+              )}
+
+              {/* AI Analysis - What Does AI Think? */}
+              {analysis.aiAnalysis && (
+                <AIThinkSection analysis={analysis.aiAnalysis} />
               )}
 
               {/* Quick Stats */}

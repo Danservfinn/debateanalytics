@@ -20,3 +20,6 @@ export { AnalysisPanel } from './AnalysisPanel'
 
 // Phase 5: Executive Summary
 export { ExecutiveSummary, deriveExecutiveSummary } from './ExecutiveSummary'
+
+// Phase 6: AI Analysis
+export { AIThinkSection } from './AIThinkSection'

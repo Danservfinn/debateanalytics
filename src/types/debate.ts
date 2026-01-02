@@ -536,6 +536,53 @@ export interface ThreadAnalysisResult {
 
   // Raw thread data for re-analysis (stored when pasted from JSON)
   rawThreadData?: unknown
+
+  // AI's structured answer to the central question
+  aiAnalysis?: AIAnalysis
+}
+
+// ============================================================================
+// AI Analysis Types (What Does AI Think?)
+// ============================================================================
+
+export interface AISource {
+  type: 'thread' | 'web'
+  title: string
+  url?: string
+  author?: string           // For thread sources (e.g., "u/username")
+  commentId?: string        // For thread sources - links to specific comment
+  relevantQuote: string
+  credibility: 'high' | 'medium' | 'low'
+}
+
+export interface AIAnalysis {
+  generatedAt: string
+  centralQuestion: string
+
+  // Structured argument
+  position: 'pro' | 'con' | 'nuanced'
+  confidence: number        // 0-100
+
+  premises: Array<{
+    statement: string
+    supporting: AISource[]
+  }>
+
+  evidence: Array<{
+    claim: string
+    sources: AISource[]
+  }>
+
+  counterargumentsAddressed: Array<{
+    counterargument: string
+    rebuttal: string
+  }>
+
+  conclusion: string
+
+  // Meta
+  limitations: string[]     // What the AI couldn't determine
+  sources: AISource[]       // All sources used
 }
 
 // ============================================================================
