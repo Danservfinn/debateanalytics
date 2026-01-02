@@ -152,12 +152,21 @@ CRITICAL ANALYSIS INSTRUCTIONS:
 4. Well-designed observational studies
 5. Case studies, expert opinion (weakest)
 
+**SCRUTINIZE COMPARISON GROUP DEFINITIONS:**
+- "Unvaccinated" cohorts: Did they truly receive ZERO vaccines, or just not the specific vaccine being studied?
+- Hidden exposures: Did "unvaccinated" groups receive Hep B at birth, Vitamin K shots, or other early interventions?
+- Timing definitions: Is "unvaccinated" defined as "before age X" while still receiving vaccines later?
+- Dose variations: Are partial schedules lumped with full schedules or true vaccine-naive?
+- This matters because comparing "DTaP vaccinated" vs "no DTaP but received 5 other vaccines" is NOT a true vaccinated vs unvaccinated comparison
+- ALWAYS ask: What did the control group ACTUALLY receive?
+
 **LOOK FOR RED FLAGS:**
 - P-hacking or selective reporting
 - Overgeneralized conclusions
 - Correlation presented as causation
 - Small effect sizes hyped as significant
 - Missing confidence intervals
+- Misleading comparison group labels (critical for medical/vaccine studies)
 
 DRAW YOUR OWN CONCLUSIONS based on your critical analysis. Do NOT simply defer to what sources claim—evaluate whether their claims are actually supported by their evidence.
 
@@ -176,7 +185,7 @@ Respond with a JSON object:
     }
   ],
   "keyEvidence": ["<key DATA POINT 1 - actual finding>", "<key DATA POINT 2>", ...],
-  "nuances": ["<methodological limitation 1>", "<alternative interpretation>", "<important caveat>", ...]
+  "nuances": ["<methodological limitation 1>", "<comparison group definition issue if applicable>", "<alternative interpretation>", "<important caveat>", ...]
 }
 
 Remember: Your verdict should reflect what the EVIDENCE actually supports, not what sources claim. If studies have weak methodology, say so. If conclusions are overstated relative to data, note that. Be the critical reviewer the user deserves.
