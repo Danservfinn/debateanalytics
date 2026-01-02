@@ -14,13 +14,49 @@ function deriveCentralQuestion(threadTitle: string): string {
     .replace(/^CMV:\s*/i, '')
     .replace(/\?+\s*I don't see it\.?$/i, '')
     .replace(/\?+$/i, '')
+    .trim()
 
-  // If it's a statement, convert to question
-  if (!question.includes('?')) {
-    question = `Is it true that ${question.toLowerCase()}?`
+  // If it already ends with a question mark, return as-is
+  if (question.includes('?')) {
+    return question
   }
 
-  return question
+  // Check if it's an imperative/command (starts with verb phrase) - don't convert these
+  const imperativePatterns = [
+    /^(debate|discuss|explain|tell|show|prove|convince|help|change)\s+/i,
+    /^(respectfully|please|kindly)\s+/i,
+  ]
+
+  const isImperative = imperativePatterns.some(p => p.test(question))
+
+  if (isImperative) {
+    // For imperatives, try to extract the actual topic
+    // "respectfully debate me on vaccines" -> "vaccines"
+    const topicMatch = question.match(/(?:on|about|regarding|concerning)\s+(.+)$/i)
+    if (topicMatch) {
+      return `What is the truth about ${topicMatch[1]}?`
+    }
+    // Fallback: wrap the whole thing
+    return `What are the key arguments regarding: ${question}?`
+  }
+
+  // Check if it starts with common statement patterns that convert well
+  const startsWithSubject = /^(I|we|you|they|he|she|it|the|a|an|my|your|there|this|that|people|everyone|most|some|all|no one|nobody)\s+/i.test(question)
+
+  if (startsWithSubject) {
+    return `Is it true that ${question.toLowerCase()}?`
+  }
+
+  // For other statements, try a more natural question form
+  // "Vaccines are safe" -> "Are vaccines safe?"
+  const beVerbMatch = question.match(/^(.+?)\s+(is|are|was|were|will be|should be|can be|must be)\s+(.+)$/i)
+  if (beVerbMatch) {
+    const [, subject, verb, predicate] = beVerbMatch
+    return `${verb.charAt(0).toUpperCase() + verb.slice(1)} ${subject.toLowerCase()} ${predicate}?`
+  }
+
+  // Fallback: use "Is it true that" for genuine statements
+  return `Is it true that ${question.toLowerCase()}?`
 }
 
 // API Version marker for deployment verification
