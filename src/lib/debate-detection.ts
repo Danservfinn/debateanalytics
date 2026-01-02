@@ -280,7 +280,7 @@ async function classifyAndScoreComments(
   for (let i = 0; i < comments.length; i += batchSize) {
     const batch = comments.slice(i, i + batchSize)
 
-    const prompt = `You are analyzing Reddit comments in a debate thread.
+    const prompt = `You are analyzing Reddit comments in a debate thread. Be very careful about position classification.
 
 ORIGINAL POST (OP) POSITION:
 ${opText.substring(0, 2000)}
@@ -310,10 +310,30 @@ For EACH comment, provide analysis in JSON format:
   ]
 }
 
-POSITION DEFINITIONS:
-- PRO: Agrees with or supports OP's position
-- CON: Disagrees with or challenges OP's position
-- NEUTRAL: Neither agrees nor disagrees
+CRITICAL: POSITION CLASSIFICATION RULES
+
+The thread topic is typically a normative question (what SHOULD happen). Carefully distinguish:
+
+1. FACTUAL/DESCRIPTIVE STATEMENTS ("what IS") vs NORMATIVE STATEMENTS ("what SHOULD BE")
+   - "You cannot revoke citizenship for crimes" = FACTUAL claim about current law → NEUTRAL
+   - "We should not revoke citizenship" = NORMATIVE position → CON
+   - "The law says X" without advocating = NEUTRAL
+   - "The law should be changed to X" = NORMATIVE → PRO or CON
+
+2. POSITION DEFINITIONS:
+   - PRO: Explicitly ADVOCATES for or ENDORSES OP's normative position. Must contain clear support language like "I agree", "you're right", "we should", "it's good that"
+   - CON: Explicitly OPPOSES or CHALLENGES OP's normative position. Must contain clear opposition language like "I disagree", "that's wrong", "we shouldn't", "actually"
+   - NEUTRAL: DEFAULT for any of these:
+     * Purely factual/legal/definitional statements without advocacy
+     * Questions asked without taking a stance
+     * "Devil's advocate" framing without committing
+     * Explaining both sides without choosing
+     * Providing context or information neutrally
+     * Statements that could support either side equally
+
+3. KEY PRINCIPLE: When in doubt, classify as NEUTRAL. Only assign PRO/CON when there is EXPLICIT advocacy language showing the author personally endorses or opposes the OP's view.
+
+4. Watch for INDIRECT opposition: If someone provides facts that UNDERMINE OP's position but doesn't explicitly disagree, consider context. If the clear rhetorical purpose is to argue against OP, it's CON. If they're just stating facts, it's NEUTRAL.
 
 QUALITY SCORING (1-10):
 - Evidence (0-3 points): Sources, statistics, concrete examples
