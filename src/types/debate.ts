@@ -533,6 +533,9 @@ export interface ThreadAnalysisResult {
 
   // Topics (dynamic, LLM-generated)
   topics?: string[]
+
+  // Raw thread data for re-analysis (stored when pasted from JSON)
+  rawThreadData?: unknown
 }
 
 // ============================================================================

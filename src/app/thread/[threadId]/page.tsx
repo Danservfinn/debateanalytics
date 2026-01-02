@@ -65,24 +65,48 @@ export default function ThreadDetailPage() {
     setTimeout(() => setSelectedDebate(null), 300)
   }, [])
 
-  // Refresh analysis - clears cache and re-fetches
+  // Refresh analysis - re-analyzes using stored raw data or fetches fresh
   const refreshAnalysis = useCallback(async () => {
     setIsRefreshing(true)
     setError(null)
 
     try {
-      // Remove from localStorage cache
-      removeThread(threadId)
+      // Get current analysis to check for raw data
+      const currentAnalysis = analysis
 
       // Build URL for analysis
       const urlParam = originalUrl || `https://reddit.com/r/changemyview/comments/${threadId}`
 
-      const response = await fetch(`/api/analyze-thread?url=${encodeURIComponent(urlParam)}`)
-      const result = await response.json()
+      let response: Response
+      let result: { success: boolean; data?: ThreadAnalysisResult; error?: string }
+
+      // If we have raw thread data, use it for re-analysis
+      if (currentAnalysis?.rawThreadData) {
+        response = await fetch('/api/analyze-thread', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            url: urlParam,
+            threadData: currentAnalysis.rawThreadData
+          })
+        })
+        result = await response.json()
+
+        // Preserve the raw data in the new analysis
+        if (result.success && result.data) {
+          result.data.rawThreadData = currentAnalysis.rawThreadData
+        }
+      } else {
+        // No raw data - try fetching from Reddit (may fail with 403)
+        response = await fetch(`/api/analyze-thread?url=${encodeURIComponent(urlParam)}`)
+        result = await response.json()
+      }
 
       if (result.success && result.data) {
+        // Remove old entry and save new one
+        removeThread(threadId)
         setAnalysis(result.data)
-        saveThread(result.data) // Persist to localStorage
+        saveThread(result.data)
       } else {
         setError(result.error || "Could not refresh analysis. Please try again.")
       }
@@ -92,7 +116,7 @@ export default function ThreadDetailPage() {
     }
 
     setIsRefreshing(false)
-  }, [threadId, originalUrl])
+  }, [threadId, originalUrl, analysis])
 
   useEffect(() => {
     async function loadData() {

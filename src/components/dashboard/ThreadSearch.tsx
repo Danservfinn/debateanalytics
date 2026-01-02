@@ -103,7 +103,12 @@ export function ThreadSearch() {
       if (match) {
         const [, subreddit, threadId] = match
         const cacheKey = `thread-analysis-${subreddit}-${threadId}`
-        sessionStorage.setItem(cacheKey, JSON.stringify(result.data))
+        // Include raw thread data for potential re-analysis
+        const dataWithRaw = {
+          ...result.data,
+          rawThreadData: parsedJson
+        }
+        sessionStorage.setItem(cacheKey, JSON.stringify(dataWithRaw))
         router.push(`/thread/${subreddit}-${threadId}?url=${encodeURIComponent(trimmedUrl)}&fromJson=true`)
       }
     } catch (err) {
