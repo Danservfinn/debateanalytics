@@ -679,14 +679,6 @@ export function deriveExecutiveSummary(
 
   const isNonPropositionTitle = /^(respectfully\s+)?debate\s+me|^discuss(ion)?|^thoughts\s+on|^ama\b|^what\s+do\s+you\s+think|^let'?s\s+talk/i.test(threadTitle)
 
-  // Debug logging
-  console.log('[CentralQuestion Debug]', {
-    threadTitle,
-    isNonPropositionTitle,
-    hasDebates: debates.length > 0,
-    keyClash: debates[0]?.keyClash
-  })
-
   let question: string
   let proDefinition: string
   let conDefinition: string

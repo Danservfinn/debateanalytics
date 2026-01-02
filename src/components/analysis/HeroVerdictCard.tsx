@@ -16,6 +16,7 @@ interface HeroVerdictCardProps {
   commentCount: number
   title: string
   debates?: DebateThread[]  // Optional: pass debates to derive executive summary
+  centralQuestion?: string  // The central question being debated
 }
 
 /**
@@ -32,7 +33,8 @@ export function HeroVerdictCard({
   debateCount,
   commentCount,
   title,
-  debates = []
+  debates = [],
+  centralQuestion
 }: HeroVerdictCardProps) {
   // Calculate ring offset based on score (0-10 scale)
   const ringOffset = useMemo(() => {
@@ -75,41 +77,97 @@ export function HeroVerdictCard({
     return result
   }, [verdict, debateCount])
 
-  // Derive executive summary from debates
+  // Derive executive summary from debates with qualitative analysis
   const executiveSummary = useMemo(() => {
     // Use verdict's fields if available, otherwise derive from debates
     const keyTakeaways = verdict.keyTakeaways || []
     const conclusion = verdict.conclusion
     const winningPosition = verdict.winningPosition
 
-    // If no verdict fields, derive from debates
+    // If no verdict fields, derive from debates with qualitative reasoning
     if (!conclusion && debates.length > 0) {
       const proWins = debates.filter(d => d.winner === 'pro').length
       const conWins = debates.filter(d => d.winner === 'con').length
       const draws = debates.filter(d => d.winner === 'draw').length
 
+      // Calculate average quality scores for each side
+      const allReplies = debates.flatMap(d => d.replies)
+      const proReplies = allReplies.filter(r => r.position === 'pro')
+      const conReplies = allReplies.filter(r => r.position === 'con')
+      const proAvg = proReplies.length > 0
+        ? proReplies.reduce((sum, r) => sum + r.qualityScore, 0) / proReplies.length
+        : 0
+      const conAvg = conReplies.length > 0
+        ? conReplies.reduce((sum, r) => sum + r.qualityScore, 0) / conReplies.length
+        : 0
+
       let derivedConclusion: string
       let derivedPosition: 'pro' | 'con' | 'draw' | 'unresolved'
 
+      // Generate qualitative conclusion explaining WHY
       if (proWins > conWins) {
-        derivedConclusion = `PRO side generally prevails (${proWins} vs ${conWins} debates won)`
         derivedPosition = 'pro'
+        const qualityDiff = proAvg - conAvg
+        if (qualityDiff > 2) {
+          derivedConclusion = `PRO arguments were significantly more substantive, with higher quality reasoning and better evidence support`
+        } else if (qualityDiff > 0.5) {
+          derivedConclusion = `PRO side presented more compelling arguments with stronger logical foundations`
+        } else {
+          derivedConclusion = `PRO prevailed through more consistent argumentation across ${proWins} debate exchanges`
+        }
       } else if (conWins > proWins) {
-        derivedConclusion = `CON side generally prevails (${conWins} vs ${proWins} debates won)`
         derivedPosition = 'con'
+        const qualityDiff = conAvg - proAvg
+        if (qualityDiff > 2) {
+          derivedConclusion = `CON arguments were significantly more substantive, with higher quality reasoning and better evidence support`
+        } else if (qualityDiff > 0.5) {
+          derivedConclusion = `CON side presented more compelling rebuttals with stronger logical foundations`
+        } else {
+          derivedConclusion = `CON prevailed through more effective counterarguments across ${conWins} debate exchanges`
+        }
       } else if (draws > 0 || (proWins === conWins && proWins > 0)) {
-        derivedConclusion = `Evenly matched debate (${proWins} PRO vs ${conWins} CON wins, ${draws} draws)`
+        derivedConclusion = `Both sides presented equally valid points, with neither establishing clear dominance`
         derivedPosition = 'draw'
       } else {
-        derivedConclusion = 'No clear winner emerged from the debates'
+        derivedConclusion = 'The discussion lacked sufficient back-and-forth to determine a clear outcome'
         derivedPosition = 'unresolved'
       }
 
-      // Derive key takeaways from debate win reasons
-      const derivedTakeaways = debates
-        .filter(d => d.winnerReason)
-        .slice(0, 3)
-        .map(d => d.winnerReason)
+      // Generate meaningful key takeaways based on debate content
+      const derivedTakeaways: string[] = []
+
+      // 1. Key clash insight
+      const primaryDebate = debates[0]
+      if (primaryDebate?.keyClash) {
+        derivedTakeaways.push(`Core disagreement: ${primaryDebate.keyClash}`)
+      }
+
+      // 2. Best argument insight
+      const bestProArg = proReplies.reduce((best, r) =>
+        r.qualityScore > (best?.qualityScore || 0) ? r : best, proReplies[0])
+      const bestConArg = conReplies.reduce((best, r) =>
+        r.qualityScore > (best?.qualityScore || 0) ? r : best, conReplies[0])
+
+      if (derivedPosition === 'pro' && bestProArg) {
+        const excerpt = bestProArg.text.length > 100
+          ? bestProArg.text.substring(0, 100) + '...'
+          : bestProArg.text
+        derivedTakeaways.push(`Strongest PRO argument (${bestProArg.qualityScore.toFixed(1)}/10): "${excerpt}"`)
+      } else if (derivedPosition === 'con' && bestConArg) {
+        const excerpt = bestConArg.text.length > 100
+          ? bestConArg.text.substring(0, 100) + '...'
+          : bestConArg.text
+        derivedTakeaways.push(`Strongest CON argument (${bestConArg.qualityScore.toFixed(1)}/10): "${excerpt}"`)
+      }
+
+      // 3. Concession or evidence insight
+      const concessions = allReplies.filter(r => r.isConcession)
+      if (concessions.length > 0) {
+        derivedTakeaways.push(`${concessions.length} concession${concessions.length > 1 ? 's' : ''} made, indicating good faith engagement`)
+      } else {
+        // Quality comparison
+        derivedTakeaways.push(`PRO avg quality: ${proAvg.toFixed(1)}/10 vs CON avg: ${conAvg.toFixed(1)}/10`)
+      }
 
       return {
         keyTakeaways: keyTakeaways.length > 0 ? keyTakeaways : derivedTakeaways,
@@ -194,13 +252,25 @@ export function HeroVerdictCard({
 
           {/* Content */}
           <div className="flex-1 min-w-0">
+            {/* Central Question - Most Prominent */}
+            {centralQuestion && (
+              <div className="mb-4 p-4 rounded-xl bg-gradient-to-r from-primary/20 via-purple-500/15 to-primary/20 border border-primary/30">
+                <p className="text-xs text-primary uppercase tracking-wider font-medium mb-1">
+                  Central Question
+                </p>
+                <p className="text-lg md:text-xl font-heading font-semibold text-foreground">
+                  {centralQuestion}
+                </p>
+              </div>
+            )}
+
             {/* Title */}
-            <h1 className="text-xl md:text-2xl font-heading font-semibold text-foreground mb-3">
+            <h1 className="text-base md:text-lg font-medium text-muted-foreground mb-2">
               {title}
             </h1>
 
             {/* Summary */}
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
               {verdict.summary}
             </p>
 

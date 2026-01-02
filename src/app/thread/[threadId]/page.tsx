@@ -295,6 +295,9 @@ export default function ThreadDetailPage() {
             commentCount={analysis.commentCount}
             title={analysis.title}
             debates={analysis.debates}
+            centralQuestion={analysis.debates.length > 0
+              ? deriveExecutiveSummary(analysis.debates, analysis.title).centralQuestion.question
+              : undefined}
           />
         </motion.section>
 
