@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "src/app/api/analyze-thread/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/analyze-thread-deep/route.ts": {
+      "maxDuration": 60
+    },
+    "src/app/api/verify-claim/route.ts": {
+      "maxDuration": 60
+    }
+  }
+}

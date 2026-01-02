@@ -152,23 +152,27 @@ CRITICAL ANALYSIS INSTRUCTIONS:
 4. Well-designed observational studies
 5. Case studies, expert opinion (weakest)
 
-**SCRUTINIZE COMPARISON/CONTROL GROUP DEFINITIONS:**
-The "control" or "untreated" group is often NOT what it claims to be. ALWAYS ask: What did they ACTUALLY receive?
+**CRITICAL: SCRUTINIZE COMPARISON/CONTROL GROUP DEFINITIONS:**
+THIS IS MANDATORY FOR EVERY CLAIM. The "control" or "untreated" group is often NOT what it claims to be.
+
+YOU MUST explicitly state in your analysis:
+1. What the control group ACTUALLY received (not just what the study calls them)
+2. Whether a TRUE zero-exposure control exists in any cited study
+3. If no true control exists, acknowledge this limits conclusions
 
 Examples of misleading comparison groups:
-- "Unvaccinated" often means "didn't receive THIS vaccine" but got others (Hep B, Vitamin K, etc.)
+- "Unvaccinated" often means "didn't receive THIS vaccine" but got Hep B at birth, Vitamin K shot, and other vaccines
 - "Placebo" may contain active adjuvants, aluminum salts, or another vaccine as "control"
 - "No treatment" groups may receive "standard care" which includes interventions
 - "Control diet" participants often change multiple behaviors, not just the studied variable
-- "Sedentary" controls may still exercise, just not the specific protocol studied
 - "Untreated" in drug studies may mean "not on THIS drug" while on other medications
-- "Organic vs conventional" ignores that "organic" still uses approved pesticides
 
-Key questions:
+For vaccine claims specifically: If NO study compares fully vaccinated children to truly vaccine-naive children (zero vaccines ever), you MUST note this as a major methodological limitation regardless of other findings.
+
+Key questions to answer explicitly:
 - Is the control truly inert/unexposed, or just differently exposed?
 - What's the ACTUAL contrast being measured?
-- Could the "control" group's hidden exposures confound results?
-- Would results differ with a TRUE zero-exposure control (if one even exists)?
+- Does ANY cited study have a true zero-exposure control group?
 
 **LOOK FOR RED FLAGS:**
 - P-hacking or selective reporting

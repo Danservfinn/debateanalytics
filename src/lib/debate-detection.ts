@@ -100,6 +100,11 @@ interface QualityResult {
 // Debate Detection Pipeline
 // ============================================================================
 
+// Limits to prevent timeout on large threads
+const MAX_COMMENTS_TOTAL = 200      // Max comments to process overall
+const MAX_DEBATES = 8               // Max number of debate threads to analyze
+const MAX_COMMENTS_PER_DEBATE = 30  // Max comments per debate thread
+
 /**
  * Main entry point: Detect and analyze debates in a Reddit thread
  */
@@ -112,16 +117,35 @@ export async function detectDebates(
   verdict: ThreadVerdict
   topics: string[]
 }> {
-  // Step 1: Build reply tree
-  const trees = buildReplyTree(comments)
+  const startTime = Date.now()
 
-  // Step 2: Identify debate roots
-  const debateRoots = identifyDebateRoots(trees)
+  // Limit total comments to prevent timeout
+  const limitedComments = comments.length > MAX_COMMENTS_TOTAL
+    ? comments.slice(0, MAX_COMMENTS_TOTAL)
+    : comments
+
+  if (comments.length > MAX_COMMENTS_TOTAL) {
+    console.log(`Large thread: limiting from ${comments.length} to ${MAX_COMMENTS_TOTAL} comments`)
+  }
+
+  // Step 1: Build reply tree
+  const trees = buildReplyTree(limitedComments)
+
+  // Step 2: Identify debate roots (already sorted by engagement)
+  const debateRoots = identifyDebateRoots(trees).slice(0, MAX_DEBATES)
+
+  console.log(`Processing ${debateRoots.length} debates from ${limitedComments.length} comments`)
 
   // Step 3-6: Process each debate
   const debates: DebateThread[] = []
 
   for (const root of debateRoots) {
+    // Check if we're approaching timeout (50s limit for 60s function)
+    if (Date.now() - startTime > 50000) {
+      console.log(`Approaching timeout, stopping at ${debates.length} debates`)
+      break
+    }
+
     const debate = await processDebate(root, opText, threadTitle)
     if (debate) {
       debates.push(debate)
@@ -131,8 +155,13 @@ export async function detectDebates(
   // Step 7: Generate overall verdict
   const verdict = calculateVerdict(debates, comments.length)
 
-  // Extract topics dynamically
-  const topics = await extractTopics(threadTitle, opText, debates)
+  // Extract topics dynamically (skip if running low on time)
+  let topics: string[] = []
+  if (Date.now() - startTime < 55000) {
+    topics = await extractTopics(threadTitle, opText, debates)
+  }
+
+  console.log(`Debate detection complete in ${Date.now() - startTime}ms`)
 
   return { debates, verdict, topics }
 }
@@ -218,11 +247,17 @@ async function processDebate(
   opText: string,
   threadTitle: string
 ): Promise<DebateThread | null> {
-  // Flatten tree to get all comments
-  const allComments = flattenTree(tree)
+  // Flatten tree to get all comments (limited to prevent timeout)
+  let allComments = flattenTree(tree)
 
   if (allComments.length < 2) {
     return null
+  }
+
+  // Limit comments per debate to prevent timeout
+  if (allComments.length > MAX_COMMENTS_PER_DEBATE) {
+    console.log(`Limiting debate from ${allComments.length} to ${MAX_COMMENTS_PER_DEBATE} comments`)
+    allComments = allComments.slice(0, MAX_COMMENTS_PER_DEBATE)
   }
 
   // Classify positions and score arguments using Claude
