@@ -191,6 +191,112 @@ function RhetoricalBars({ proReplies, conReplies }: { proReplies: DebateComment[
   )
 }
 
+// Reasoning chain item with expandable comment text
+interface ReasoningChainItem {
+  step: number
+  text: string
+  commentId: string
+  commentText: string
+  author: string
+  position: DebatePosition
+  qualityScore: number
+}
+
+function ReasoningChainList({
+  items,
+  onJumpToComment
+}: {
+  items: ReasoningChainItem[]
+  onJumpToComment: (commentId: string) => void
+}) {
+  const [expandedStep, setExpandedStep] = useState<number | null>(null)
+
+  const toggleExpand = (step: number) => {
+    setExpandedStep(expandedStep === step ? null : step)
+  }
+
+  const truncateText = (text: string, maxLength: number = 200) => {
+    if (text.length <= maxLength) return text
+    return text.slice(0, maxLength).trim() + '...'
+  }
+
+  return (
+    <div className="space-y-2">
+      {items.map(item => {
+        const isExpanded = expandedStep === item.step
+        const positionColor = item.position === 'pro'
+          ? 'bg-success/20 text-success border-success/30'
+          : item.position === 'con'
+            ? 'bg-danger/20 text-danger border-danger/30'
+            : 'bg-secondary/20 text-muted-foreground border-border'
+
+        return (
+          <div key={item.step} className="group">
+            {/* Main row - clickable with hover preview */}
+            <button
+              onClick={() => toggleExpand(item.step)}
+              title={!isExpanded ? `"${truncateText(item.commentText, 150)}"` : undefined}
+              className={`w-full flex items-start gap-2 p-2 rounded-lg transition-all text-left
+                ${isExpanded ? 'bg-secondary/50' : 'hover:bg-secondary/30'}`}
+            >
+              <span className={`shrink-0 w-6 h-6 rounded-full text-xs flex items-center justify-center font-medium border ${positionColor}`}>
+                {item.step}
+              </span>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm text-foreground">{item.text}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  u/{item.author} • {isExpanded ? 'Click to collapse' : 'Click to view argument'}
+                </p>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform shrink-0 ${isExpanded ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Expanded comment text */}
+            <AnimatePresence>
+              {isExpanded && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden"
+                >
+                  <div className="ml-8 mt-1 p-3 rounded-lg bg-card border border-border">
+                    {/* Comment preview */}
+                    <div className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">
+                      {item.commentText.length > 500
+                        ? truncateText(item.commentText, 500)
+                        : item.commentText
+                      }
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center gap-3 mt-3 pt-2 border-t border-border">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          onJumpToComment(item.commentId)
+                        }}
+                        className="text-xs text-primary hover:underline flex items-center gap-1"
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        Jump to full comment
+                      </button>
+                      <span className="text-xs text-muted-foreground">
+                        Quality: {item.qualityScore.toFixed(1)}/10
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 // Burden of proof timeline
 function BurdenOfProofTracker({ momentumShifts }: { momentumShifts?: DebateThread['momentumShifts'] }) {
   const shifts = momentumShifts || [
