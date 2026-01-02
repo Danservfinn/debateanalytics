@@ -226,14 +226,39 @@ export default function ThreadDetailPage() {
   }
 
   if (error || !analysis) {
+    const isRedditBlocked = error?.includes('403') || error?.includes('REDDIT_BLOCKED') || error?.includes('Blocked')
+
     return (
       <div className="min-h-screen">
         <FloatingShapes />
         <Navbar />
         <main className="container mx-auto px-4 py-8">
-          <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+          <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
             <AlertTriangle className="w-12 h-12 text-warning" />
-            <p className="text-lg font-medium">{error || "Thread not found"}</p>
+            <p className="text-lg font-medium">{isRedditBlocked ? 'Reddit API error: 403 Blocked' : (error || "Thread not found")}</p>
+
+            {isRedditBlocked && (
+              <div className="max-w-md text-center space-y-4">
+                <p className="text-muted-foreground">
+                  Reddit is blocking requests from cloud servers. Use &quot;Paste JSON&quot; mode instead:
+                </p>
+                <div className="bg-card/50 border border-border rounded-lg p-4 text-left space-y-2">
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">1.</strong> Open your Reddit thread in a browser
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">2.</strong> Add <code className="bg-muted px-1.5 py-0.5 rounded text-xs">.json</code> to the end of the URL
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">3.</strong> Copy the JSON data (Ctrl/Cmd + A, then Ctrl/Cmd + C)
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">4.</strong> Go to Dashboard → &quot;Paste JSON&quot; → Paste the data
+                  </p>
+                </div>
+              </div>
+            )}
+
             <Link href="/">
               <Button variant="outline">
                 <ArrowLeft className="w-4 h-4 mr-2" />

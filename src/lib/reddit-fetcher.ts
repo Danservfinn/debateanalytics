@@ -157,10 +157,24 @@ export async function fetchRedditThread(url: string): Promise<RedditThreadData> 
     if (response.status === 404) {
       throw new Error('Thread not found. Please check the URL.')
     }
-    throw new Error(`Reddit API error: ${response.status} ${response.statusText}`)
+    if (response.status === 403) {
+      throw new Error('REDDIT_BLOCKED: Reddit is blocking requests from this server. Please use "Paste JSON" mode instead.')
+    }
+    throw new Error(`REDDIT_BLOCKED: Reddit API error: ${response.status} ${response.statusText}`)
   }
 
-  const data = await response.json() as unknown[]
+  // Check content type - Reddit may return HTML instead of JSON when blocking
+  const contentType = response.headers.get('content-type') || ''
+  if (!contentType.includes('application/json')) {
+    throw new Error('REDDIT_BLOCKED: Reddit is blocking requests from this server. Please use "Paste JSON" mode instead.')
+  }
+
+  let data: unknown[]
+  try {
+    data = await response.json() as unknown[]
+  } catch {
+    throw new Error('REDDIT_BLOCKED: Reddit returned invalid response. Please use "Paste JSON" mode instead.')
+  }
 
   if (!Array.isArray(data) || data.length < 2) {
     throw new Error('Invalid Reddit API response format')
