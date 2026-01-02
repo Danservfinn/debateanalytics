@@ -112,7 +112,7 @@ export function AIThinkSection({ analysis, onJumpToComment, positionDefinitions 
                   Central Question
                 </p>
                 <p className="text-sm font-medium text-foreground">
-                  {analysis.centralQuestion}
+                  {positionDefinitions?.question || analysis.centralQuestion}
                 </p>
                 {/* Position Legend */}
                 {positionDefinitions && (
