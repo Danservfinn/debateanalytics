@@ -116,6 +116,21 @@ export function getStoredStats(): StoredStats {
 }
 
 /**
+ * Remove a specific thread from storage
+ */
+export function removeThread(threadId: string): void {
+  if (typeof window === 'undefined') return
+  try {
+    const threads = getStoredThreads()
+    const filtered = threads.filter(t => t.threadId !== threadId)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered))
+    updateStats(filtered)
+  } catch (error) {
+    console.error('Failed to remove thread:', error)
+  }
+}
+
+/**
  * Clear all stored data
  */
 export function clearStoredData(): void {

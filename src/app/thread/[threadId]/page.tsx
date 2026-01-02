@@ -16,7 +16,8 @@ import {
   Swords,
   TrendingUp,
   CheckCircle,
-  Zap
+  Zap,
+  RefreshCw
 } from "lucide-react"
 import { Navbar } from "@/components/layout/Navbar"
 import { FloatingShapes } from "@/components/layout/FloatingShapes"
@@ -36,7 +37,7 @@ import {
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
 import { formatRelativeTime } from "@/lib/utils"
-import { saveThread, getStoredThread } from "@/lib/storage"
+import { saveThread, getStoredThread, removeThread } from "@/lib/storage"
 import type { ThreadAnalysisResult, DebateThread } from "@/types/debate"
 
 export default function ThreadDetailPage() {
@@ -48,6 +49,7 @@ export default function ThreadDetailPage() {
 
   const [analysis, setAnalysis] = useState<ThreadAnalysisResult | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isRefreshing, setIsRefreshing] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [selectedDebate, setSelectedDebate] = useState<DebateThread | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -62,6 +64,35 @@ export default function ThreadDetailPage() {
     // Delay clearing debate to allow exit animation
     setTimeout(() => setSelectedDebate(null), 300)
   }, [])
+
+  // Refresh analysis - clears cache and re-fetches
+  const refreshAnalysis = useCallback(async () => {
+    setIsRefreshing(true)
+    setError(null)
+
+    try {
+      // Remove from localStorage cache
+      removeThread(threadId)
+
+      // Build URL for analysis
+      const urlParam = originalUrl || `https://reddit.com/r/changemyview/comments/${threadId}`
+
+      const response = await fetch(`/api/analyze-thread?url=${encodeURIComponent(urlParam)}`)
+      const result = await response.json()
+
+      if (result.success && result.data) {
+        setAnalysis(result.data)
+        saveThread(result.data) // Persist to localStorage
+      } else {
+        setError(result.error || "Could not refresh analysis. Please try again.")
+      }
+    } catch (err) {
+      console.error('Failed to refresh analysis:', err)
+      setError("Failed to refresh analysis. Please try again.")
+    }
+
+    setIsRefreshing(false)
+  }, [threadId, originalUrl])
 
   useEffect(() => {
     async function loadData() {
@@ -202,17 +233,28 @@ export default function ThreadDetailPage() {
               )}
             </div>
           </div>
-          <a
-            href={analysis.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0"
-          >
-            <Button variant="outline" size="sm">
-              <ExternalLink className="w-4 h-4 mr-2" />
-              View on Reddit
+          <div className="flex items-center gap-2 shrink-0">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={refreshAnalysis}
+              disabled={isRefreshing}
+              title="Re-analyze this thread"
+            >
+              <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+              {isRefreshing ? 'Refreshing...' : 'Refresh'}
             </Button>
-          </a>
+            <a
+              href={analysis.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="outline" size="sm">
+                <ExternalLink className="w-4 h-4 mr-2" />
+                View on Reddit
+              </Button>
+            </a>
+          </div>
         </motion.section>
 
         {/* Hero Verdict Card */}
