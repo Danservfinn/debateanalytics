@@ -3,6 +3,8 @@
  * Comprehensive types for debate analysis, user metrics, and thread data
  */
 
+import type { FlowAnalysisResult } from './debate-scoring'
+
 // ============================================
 // Core Enums
 // ============================================
@@ -539,6 +541,9 @@ export interface ThreadAnalysisResult {
 
   // AI's structured answer to the central question
   aiAnalysis?: AIAnalysis
+
+  // Traditional debate flow analysis (when available)
+  flowAnalysis?: FlowAnalysisResult
 }
 
 // ============================================================================

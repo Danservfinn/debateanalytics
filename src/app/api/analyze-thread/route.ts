@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { detectDebates } from '@/lib/debate-detection'
 import { generateAIAnalysis } from '@/lib/ai-analysis'
+import { runFlowAnalysis } from '@/lib/traditional-scoring'
 import { storeThreadAnalysis, getBatchUserStatus } from '@/lib/neo4j'
 import { fetchRedditThread, parseRedditUrl } from '@/lib/reddit-fetcher'
 import type { ThreadAnalysisResult, DebatePosition, DebaterArchetype, AIAnalysis } from '@/types/debate'
+import type { FlowAnalysisResult, FlowComment } from '@/types/debate-scoring'
 
 /**
  * Derive the central question from thread title
@@ -456,8 +458,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<AnalyzeTh
       let topics: string[] = []
       let aiAnalysisPost: AIAnalysis | null = null
 
+      let flowAnalysisResult: FlowAnalysisResult | null = null
+
       if (hasClaudeKey && comments.length > 0) {
         const opText = `${post.title}\n\n${post.selftext || ''}`
+        const centralQuestion = deriveCentralQuestion(post.title)
+
+        // Run debate detection and AI analysis in parallel
         const detection = await detectDebates(comments, opText, post.title)
         debates = detection.debates
         verdict = detection.verdict
@@ -465,8 +472,32 @@ export async function POST(request: NextRequest): Promise<NextResponse<AnalyzeTh
 
         // Generate AI analysis (What Does AI Think?)
         if (debates.length > 0) {
-          const centralQuestion = deriveCentralQuestion(post.title)
           aiAnalysisPost = await generateAIAnalysis(debates, post.title, centralQuestion, opText)
+        }
+
+        // Run traditional flow analysis (if requested via query param or env var)
+        const enableFlowAnalysis = body.enableFlowAnalysis || process.env.ENABLE_FLOW_ANALYSIS
+        if (enableFlowAnalysis && debates.length > 0) {
+          try {
+            console.log('Running traditional flow analysis...')
+            const flowComments: FlowComment[] = comments.map(c => ({
+              id: c.id,
+              parentId: c.parent_id?.replace(/^t[13]_/, '') || null,
+              author: c.author,
+              text: c.body,
+              timestamp: new Date(c.created_utc * 1000).toISOString(),
+              karma: c.score
+            }))
+
+            flowAnalysisResult = await runFlowAnalysis({
+              comments: flowComments,
+              centralQuestion,
+              threadTitle: post.title
+            })
+            console.log(`Flow analysis complete: ${flowAnalysisResult.issues.length} issues identified`)
+          } catch (flowError) {
+            console.error('Flow analysis error (non-fatal):', flowError)
+          }
         }
       }
 
@@ -535,7 +566,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<AnalyzeTh
         claims: claims.slice(0, 50),
         fallacies: fallacies.slice(0, 50),
         topics,
-        aiAnalysis: aiAnalysisPost || undefined
+        aiAnalysis: aiAnalysisPost || undefined,
+        flowAnalysis: flowAnalysisResult || undefined
       }
 
       // Store and cache
