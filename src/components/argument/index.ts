@@ -6,3 +6,4 @@
 
 export { ArgumentComposer } from './ArgumentComposer'
 export { ArgumentAnalysisResults } from './ArgumentAnalysisResults'
+export { ScoreRadarChart } from './ScoreRadarChart'

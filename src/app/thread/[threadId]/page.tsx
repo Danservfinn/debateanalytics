@@ -37,6 +37,7 @@ import {
   deriveExecutiveSummary,
   AIThinkSection,
   ThreadNarrative,
+  FlowScoreBreakdown,
   type PositionDefinitions
 } from "@/components/analysis"
 import { staggerContainer, fadeIn } from "@/lib/animations"
@@ -431,6 +432,11 @@ export default function ThreadDetailPage() {
               {/* AI Analysis - What Does AI Think? */}
               {analysis.aiAnalysis && (
                 <AIThinkSection analysis={analysis.aiAnalysis} positionDefinitions={positionDefinitions} />
+              )}
+
+              {/* Traditional Flow Analysis - when available */}
+              {analysis.flowAnalysis && (
+                <FlowScoreBreakdown flowAnalysis={analysis.flowAnalysis} />
               )}
 
               {/* Quick Stats */}

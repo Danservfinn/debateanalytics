@@ -527,7 +527,7 @@ export function ArgumentAnalysisResults({
                             <p className="text-xs text-primary">
                               <span className="font-medium">Suggestion:</span> {issue.suggestion}
                             </p>
-                            {issue.fixedText && !isApplied && (
+                            {issue.fixedText && !isApplied && onApplyFix && (
                               <Button
                                 variant="ghost"
                                 size="sm"

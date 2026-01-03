@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from 'react'
 import type { DebateThread, DebateWinner, DebateComment } from '@/types/debate'
+import type { FlowAnalysisResult } from '@/types/debate-scoring'
+import { Gavel, CheckCircle2, XCircle } from 'lucide-react'
 
 interface DebateThreadCardProps {
   debate: DebateThread
@@ -9,6 +11,7 @@ interface DebateThreadCardProps {
   onClick?: () => void
   isExpanded?: boolean  // Controlled expansion from parent
   onCollapse?: () => void  // Callback to collapse
+  flowAnalysis?: FlowAnalysisResult // Optional flow analysis for this debate
 }
 
 /**

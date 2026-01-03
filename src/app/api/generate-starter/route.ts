@@ -15,10 +15,7 @@ interface GenerateStarterRequest {
   position: 'pro' | 'con' | 'neutral'
   proDefinition?: string
   conDefinition?: string
-  keyArguments?: Array<{
-    claim: string
-    position: string
-  }>
+  keyArguments?: string[]  // Format: "[PRO] argument text..." or "[CON] argument text..."
 }
 
 interface GenerateStarterResponse {
@@ -46,7 +43,7 @@ export async function POST(
     if (keyArguments && keyArguments.length > 0) {
       existingContext = `
 Some key arguments already made in this debate:
-${keyArguments.slice(0, 5).map(arg => `- ${arg.position.toUpperCase()}: ${arg.claim}`).join('\n')}
+${keyArguments.slice(0, 5).map(arg => `- ${arg}`).join('\n')}
 
 Your starter should offer a FRESH perspective, not repeat these points.
 `

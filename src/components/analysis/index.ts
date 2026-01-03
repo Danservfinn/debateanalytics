@@ -31,6 +31,7 @@ export type { ThreadNarrativeProps, NarrativeData, TurningPoint, ArgumentSummary
 // Phase 8: Traditional Debate Scoring UI
 export { FlowSheet } from './FlowSheet'
 export { VerdictBreakdown } from './VerdictBreakdown'
+export { FlowScoreBreakdown } from './FlowScoreBreakdown'
 
 // Shared Components
 export { PositionLegend } from './PositionLegend'
