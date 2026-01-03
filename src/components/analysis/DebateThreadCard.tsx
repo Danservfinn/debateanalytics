@@ -24,11 +24,54 @@ interface DebateThreadCardProps {
  * - Argument preview with quality scores
  * - Full argument list when expanded
  */
-export function DebateThreadCard({ debate, index, onClick, isExpanded: controlledExpanded, onCollapse }: DebateThreadCardProps) {
+export function DebateThreadCard({ debate, index, onClick, isExpanded: controlledExpanded, onCollapse, flowAnalysis }: DebateThreadCardProps) {
   const [internalExpanded, setInternalExpanded] = useState(false)
 
   // Use controlled or internal state
   const isExpanded = controlledExpanded !== undefined ? controlledExpanded : internalExpanded
+
+  // Filter flow analysis to this debate's comments
+  const debateFlowStats = useMemo(() => {
+    if (!flowAnalysis) return null
+
+    // Get comment IDs from this debate
+    const debateCommentIds = new Set(debate.replies.map(r => r.id))
+
+    // Filter arguments that belong to this debate
+    const debateArgs = flowAnalysis.arguments.filter(a => debateCommentIds.has(a.commentId))
+    if (debateArgs.length === 0) return null
+
+    const debateArgIds = new Set(debateArgs.map(a => a.id))
+
+    // Filter clashes involving these arguments
+    const debateClashes = flowAnalysis.clashes.filter(
+      c => debateArgIds.has(c.attackerId) || debateArgIds.has(c.defenderId)
+    )
+
+    // Filter issues that have arguments from this debate
+    const debateIssues = flowAnalysis.issues.filter(issue => {
+      const hasProArg = issue.proArguments.some(a => debateArgIds.has(a.id))
+      const hasConArg = issue.conArguments.some(a => debateArgIds.has(a.id))
+      return hasProArg || hasConArg
+    })
+
+    // Calculate wins
+    const proWins = debateIssues.filter(i => i.issueWinner === 'pro').length
+    const conWins = debateIssues.filter(i => i.issueWinner === 'con').length
+    const draws = debateIssues.filter(i => i.issueWinner === 'draw').length
+
+    // Get burden info
+    const burden = flowAnalysis.burden
+
+    return {
+      proWins,
+      conWins,
+      draws,
+      totalIssues: debateIssues.length,
+      totalClashes: debateClashes.length,
+      burdenMet: burden.burdenMet
+    }
+  }, [flowAnalysis, debate.replies])
 
   // Calculate position stats
   const stats = useMemo(() => {
@@ -174,6 +217,41 @@ export function DebateThreadCard({ debate, index, onClick, isExpanded: controlle
             color="danger"
           />
         </div>
+
+        {/* Flow Score - Traditional Debate Scoring */}
+        {debateFlowStats && (
+          <div className="mb-4 p-3 rounded-lg bg-secondary/30 border border-border">
+            <div className="flex items-center gap-2 mb-2">
+              <Gavel className="w-4 h-4 text-primary" />
+              <span className="text-xs font-medium text-foreground">Flow Score</span>
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="p-1.5 rounded bg-success/10">
+                <div className="text-sm font-bold text-success">{debateFlowStats.proWins}</div>
+                <div className="text-[10px] text-muted-foreground">PRO</div>
+              </div>
+              <div className="p-1.5 rounded bg-zinc-500/10">
+                <div className="text-sm font-bold text-zinc-400">{debateFlowStats.draws}</div>
+                <div className="text-[10px] text-muted-foreground">Draw</div>
+              </div>
+              <div className="p-1.5 rounded bg-danger/10">
+                <div className="text-sm font-bold text-danger">{debateFlowStats.conWins}</div>
+                <div className="text-[10px] text-muted-foreground">CON</div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between mt-2 text-[10px] text-muted-foreground">
+              <span>{debateFlowStats.totalIssues} issues • {debateFlowStats.totalClashes} clashes</span>
+              <div className="flex items-center gap-1">
+                <span className={debateFlowStats.burdenMet.pro ? 'text-success' : 'text-danger'}>
+                  {debateFlowStats.burdenMet.pro ? <CheckCircle2 className="w-3 h-3 inline" /> : <XCircle className="w-3 h-3 inline" />} PRO
+                </span>
+                <span className={debateFlowStats.burdenMet.con ? 'text-success' : 'text-danger'}>
+                  {debateFlowStats.burdenMet.con ? <CheckCircle2 className="w-3 h-3 inline" /> : <XCircle className="w-3 h-3 inline" />} CON
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Key clash preview */}
         <div className="text-sm text-muted-foreground line-clamp-2 italic border-l-2 border-primary pl-3">

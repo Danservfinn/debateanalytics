@@ -539,6 +539,7 @@ export default function ThreadDetailPage() {
                         debate={debate}
                         index={idx}
                         onClick={() => handleOpenDebateModal(debate)}
+                        flowAnalysis={analysis.flowAnalysis}
                       />
                     ))}
                   </motion.div>
