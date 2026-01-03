@@ -100,13 +100,18 @@ interface QualityResult {
 // Debate Detection Pipeline
 // ============================================================================
 
-// Limits to prevent timeout on large threads
-const MAX_COMMENTS_TOTAL = 200      // Max comments to process overall
-const MAX_DEBATES = 8               // Max number of debate threads to analyze
-const MAX_COMMENTS_PER_DEBATE = 30  // Max comments per debate thread
+// Limits optimized for Vercel Hobby tier (10s timeout)
+const MAX_COMMENTS_TOTAL = 100      // Max comments to process overall
+const MAX_DEBATES = 3               // Max number of debate threads to analyze
+const MAX_COMMENTS_PER_DEBATE = 15  // Max comments per debate thread
+
+// Fast mode for Vercel Hobby tier (10s limit)
+// Set ENABLE_AI_ANALYSIS=true in Vercel env vars if on Pro tier (60s limit)
+const FAST_MODE = process.env.VERCEL && !process.env.ENABLE_AI_ANALYSIS
 
 /**
  * Main entry point: Detect and analyze debates in a Reddit thread
+ * Uses fast mode on Vercel Hobby to avoid timeout
  */
 export async function detectDebates(
   comments: RawComment[],
@@ -134,36 +139,210 @@ export async function detectDebates(
   // Step 2: Identify debate roots (already sorted by engagement)
   const debateRoots = identifyDebateRoots(trees).slice(0, MAX_DEBATES)
 
-  console.log(`Processing ${debateRoots.length} debates from ${limitedComments.length} comments`)
+  console.log(`Processing ${debateRoots.length} debates from ${limitedComments.length} comments (fast=${FAST_MODE})`)
 
-  // Step 3-6: Process each debate
-  const debates: DebateThread[] = []
+  let debates: DebateThread[]
 
-  for (const root of debateRoots) {
-    // Check if we're approaching timeout (50s limit for 60s function)
-    if (Date.now() - startTime > 50000) {
-      console.log(`Approaching timeout, stopping at ${debates.length} debates`)
-      break
-    }
+  if (FAST_MODE) {
+    // Fast mode: Use pattern-matching instead of AI (completes in <5s)
+    debates = debateRoots
+      .map(root => processDebateFast(root, opText, threadTitle))
+      .filter((d): d is DebateThread => d !== null)
+  } else {
+    // Full AI mode: Use Claude for deep analysis
+    console.log(`Processing ${debateRoots.length} debates in parallel...`)
 
-    const debate = await processDebate(root, opText, threadTitle)
-    if (debate) {
-      debates.push(debate)
-    }
+    const debatePromises = debateRoots.map(root =>
+      processDebate(root, opText, threadTitle)
+    )
+
+    const debateResults = await Promise.all(debatePromises)
+    debates = debateResults.filter((d): d is DebateThread => d !== null)
   }
 
   // Step 7: Generate overall verdict
   const verdict = calculateVerdict(debates, comments.length)
 
-  // Extract topics dynamically (skip if running low on time)
-  let topics: string[] = []
-  if (Date.now() - startTime < 55000) {
-    topics = await extractTopics(threadTitle, opText, debates)
-  }
+  // Extract topics (fast pattern matching)
+  const topics = FAST_MODE
+    ? extractTopicsFast(threadTitle)
+    : await extractTopics(threadTitle, opText, debates)
 
   console.log(`Debate detection complete in ${Date.now() - startTime}ms`)
 
   return { debates, verdict, topics }
+}
+
+/**
+ * Fast debate processing without AI - uses pattern matching
+ * Completes in milliseconds instead of seconds
+ */
+function processDebateFast(
+  tree: CommentTree,
+  opText: string,
+  threadTitle: string
+): DebateThread | null {
+  const allComments = flattenTree(tree).slice(0, MAX_COMMENTS_PER_DEBATE)
+
+  if (allComments.length < 2) {
+    return null
+  }
+
+  // Fast position classification using keyword patterns
+  const scoredComments: DebateComment[] = allComments.map(comment => {
+    const text = comment.body.toLowerCase()
+    const position = classifyPositionFast(text, threadTitle)
+
+    return {
+      id: comment.id,
+      author: comment.author,
+      text: comment.body,
+      position: position.position,
+      positionIntensity: position.intensity,
+      qualityScore: estimateQualityFast(comment.body),
+      isConcession: /i agree|you('re| are) right|good point|fair enough|i concede/i.test(comment.body),
+      parentId: comment.parent_id?.replace(/^t[13]_/, '') || null,
+      depth: comment.depth || 0,
+      karma: comment.score,
+      createdAt: new Date(comment.created_utc * 1000).toISOString()
+    }
+  })
+
+  // Determine winner
+  const { winner, winnerReason, proScore, conScore } = determineWinner(scoredComments)
+
+  // Generate simple title
+  const title = generateTitleFast(threadTitle)
+
+  return {
+    id: `debate_${tree.comment.id}`,
+    title,
+    keyClash: 'Points of contention identified',
+    rootCommentId: tree.comment.id,
+    winner,
+    winnerReason,
+    proScore,
+    conScore,
+    replyCount: allComments.length,
+    heatLevel: calculateHeatLevel(scoredComments),
+    replies: scoredComments,
+    momentumShifts: []
+  }
+}
+
+/**
+ * Fast position classification using keywords
+ */
+function classifyPositionFast(text: string, title: string): { position: DebatePosition; intensity: number } {
+  // Agreement indicators
+  const proPatterns = /\bi agree\b|absolutely|exactly|you('re| are) right|this is correct|true|yes|support|agree with/i
+  // Disagreement indicators
+  const conPatterns = /\bi disagree\b|no[,.]|wrong|false|incorrect|but|however|not true|don't think|isn't|aren't|actually/i
+  // Question/neutral indicators
+  const neutralPatterns = /\?$|what if|could you|how about|i'm not sure|depends/i
+
+  const proMatch = text.match(proPatterns)
+  const conMatch = text.match(conPatterns)
+  const neutralMatch = text.match(neutralPatterns)
+
+  if (neutralMatch && !proMatch && !conMatch) {
+    return { position: 'neutral', intensity: 3 }
+  }
+
+  if (proMatch && !conMatch) {
+    return { position: 'pro', intensity: 7 }
+  }
+
+  if (conMatch && !proMatch) {
+    return { position: 'con', intensity: 7 }
+  }
+
+  // Both or neither - analyze further
+  if (conMatch && proMatch) {
+    // If starts with disagreement, likely con
+    if (text.indexOf(conMatch[0]) < text.indexOf(proMatch[0])) {
+      return { position: 'con', intensity: 5 }
+    }
+    return { position: 'pro', intensity: 5 }
+  }
+
+  return { position: 'neutral', intensity: 4 }
+}
+
+/**
+ * Fast quality estimation based on text features
+ */
+function estimateQualityFast(text: string): number {
+  let score = 5
+
+  // Length bonus (longer = more detailed)
+  if (text.length > 500) score += 1
+  if (text.length > 1000) score += 1
+
+  // Structure bonus (paragraphs, lists)
+  if (text.includes('\n\n')) score += 0.5
+  if (/^\s*[-*•]\s/m.test(text)) score += 0.5
+
+  // Evidence indicators
+  if (/https?:\/\/|source|study|research|according to|data shows/i.test(text)) score += 1
+
+  // Logic indicators
+  if (/therefore|because|since|thus|hence|as a result|consequently/i.test(text)) score += 0.5
+
+  // Caps = shouting = lower quality
+  if (text === text.toUpperCase() && text.length > 20) score -= 1
+
+  return Math.min(10, Math.max(1, Math.round(score * 10) / 10))
+}
+
+/**
+ * Generate title from thread title
+ */
+function generateTitleFast(threadTitle: string): string {
+  // Remove CMV prefix
+  let title = threadTitle.replace(/^CMV:\s*/i, '').trim()
+
+  // Shorten if too long
+  if (title.length > 50) {
+    title = title.substring(0, 47) + '...'
+  }
+
+  return title
+}
+
+/**
+ * Extract topics from title using patterns
+ */
+function extractTopicsFast(threadTitle: string): string[] {
+  const title = threadTitle.toLowerCase()
+  const topics: string[] = []
+
+  // Common topic patterns
+  const patterns: [RegExp, string][] = [
+    [/immigra|migration|border/i, 'immigration'],
+    [/cultur|tradition/i, 'culture'],
+    [/global|world|international/i, 'globalization'],
+    [/politi|govern|democra|republic/i, 'politics'],
+    [/econom|money|financ|market/i, 'economics'],
+    [/climate|environment|green/i, 'environment'],
+    [/health|medic|vaccine|drug/i, 'healthcare'],
+    [/tech|ai|computer|software/i, 'technology'],
+    [/educat|school|university|learn/i, 'education'],
+    [/social media|twitter|facebook|reddit/i, 'social_media'],
+  ]
+
+  for (const [pattern, topic] of patterns) {
+    if (pattern.test(title)) {
+      topics.push(topic)
+    }
+  }
+
+  // Fallback
+  if (topics.length === 0) {
+    topics.push('general_discussion')
+  }
+
+  return topics.slice(0, 5)
 }
 
 // ============================================================================
@@ -310,12 +489,17 @@ async function classifyAndScoreComments(
 ): Promise<DebateComment[]> {
   const client = getAnthropicClient()
 
-  // Batch process comments for efficiency
+  // Batch process comments in PARALLEL for speed
   const batchSize = 10
-  const results: DebateComment[] = []
+  const batches: RawComment[][] = []
 
   for (let i = 0; i < comments.length; i += batchSize) {
-    const batch = comments.slice(i, i + batchSize)
+    batches.push(comments.slice(i, i + batchSize))
+  }
+
+  // Process all batches in parallel
+  const batchPromises = batches.map(async (batch) => {
+    const batchResults: DebateComment[] = []
 
     const prompt = `You are analyzing Reddit comments in a debate thread. Be very careful about position classification.
 
@@ -396,7 +580,7 @@ Return ONLY valid JSON, no markdown.`
 
     try {
       const response = await client.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-3-5-haiku-20241022',
         max_tokens: 4096,
         messages: [{ role: 'user', content: prompt }]
       })
@@ -418,7 +602,7 @@ Return ONLY valid JSON, no markdown.`
         for (const analysis of parsed.analyses) {
           const comment = batch[analysis.commentIndex]
           if (comment) {
-            results.push({
+            batchResults.push({
               id: comment.id,
               author: comment.author,
               text: comment.body,
@@ -440,7 +624,7 @@ Return ONLY valid JSON, no markdown.`
       console.error('Claude analysis error:', error)
       // Fall back to basic classification for failed batch
       for (const comment of batch) {
-        results.push({
+        batchResults.push({
           id: comment.id,
           author: comment.author,
           text: comment.body,
@@ -455,9 +639,12 @@ Return ONLY valid JSON, no markdown.`
         })
       }
     }
-  }
+    return batchResults
+  })
 
-  return results
+  // Wait for all batches to complete and flatten results
+  const allBatchResults = await Promise.all(batchPromises)
+  return allBatchResults.flat()
 }
 
 // ============================================================================
@@ -608,7 +795,7 @@ async function generateDebateTitle(
 
   try {
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-haiku-4-20250514',
       max_tokens: 256,
       messages: [{
         role: 'user',
@@ -757,7 +944,7 @@ async function extractTopics(
 
   try {
     const response = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-haiku-4-20250514',
       max_tokens: 256,
       messages: [{
         role: 'user',
