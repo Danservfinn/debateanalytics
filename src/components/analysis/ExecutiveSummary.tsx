@@ -771,24 +771,45 @@ export function deriveExecutiveSummary(
       .replace(/^CMV:\s*/i, '')
       .replace(/\?+\s*I don't see it\.?$/i, '')
       .replace(/\?+$/i, '')
+      .trim()
 
     // If it's a statement, convert to question
     if (!cleanedTitle.includes('?')) {
-      question = `Is it true that ${cleanedTitle.toLowerCase()}?`
+      question = convertStatementToQuestion(cleanedTitle)
     } else {
       question = cleanedTitle
     }
 
-    // Determine PRO/CON definitions based on thread sentiment
-    // If thread title is skeptical ("I don't see it"), CON aligns with OP
-    const isSkepticalTitle = /don't see|not convinced|disagree|wrong|false/i.test(threadTitle)
+    // Extract the core proposition for specific PRO/CON definitions
+    // Try to identify what's being claimed in the title
+    const coreProposition = cleanedTitle
+      .replace(/^(I think|I believe|In my opinion|IMO)\s*/i, '')
+      .replace(/\.$/, '')
+      .trim()
 
-    proDefinition = isSkepticalTitle
-      ? `Defends the position against OP's skepticism`
-      : `Supports the claim made in the thread`
-    conDefinition = isSkepticalTitle
-      ? `Agrees with OP's skepticism`
-      : `Opposes the claim made in the thread`
+    // Generate specific definitions based on the proposition
+    // Check for common claim patterns
+    const isPattern = coreProposition.match(/^(.+?)\s+(is|are|was|were)\s+(.+)$/i)
+    const shouldPattern = coreProposition.match(/^(.+?)\s+(should|shouldn't|should not|must|need to)\s+(.+)$/i)
+
+    if (isPattern) {
+      // "X is Y" -> PRO: "Agrees X is Y", CON: "Disagrees X is Y"
+      const [, subject, verb, predicate] = isPattern
+      const shortPredicate = predicate.length > 40 ? predicate.slice(0, 37) + '...' : predicate
+      proDefinition = `Agrees that ${subject.toLowerCase()} ${verb} ${shortPredicate}`
+      conDefinition = `Disagrees that ${subject.toLowerCase()} ${verb} ${shortPredicate}`
+    } else if (shouldPattern) {
+      // "X should Y" -> PRO: "Supports X should Y", CON: "Opposes X should Y"
+      const [, subject, modal, action] = shouldPattern
+      const shortAction = action.length > 40 ? action.slice(0, 37) + '...' : action
+      proDefinition = `Supports: ${subject} ${modal} ${shortAction}`
+      conDefinition = `Opposes: ${subject} ${modal} ${shortAction}`
+    } else {
+      // Fallback: use the proposition directly but shortened
+      const shortProp = coreProposition.length > 50 ? coreProposition.slice(0, 47) + '...' : coreProposition
+      proDefinition = `Agrees: "${shortProp}"`
+      conDefinition = `Disagrees: "${shortProp}"`
+    }
   }
 
   // Calculate wins
