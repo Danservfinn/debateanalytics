@@ -177,16 +177,7 @@ export default function ThreadDetailPage() {
           }
         }
 
-        // Check localStorage for previously analyzed thread (PRIORITY)
-        const storedThread = getStoredThread(threadId)
-        if (storedThread) {
-          console.log('Using cached thread from localStorage:', threadId)
-          setAnalysis(storedThread)
-          setIsLoading(false)
-          return
-        }
-
-        // Try to load from static JSON file first (for pre-analyzed threads)
+        // When fromJson=true, try static JSON file FIRST (has latest analysis with flowAnalysis)
         if (fromJson) {
           try {
             const staticResponse = await fetch(`/data/analysis/${threadId}.json`)
@@ -194,13 +185,22 @@ export default function ThreadDetailPage() {
               const staticData = await staticResponse.json() as ThreadAnalysisResult
               console.log('Loaded from static JSON file:', threadId, 'flowAnalysis:', !!staticData.flowAnalysis)
               setAnalysis(staticData)
-              saveThread(staticData) // Persist to localStorage
+              saveThread(staticData) // Update localStorage with latest data
               setIsLoading(false)
               return
             }
           } catch (staticErr) {
-            console.log('No static JSON file found, falling back to API')
+            console.log('No static JSON file found, checking localStorage')
           }
+        }
+
+        // Check localStorage for previously analyzed thread
+        const storedThread = getStoredThread(threadId)
+        if (storedThread) {
+          console.log('Using cached thread from localStorage:', threadId)
+          setAnalysis(storedThread)
+          setIsLoading(false)
+          return
         }
 
         // Only fetch from API if not cached
