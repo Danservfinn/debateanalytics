@@ -186,6 +186,23 @@ export default function ThreadDetailPage() {
           return
         }
 
+        // Try to load from static JSON file first (for pre-analyzed threads)
+        if (fromJson) {
+          try {
+            const staticResponse = await fetch(`/data/analysis/${threadId}.json`)
+            if (staticResponse.ok) {
+              const staticData = await staticResponse.json() as ThreadAnalysisResult
+              console.log('Loaded from static JSON file:', threadId, 'flowAnalysis:', !!staticData.flowAnalysis)
+              setAnalysis(staticData)
+              saveThread(staticData) // Persist to localStorage
+              setIsLoading(false)
+              return
+            }
+          } catch (staticErr) {
+            console.log('No static JSON file found, falling back to API')
+          }
+        }
+
         // Only fetch from API if not cached
         // Build URL for analysis
         const urlParam = originalUrl || `https://reddit.com/r/changemyview/comments/${threadId}`
