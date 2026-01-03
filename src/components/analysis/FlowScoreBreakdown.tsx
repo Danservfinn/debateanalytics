@@ -558,7 +558,7 @@ function SpeakerRankings({ speakers }: { speakers: SpeakerEvaluation[] }) {
                   speaker.position === 'pro' ? 'badge-strong' : 'badge-weak'
                 }`}
               >
-                {speaker.position.toUpperCase()}
+                {speaker.position?.toUpperCase() || 'N/A'}
               </Badge>
             </div>
             <div className="flex items-center gap-3 text-xs text-muted-foreground mt-0.5">
