@@ -105,9 +105,9 @@ const MAX_COMMENTS_TOTAL = 100      // Max comments to process overall
 const MAX_DEBATES = 3               // Max number of debate threads to analyze
 const MAX_COMMENTS_PER_DEBATE = 15  // Max comments per debate thread
 
-// Fast mode for Vercel Hobby tier (10s limit)
-// Set ENABLE_AI_ANALYSIS=true in Vercel env vars if on Pro tier (60s limit)
-const FAST_MODE = process.env.VERCEL && !process.env.ENABLE_AI_ANALYSIS
+// Fast mode disabled - parallel processing + Haiku model keeps under 60s limit
+// Re-enable with: const FAST_MODE = !process.env.ENABLE_AI_ANALYSIS
+const FAST_MODE = false
 
 /**
  * Main entry point: Detect and analyze debates in a Reddit thread
