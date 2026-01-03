@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   X,
@@ -11,7 +11,10 @@ import {
   ThumbsUp,
   ThumbsDown,
   Minus,
-  HelpCircle
+  HelpCircle,
+  Sparkles,
+  Save,
+  Trash2
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -23,6 +26,9 @@ import {
 } from '@/components/ui/dialog'
 import { ArgumentAnalysisResults } from './ArgumentAnalysisResults'
 import type { ArgumentPosition, ArgumentContext, ArgumentAnalysisResult } from '@/types/argument'
+
+// Draft storage key prefix
+const DRAFT_STORAGE_KEY = 'debate-analytics-argument-draft'
 
 interface ArgumentComposerProps {
   isOpen: boolean
@@ -60,16 +66,111 @@ const POSITION_CONFIG = {
 const MAX_CHARS = 2000
 const MIN_CHARS = 20
 
+// Generate a draft key based on central question
+function getDraftKey(question: string): string {
+  const hash = question.slice(0, 50).replace(/\s+/g, '-').toLowerCase()
+  return `${DRAFT_STORAGE_KEY}-${hash}`
+}
+
+interface Draft {
+  text: string
+  position: ArgumentPosition
+  savedAt: number
+}
+
 export function ArgumentComposer({ isOpen, onClose, context }: ArgumentComposerProps) {
   const [position, setPosition] = useState<ArgumentPosition>('pro')
   const [text, setText] = useState('')
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [analysisResult, setAnalysisResult] = useState<ArgumentAnalysisResult | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [isGeneratingStarter, setIsGeneratingStarter] = useState(false)
+  const [hasDraft, setHasDraft] = useState(false)
+  const [lastSaved, setLastSaved] = useState<Date | null>(null)
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const autoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const charCount = text.length
   const isValidLength = charCount >= MIN_CHARS && charCount <= MAX_CHARS
-  const canSubmit = isValidLength && !isAnalyzing
+  const canSubmit = isValidLength && !isAnalyzing && !isGeneratingStarter
+
+  // Load draft on mount
+  useEffect(() => {
+    if (isOpen && context.centralQuestion) {
+      const draftKey = getDraftKey(context.centralQuestion)
+      try {
+        const saved = localStorage.getItem(draftKey)
+        if (saved) {
+          const draft: Draft = JSON.parse(saved)
+          setText(draft.text)
+          setPosition(draft.position)
+          setHasDraft(true)
+          setLastSaved(new Date(draft.savedAt))
+        }
+      } catch (e) {
+        console.error('Error loading draft:', e)
+      }
+    }
+  }, [isOpen, context.centralQuestion])
+
+  // Auto-save draft when text or position changes
+  useEffect(() => {
+    if (!isOpen || !context.centralQuestion || text.length === 0) return
+
+    // Clear existing timeout
+    if (autoSaveTimeoutRef.current) {
+      clearTimeout(autoSaveTimeoutRef.current)
+    }
+
+    // Debounce save by 1 second
+    autoSaveTimeoutRef.current = setTimeout(() => {
+      const draftKey = getDraftKey(context.centralQuestion)
+      const draft: Draft = {
+        text,
+        position,
+        savedAt: Date.now()
+      }
+      try {
+        localStorage.setItem(draftKey, JSON.stringify(draft))
+        setHasDraft(true)
+        setLastSaved(new Date())
+      } catch (e) {
+        console.error('Error saving draft:', e)
+      }
+    }, 1000)
+
+    return () => {
+      if (autoSaveTimeoutRef.current) {
+        clearTimeout(autoSaveTimeoutRef.current)
+      }
+    }
+  }, [text, position, isOpen, context.centralQuestion])
+
+  // Keyboard shortcut: Cmd/Ctrl + Enter to submit
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter' && canSubmit && !analysisResult) {
+        e.preventDefault()
+        handleAnalyze()
+      }
+    }
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown)
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen, canSubmit, analysisResult])
+
+  // Clear draft
+  const clearDraft = useCallback(() => {
+    if (context.centralQuestion) {
+      const draftKey = getDraftKey(context.centralQuestion)
+      localStorage.removeItem(draftKey)
+      setHasDraft(false)
+      setLastSaved(null)
+    }
+  }, [context.centralQuestion])
 
   const handleAnalyze = useCallback(async () => {
     if (!canSubmit) return
@@ -116,6 +217,9 @@ export function ArgumentComposer({ isOpen, onClose, context }: ArgumentComposerP
       setPosition('pro')
       setAnalysisResult(null)
       setError(null)
+      setIsGeneratingStarter(false)
+      setHasDraft(false)
+      setLastSaved(null)
     }, 300)
   }, [onClose])
 
@@ -123,6 +227,48 @@ export function ArgumentComposer({ isOpen, onClose, context }: ArgumentComposerP
     setText(improvedText)
     setAnalysisResult(null)
   }, [])
+
+  // AI Kickstarter - generate a starter argument
+  const handleGenerateStarter = useCallback(async () => {
+    setIsGeneratingStarter(true)
+    setError(null)
+
+    try {
+      const response = await fetch('/api/generate-starter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          centralQuestion: context.centralQuestion,
+          position,
+          proDefinition: context.proDefinition,
+          conDefinition: context.conDefinition,
+          keyArguments: context.keyArguments
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success && result.starterText) {
+        setText(result.starterText)
+        // Focus the textarea after inserting text
+        setTimeout(() => {
+          textareaRef.current?.focus()
+          // Move cursor to end
+          if (textareaRef.current) {
+            textareaRef.current.selectionStart = result.starterText.length
+            textareaRef.current.selectionEnd = result.starterText.length
+          }
+        }, 100)
+      } else {
+        setError(result.error || 'Failed to generate starter. Try writing your own!')
+      }
+    } catch (err) {
+      console.error('Starter generation error:', err)
+      setError('Failed to generate starter. Try writing your own!')
+    }
+
+    setIsGeneratingStarter(false)
+  }, [position, context])
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
@@ -213,10 +359,33 @@ export function ArgumentComposer({ isOpen, onClose, context }: ArgumentComposerP
 
               {/* Text Area */}
               <div className="mb-4">
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Your Argument
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-sm font-medium text-foreground">
+                    Your Argument
+                  </label>
+                  {/* Help me start button */}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleGenerateStarter}
+                    disabled={isGeneratingStarter || isAnalyzing || text.length > 50}
+                    className="text-xs h-7 text-primary hover:text-primary/80"
+                  >
+                    {isGeneratingStarter ? (
+                      <>
+                        <Loader2 className="w-3 h-3 mr-1.5 animate-spin" />
+                        Generating...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-3 h-3 mr-1.5" />
+                        Help me start
+                      </>
+                    )}
+                  </Button>
+                </div>
                 <textarea
+                  ref={textareaRef}
                   value={text}
                   onChange={(e) => setText(e.target.value)}
                   placeholder="Write your argument here. Be clear, provide evidence, and address potential counterarguments..."
@@ -224,19 +393,42 @@ export function ArgumentComposer({ isOpen, onClose, context }: ArgumentComposerP
                   maxLength={MAX_CHARS}
                 />
                 <div className="flex justify-between items-center mt-2">
-                  <p className="text-xs text-muted-foreground">
-                    {charCount < MIN_CHARS && charCount > 0 && (
-                      <span className="text-warning">
-                        At least {MIN_CHARS} characters required
+                  <div className="flex items-center gap-3">
+                    <p className="text-xs text-muted-foreground">
+                      {charCount < MIN_CHARS && charCount > 0 && (
+                        <span className="text-warning">
+                          At least {MIN_CHARS} characters required
+                        </span>
+                      )}
+                      {charCount >= MIN_CHARS && charCount <= MAX_CHARS && (
+                        <span className="text-success">Ready to analyze</span>
+                      )}
+                    </p>
+                    {/* Draft indicator */}
+                    {hasDraft && lastSaved && (
+                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                        <Save className="w-3 h-3" />
+                        Saved {lastSaved.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </span>
                     )}
-                    {charCount >= MIN_CHARS && charCount <= MAX_CHARS && (
-                      <span className="text-success">Ready to analyze</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {hasDraft && (
+                      <button
+                        onClick={() => {
+                          setText('')
+                          clearDraft()
+                        }}
+                        className="flex items-center gap-1 text-xs text-muted-foreground hover:text-red-400 transition-colors"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                        Clear
+                      </button>
                     )}
-                  </p>
-                  <p className={`text-xs ${charCount > MAX_CHARS * 0.9 ? 'text-warning' : 'text-muted-foreground'}`}>
-                    {charCount}/{MAX_CHARS}
-                  </p>
+                    <p className={`text-xs ${charCount > MAX_CHARS * 0.9 ? 'text-warning' : 'text-muted-foreground'}`}>
+                      {charCount}/{MAX_CHARS}
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -264,27 +456,39 @@ export function ArgumentComposer({ isOpen, onClose, context }: ArgumentComposerP
               </div>
 
               {/* Actions */}
-              <div className="flex justify-end gap-3">
-                <Button variant="outline" onClick={handleClose}>
-                  Cancel
-                </Button>
-                <Button
-                  onClick={handleAnalyze}
-                  disabled={!canSubmit}
-                  className="min-w-[160px]"
-                >
-                  {isAnalyzing ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Analyzing...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4 mr-2" />
-                      Analyze Argument
-                    </>
-                  )}
-                </Button>
+              <div className="flex items-center justify-between">
+                <p className="text-xs text-muted-foreground">
+                  <kbd className="px-1.5 py-0.5 rounded bg-secondary border border-border text-[10px] font-mono">
+                    {typeof navigator !== 'undefined' && navigator.platform?.includes('Mac') ? '⌘' : 'Ctrl'}
+                  </kbd>
+                  {' + '}
+                  <kbd className="px-1.5 py-0.5 rounded bg-secondary border border-border text-[10px] font-mono">
+                    Enter
+                  </kbd>
+                  {' to analyze'}
+                </p>
+                <div className="flex gap-3">
+                  <Button variant="outline" onClick={handleClose}>
+                    Cancel
+                  </Button>
+                  <Button
+                    onClick={handleAnalyze}
+                    disabled={!canSubmit}
+                    className="min-w-[160px]"
+                  >
+                    {isAnalyzing ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Analyzing...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Analyze Argument
+                      </>
+                    )}
+                  </Button>
+                </div>
               </div>
             </motion.div>
           ) : (
