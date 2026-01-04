@@ -1,0 +1,72 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "crons": [
+    {
+      "path": "/api/cron/keepalive",
+      "schedule": "0 8 * * *"
+    }
+  ],
+  "functions": {
+    "src/app/api/cron/process-and-remind/route.ts": {
+      "maxDuration": 30
+    },
+    "src/app/api/**/*.ts": {
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self' https://*.whop.com https://whop.com"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "ALLOW-FROM https://whop.com"
+        },
+        {
+          "key": "x-vercel-sso-protection",
+          "value": "none"
+        }
+      ]
+    },
+    {
+      "source": "/api/webhooks/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "x-vercel-sso-protection",
+          "value": "none"
+        }
+      ]
+    },
+    {
+      "source": "/api/cases/export",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "ALLOW_INSECURE_DEV": "false"
+  }
+}
