@@ -2,15 +2,13 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { MessageSquare, Users, Award, AlertTriangle, Link2, User } from "lucide-react"
+import { MessageSquare, Users, Award, AlertTriangle } from "lucide-react"
 import { Navbar } from "@/components/layout/Navbar"
 import { FloatingShapes } from "@/components/layout/FloatingShapes"
 import { UserSearch } from "@/components/dashboard/UserSearch"
-import { ThreadSearch } from "@/components/dashboard/ThreadSearch"
 import { MetricCard } from "@/components/dashboard/MetricCard"
 import { ThreadCard } from "@/components/dashboard/ThreadCard"
 import { SkeletonMetricCard, SkeletonThreadCard } from "@/components/ui/skeleton"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { loadManifest, loadAllThreads } from "@/lib/data"
 import { getStoredThreads, getStoredStats } from "@/lib/storage"
 import { staggerContainer } from "@/lib/animations"
@@ -115,32 +113,10 @@ export default function Dashboard() {
           </p>
         </motion.section>
 
-        {/* Search Section with Tabs */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="py-4"
-        >
-          <Tabs defaultValue="thread" className="w-full max-w-2xl mx-auto">
-            <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="thread" className="flex items-center gap-2">
-                <Link2 className="w-4 h-4" />
-                Analyze Thread
-              </TabsTrigger>
-              <TabsTrigger value="user" className="flex items-center gap-2">
-                <User className="w-4 h-4" />
-                Analyze User
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="thread">
-              <ThreadSearch />
-            </TabsContent>
-            <TabsContent value="user">
-              <UserSearch />
-            </TabsContent>
-          </Tabs>
-        </motion.section>
+        {/* User Search */}
+        <section className="py-4">
+          <UserSearch />
+        </section>
 
         {/* Stats Overview */}
         <section className="space-y-4">
@@ -225,7 +201,7 @@ export default function Dashboard() {
                 <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p>No threads analyzed yet.</p>
                 <p className="text-sm mt-2">
-                  Paste a Reddit thread URL above to get started!
+                  Search for a Reddit user above to get started, or check back soon!
                 </p>
               </div>
             )}
