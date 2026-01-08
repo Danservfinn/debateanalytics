@@ -1,0 +1,547 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * PARSE - THE NEWSROOM
+ * Editorial Authority Design System
+ * Inspired by: NYT, The Economist, Financial Times, The Atlantic
+ * Aesthetic: Newspaper heritage, journalistic trust, authoritative typography
+ */
+
+@layer base {
+  :root {
+    /* The Newsroom - Cream & Ink */
+    --background: 40 30% 96%; /* Warm newsprint cream #f7f4ef */
+    --foreground: 30 10% 12%; /* Rich ink black */
+    --card: 40 25% 98%; /* Pure cream white */
+    --card-foreground: 30 10% 12%;
+    --popover: 40 25% 99%;
+    --popover-foreground: 30 10% 12%;
+
+    /* Primary: Editorial Red - The classic newspaper accent */
+    --primary: 0 72% 45%; /* Deep editorial red #c41e1e */
+    --primary-foreground: 40 30% 98%;
+
+    /* Secondary: Slate blue - Authority & trust */
+    --secondary: 215 25% 27%; /* Deep navy slate #333d4d */
+    --secondary-foreground: 40 30% 96%;
+
+    /* Muted: Warm gray with newsprint tint */
+    --muted: 35 15% 90%;
+    --muted-foreground: 30 10% 40%;
+
+    /* Accent: Gold for highlights & awards */
+    --accent: 43 74% 49%; /* Journalistic gold #d4a012 */
+    --accent-foreground: 30 10% 12%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 30% 98%;
+
+    /* Borders - Hairline rules like newspapers */
+    --border: 35 15% 85%;
+    --input: 35 15% 88%;
+    --ring: 0 72% 45%;
+
+    /* Sharp corners for editorial precision */
+    --radius: 0.125rem;
+  }
+
+  /* Dark Edition - Evening Read */
+  .dark {
+    --background: 220 15% 8%; /* Deep charcoal #111318 */
+    --foreground: 40 15% 92%; /* Cream text */
+    --card: 220 15% 11%;
+    --card-foreground: 40 15% 92%;
+    --popover: 220 15% 10%;
+    --popover-foreground: 40 15% 92%;
+
+    --primary: 0 65% 55%; /* Brighter red for dark */
+    --primary-foreground: 40 15% 98%;
+
+    --secondary: 215 20% 35%;
+    --secondary-foreground: 40 15% 92%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 40 10% 60%;
+
+    --accent: 43 70% 55%;
+    --accent-foreground: 220 15% 8%;
+
+    --border: 220 10% 20%;
+    --input: 220 10% 18%;
+    --ring: 0 65% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    @apply antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+}
+
+/* ==========================================================================
+   EDITORIAL TYPOGRAPHY SYSTEM
+   Inspired by newspaper mastheads and premium publications
+   ========================================================================== */
+
+@layer utilities {
+  /* Masthead - For the main title/logo */
+  .font-masthead {
+    font-family: var(--font-playfair), Georgia, 'Times New Roman', serif;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    font-style: normal;
+  }
+
+  /* Headlines - Article titles */
+  .font-headline {
+    font-family: var(--font-playfair), Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  /* Deck/Subheadline - Secondary headlines */
+  .font-deck {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    font-style: italic;
+  }
+
+  /* Byline - Author attribution */
+  .font-byline {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+  }
+
+  /* Body - Article text */
+  .font-body {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  /* Section labels */
+  .font-section {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+
+  /* Display font for legacy reference */
+  .font-display {
+    font-family: var(--font-playfair), Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .font-display-bold {
+    font-family: var(--font-playfair), Georgia, 'Times New Roman', serif;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+}
+
+/* ==========================================================================
+   NEWSPAPER RULES & DIVIDERS
+   Classic hairline rules that define editorial design
+   ========================================================================== */
+
+@layer utilities {
+  /* Single hairline rule */
+  .rule {
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  /* Double rule - section dividers */
+  .rule-double {
+    border-bottom: 3px double hsl(var(--foreground) / 0.2);
+  }
+
+  /* Heavy rule - major sections */
+  .rule-heavy {
+    border-bottom: 2px solid hsl(var(--foreground));
+  }
+
+  /* Decorative rule with accent */
+  .rule-accent {
+    position: relative;
+  }
+  .rule-accent::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: hsl(var(--primary));
+  }
+
+  /* Oxford rule - thin-thick-thin */
+  .rule-oxford {
+    border-top: 1px solid hsl(var(--foreground) / 0.3);
+    border-bottom: 1px solid hsl(var(--foreground) / 0.3);
+    padding: 2px 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 45%,
+      hsl(var(--foreground) / 0.15) 45%,
+      hsl(var(--foreground) / 0.15) 55%,
+      transparent 55%
+    );
+  }
+}
+
+/* ==========================================================================
+   EDITORIAL COMPONENTS
+   Cards, badges, and containers with newspaper aesthetics
+   ========================================================================== */
+
+@layer utilities {
+  /* Article card */
+  .card-editorial {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    transition: all 0.2s ease;
+  }
+  .card-editorial:hover {
+    box-shadow: 0 2px 12px hsl(var(--foreground) / 0.08);
+    border-color: hsl(var(--foreground) / 0.15);
+  }
+
+  /* Section label badge */
+  .badge-section {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Breaking news badge */
+  .badge-breaking {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: pulse-subtle 2s ease-in-out infinite;
+  }
+
+  /* Dateline */
+  .dateline {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.75rem;
+    color: hsl(var(--muted-foreground));
+    letter-spacing: 0.02em;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    position: relative;
+    padding: 1.5rem 2rem;
+    border-top: 2px solid hsl(var(--foreground));
+    border-bottom: 2px solid hsl(var(--foreground));
+    font-family: var(--font-playfair), Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  /* Drop cap */
+  .drop-cap::first-letter {
+    float: left;
+    font-family: var(--font-playfair), Georgia, serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    line-height: 0.8;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    color: hsl(var(--primary));
+  }
+}
+
+/* ==========================================================================
+   MASTHEAD & NAVIGATION STYLES
+   Classic newspaper header treatments
+   ========================================================================== */
+
+@layer utilities {
+  /* Masthead container */
+  .masthead {
+    border-bottom: 1px solid hsl(var(--border));
+    background: hsl(var(--background));
+  }
+
+  /* Masthead with double rule */
+  .masthead-double {
+    border-bottom: 3px double hsl(var(--foreground) / 0.2);
+    padding-bottom: 0.5rem;
+  }
+
+  /* Section navigation */
+  .nav-section {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: hsl(var(--muted-foreground));
+    transition: color 0.15s ease;
+  }
+  .nav-section:hover {
+    color: hsl(var(--foreground));
+  }
+  .nav-section.active {
+    color: hsl(var(--primary));
+    font-weight: 600;
+  }
+
+  /* Edition date bar */
+  .edition-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid hsl(var(--border));
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.7rem;
+    color: hsl(var(--muted-foreground));
+    letter-spacing: 0.03em;
+  }
+}
+
+/* ==========================================================================
+   COLUMN LAYOUTS
+   Classic newspaper multi-column arrangements
+   ========================================================================== */
+
+@layer utilities {
+  /* Newspaper columns */
+  .columns-news {
+    column-count: 2;
+    column-gap: 2rem;
+    column-rule: 1px solid hsl(var(--border));
+  }
+
+  @media (min-width: 1024px) {
+    .columns-news-lg {
+      column-count: 3;
+      column-gap: 2.5rem;
+      column-rule: 1px solid hsl(var(--border));
+    }
+  }
+
+  /* Prevent column breaks */
+  .no-break {
+    break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+   SCORE & METRIC DISPLAYS
+   Editorial treatment for truth scores and analysis metrics
+   ========================================================================== */
+
+@layer utilities {
+  /* Score display - large editorial number */
+  .score-editorial {
+    font-family: var(--font-playfair), Georgia, serif;
+    font-weight: 900;
+    font-size: 4rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Metric label */
+  .metric-label {
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Score indicator bar */
+  .score-bar {
+    height: 4px;
+    background: hsl(var(--muted));
+    position: relative;
+    overflow: hidden;
+  }
+  .score-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: hsl(var(--primary));
+    transition: width 0.6s ease;
+  }
+}
+
+/* ==========================================================================
+   ANIMATION & TRANSITIONS
+   Subtle, professional movements
+   ========================================================================== */
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.3s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ==========================================================================
+   PRINT-INSPIRED TEXTURES
+   Subtle newsprint effects
+   ========================================================================== */
+
+@layer utilities {
+  /* Subtle paper texture overlay */
+  .texture-newsprint {
+    position: relative;
+  }
+  .texture-newsprint::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  /* Ink stamp effect */
+  .ink-stamp {
+    position: relative;
+  }
+  .ink-stamp::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      hsl(var(--foreground) / 0.03) 100%
+    );
+    pointer-events: none;
+  }
+}
+
+/* ==========================================================================
+   UTILITY OVERRIDES FOR NEWSROOM
+   ========================================================================== */
+
+/* Button overrides for editorial style */
+.btn-editorial {
+  @apply px-6 py-2.5;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: all 0.15s ease;
+}
+
+.btn-editorial-primary {
+  @apply btn-editorial;
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+}
+.btn-editorial-primary:hover {
+  background: hsl(var(--primary));
+}
+
+.btn-editorial-outline {
+  @apply btn-editorial;
+  background: transparent;
+  border: 1px solid hsl(var(--foreground));
+  color: hsl(var(--foreground));
+}
+.btn-editorial-outline:hover {
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
+}
+
+/* Legacy class support */
+.gold-gradient {
+  color: hsl(var(--primary));
+}
+
+.text-glow {
+  /* No glow in editorial - clean typography */
+}
+
+.glass, .glass-subtle {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.card-luxury {
+  @apply card-editorial;
+}
+
+.gold-shimmer {
+  display: none;
+}
+
+.border-gold-subtle {
+  border-color: hsl(var(--border));
+}
