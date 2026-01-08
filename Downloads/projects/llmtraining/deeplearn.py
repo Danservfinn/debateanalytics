@@ -437,7 +437,7 @@ def main_loop():
       4. Repeats every fixed cycle (e.g., 60 seconds).
     """
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [STARTUP] Device: {device} | Working Directory: {os.getcwd()}")
-    cycle_length = 60  # seconds per cycle
+    cycle_length = 600 # seconds per cycle
     while True:
         cycle_start = time.time()
         print("\n" + "="*60)

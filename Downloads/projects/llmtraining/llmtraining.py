@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 import os
 import json
+import time
 from datetime import datetime
+import torch
 from torch.utils.data import Dataset
 from transformers import (
     AutoTokenizer,
@@ -10,11 +12,13 @@ from transformers import (
     TrainingArguments,
     DataCollatorForLanguageModeling,
 )
-from transformers.tokenization_utils_base import BatchEncoding  # Explicit import
+
+# Disable parallelism in tokenizers to avoid deadlocks/warnings.
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 def print_log(tag, message):
-    """Print a timestamped log message (time only)."""
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] [{tag}] {message}")
+    """Print a timestamped log message and flush stdout immediately."""
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] [{tag}] {message}", flush=True)
 
 def make_serializable(obj):
     """
@@ -35,8 +39,8 @@ def make_serializable(obj):
 
 class TextFilesDataset(Dataset):
     """
-    A custom Dataset that reads text files from a folder,
-    tokenizes them, and caches the tokenization result.
+    A custom Dataset that reads text files from a folder, tokenizes them,
+    and caches the tokenization result.
     """
     def __init__(self, folder, tokenizer=None, max_length=512):
         print_log("DATASET INIT", f"Initializing dataset from folder: {folder}")
@@ -58,14 +62,14 @@ class TextFilesDataset(Dataset):
         file_path = self.file_paths[idx]
         cache_file = os.path.join(self.cache_dir, os.path.basename(file_path) + ".cache")
         
-        # Try to load from cache if it exists.
+        # Try to load from cache if available.
         if os.path.exists(cache_file):
             try:
                 with open(cache_file, "r", encoding="utf-8") as f:
                     cached_content = f.read().strip()
                 if cached_content:
                     tokenized = json.loads(cached_content)
-                    # Check that cached data is in valid format by verifying it has input_ids.
+                    # Verify that cache is valid by checking for required keys.
                     if isinstance(tokenized, dict) and "input_ids" in tokenized:
                         print_log("CACHE", f"Loaded cache for {os.path.basename(file_path)}")
                         return tokenized
@@ -75,23 +79,21 @@ class TextFilesDataset(Dataset):
                 print_log("CACHE", f"Error loading cache for {file_path}: {e}")
                 os.remove(cache_file)
         
-        # Read and process the raw text file.
+        # Process raw text file.
         print_log("READ", f"Processing file: {os.path.basename(file_path)}")
         with open(file_path, "r", encoding="utf-8") as f:
             text = f.read().strip()
         
         if self.tokenizer is not None:
-            # Tokenize the text.
             tokenized = self.tokenizer(
                 text,
                 truncation=True,
                 padding="max_length",
                 max_length=self.max_length
             )
+            # If tokenized is a BatchEncoding, convert it to a dict.
             if hasattr(tokenized, "to_dict"):
-            if isinstance(tokenized, BatchEncoding):
                 tokenized = tokenized.to_dict()
-            # Duplicate input_ids into labels.
             tokenized["labels"] = tokenized["input_ids"].copy()
             
             # --- CLEANING STEP: Ensure tokens are valid indices ---
@@ -104,16 +106,13 @@ class TextFilesDataset(Dataset):
             tokenized["labels"] = tokenized["input_ids"].copy()
             # --- END CLEANING STEP ---
             
-            # Convert recursively into JSON-serializable types.
             tokenized = make_serializable(tokenized)
             try:
-                # Force a JSON round-trip so that the object is pure Python.
                 tokenized = json.loads(json.dumps(tokenized))
             except Exception as e:
                 print_log("JSON", f"JSON conversion failed for {file_path}: {e}")
                 raise e
             try:
-                # Save tokenized data to cache.
                 with open(cache_file, "w", encoding="utf-8") as f:
                     json.dump(tokenized, f, indent=2)
                 print_log("CACHE", f"Saved cache for {os.path.basename(file_path)}")
@@ -122,83 +121,83 @@ class TextFilesDataset(Dataset):
             return tokenized
         return {"text": text}
 
+# Force training on CPU
+device = torch.device("cpu")
+torch.set_num_threads(8)
+print_log("DEVICE SELECT", "Running on CPU")
+
+# Define the output directory for training artifacts.
+output_dir = "./output"
+
+# Create training arguments with CPU-oriented settings.
+training_args = TrainingArguments(
+    output_dir=output_dir,
+    num_train_epochs=3,
+    per_device_train_batch_size=1,           # Minimal batch size for CPU usage.
+    per_device_eval_batch_size=1,
+    gradient_accumulation_steps=4,
+    learning_rate=5e-5,
+    warmup_steps=100,
+    weight_decay=0.01,
+    logging_steps=10,
+    save_steps=50,
+    eval_steps=50,
+    eval_strategy="steps",
+    load_best_model_at_end=True,
+    no_cuda=True,                          # Force CPU usage
+    dataloader_num_workers=1,              # Limit the number of DataLoader workers.
+    run_name="llmtraining-run-cpu",
+    optim="adamw_torch",
+)
+
+# Moved DummyDataset to top level so it can be pickled for multiprocessing.
+class DummyDataset(Dataset):
+    def __init__(self, tokenizer, length=100):
+        self.tokenizer = tokenizer
+        self.length = length
+
+    def __len__(self):
+        return self.length
+
+    def __getitem__(self, idx):
+        sample = "This is a dummy sample for training."
+        encoding = self.tokenizer(sample, truncation=True, padding="max_length", max_length=64)
+        encoding["labels"] = encoding["input_ids"].copy()
+        return encoding
+
 def main():
-    # Check if we should use CPU (set via LLMTRAINING_USE_CPU environment variable)
-    use_cpu = os.getenv("LLMTRAINING_USE_CPU", "false").lower() == "true"
-    
-    # Use the same model regardless of device.
     model_name = "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
-    
-    # Adjust batch sizes if using CPU to help with memory (optional).
-    if use_cpu:
-        per_device_train_batch_size = 1
-        per_device_eval_batch_size = 1
-    else:
-        per_device_train_batch_size = 4
-        per_device_eval_batch_size = 4
+    hf_token = "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"  # Replace with your valid token
 
-    train_folder = "./train"
-    val_folder = "./validation"
-    max_length = 128
-
-    print_log("STEP 1", "Starting training process")
-    
-    # Load the tokenizer.
-    print_log("STEP 2", f"Loading tokenizer for model: {model_name}")
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    if tokenizer.pad_token is None:
-        print_log("STEP 2", "Setting pad_token to eos_token")
-        tokenizer.pad_token = tokenizer.eos_token
-    
-    # Load the model with low_cpu_mem_usage enabled to reduce memory usage.
-    print_log("STEP 2", f"Loading model: {model_name}")
-    model = AutoModelForCausalLM.from_pretrained(model_name, low_cpu_mem_usage=True)
-    if model.config.pad_token_id is None:
-        model.config.pad_token_id = tokenizer.pad_token_id
-
-    # Define training arguments.
-    output_dir = "./output"
-    training_args = TrainingArguments(
-        output_dir=output_dir,
-        num_train_epochs=3,
-        per_device_train_batch_size=per_device_train_batch_size,
-        per_device_eval_batch_size=per_device_eval_batch_size,
-        eval_strategy="steps",
-        eval_steps=50,
-        save_steps=50,
-        logging_steps=10,
-        learning_rate=5e-5,
-        warmup_steps=100,
-        weight_decay=0.01,
-        gradient_accumulation_steps=2,
-        fp16=not use_cpu,                   # Disable fp16 if using CPU
-        dataloader_num_workers=1,           # Lowering workers to reduce resource usage
-        load_best_model_at_end=True,
-        use_cpu=use_cpu,                    # Use CPU if specified
-        run_name="llm-training-run"         # Custom run name to avoid wandb warnings
+    print_log("MODEL INIT", f"Loading model and tokenizer for {model_name}")
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        token=hf_token,
+        trust_remote_code=True,
+        low_cpu_mem_usage=True
+    ).to(device)
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_name,
+        token=hf_token,
+        trust_remote_code=True
     )
-    
-    # Create a data collator for language modeling.
+
     data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
     
-    # Create the Trainer instance.
+    train_dataset = DummyDataset(tokenizer)
+    eval_dataset = DummyDataset(tokenizer, length=20)
+    
     trainer = Trainer(
         model=model,
         args=training_args,
-        train_dataset=TextFilesDataset(train_folder, tokenizer=tokenizer, max_length=max_length),
-        eval_dataset=TextFilesDataset(val_folder, tokenizer=tokenizer, max_length=max_length),
-        data_collator=data_collator,
-        tokenizer=tokenizer  # Note: Deprecated for future versions.
+        train_dataset=train_dataset,
+        eval_dataset=eval_dataset,
+        data_collator=data_collator
     )
     
-    # Continuous training loop: immediately start a new iteration after finishing one.
-    while True:
-        print_log("STEP 6", "Starting training iteration")
-        trainer.train()  # Runs one training session (3 epochs)
-        # Save a checkpoint after each iteration.
-        model.save_pretrained(output_dir)
-        tokenizer.save_pretrained(output_dir)
-        print_log("STEP 6", f"Completed training iteration. Checkpoint saved to {output_dir}.")
+    print_log("TRAINING", "Starting training process on CPU")
+    trainer.train()
+    print_log("TRAINING", f"Training complete. Outputs saved to {output_dir}")
 
 if __name__ == "__main__":
     main()

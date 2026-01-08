@@ -29,12 +29,20 @@ export function MetricCard({
   variant = 'default',
   delay = 0
 }: MetricCardProps) {
-  const iconColors = {
-    default: 'text-muted-foreground bg-secondary',
-    primary: 'text-primary bg-primary/10',
-    success: 'text-success bg-success/10',
-    warning: 'text-warning bg-warning/10',
-    danger: 'text-danger bg-danger/10',
+  const iconStyles = {
+    default: 'text-muted-foreground bg-secondary border-border/50',
+    primary: 'text-primary bg-primary/10 border-primary/20',
+    success: 'text-success bg-success/10 border-success/20',
+    warning: 'text-warning bg-warning/10 border-warning/20',
+    danger: 'text-danger bg-danger/10 border-danger/20',
+  }
+
+  const valueStyles = {
+    default: 'text-foreground',
+    primary: 'text-gradient',
+    success: 'text-success',
+    warning: 'text-warning',
+    danger: 'text-danger',
   }
 
   return (
@@ -45,15 +53,27 @@ export function MetricCard({
       whileHover="hover"
       transition={{ delay }}
     >
-      <Card variant="premium" className="h-full">
-        <CardContent className="p-6">
-          <div className="flex items-start justify-between">
+      <Card variant="premium" className="h-full overflow-hidden group">
+        <CardContent className="p-6 relative">
+          {/* Subtle gradient overlay on hover */}
+          <div className={cn(
+            "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
+            variant === 'primary' && "bg-gradient-to-br from-primary/5 to-transparent",
+            variant === 'success' && "bg-gradient-to-br from-success/5 to-transparent",
+            variant === 'warning' && "bg-gradient-to-br from-warning/5 to-transparent",
+            variant === 'danger' && "bg-gradient-to-br from-danger/5 to-transparent",
+          )} />
+
+          <div className="flex items-start justify-between relative">
             <div className="space-y-2">
-              <p className="text-sm text-muted-foreground font-medium">
+              <p className="text-sm text-muted-foreground font-medium tracking-wide uppercase">
                 {title}
               </p>
-              <p className="text-3xl font-heading font-bold tracking-tight">
-                {value}
+              <p className={cn(
+                "text-4xl font-heading font-bold tracking-tight",
+                valueStyles[variant]
+              )}>
+                {typeof value === 'number' ? value.toLocaleString() : value}
               </p>
               {subtitle && (
                 <p className="text-xs text-muted-foreground">
@@ -61,10 +81,12 @@ export function MetricCard({
                 </p>
               )}
               {trend && (
-                <div className="flex items-center gap-1 mt-2">
+                <div className="flex items-center gap-1.5 mt-2">
                   <span className={cn(
-                    "text-xs font-medium",
-                    trend.positive ? "text-success" : "text-danger"
+                    "text-xs font-semibold px-1.5 py-0.5 rounded",
+                    trend.positive
+                      ? "text-success bg-success/10"
+                      : "text-danger bg-danger/10"
                   )}>
                     {trend.positive ? "+" : ""}{trend.value}%
                   </span>
@@ -75,8 +97,8 @@ export function MetricCard({
               )}
             </div>
             <div className={cn(
-              "p-3 rounded-xl",
-              iconColors[variant]
+              "p-3 rounded-xl border transition-transform duration-300 group-hover:scale-110",
+              iconStyles[variant]
             )}>
               <Icon className="w-5 h-5" />
             </div>

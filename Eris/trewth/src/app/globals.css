@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Luxury Dark Mode - Rich Black & Champagne Gold */
+    --background: 0 0% 4%; /* Rich black #0a0a0a */
+    --foreground: 45 20% 95%; /* Pearl white */
+    --card: 0 0% 6%; /* Slightly lighter black */
+    --card-foreground: 45 20% 95%; /* Pearl white */
+    --popover: 0 0% 8%; /* Deep black */
+    --popover-foreground: 45 20% 95%; /* Pearl white */
+
+    /* Primary: Champagne gold - HSL(45, 65%, 45%) */
+    --primary: 45 65% 45%;
+    --primary-foreground: 0 0% 4%; /* Rich black for contrast */
+
+    /* Secondary: Antique gold - HSL(42, 50%, 25%) */
+    --secondary: 42 50% 25%;
+    --secondary-foreground: 45 20% 95%; /* Pearl white */
+
+    /* Muted: Dark charcoal with gold tint - HSL(40, 10%, 12%) */
+    --muted: 40 10% 12%;
+    --muted-foreground: 45 15% 70%; /* Soft pearl */
+
+    /* Accent: Bright champagne - HSL(48, 85%, 55%) */
+    --accent: 48 85% 55%;
+    --accent-foreground: 0 0% 4%; /* Rich black */
+
+    /* Destructive: Ruby red for errors */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 45 20% 95%;
+
+    /* Borders: Subtle gold tint */
+    --border: 45 20% 15%;
+    --input: 45 20% 12%;
+    --ring: 45 65% 45%; /* Champagne gold focus ring */
+
+    /* Premium rounded corners */
+    --radius: 0.5rem;
+  }
+
+  .light {
+    /* Light Mode - Optional for accessibility */
+    --background: 45 30% 98%; /* Cream white */
+    --foreground: 30 20% 15%; /* Nearly black */
+    --card: 45 20% 100%; /* Pure white */
+    --card-foreground: 30 20% 15%;
+    --popover: 45 20% 100%;
+    --popover-foreground: 30 20% 15%;
+
+    /* Primary: Rich gold - HSL(45, 75%, 45%) */
+    --primary: 45 75% 45%;
+    --primary-foreground: 45 20% 98%;
+
+    /* Secondary: Light gold cream */
+    --secondary: 45 30% 90%;
+    --secondary-foreground: 30 20% 15%;
+
+    /* Muted: Soft cream */
+    --muted: 45 20% 92%;
+    --muted-foreground: 30 15% 35%;
+
+    /* Accent: Vibrant gold */
+    --accent: 45 90% 50%;
+    --accent-foreground: 30 20% 15%;
+
+    /* Destructive: Red */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 45 20% 98%;
+
+    /* Borders */
+    --border: 45 15% 85%;
+    --input: 45 15% 85%;
+    --ring: 45 75% 45%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    @apply antialiased;
+  }
+}
+
+/* Premium Typography */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-cormorant), serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .font-display-bold {
+    font-family: var(--font-cormorant), serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+}
+
+/* Glassmorphism Effect */
+@layer utilities {
+  .glass {
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+
+  .glass-subtle {
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(212, 175, 55, 0.05);
+  }
+}
+
+/* Premium Gold Gradient */
+@layer utilities {
+  .gold-gradient {
+    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gold-gradient-bg {
+    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+  }
+
+  .gold-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(212, 175, 55, 0) 0%,
+      rgba(244, 208, 63, 0.2) 50%,
+      rgba(212, 175, 55, 0) 100%
+    );
+  }
+}
+
+/* Premium Border Glow */
+@layer utilities {
+  .border-gold-glow {
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow:
+      0 0 20px rgba(212, 175, 55, 0.1),
+      inset 0 0 20px rgba(212, 175, 55, 0.05);
+  }
+
+  .border-gold-subtle {
+    border: 1px solid rgba(212, 175, 55, 0.15);
+  }
+}
+
+/* Premium Card Hover Effect */
+@layer utilities {
+  .card-luxury {
+    background: linear-gradient(145deg, rgba(15, 15, 15, 0.9), rgba(10, 10, 10, 0.95));
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-luxury:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(212, 175, 55, 0.1);
+    transform: translateY(-2px);
+  }
+}
+
+/* Premium Text Shadow */
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+  }
+
+  .text-glow-subtle {
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+  }
+}
+
+/* Smooth Animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    background-position: -200% center;
+  }
+  50% {
+    background-position: 200% center;
+  }
+}

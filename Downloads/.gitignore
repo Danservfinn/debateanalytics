@@ -37,3 +37,4 @@ Thumbs.db
 
 # JSON data exports
 *_debates.json
+.vercel
