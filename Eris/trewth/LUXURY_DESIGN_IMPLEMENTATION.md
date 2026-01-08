@@ -272,7 +272,7 @@ Strong Gold: rgba(212, 175, 55, 0.50)
 - ✨ Follows luxury design principles
 - ✨ Maintains excellent usability
 
-**Live at:** https://trewth.vercel.app
+**Live at:** https://parse.app
 **Development:** http://localhost:3000
 
 **Status:** ✅ Production Ready ✅
@@ -281,11 +281,9 @@ Strong Gold: rgba(212, 175, 55, 0.50)
 - **Platform:** Vercel
 - **Build:** Next.js 16.1.1 (Turbopack)
 - **Deployment Date:** January 8, 2026
-- **Deployment ID:** dpl_9Qqy5URqkWcwYXxpm1ysSUU7HT6w
-- **Aliases:**
-  - https://trewth.vercel.app (primary)
-  - https://trewth-dannys-projects-de68569e.vercel.app
-  - https://trewth-691pwzoyo-dannys-projects-de68569e.vercel.app
+- **Project:** Parse (rebranded from Trewth)
+- **Primary Domain:** https://parse.app
+- **Vercel Deployment:** https://parse.vercel.app (automatic)
 
 **Git Commit:** 24df48c
 

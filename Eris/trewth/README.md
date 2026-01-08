@@ -525,5 +525,5 @@ Built on the foundation of:
 **Version:** 0.1.0 (Production)
 **Last Updated:** January 8, 2026
 **Authors:** Claude Code + User Collaboration
-**Live URL:** https://trewth.vercel.app
+**Live URL:** https://parse.app
 **Status:** ✅ Production Ready with Luxury Dark Mode Design
