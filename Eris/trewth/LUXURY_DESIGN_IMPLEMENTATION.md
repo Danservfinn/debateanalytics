@@ -272,12 +272,26 @@ Strong Gold: rgba(212, 175, 55, 0.50)
 - ✨ Follows luxury design principles
 - ✨ Maintains excellent usability
 
-**Live at:** http://localhost:3000
+**Live at:** https://trewth.vercel.app
+**Development:** http://localhost:3000
 
-**Status:** ✅ Ready for Production
+**Status:** ✅ Production Ready ✅
+
+**Deployment Details:**
+- **Platform:** Vercel
+- **Build:** Next.js 16.1.1 (Turbopack)
+- **Deployment Date:** January 8, 2026
+- **Deployment ID:** dpl_9Qqy5URqkWcwYXxpm1ysSUU7HT6w
+- **Aliases:**
+  - https://trewth.vercel.app (primary)
+  - https://trewth-dannys-projects-de68569e.vercel.app
+  - https://trewth-691pwzoyo-dannys-projects-de68569e.vercel.app
+
+**Git Commit:** 24df48c
 
 ---
 
 *Implemented: January 7, 2026*
+*Deployed: January 8, 2026*
 *Design Direction: Option 8 - Luxury Dark Mode*
 *Time Investment: ~2 hours*
