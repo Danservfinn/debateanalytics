@@ -40,10 +40,10 @@ Before configuring OAuth, you'll need to create OAuth applications with each pro
 3. Name: `Parse Web App`
 4. Authorized JavaScript origins:
    - `http://localhost:3000` (development)
-   - `https://parse.app` (production)
+   - `https://parseapp.vercel.app` (production)
 5. Authorized redirect URIs:
    - `http://localhost:3000/api/auth/callback/google` (development)
-   - `https://parse.app/api/auth/callback/google` (production)
+   - `https://parseapp.vercel.app/api/auth/callback/google` (production)
 6. Click **Create**
 
 ### Step 3: Get Credentials
@@ -79,7 +79,7 @@ GOOGLE_CLIENT_SECRET="your-google-client-secret"
 1. Go to **Facebook Login** > **Settings**
 2. Valid OAuth Redirect URIs:
    - `http://localhost:3000/api/auth/callback/facebook` (development)
-   - `https://parse.app/api/auth/callback/facebook` (production)
+   - `https://parseapp.vercel.app/api/auth/callback/facebook` (production)
 
 ### Environment Variables
 
@@ -111,7 +111,7 @@ You'll need an [Apple Developer Program](https://developer.apple.com/) membershi
 3. Bundle ID: Same as your App ID
 4. Return URLs:
    - `http://localhost:3000/api/auth/callback/apple` (development)
-   - `https://parse.app/api/auth/callback/apple` (production)
+   - `https://parseapp.vercel.app/api/auth/callback/apple` (production)
 
 ### Step 4: Generate Client Secret
 
@@ -235,7 +235,7 @@ APPLE_TEAM_ID="your-team-id"
 - **Solution:** Check that your `NEXTAUTH_URL` environment variable is set correctly:
   ```env
   NEXTAUTH_URL="http://localhost:3000"  # Development
-  NEXTAUTH_URL="https://parse.app"  # Production
+  NEXTAUTH_URL="https://parseapp.vercel.app"  # Production
   ```
 
 **Problem:** Session not persisting
@@ -315,7 +315,7 @@ model User {
 Add these in your Vercel project settings:
 
 ```env
-NEXTAUTH_URL="https://parse.app"
+NEXTAUTH_URL="https://parseapp.vercel.app"
 NEXTAUTH_SECRET="your-nextauth-secret-here"
 
 GOOGLE_CLIENT_ID="your-production-google-client-id"

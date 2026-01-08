@@ -1,14 +1,15 @@
 /**
- * NextAuth.js Configuration
- * Trewth Authentication Setup
+ * NextAuth.js v5 Configuration
+ * Parse Authentication Setup
  */
 
-import { NextAuthOptions } from "next-auth"
+import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import CredentialsProvider from "next-auth/providers/credentials"
+import bcrypt from "bcryptjs"
 import { prisma } from "./prisma"
 
-export const authOptions: NextAuthOptions = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
@@ -28,11 +29,8 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Email and password required")
         }
 
-        // TODO: Implement proper password hashing verification
-        // For now, this is a placeholder - you'll need to add password hashing
-
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: { email: credentials.email as string },
           include: {
             credits: true,
             subscription: true,
@@ -43,11 +41,16 @@ export const authOptions: NextAuthOptions = {
           throw new Error("No user found with this email")
         }
 
-        // TODO: Verify password hash here
-        // const isValidPassword = await verifyPassword(credentials.password, user.password)
-        // if (!isValidPassword) {
-        //   throw new Error("Invalid password")
-        // }
+        // Verify password if user has one
+        if (user.password) {
+          const isValidPassword = await bcrypt.compare(
+            credentials.password as string,
+            user.password
+          )
+          if (!isValidPassword) {
+            throw new Error("Invalid password")
+          }
+        }
 
         return {
           id: user.id,
@@ -72,4 +75,25 @@ export const authOptions: NextAuthOptions = {
       return session
     },
   },
+})
+
+// Legacy export for backwards compatibility
+export const authOptions = {
+  adapter: PrismaAdapter(prisma),
+  session: { strategy: "jwt" as const },
+  pages: { signIn: "/auth/signin" },
+}
+
+/**
+ * Hash a password using bcrypt
+ */
+export async function hashPassword(password: string): Promise<string> {
+  return bcrypt.hash(password, 12)
+}
+
+/**
+ * Verify a password against a hash
+ */
+export async function verifyPassword(password: string, hash: string): Promise<boolean> {
+  return bcrypt.compare(password, hash)
 }
