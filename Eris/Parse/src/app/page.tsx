@@ -143,8 +143,8 @@ export default function HomePage() {
       <section className="bg-muted/30 py-16">
         <div className="container mx-auto px-4">
           <blockquote className="pull-quote max-w-3xl mx-auto text-foreground">
-            "In an age of information warfare, the ability to separate
-            signal from noise isn't just valuable—it's essential."
+            In an age of information warfare, the ability to separate
+            signal from noise isn't just valuable—it's essential.
           </blockquote>
         </div>
       </section>

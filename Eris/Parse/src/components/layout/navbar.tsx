@@ -10,7 +10,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { useSession, signOut } from "next-auth/react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Coins } from "lucide-react"
 
 export function Navbar() {
   const pathname = usePathname()
@@ -73,6 +73,13 @@ export function Navbar() {
               <div className="h-8 w-20 bg-muted animate-pulse" />
             ) : session ? (
               <div className="flex items-center gap-4">
+                {/* Credit Balance */}
+                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-muted/50 border border-border">
+                  <Coins className="h-4 w-4 text-primary" />
+                  <span className="font-byline text-sm text-foreground">
+                    25
+                  </span>
+                </div>
                 {/* User Info */}
                 <div className="flex items-center gap-3 px-3 py-1.5 border border-border">
                   <div className="w-7 h-7 bg-foreground text-background flex items-center justify-center">
@@ -112,11 +119,18 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-3">
             {session && (
-              <div className="w-8 h-8 bg-foreground text-background flex items-center justify-center">
-                <span className="text-xs font-bold">
-                  {session.user?.name?.charAt(0).toUpperCase()}
-                </span>
-              </div>
+              <>
+                {/* Mobile Credit Balance */}
+                <div className="flex items-center gap-1 px-2 py-1 bg-muted/50 border border-border">
+                  <Coins className="h-3.5 w-3.5 text-primary" />
+                  <span className="font-byline text-xs text-foreground">25</span>
+                </div>
+                <div className="w-8 h-8 bg-foreground text-background flex items-center justify-center">
+                  <span className="text-xs font-bold">
+                    {session.user?.name?.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+              </>
             )}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

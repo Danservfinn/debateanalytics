@@ -5,10 +5,18 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Loader2, CheckCircle2, AlertCircle, ExternalLink } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import type { ExtractedArticle } from '@/types';
+
+const LOADING_STAGES = [
+  { progress: 15, label: 'Fetching article...' },
+  { progress: 35, label: 'Parsing content...' },
+  { progress: 55, label: 'Extracting claims...' },
+  { progress: 75, label: 'Analyzing sources...' },
+  { progress: 90, label: 'Finalizing...' },
+];
 
 interface ArticleUploaderProps {
   onExtract: (url: string) => Promise<any>;
@@ -22,6 +30,45 @@ export function ArticleUploader({ onExtract, onConfirm }: ArticleUploaderProps) 
   const [error, setError] = useState<string | null>(null);
   const [extractedArticle, setExtractedArticle] = useState<any>(null);
   const [selectedAnalysis, setSelectedAnalysis] = useState<'free' | 'full'>('full');
+  const [loadingStage, setLoadingStage] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  // Animate progress bar through stages while loading
+  useEffect(() => {
+    if (!loading) {
+      setLoadingStage(0);
+      setProgress(0);
+      return;
+    }
+
+    const stageInterval = setInterval(() => {
+      setLoadingStage((prev) => {
+        if (prev < LOADING_STAGES.length - 1) {
+          return prev + 1;
+        }
+        return prev;
+      });
+    }, 1500);
+
+    return () => clearInterval(stageInterval);
+  }, [loading]);
+
+  // Smooth progress animation
+  useEffect(() => {
+    if (!loading) return;
+
+    const targetProgress = LOADING_STAGES[loadingStage]?.progress || 0;
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev < targetProgress) {
+          return Math.min(prev + 2, targetProgress);
+        }
+        return prev;
+      });
+    }, 50);
+
+    return () => clearInterval(progressInterval);
+  }, [loading, loadingStage]);
 
   const handleExtract = async () => {
     if (!url) return;
@@ -90,6 +137,26 @@ export function ArticleUploader({ onExtract, onConfirm }: ArticleUploaderProps) 
                 )}
               </button>
             </div>
+
+            {/* Progress Bar */}
+            {loading && (
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground font-byline">
+                    {LOADING_STAGES[loadingStage]?.label || 'Processing...'}
+                  </span>
+                  <span className="text-sm text-muted-foreground font-byline">
+                    {progress}%
+                  </span>
+                </div>
+                <div className="h-2 bg-muted/50 border border-border overflow-hidden">
+                  <div
+                    className="h-full bg-primary transition-all duration-150 ease-out"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              </div>
+            )}
 
             {error && (
               <div className="flex items-start gap-3 p-4 bg-destructive/5 border border-destructive/20">

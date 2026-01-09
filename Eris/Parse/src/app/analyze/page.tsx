@@ -37,28 +37,12 @@ export default function AnalyzePage() {
     setIsAnalyzing(true);
 
     try {
-      // First, save the extracted article to database
-      const saveResponse = await fetch("/api/article/save", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          url: article.url,
-          extractedContent: article,
-        }),
-      });
-
-      const saveData = await saveResponse.json();
-
-      if (!saveData.success) {
-        throw new Error(saveData.error || "Failed to save article");
-      }
-
-      // Then run the analysis
+      // Run the analysis directly with URL (MVP: no database save)
       const analyzeResponse = await fetch("/api/article/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          articleId: saveData.data.id,
+          url: article.url,
           analysisType,
         }),
       });
@@ -69,8 +53,10 @@ export default function AnalyzePage() {
         throw new Error(analyzeData.error || "Failed to analyze article");
       }
 
-      // Navigate to results page
+      // Navigate to results page with analysis data in state
       if (analyzeData.data.id) {
+        // Store analysis in sessionStorage for the results page
+        sessionStorage.setItem(`analysis_${analyzeData.data.id}`, JSON.stringify(analyzeData.data));
         router.push(`/analyze/result/${analyzeData.data.id}`);
       } else if (analyzeData.data.jobId) {
         // If queued, show queue status
