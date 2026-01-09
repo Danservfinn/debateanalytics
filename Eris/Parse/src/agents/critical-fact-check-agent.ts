@@ -68,6 +68,23 @@ async function verifyClaim(claim: any, article: ExtractedArticle): Promise<FactC
   const searchQueries = generateSearchQueries(claim, article)
   const searchResults = await searchWebWithVariations(searchQueries)
 
+  // If no search results, return inconclusive rather than trying to verify with no data
+  if (searchResults.length === 0) {
+    console.log(`[FactCheck] No search results for claim: ${claim.text.substring(0, 50)}...`)
+    return {
+      id: crypto.randomUUID(),
+      claimId: claim.id,
+      claim: claim.text,
+      verification: 'inconclusive',
+      confidence: 30,
+      sources: [],
+      methodology: 'no_search_results',
+      methodologyScore: 0,
+      evidenceHierarchy: 'tertiary',
+      reasoning: 'Unable to find independent sources to verify this claim. Search returned no results.',
+    }
+  }
+
   // Step 2: Use GLM-4.7 to analyze sources and assess claim
   const systemPrompt = `You are an expert fact-checker applying rigorous critical analysis.
 
