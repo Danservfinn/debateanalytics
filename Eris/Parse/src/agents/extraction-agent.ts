@@ -155,6 +155,61 @@ function preExtractFromHTML(html: string, url: string): {
 }
 
 /**
+ * Pre-extract metadata from Jina Reader markdown output (fallback when GLM fails)
+ */
+function preExtractFromMarkdown(markdown: string, url: string): {
+  title: string | null
+  authors: string[]
+  publication: string | null
+  publishDate: string | null
+  description: string | null
+} {
+  let title: string | null = null
+  const authors: string[] = []
+  let publication: string | null = null
+  let publishDate: string | null = null
+  let description: string | null = null
+
+  // Jina Reader typically returns markdown with title as first H1 heading
+  const h1Match = markdown.match(/^#\s+(.+)$/m)
+  if (h1Match) {
+    title = h1Match[1].trim()
+  }
+
+  // If no H1, try first line that looks like a title (capitalized, reasonable length)
+  if (!title) {
+    const firstLine = markdown.split('\n').find(line => {
+      const trimmed = line.trim()
+      return trimmed.length > 10 && trimmed.length < 200 && !trimmed.startsWith('[') && !trimmed.startsWith('http')
+    })
+    if (firstLine) {
+      title = firstLine.trim()
+    }
+  }
+
+  // Extract publication from URL
+  try {
+    const urlObj = new URL(url)
+    publication = urlObj.hostname.replace(/^www\./, '').split('.')[0]
+    publication = publication.charAt(0).toUpperCase() + publication.slice(1)
+  } catch { /* ignore */ }
+
+  // Try to find date patterns in markdown
+  const dateMatch = markdown.match(/(\d{4}-\d{2}-\d{2})|(\w+\s+\d{1,2},?\s+\d{4})|(\d{1,2}\s+\w+\s+\d{4})/i)
+  if (dateMatch) {
+    publishDate = dateMatch[0]
+  }
+
+  // Use first paragraph as description
+  const paragraphs = markdown.split(/\n\n+/).filter(p => p.trim().length > 50 && !p.startsWith('#'))
+  if (paragraphs.length > 0) {
+    description = paragraphs[0].substring(0, 300).trim()
+  }
+
+  return { title, authors, publication, publishDate, description }
+}
+
+/**
  * Extract structured article data from URL
  */
 export async function extractArticle(input: ExtractionInput): Promise<ExtractedArticle> {
@@ -165,6 +220,9 @@ export async function extractArticle(input: ExtractionInput): Promise<ExtractedA
   let isMarkdown = false
   let preExtracted: ReturnType<typeof preExtractFromHTML> | null = null
 
+  // Store markdown pre-extraction for fallback
+  let markdownPreExtracted: ReturnType<typeof preExtractFromMarkdown> | null = null
+
   if (!articleContent) {
     try {
       // Try Jina Reader first (handles JavaScript-rendered pages)
@@ -172,6 +230,13 @@ export async function extractArticle(input: ExtractionInput): Promise<ExtractedA
       articleContent = await fetchWithJinaReader(url)
       isMarkdown = true // Jina returns clean markdown
       console.log('Jina Reader succeeded, content length:', articleContent.length)
+
+      // Pre-extract from markdown for fallback when GLM fails
+      markdownPreExtracted = preExtractFromMarkdown(articleContent, url)
+      console.log('Pre-extracted from markdown:', {
+        title: markdownPreExtracted.title,
+        publication: markdownPreExtracted.publication,
+      })
     } catch (jinaError) {
       console.log('Jina Reader failed, falling back to direct fetch:', jinaError)
       try {
@@ -272,29 +337,37 @@ No markdown code blocks, no explanations, just the raw JSON.`
   }
 
   // Use pre-extracted metadata as fallback when GLM returns empty/default values
+  // Check both HTML pre-extraction (preExtracted) and markdown pre-extraction (markdownPreExtracted)
   const glmTitle = extractedData.title
   const needsTitleFallback = !glmTitle || glmTitle === 'Untitled Article' || glmTitle.trim() === ''
 
+  // Fallback title: try HTML pre-extraction first, then markdown pre-extraction
+  const fallbackTitle = preExtracted?.title || markdownPreExtracted?.title || null
+
   // Determine final values with fallback chain
-  const finalTitle = needsTitleFallback && preExtracted?.title
-    ? preExtracted.title
+  const finalTitle = needsTitleFallback && fallbackTitle
+    ? fallbackTitle
     : (glmTitle || 'Untitled Article')
 
   const finalAuthors = (extractedData.authors && extractedData.authors.length > 0)
     ? extractedData.authors
-    : (preExtracted?.authors || [])
+    : (preExtracted?.authors || markdownPreExtracted?.authors || [])
 
+  // Fallback publication: try HTML pre-extraction first, then markdown pre-extraction
+  const fallbackPublication = preExtracted?.publication || markdownPreExtracted?.publication || null
   const finalPublication = extractedData.publication && extractedData.publication !== 'Unknown Publication'
     ? extractedData.publication
-    : (preExtracted?.publication || 'Unknown Publication')
+    : (fallbackPublication || 'Unknown Publication')
 
+  // Fallback date: try HTML pre-extraction first, then markdown pre-extraction
+  const fallbackDate = preExtracted?.publishDate || markdownPreExtracted?.publishDate || null
   const finalPublishDate = extractedData.publishDate
     ? extractedData.publishDate
-    : (preExtracted?.publishDate || new Date().toISOString().split('T')[0])
+    : (fallbackDate || new Date().toISOString().split('T')[0])
 
   // Log fallback usage
-  if (needsTitleFallback && preExtracted?.title) {
-    console.log('Using pre-extracted title as fallback:', preExtracted.title)
+  if (needsTitleFallback && fallbackTitle) {
+    console.log('Using pre-extracted title as fallback:', fallbackTitle, 'source:', preExtracted?.title ? 'HTML' : 'markdown')
   }
 
   const article: ExtractedArticle = {
@@ -308,8 +381,8 @@ No markdown code blocks, no explanations, just the raw JSON.`
     content: {
       headline: extractedData.content?.headline || finalTitle || '',
       subhead: extractedData.content?.subhead || null,
-      lede: extractedData.content?.lede || preExtracted?.description || '',
-      body: bodyText || preExtracted?.cleanedContent || '',
+      lede: extractedData.content?.lede || preExtracted?.description || markdownPreExtracted?.description || '',
+      body: bodyText || preExtracted?.cleanedContent || (isMarkdown ? articleContent : '') || '',
       sections: extractedData.content?.sections || [],
     },
     claims: validateClaims(Array.isArray(extractedData.claims) ? extractedData.claims : []),

@@ -144,7 +144,7 @@ describe('SynthesisAgent', () => {
       expect(result.truthScore).toBe(0)
     })
 
-    it('should handle missing scores with defaults', async () => {
+    it('should handle missing scores with defaults (defensive behavior)', async () => {
       mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: true,
         text: '{}',
@@ -153,15 +153,20 @@ describe('SynthesisAgent', () => {
         finishReason: 'stop',
       })
 
-      // Missing all score fields
+      // Missing all score fields - agent uses defaults (20 + 12 + 10 + 8 = 50)
       mockedExtractJSON.mockReturnValueOnce({
         credibility: 'low',
       })
 
       const result = await synthesizeAnalysis(mockInput)
 
-      expect(result.truthScore).toBe(0)
-      expect(result.whatAiThinks).toBe('Analysis incomplete')
+      // Agent now uses default scores instead of 0
+      expect(result.truthScore).toBe(50) // Default scores: 20 + 12 + 10 + 8
+      expect(result.breakdown.evidenceQuality).toBe(20)
+      expect(result.breakdown.methodologyRigor).toBe(12)
+      expect(result.breakdown.logicalStructure).toBe(10)
+      expect(result.breakdown.manipulationAbsence).toBe(8)
+      expect(result.credibility).toBe('low') // Provided in mock
     })
 
     it('should throw error on GLM failure', async () => {
@@ -178,7 +183,7 @@ describe('SynthesisAgent', () => {
         .rejects.toThrow('Synthesis failed: API unavailable')
     })
 
-    it('should throw error on invalid JSON response', async () => {
+    it('should use defaults on invalid JSON response (defensive behavior)', async () => {
       mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: true,
         text: 'not json',
@@ -189,11 +194,14 @@ describe('SynthesisAgent', () => {
 
       mockedExtractJSON.mockReturnValueOnce(null)
 
-      await expect(synthesizeAnalysis(mockInput))
-        .rejects.toThrow('Invalid synthesis response format')
+      // Agent now uses default scores instead of throwing
+      const result = await synthesizeAnalysis(mockInput)
+      expect(result.truthScore).toBe(50) // Default scores: 20 + 12 + 10 + 8
+      expect(result.credibility).toBe('low') // Score 50 = low (40-59)
+      expect(result.whatAiThinks).toContain('warrants careful evaluation')
     })
 
-    it('should default credibility to moderate if not provided', async () => {
+    it('should calculate credibility from score when not provided', async () => {
       mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: true,
         text: '{}',
@@ -203,16 +211,17 @@ describe('SynthesisAgent', () => {
       })
 
       mockedExtractJSON.mockReturnValueOnce({
-        evidenceQuality: 20,
-        methodologyRigor: 15,
-        logicalStructure: 10,
+        evidenceQuality: 28,  // Score 60+ needed for moderate
+        methodologyRigor: 18,
+        logicalStructure: 12,
         manipulationAbsence: 10,
-        // No credibility field
+        // No credibility field - calculated from score (28+18+12+10=68)
       })
 
       const result = await synthesizeAnalysis(mockInput)
 
-      expect(result.credibility).toBe('moderate')
+      expect(result.truthScore).toBe(68)
+      expect(result.credibility).toBe('moderate') // Score 68 = moderate (60-79)
     })
   })
 

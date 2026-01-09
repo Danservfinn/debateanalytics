@@ -21,6 +21,7 @@ describe('SteelManningAgent', () => {
     vi.clearAllMocks()
   })
 
+  // Mock article with sufficient content (body >= 50 chars) to pass validation
   const mockArticle: ExtractedArticle = {
     id: 'test-article',
     url: 'https://example.com/article',
@@ -29,11 +30,27 @@ describe('SteelManningAgent', () => {
     publication: 'Test Pub',
     publishDate: '2024-01-15',
     articleType: 'news',
-    content: { headline: 'Test', subhead: null, lede: '', body: 'Body content', sections: [] },
+    content: { headline: 'Test', subhead: null, lede: '', body: 'This is a test article body with sufficient content to pass the minimum 50 character validation check.', sections: [] },
     claims: [{ id: '1', text: 'Claim 1', type: 'factual', verifiability: 'testable', section: 'main', context: '' }],
     sources: [],
     statistics: [],
     emotionalLanguageDensity: 0.2,
+  }
+
+  // Mock article with insufficient content (fails validation)
+  const invalidArticle: ExtractedArticle = {
+    id: 'invalid-article',
+    url: 'https://example.com/invalid',
+    title: 'Untitled Article', // Invalid title
+    authors: [],
+    publication: 'Unknown Publication',
+    publishDate: '2024-01-15',
+    articleType: 'news',
+    content: { headline: '', subhead: null, lede: '', body: 'Short', sections: [] },
+    claims: [],
+    sources: [],
+    statistics: [],
+    emotionalLanguageDensity: 0,
   }
 
   describe('steelManArticle', () => {
@@ -157,7 +174,7 @@ describe('SteelManningAgent', () => {
         .rejects.toThrow('Steel-manning failed: Rate limit exceeded')
     })
 
-    it('should throw error on invalid response format', async () => {
+    it('should return empty array on invalid response format (defensive behavior)', async () => {
       mockedCallGLM.mockResolvedValueOnce({
         success: true,
         text: '{}',
@@ -166,14 +183,14 @@ describe('SteelManningAgent', () => {
         finishReason: 'stop',
       })
 
-      // Missing perspectives array
+      // Missing perspectives array - agent returns empty array instead of throwing
       mockedExtractJSON.mockReturnValueOnce({ data: [] })
 
-      await expect(steelManArticle({ article: mockArticle }))
-        .rejects.toThrow('Invalid steel-manning response format')
+      const result = await steelManArticle({ article: mockArticle })
+      expect(result).toEqual([])
     })
 
-    it('should throw error on null JSON response', async () => {
+    it('should return empty array on null JSON response (defensive behavior)', async () => {
       mockedCallGLM.mockResolvedValueOnce({
         success: true,
         text: 'not json',
@@ -184,8 +201,16 @@ describe('SteelManningAgent', () => {
 
       mockedExtractJSON.mockReturnValueOnce(null)
 
-      await expect(steelManArticle({ article: mockArticle }))
-        .rejects.toThrow('Invalid steel-manning response format')
+      const result = await steelManArticle({ article: mockArticle })
+      expect(result).toEqual([])
+    })
+
+    it('should return empty array for invalid article content without calling GLM', async () => {
+      // Invalid article should return empty without API call
+      const result = await steelManArticle({ article: invalidArticle })
+
+      expect(result).toEqual([])
+      expect(mockedCallGLM).not.toHaveBeenCalled()
     })
 
     it('should generate unique IDs for each perspective', async () => {

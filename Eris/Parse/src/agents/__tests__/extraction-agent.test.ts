@@ -100,14 +100,22 @@ describe('ExtractionAgent', () => {
     })
 
     it('should throw error on fetch failure', async () => {
-      vi.mocked(global.fetch).mockResolvedValueOnce({
-        ok: false,
-        status: 404,
-        statusText: 'Not Found',
-      } as Response)
+      // First mock: Jina Reader fetch fails
+      vi.mocked(global.fetch)
+        .mockResolvedValueOnce({
+          ok: false,
+          status: 500,
+          statusText: 'Server Error',
+        } as Response)
+        // Second mock: Direct fetch also fails
+        .mockResolvedValueOnce({
+          ok: false,
+          status: 404,
+          statusText: 'Not Found',
+        } as Response)
 
       await expect(extractArticle({ url: 'https://example.com/notfound' }))
-        .rejects.toThrow('Failed to fetch article: 404 Not Found')
+        .rejects.toThrow('Failed to fetch article')
     })
 
     it('should throw error on GLM failure', async () => {
@@ -181,9 +189,10 @@ describe('ExtractionAgent', () => {
     })
 
     it('should apply defaults for missing fields', async () => {
+      // Use content too short to extract title (< 10 chars)
       vi.mocked(global.fetch).mockResolvedValueOnce({
         ok: true,
-        text: () => Promise.resolve('<html></html>'),
+        text: () => Promise.resolve('short'),
       } as Response)
 
       mockedCallGLM.mockResolvedValueOnce({
@@ -199,9 +208,11 @@ describe('ExtractionAgent', () => {
 
       const result = await extractArticle({ url: 'https://example.com' })
 
+      // With no GLM title and no pre-extracted title (content too short), falls back to 'Untitled Article'
       expect(result.title).toBe('Untitled Article')
       expect(result.authors).toEqual([])
-      expect(result.publication).toBe('Unknown Publication')
+      // Publication extracted from URL when GLM returns nothing
+      expect(result.publication).toBe('Example')
       expect(result.articleType).toBe('news')
       expect(result.claims).toEqual([])
       expect(result.sources).toEqual([])
