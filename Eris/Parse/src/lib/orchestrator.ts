@@ -34,6 +34,124 @@ import {
 } from "@/types"
 
 // ============================================================================
+// Persuasion Intent Enrichment with Deception Context
+// ============================================================================
+
+/**
+ * Enrich persuasion intent results with deception detection findings
+ * This helps when GLM returns neutral but deception agent found manipulation
+ */
+function enrichPersuasionWithDeceptionContext(
+  persuasionResult: PersuasionIntentResult,
+  deceptionInstances: { category: string; type: string; quote: string; severity: string; explanation: string }[]
+): PersuasionIntentResult {
+  // If persuasion already detected techniques, or no deception found, return as-is
+  if (persuasionResult.techniques.length > 0 || deceptionInstances.length === 0) {
+    return persuasionResult
+  }
+
+  // Map deception categories to persuasion techniques
+  const mappedTechniques: PersuasionIntentResult['techniques'] = []
+
+  for (const deception of deceptionInstances) {
+    let technique: string | null = null
+    let targetedEmotion: string | undefined = undefined
+
+    // Map deception types to persuasion techniques
+    switch (deception.type) {
+      case 'loaded_language':
+      case 'fear_appeal':
+        technique = 'emotional_manipulation'
+        targetedEmotion = deception.type === 'fear_appeal' ? 'fear' : 'outrage'
+        break
+      case 'us_vs_them':
+        technique = 'tribal_framing'
+        break
+      case 'false_balance':
+      case 'context_stripping':
+        technique = 'oversimplification'
+        break
+      case 'appeals_to_authority':
+        technique = 'authority_exploitation'
+        break
+      case 'manufactured_urgency':
+        technique = 'urgency_manufacturing'
+        break
+      case 'moral_panic':
+        technique = 'moral_outrage'
+        break
+      default:
+        // Skip unmapped types
+        continue
+    }
+
+    if (technique) {
+      mappedTechniques.push({
+        id: crypto.randomUUID(),
+        technique: technique as any,
+        quote: deception.quote,
+        context: `Detected via deception analysis: ${deception.type}`,
+        severity: (deception.severity || 'medium') as 'low' | 'medium' | 'high',
+        explanation: deception.explanation,
+        targetedEmotion,
+      })
+    }
+  }
+
+  // If we found mappable techniques, update the result
+  if (mappedTechniques.length > 0) {
+    // Recalculate persuasion score
+    let score = 0
+    mappedTechniques.forEach(t => {
+      switch (t.severity) {
+        case 'high': score += 15; break
+        case 'medium': score += 10; break
+        case 'low': score += 5; break
+      }
+    })
+
+    // Determine radicalization risk based on technique count and severity
+    const highSeverity = mappedTechniques.filter(t => t.severity === 'high').length
+    const hasTribalFraming = mappedTechniques.some(t => t.technique === 'tribal_framing')
+    const hasEmotional = mappedTechniques.some(t => t.technique === 'emotional_manipulation')
+
+    let radicalizationRisk: 'minimal' | 'low' | 'moderate' | 'high' | 'severe' = 'minimal'
+    if (highSeverity >= 3 || (hasTribalFraming && hasEmotional && highSeverity >= 1)) {
+      radicalizationRisk = 'high'
+    } else if (highSeverity >= 2 || mappedTechniques.length >= 5) {
+      radicalizationRisk = 'moderate'
+    } else if (mappedTechniques.length >= 2) {
+      radicalizationRisk = 'low'
+    }
+
+    // Determine classification based on techniques found
+    let classification: 'hit_piece' | 'fluff_piece' | 'advocacy' | 'neutral' = 'advocacy'
+    if (hasTribalFraming || mappedTechniques.length >= 3) {
+      classification = 'advocacy'
+    }
+
+    return {
+      ...persuasionResult,
+      persuasionScore: Math.min(100, score),
+      radicalizationRisk,
+      articleIntent: {
+        ...persuasionResult.articleIntent,
+        classification,
+        confidence: 70,
+        indicators: [
+          ...persuasionResult.articleIntent.indicators,
+          `Enriched with ${mappedTechniques.length} techniques from deception analysis`,
+        ],
+      },
+      techniques: mappedTechniques,
+      summary: `Article uses ${mappedTechniques.length} persuasion techniques detected via deception analysis. Radicalization risk: ${radicalizationRisk}.`,
+    }
+  }
+
+  return persuasionResult
+}
+
+// ============================================================================
 // Phase 2: Source Credibility Assessment
 // ============================================================================
 
@@ -651,6 +769,12 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
       analyzePersuasionIntent({ article }),
     ])
 
+    // Step 2.5: Enrich persuasion intent with deception context (if persuasion returned neutral)
+    const enrichedPersuasionIntent = enrichPersuasionWithDeceptionContext(
+      persuasionIntent,
+      deceptionResult.instances
+    )
+
     // Step 3: Synthesize results
     const synthesis = await synthesizeAnalysis({
       article,
@@ -825,7 +949,7 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
       factCheckResults,
       whatAiThinks: synthesis.whatAiThinks,
       aiAssessment,
-      persuasionIntent,
+      persuasionIntent: enrichedPersuasionIntent,
       analysisDuration: (Date.now() - startTime) / 1000,
       agentsUsed: [
         'ExtractionAgent',
