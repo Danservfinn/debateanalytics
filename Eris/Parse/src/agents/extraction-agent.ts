@@ -90,7 +90,7 @@ The content will be provided as ${contentType}. Extract all available informatio
 Extract:
 1. Metadata: title (string), authors (array of strings), publication (string), publishDate (string), articleType (string)
 2. Content structure: headline (string), subhead (string or null), lede (first paragraph or summary), body (main article text), sections (array)
-3. All claims with: text (string), type (factual/causal/predictive/normative/opinion), verifiability, section, context
+3. All claims with: text (string), type (factual/causal/predictive/normative/opinion), verifiability (IMPORTANT: mark as "testable" if the claim can be verified with evidence, "partially_testable" if some aspects can be verified, "untestable" only for pure opinions), section, context
 4. All sources with: type (study/expert/organization/document/data), name, url, credibilityIndicators
 5. All statistics with: value, context, source, isBaselineProvided
 6. Emotional language density (number 0-1)
@@ -183,16 +183,34 @@ No markdown code blocks, no explanations, just the raw JSON.`
 
 /**
  * Validate and structure claims
+ * Enhanced: Infer verifiability from claim type if not specified
  */
 function validateClaims(claims: any[]): ExtractedClaim[] {
-  return claims.map((claim, index) => ({
-    id: crypto.randomUUID(),
-    text: claim.text || '',
-    type: claim.type || 'opinion',
-    verifiability: claim.verifiability || 'untestable',
-    section: claim.section || 'unknown',
-    context: claim.context || '',
-  }))
+  return claims.map((claim, index) => {
+    const type = claim.type || 'opinion'
+
+    // Infer verifiability from claim type if not properly specified
+    let verifiability = claim.verifiability || 'untestable'
+    if (verifiability === 'untestable' || !verifiability) {
+      // Factual and statistical claims are usually testable
+      if (type === 'factual' || type === 'statistical') {
+        verifiability = 'testable'
+      } else if (type === 'causal' || type === 'predictive') {
+        verifiability = 'partially_testable'
+      } else if (type === 'normative' || type === 'opinion') {
+        verifiability = 'untestable'
+      }
+    }
+
+    return {
+      id: crypto.randomUUID(),
+      text: claim.text || '',
+      type,
+      verifiability,
+      section: claim.section || 'unknown',
+      context: claim.context || '',
+    }
+  })
 }
 
 /**

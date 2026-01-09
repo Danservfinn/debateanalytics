@@ -32,6 +32,354 @@ import {
 } from "@/types"
 
 // ============================================================================
+// Phase 2: Source Credibility Assessment
+// ============================================================================
+
+/**
+ * Compute credibility scores for each source cited in the article
+ */
+function computeSourceCredibility(
+  sources: { id: string; type: string; name: string; url: string | null; credibilityIndicators: any }[],
+  claims: { id: string; text: string; source?: string }[]
+): SourceCredibility[] {
+  return sources.map(source => {
+    // Authority score (0-10): Based on source type and verification
+    const authorityScore = computeAuthorityScore(source)
+
+    // Independence score (0-10): Based on potential conflicts of interest
+    const independenceScore = computeIndependenceScore(source)
+
+    // Track record score (0-10): Based on credibility indicators
+    const trackRecordScore = computeTrackRecordScore(source)
+
+    // Proximity score (0-10): How close to the events/facts
+    const proximityScore = computeProximityScore(source)
+
+    // Weighted average (authority 30%, independence 25%, track record 25%, proximity 20%)
+    const overallScore = Math.round(
+      (authorityScore.score * 0.30 +
+       independenceScore.score * 0.25 +
+       trackRecordScore.score * 0.25 +
+       proximityScore.score * 0.20) * 10
+    ) / 10
+
+    // Determine bias risk
+    const biasRisk = overallScore >= 7 ? 'LOW' as const :
+                     overallScore >= 4 ? 'MEDIUM' as const : 'HIGH' as const
+
+    // Generate warnings based on scores
+    const warnings: string[] = []
+    if (authorityScore.score < 5) warnings.push('Source authority is questionable')
+    if (independenceScore.score < 5) warnings.push('Source may have conflicts of interest')
+    if (trackRecordScore.score < 5) warnings.push('Source lacks established track record')
+    if (proximityScore.score < 5) warnings.push('Source is not directly connected to events')
+    if (source.type === 'expert' && !source.url) warnings.push('Expert claims not independently verifiable')
+
+    // Find claims attributed to this source
+    const claimsAttributed = claims
+      .filter(c => c.text.toLowerCase().includes(source.name.toLowerCase()))
+      .map(c => c.id)
+
+    return {
+      id: source.id,
+      name: source.name,
+      type: mapSourceType(source.type),
+      role: determineSourceRole(source.type),
+      factors: {
+        authority: authorityScore,
+        independence: independenceScore,
+        trackRecord: trackRecordScore,
+        proximity: proximityScore,
+      },
+      overallScore,
+      biasRisk,
+      warnings,
+      claimsAttributed,
+    }
+  })
+}
+
+function computeAuthorityScore(source: any): { score: number; max: number; reasoning: string } {
+  let score = 5 // baseline
+  let reasoning = ''
+
+  switch (source.type) {
+    case 'study':
+      score = source.credibilityIndicators?.isPeerReviewed ? 9 : 7
+      reasoning = source.credibilityIndicators?.isPeerReviewed
+        ? 'Peer-reviewed study provides high authority'
+        : 'Study provides moderate authority'
+      break
+    case 'data':
+      score = 8
+      reasoning = 'Data sources provide strong factual authority'
+      break
+    case 'expert':
+      score = source.url ? 7 : 5
+      reasoning = source.url
+        ? 'Named expert with verifiable credentials'
+        : 'Expert claim without independent verification'
+      break
+    case 'organization':
+      score = 6
+      reasoning = 'Organizational source with institutional backing'
+      break
+    case 'document':
+      score = 7
+      reasoning = 'Documentary evidence provides solid authority'
+      break
+    default:
+      score = 4
+      reasoning = 'Source type has limited inherent authority'
+  }
+
+  return { score, max: 10, reasoning }
+}
+
+function computeIndependenceScore(source: any): { score: number; max: number; reasoning: string } {
+  let score = 6
+  let reasoning = 'Standard independence assessment'
+
+  if (source.credibilityIndicators?.hasFundingDisclosed) {
+    score += 1
+    reasoning = 'Funding disclosure increases independence rating'
+  }
+
+  // Deduct for potentially interested parties
+  const name = source.name.toLowerCase()
+  if (name.includes('official') || name.includes('spokesperson') || name.includes('department')) {
+    score -= 2
+    reasoning = 'Official sources may have institutional bias'
+  }
+
+  if (name.includes('association') || name.includes('industry') || name.includes('council')) {
+    score -= 1
+    reasoning = 'Industry associations may have advocacy interests'
+  }
+
+  return { score: Math.max(1, Math.min(10, score)), max: 10, reasoning }
+}
+
+function computeTrackRecordScore(source: any): { score: number; max: number; reasoning: string } {
+  let score = 5
+  let reasoning = 'No specific track record data available'
+
+  if (source.credibilityIndicators?.isPeerReviewed) {
+    score = 8
+    reasoning = 'Peer-reviewed sources have established review process'
+  }
+
+  if (source.credibilityIndicators?.isPreprint) {
+    score = 4
+    reasoning = 'Preprint status means peer review not completed'
+  }
+
+  if (source.url) {
+    score += 1
+    reasoning += '; verifiable reference available'
+  }
+
+  return { score: Math.min(10, score), max: 10, reasoning }
+}
+
+function computeProximityScore(source: any): { score: number; max: number; reasoning: string } {
+  let score = 5
+  let reasoning = 'Standard proximity to facts'
+
+  switch (source.type) {
+    case 'data':
+      score = 9
+      reasoning = 'Direct data provides closest proximity to facts'
+      break
+    case 'study':
+      score = 8
+      reasoning = 'Studies directly analyze the subject matter'
+      break
+    case 'document':
+      score = 8
+      reasoning = 'Documentary evidence directly relevant'
+      break
+    case 'expert':
+      score = 6
+      reasoning = 'Expert analysis one step removed from primary data'
+      break
+    case 'organization':
+      score = 5
+      reasoning = 'Organizational statements may be filtered through PR'
+      break
+    default:
+      score = 4
+      reasoning = 'Limited proximity to primary facts'
+  }
+
+  return { score, max: 10, reasoning }
+}
+
+function mapSourceType(type: string): 'GOVERNMENT' | 'ORGANIZATION' | 'EXPERT' | 'EYEWITNESS' | 'MEDIA' | 'DOCUMENT' | 'ANONYMOUS' {
+  switch (type) {
+    case 'study':
+    case 'data':
+      return 'DOCUMENT'
+    case 'expert':
+      return 'EXPERT'
+    case 'organization':
+      return 'ORGANIZATION'
+    case 'document':
+      return 'DOCUMENT'
+    default:
+      return 'MEDIA'
+  }
+}
+
+function determineSourceRole(type: string): 'PRIMARY_PARTY' | 'THIRD_PARTY' | 'DIRECT_OBSERVER' | 'ANALYST' {
+  switch (type) {
+    case 'data':
+    case 'document':
+      return 'DIRECT_OBSERVER'
+    case 'study':
+      return 'ANALYST'
+    case 'expert':
+      return 'ANALYST'
+    case 'organization':
+      return 'PRIMARY_PARTY'
+    default:
+      return 'THIRD_PARTY'
+  }
+}
+
+// ============================================================================
+// Phase 2: Enhanced Claims with Verification
+// ============================================================================
+
+/**
+ * Map fact-check results to enhanced claims with verification status
+ */
+function computeEnhancedClaims(
+  claims: { id: string; text: string; type: string; verifiability: string; section: string; context: string }[],
+  factCheckResults: { claimId: string; claim: string; verification: string; confidence: number; sources: any[]; reasoning: string }[],
+  sourceCredibility: SourceCredibility[]
+): EnhancedClaim[] {
+  return claims.map(claim => {
+    // Find matching fact-check result
+    const factCheck = factCheckResults.find(fc => fc.claimId === claim.id || fc.claim === claim.text)
+
+    // Map verification status
+    let status: 'VERIFIED' | 'LIKELY_TRUE' | 'DISPUTED' | 'LIKELY_FALSE' | 'FALSE' | 'UNVERIFIABLE' = 'UNVERIFIABLE'
+    if (factCheck) {
+      switch (factCheck.verification) {
+        case 'supported': status = 'VERIFIED'; break
+        case 'partially_supported': status = 'LIKELY_TRUE'; break
+        case 'not_supported': status = 'LIKELY_FALSE'; break
+        case 'refuted': status = 'FALSE'; break
+        case 'inconclusive': status = 'DISPUTED'; break
+        default: status = 'UNVERIFIABLE'
+      }
+    } else if (claim.verifiability === 'untestable') {
+      status = 'UNVERIFIABLE'
+    }
+
+    // Calculate average source credibility for claims
+    const avgSourceCredibility = sourceCredibility.length > 0
+      ? sourceCredibility.reduce((sum, s) => sum + s.overallScore, 0) / sourceCredibility.length
+      : 5
+
+    // Build supporting and contradicting evidence
+    const supportingEvidence: string[] = []
+    const contradictingEvidence: string[] = []
+
+    if (factCheck) {
+      factCheck.sources.forEach(src => {
+        if (src.relevantFindings) {
+          if (factCheck.verification === 'supported' || factCheck.verification === 'partially_supported') {
+            supportingEvidence.push(`${src.title}: ${src.relevantFindings}`)
+          } else if (factCheck.verification === 'refuted' || factCheck.verification === 'not_supported') {
+            contradictingEvidence.push(`${src.title}: ${src.relevantFindings}`)
+          }
+        }
+      })
+    }
+
+    // Generate reader note
+    let readerNote: string | undefined
+    if (status === 'DISPUTED') {
+      readerNote = 'This claim is contested by available evidence. Consider seeking additional sources.'
+    } else if (status === 'LIKELY_FALSE' || status === 'FALSE') {
+      readerNote = 'Available evidence does not support this claim. Exercise caution.'
+    } else if (status === 'UNVERIFIABLE') {
+      readerNote = 'This claim cannot be independently verified with available sources.'
+    }
+
+    return {
+      id: claim.id,
+      text: claim.text,
+      type: claim.type.toUpperCase() as 'FACTUAL' | 'OPINION' | 'NORMATIVE' | 'CAUSAL' | 'STATISTICAL',
+      verifiability: claim.verifiability === 'testable' ? 'OBJECTIVE' as const : 'SUBJECTIVE' as const,
+      source: claim.section || 'Article',
+      sourceCredibility: avgSourceCredibility,
+      verification: {
+        status,
+        confidence: factCheck?.confidence ? factCheck.confidence / 100 : 0.5,
+        supportingEvidence,
+        contradictingEvidence,
+        verificationMethod: factCheck?.reasoning ? 'External source verification' : undefined,
+      },
+      readerNote,
+    }
+  })
+}
+
+// ============================================================================
+// Phase 2: Dynamic Confidence Interval Calculation
+// ============================================================================
+
+/**
+ * Calculate confidence interval based on data quality factors
+ */
+function calculateConfidenceInterval(
+  factCheckResults: { confidence: number }[],
+  sources: any[],
+  claims: { verifiability: string }[]
+): { confidence: number; marginOfError: number } {
+  // Base factors for confidence
+  let confidenceFactors: number[] = []
+
+  // Factor 1: Fact-check consistency (if multiple fact-checks)
+  if (factCheckResults.length > 0) {
+    const avgFactCheckConfidence = factCheckResults.reduce((sum, fc) => sum + fc.confidence, 0) / factCheckResults.length / 100
+    confidenceFactors.push(avgFactCheckConfidence)
+  }
+
+  // Factor 2: Source diversity and quality
+  const sourceQuality = sources.length >= 5 ? 0.8 :
+                        sources.length >= 3 ? 0.7 :
+                        sources.length >= 1 ? 0.6 : 0.4
+  confidenceFactors.push(sourceQuality)
+
+  // Factor 3: Claim verifiability ratio
+  const testableClaims = claims.filter(c => c.verifiability === 'testable').length
+  const verifiabilityRatio = claims.length > 0 ? testableClaims / claims.length : 0.5
+  confidenceFactors.push(Math.max(0.4, verifiabilityRatio))
+
+  // Factor 4: Source verification (URLs available)
+  const sourcesWithUrls = sources.filter(s => s.url !== null).length
+  const urlRatio = sources.length > 0 ? sourcesWithUrls / sources.length : 0.3
+  confidenceFactors.push(0.5 + urlRatio * 0.4)
+
+  // Calculate weighted average confidence
+  const avgConfidence = confidenceFactors.length > 0
+    ? confidenceFactors.reduce((sum, f) => sum + f, 0) / confidenceFactors.length
+    : 0.5
+
+  // Margin of error inversely related to confidence
+  const marginOfError = Math.round((1 - avgConfidence) * 15) // 0-15% margin
+
+  return {
+    confidence: Math.round(avgConfidence * 100) / 100,
+    marginOfError,
+  }
+}
+
+// ============================================================================
 // Phase 1 & 2: Dual Score Computation
 // ============================================================================
 
@@ -67,7 +415,7 @@ function computeFactualReliabilityScore(
   return {
     score: totalScore,
     max: 100,
-    confidence: 0.7, // Default confidence
+    confidence: 0.7, // Will be updated by dynamic calculation in main function
     label: getFactualReliabilityLabel(totalScore),
     breakdown: [
       { component: 'Claim Verification Rate', score: claimVerificationRate, max: 40, details: `${verifiedClaims.length}/${factCheckResults.length} claims verified` },
@@ -75,6 +423,31 @@ function computeFactualReliabilityScore(
       { component: 'Contested Fact Resolution', score: contestedFactResolution, max: 20, details: 'Based on methodology rigor' },
       { component: 'Statistical Validity', score: statisticalValidity, max: 15, details: `${statsWithBaseline}/${statistics.length} stats with baseline` },
     ],
+  }
+}
+
+/**
+ * Enhanced version that includes dynamic confidence calculation
+ */
+function computeFactualReliabilityWithConfidence(
+  synthesis: { truthScore: number; breakdown: { evidenceQuality: number; methodologyRigor: number } },
+  factCheckResults: { verification: string; confidence: number }[],
+  statistics: { isBaselineProvided: boolean }[],
+  sources: any[],
+  claims: { verifiability: string }[]
+): FactualReliabilityScore {
+  const baseScore = computeFactualReliabilityScore(synthesis, factCheckResults, statistics)
+  const { confidence, marginOfError } = calculateConfidenceInterval(factCheckResults, sources, claims)
+
+  return {
+    ...baseScore,
+    confidence,
+    breakdown: baseScore.breakdown.map(b => ({
+      ...b,
+      details: b.component === 'Claim Verification Rate'
+        ? `${b.details} (±${marginOfError}%)`
+        : b.details
+    }))
   }
 }
 
@@ -247,11 +620,26 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
     // Phase 1: Detect breaking news
     const breakingNewsContext = detectBreakingNews(article.publishDate)
 
-    // Phase 1: Compute dual scores
-    const factualReliability = computeFactualReliabilityScore(
+    // Phase 2: Compute source credibility scores
+    const sourceCredibility = computeSourceCredibility(
+      article.sources || [],
+      article.claims || []
+    )
+
+    // Phase 2: Compute enhanced claims with verification status
+    const enhancedClaims = computeEnhancedClaims(
+      article.claims || [],
+      factCheckResults,
+      sourceCredibility
+    )
+
+    // Phase 1: Compute dual scores with dynamic confidence
+    const factualReliability = computeFactualReliabilityWithConfidence(
       synthesis,
       factCheckResults,
-      article.statistics || []
+      article.statistics || [],
+      article.sources || [],
+      article.claims || []
     )
     const rhetoricalNeutrality = computeRhetoricalNeutralityScore(
       deceptionResult,
@@ -302,8 +690,18 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
       // Include extracted claims
       extractedClaims: article.claims,
 
+      // ========================================================================
+      // Phase 2: Enhanced Claims with Verification (NEW)
+      // ========================================================================
+      enhancedClaims,
+
       // Include sources cited
       sourcesCited: article.sources,
+
+      // ========================================================================
+      // Phase 2: Source Credibility Assessment (NEW)
+      // ========================================================================
+      sourceCredibility,
 
       // Include statistics
       statistics: article.statistics,

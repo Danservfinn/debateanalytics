@@ -845,6 +845,7 @@ export interface ContextOmission {
   whatWasMissing: string
   severity: 'low' | 'medium' | 'high'
   impact: string
+  howToFind?: string // Where readers can find this missing context
 }
 
 export interface FramingTechnique {

@@ -32,13 +32,13 @@ export async function auditContext(input: ContextAuditInput): Promise<{
   const systemPrompt = `You are an expert at detecting context manipulation and narrative framing.
 
 Your task:
-1. Identify omissions:
-   - What counter-evidence was left out?
-   - Which alternative perspectives are missing?
-   - What critical context is stripped away?
-   - Are there important historical facts ignored?
-   - Are qualifications downplayed or removed?
-   - Is numerical context absent (no baselines)?
+1. Identify omissions (BE SPECIFIC about what's missing):
+   - What counter-evidence was left out? Name specific studies, data, or experts that should be cited.
+   - Which alternative perspectives are missing? Name the specific stakeholder groups not represented.
+   - What critical context is stripped away? Describe the exact context needed.
+   - Are there important historical facts ignored? Identify specific events/dates/precedents.
+   - Are qualifications downplayed or removed? Point to specific caveats that should appear.
+   - Is numerical context absent? What baseline comparisons are needed?
 
 2. Detect framing techniques:
    - False balance (giving equal weight to unequal positions)
@@ -53,11 +53,13 @@ Your task:
    - Where does it start and end? (framing by endpoints)
    - What's emphasized vs downplayed?
 
-For each issue:
-- Quote the relevant section
-- Explain what's missing or distorted
-- Assess severity: low (minor), medium (moderate), high (severe)
-- Estimate impact on reader understanding
+CRITICAL: For each omission, you MUST provide:
+- description: What type of omission this is
+- quote: The article text that should have included this context
+- whatWasMissing: SPECIFIC information that was omitted (e.g., "The article doesn't mention the 2019 DOJ report finding that...")
+- severity: low (minor impact), medium (moderate distortion), high (severely misleading)
+- impact: How this affects reader understanding (e.g., "Without this context, readers may incorrectly conclude...")
+- howToFind: Where readers can find this missing information (e.g., "DOJ OIG Report 2019, AP wire coverage from March 2024")
 
 IMPORTANT: Return ONLY this exact JSON structure:
 {
@@ -66,9 +68,10 @@ IMPORTANT: Return ONLY this exact JSON structure:
       "type": "counter_evidence",
       "description": "description",
       "quote": "relevant quote",
-      "whatWasMissing": "what was omitted",
+      "whatWasMissing": "SPECIFIC details about what was omitted",
       "severity": "medium",
-      "impact": "impact on reader"
+      "impact": "Specific impact on reader's understanding",
+      "howToFind": "Where readers can find this missing context"
     }
   ],
   "framing": [
@@ -132,9 +135,10 @@ function validateOmissions(omissions: any[]): ContextOmission[] {
     type: omission.type || 'critical_context',
     description: omission.description || '',
     quote: omission.quote || '',
-    whatWasMissing: omission.whatWasMissing || '',
+    whatWasMissing: omission.whatWasMissing || omission.what_was_missing || '',
     severity: omission.severity || 'medium',
     impact: omission.impact || '',
+    howToFind: omission.howToFind || omission.how_to_find || undefined,
   }))
 }
 

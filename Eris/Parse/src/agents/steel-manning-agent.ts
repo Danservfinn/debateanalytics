@@ -15,11 +15,18 @@ interface SteelManningInput {
 
 /**
  * Identify and steel-man all perspectives in the article
+ * Enhanced: Always generates at least 2 perspectives (article's view + strongest counter-view)
  */
 export async function steelManArticle(input: SteelManningInput): Promise<SteelMannedPerspective[]> {
   const { article } = input
 
   const systemPrompt = `You are an expert at steel-manning arguments - constructing the strongest possible version of each perspective.
+
+CRITICAL: You MUST identify and steel-man AT LEAST 2 perspectives:
+1. The article's main position/perspective (what the article argues FOR)
+2. The strongest opposing perspective (what a reasonable person who disagrees would argue)
+
+Even if the article presents only one viewpoint, YOU MUST construct the strongest counter-argument that a thoughtful opponent would make.
 
 Steel-manning requires:
 1. Intellectual charity: Give each view its best possible defense
@@ -27,31 +34,53 @@ Steel-manning requires:
 3. Fill gaps: Use your knowledge to strengthen weak arguments
 4. Anticipate counterarguments: Strengthen where perspectives are vulnerable
 
-For each perspective:
-- label: name of the perspective
-- originalStrength: "weak", "moderate", or "strong"
-- steelMannedVersion: object with coreClaim, strongestArguments, bestEvidence, logicalStructure, qualityScore (0-100)
-- isImplicit: boolean (true if perspective is not directly stated)
+For EACH perspective:
+- label: Clear name describing the perspective (e.g., "Pro-Administration View", "Civil Liberties Concern", "Economic Conservative Position")
+- originalStrength: "weak", "moderate", or "strong" (how well the article presented this view)
+- steelMannedVersion: {
+    coreClaim: The central thesis in its strongest form
+    strongestArguments: Array of 2-4 compelling arguments
+    bestEvidence: Array of 1-3 strongest pieces of evidence or data that would support this view
+    logicalStructure: How the argument builds from premises to conclusion
+    anticipatedCounterarguments: What the opposing side would say in response
+    qualityScore: 0-100 (how strong is this perspective after steel-manning)
+  }
+- sourceInArticle: Quotes from the article that relate to this perspective (empty if implicit)
+- isImplicit: true if this perspective is NOT explicitly in the article but should be considered
 
-IMPORTANT: Return ONLY this exact JSON structure:
+IMPORTANT: Return ONLY this exact JSON structure with AT LEAST 2 perspectives:
 {
   "perspectives": [
     {
-      "label": "Perspective Name",
-      "originalStrength": "moderate",
+      "label": "Article's Main Position",
+      "originalStrength": "strong",
       "steelMannedVersion": {
-        "coreClaim": "core argument",
-        "strongestArguments": ["arg1", "arg2"],
-        "bestEvidence": ["evidence1"],
-        "logicalStructure": "how the argument is structured",
+        "coreClaim": "The core argument in its strongest form",
+        "strongestArguments": ["arg1", "arg2", "arg3"],
+        "bestEvidence": ["evidence1", "evidence2"],
+        "logicalStructure": "Premise A leads to B which supports conclusion C",
+        "anticipatedCounterarguments": ["counter1", "counter2"],
         "qualityScore": 75
       },
+      "sourceInArticle": ["relevant quote from article"],
       "isImplicit": false
+    },
+    {
+      "label": "Strongest Counter-Perspective",
+      "originalStrength": "weak",
+      "steelMannedVersion": {
+        "coreClaim": "The opposing view in its strongest form",
+        "strongestArguments": ["arg1", "arg2"],
+        "bestEvidence": ["evidence1"],
+        "logicalStructure": "How this counter-argument is structured",
+        "anticipatedCounterarguments": ["what the article's side would respond"],
+        "qualityScore": 70
+      },
+      "sourceInArticle": [],
+      "isImplicit": true
     }
   ]
 }
-
-If no perspectives found, return: {"perspectives": []}
 
 Return ONLY valid JSON. No markdown code blocks, no explanations.`
 
