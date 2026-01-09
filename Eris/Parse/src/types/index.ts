@@ -965,3 +965,118 @@ export interface ExtendedTruthScoreBreakdown {
     }>
   }
 }
+
+// ============================================================================
+// Claim Testing / Verification Types
+// ============================================================================
+
+export type ClaimVerdict =
+  | 'verified'
+  | 'mostly_true'
+  | 'partially_true'
+  | 'misleading'
+  | 'mostly_false'
+  | 'false'
+  | 'unverifiable'
+
+export interface EvidenceItem {
+  id: string
+  type: 'study' | 'data' | 'expert_opinion' | 'official_source' | 'news_report' | 'fact_check'
+  title: string
+  source: string
+  url?: string
+  relevance: number // 0-100
+  credibility: 'high' | 'medium' | 'low'
+  excerpt: string
+  publicationDate?: string
+  methodology?: string
+}
+
+export interface VerificationSource {
+  name: string
+  type: 'academic' | 'government' | 'news' | 'fact_checker' | 'expert' | 'data_source'
+  url?: string
+  credibilityScore: number // 0-10
+  notes?: string
+}
+
+export interface ClaimTestResult {
+  claimId: string
+  claim: string
+  verdict: ClaimVerdict
+  confidence: number // 0-100
+  summary: string
+
+  evidence: {
+    supporting: EvidenceItem[]
+    contradicting: EvidenceItem[]
+    contextual: EvidenceItem[]
+  }
+
+  sources: VerificationSource[]
+
+  analysis: {
+    methodology: string
+    keyFindings: string[]
+    limitations: string
+    recommendation: string
+    fullText: string
+  }
+
+  testedAt: string
+  processingTime: number // milliseconds
+}
+
+export interface ClaimTestRequest {
+  claimId: string
+  claim: string
+  context: string
+  articleUrl?: string
+  articleTitle?: string
+}
+
+export interface ClaimTestResponse {
+  success: boolean
+  data?: ClaimTestResult
+  error?: string
+}
+
+// Helper functions for claim testing
+export function getClaimVerdictLabel(verdict: ClaimVerdict): string {
+  const labels: Record<ClaimVerdict, string> = {
+    verified: 'Verified',
+    mostly_true: 'Mostly True',
+    partially_true: 'Partially True',
+    misleading: 'Misleading',
+    mostly_false: 'Mostly False',
+    false: 'False',
+    unverifiable: 'Unverifiable'
+  }
+  return labels[verdict]
+}
+
+export function getClaimVerdictColor(verdict: ClaimVerdict): string {
+  const colors: Record<ClaimVerdict, string> = {
+    verified: '#22c55e',      // green
+    mostly_true: '#84cc16',   // lime
+    partially_true: '#f59e0b', // amber
+    misleading: '#f97316',    // orange
+    mostly_false: '#ef4444',  // red
+    false: '#dc2626',         // dark red
+    unverifiable: '#6b7280'   // gray
+  }
+  return colors[verdict]
+}
+
+export function getClaimVerdictIcon(verdict: ClaimVerdict): string {
+  const icons: Record<ClaimVerdict, string> = {
+    verified: '✓',
+    mostly_true: '≈',
+    partially_true: '~',
+    misleading: '⚠',
+    mostly_false: '✗',
+    false: '✗',
+    unverifiable: '?'
+  }
+  return icons[verdict]
+}

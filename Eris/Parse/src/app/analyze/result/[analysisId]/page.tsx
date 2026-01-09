@@ -11,13 +11,15 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Loader2, ExternalLink, Download, Share2, Copy, CheckCircle, AlertTriangle, XCircle, Info, FileText, Users, Calendar, BookOpen, BarChart3, Shield, Brain, Scale, Search, History, RefreshCw } from "lucide-react";
+import { Loader2, ExternalLink, Download, Share2, Copy, CheckCircle, AlertTriangle, XCircle, Info, FileText, Users, Calendar, BookOpen, BarChart3, Shield, Brain, Scale, Search, History, RefreshCw, FlaskConical, X } from "lucide-react";
 import {
   getCredibilityLabel,
   getCredibilityColor,
   getFactualReliabilityColor,
   getRhetoricalNeutralityColor,
   getConfidenceLevelColor,
+  getClaimVerdictLabel,
+  getClaimVerdictColor,
   type ParseAnalysis,
   type TruthScoreBreakdown,
   type SteelMannedPerspective,
@@ -33,6 +35,7 @@ import {
   type BreakingNewsContext,
   type ReaderGuidance,
   type PersuasionIntentResult,
+  type ClaimTestResult,
 } from "@/types";
 
 interface PageProps {
@@ -84,6 +87,11 @@ export default function AnalysisResultPage({ params }: PageProps) {
   const [copied, setCopied] = useState(false);
   const [isFromDatabase, setIsFromDatabase] = useState(false);
   const parseCardRef = useRef<HTMLDivElement>(null);
+
+  // Claim testing state
+  const [testingClaimId, setTestingClaimId] = useState<string | null>(null);
+  const [claimTestResult, setClaimTestResult] = useState<ClaimTestResult | null>(null);
+  const [showTestModal, setShowTestModal] = useState(false);
 
   useEffect(() => {
     const fetchAnalysis = async () => {
@@ -174,6 +182,43 @@ export default function AnalysisResultPage({ params }: PageProps) {
     } else {
       router.push('/analyze');
     }
+  };
+
+  const handleTestClaim = async (claim: ExtractedClaim) => {
+    setTestingClaimId(claim.id);
+    setClaimTestResult(null);
+    setShowTestModal(true);
+
+    try {
+      const response = await fetch('/api/claim/test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          claimId: claim.id,
+          claim: claim.text,
+          context: claim.context || claim.section || 'No additional context available',
+          articleUrl: analysis?.url,
+          articleTitle: analysis?.articleMetadata?.title || analysis?.articleMetadata?.headline,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success && result.data) {
+        setClaimTestResult(result.data);
+      } else {
+        console.error('Claim test failed:', result.error);
+      }
+    } catch (error) {
+      console.error('Error testing claim:', error);
+    } finally {
+      setTestingClaimId(null);
+    }
+  };
+
+  const closeTestModal = () => {
+    setShowTestModal(false);
+    setClaimTestResult(null);
   };
 
   if (loading) {
@@ -1349,7 +1394,7 @@ export default function AnalysisResultPage({ params }: PageProps) {
                 Extracted Claims
               </CardTitle>
               <CardDescription>
-                All claims identified in the article ({extractedClaims.length} total)
+                All claims identified in the article ({extractedClaims.length} total) — Click "Test it" on testable claims for deep verification
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -1373,6 +1418,28 @@ export default function AnalysisResultPage({ params }: PageProps) {
                         <p className="text-xs text-muted-foreground mt-1">Section: {claim.section}</p>
                       )}
                     </div>
+                    {/* Test it button for testable claims */}
+                    {claim.verifiability === 'testable' && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="shrink-0 gap-1.5 text-xs hover:bg-primary/10 hover:text-primary hover:border-primary"
+                        onClick={() => handleTestClaim(claim)}
+                        disabled={testingClaimId === claim.id}
+                      >
+                        {testingClaimId === claim.id ? (
+                          <>
+                            <Loader2 className="h-3 w-3 animate-spin" />
+                            Testing...
+                          </>
+                        ) : (
+                          <>
+                            <FlaskConical className="h-3 w-3" />
+                            Test it
+                          </>
+                        )}
+                      </Button>
+                    )}
                   </div>
                 ))}
                 {extractedClaims.length > 10 && (
@@ -1669,6 +1736,224 @@ export default function AnalysisResultPage({ params }: PageProps) {
           </CardContent>
         </Card>
       </div>
+
+      {/* ============================================ */}
+      {/* CLAIM TEST RESULT MODAL */}
+      {/* ============================================ */}
+      {showTestModal && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-background rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-background border-b border-border p-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <FlaskConical className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-headline text-lg font-semibold text-foreground">
+                    Claim Verification Result
+                  </h3>
+                  <p className="text-xs text-muted-foreground">Deep analysis powered by AI</p>
+                </div>
+              </div>
+              <Button variant="ghost" size="icon" onClick={closeTestModal}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6">
+              {testingClaimId && !claimTestResult ? (
+                /* Loading State */
+                <div className="flex flex-col items-center justify-center py-12">
+                  <Loader2 className="h-10 w-10 animate-spin text-primary mb-4" />
+                  <p className="text-foreground font-medium">Analyzing claim...</p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Searching for evidence and evaluating sources
+                  </p>
+                </div>
+              ) : claimTestResult ? (
+                /* Results */
+                <div className="space-y-6">
+                  {/* The Claim */}
+                  <div className="p-4 bg-muted/30 rounded-lg border border-border">
+                    <span className="text-xs text-muted-foreground uppercase tracking-wide">Claim Tested</span>
+                    <p className="text-foreground font-medium mt-1">"{claimTestResult.claim}"</p>
+                  </div>
+
+                  {/* Verdict Banner */}
+                  <div
+                    className="p-6 rounded-lg text-center"
+                    style={{ backgroundColor: `${getClaimVerdictColor(claimTestResult.verdict)}15` }}
+                  >
+                    <Badge
+                      className="text-lg px-6 py-2 mb-3"
+                      style={{
+                        backgroundColor: getClaimVerdictColor(claimTestResult.verdict),
+                        color: 'white'
+                      }}
+                    >
+                      {getClaimVerdictLabel(claimTestResult.verdict)}
+                    </Badge>
+                    <div className="flex items-center justify-center gap-2 mt-3">
+                      <span className="text-sm text-muted-foreground">Confidence:</span>
+                      <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
+                        <div
+                          className="h-full rounded-full"
+                          style={{
+                            width: `${claimTestResult.confidence}%`,
+                            backgroundColor: getClaimVerdictColor(claimTestResult.verdict)
+                          }}
+                        />
+                      </div>
+                      <span className="text-sm font-medium">{claimTestResult.confidence}%</span>
+                    </div>
+                  </div>
+
+                  {/* Summary */}
+                  <div className="p-4 bg-background rounded-lg border-l-4 border-primary">
+                    <h4 className="font-headline font-semibold text-foreground mb-2">Summary</h4>
+                    <p className="text-muted-foreground leading-relaxed">{claimTestResult.summary}</p>
+                  </div>
+
+                  {/* Evidence Breakdown */}
+                  <div className="space-y-4">
+                    <h4 className="font-headline font-semibold text-foreground">Evidence Analysis</h4>
+
+                    {/* Supporting Evidence */}
+                    {claimTestResult.evidence.supporting.length > 0 && (
+                      <div className="p-4 bg-green-50/50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-900">
+                        <h5 className="text-sm font-semibold text-green-700 dark:text-green-400 mb-3 flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4" />
+                          Supporting Evidence ({claimTestResult.evidence.supporting.length})
+                        </h5>
+                        <div className="space-y-2">
+                          {claimTestResult.evidence.supporting.map((item) => (
+                            <div key={item.id} className="p-3 bg-background rounded border border-border">
+                              <div className="flex justify-between items-start mb-1">
+                                <span className="font-medium text-sm text-foreground">{item.title}</span>
+                                <Badge variant="outline" className="text-xs">{item.credibility}</Badge>
+                              </div>
+                              <p className="text-xs text-muted-foreground mb-1">{item.source}</p>
+                              <p className="text-sm text-foreground italic">"{item.excerpt}"</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Contradicting Evidence */}
+                    {claimTestResult.evidence.contradicting.length > 0 && (
+                      <div className="p-4 bg-red-50/50 dark:bg-red-950/20 rounded-lg border border-red-200 dark:border-red-900">
+                        <h5 className="text-sm font-semibold text-red-700 dark:text-red-400 mb-3 flex items-center gap-2">
+                          <XCircle className="h-4 w-4" />
+                          Contradicting Evidence ({claimTestResult.evidence.contradicting.length})
+                        </h5>
+                        <div className="space-y-2">
+                          {claimTestResult.evidence.contradicting.map((item) => (
+                            <div key={item.id} className="p-3 bg-background rounded border border-border">
+                              <div className="flex justify-between items-start mb-1">
+                                <span className="font-medium text-sm text-foreground">{item.title}</span>
+                                <Badge variant="outline" className="text-xs">{item.credibility}</Badge>
+                              </div>
+                              <p className="text-xs text-muted-foreground mb-1">{item.source}</p>
+                              <p className="text-sm text-foreground italic">"{item.excerpt}"</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Contextual Evidence */}
+                    {claimTestResult.evidence.contextual.length > 0 && (
+                      <div className="p-4 bg-amber-50/50 dark:bg-amber-950/20 rounded-lg border border-amber-200 dark:border-amber-900">
+                        <h5 className="text-sm font-semibold text-amber-700 dark:text-amber-400 mb-3 flex items-center gap-2">
+                          <Info className="h-4 w-4" />
+                          Contextual Information ({claimTestResult.evidence.contextual.length})
+                        </h5>
+                        <div className="space-y-2">
+                          {claimTestResult.evidence.contextual.map((item) => (
+                            <div key={item.id} className="p-3 bg-background rounded border border-border">
+                              <div className="flex justify-between items-start mb-1">
+                                <span className="font-medium text-sm text-foreground">{item.title}</span>
+                                <Badge variant="outline" className="text-xs">{item.credibility}</Badge>
+                              </div>
+                              <p className="text-xs text-muted-foreground mb-1">{item.source}</p>
+                              <p className="text-sm text-foreground italic">"{item.excerpt}"</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* No evidence found */}
+                    {claimTestResult.evidence.supporting.length === 0 &&
+                     claimTestResult.evidence.contradicting.length === 0 &&
+                     claimTestResult.evidence.contextual.length === 0 && (
+                      <div className="p-4 bg-muted/30 rounded-lg text-center">
+                        <p className="text-muted-foreground">No specific evidence items were identified.</p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Key Findings */}
+                  {claimTestResult.analysis.keyFindings.length > 0 && (
+                    <div className="p-4 bg-background rounded-lg border border-border">
+                      <h4 className="font-headline font-semibold text-foreground mb-3">Key Findings</h4>
+                      <ul className="space-y-2">
+                        {claimTestResult.analysis.keyFindings.map((finding, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                            {finding}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Full Analysis */}
+                  <div className="p-4 bg-muted/30 rounded-lg">
+                    <h4 className="font-headline font-semibold text-foreground mb-3">Detailed Analysis</h4>
+                    <p className="text-sm text-muted-foreground whitespace-pre-line leading-relaxed">
+                      {claimTestResult.analysis.fullText}
+                    </p>
+                  </div>
+
+                  {/* Limitations */}
+                  <div className="p-4 bg-amber-50/30 dark:bg-amber-950/10 rounded-lg border border-amber-200/50 dark:border-amber-900/50">
+                    <h4 className="text-sm font-semibold text-amber-700 dark:text-amber-400 mb-2">Limitations</h4>
+                    <p className="text-sm text-muted-foreground">{claimTestResult.analysis.limitations}</p>
+                  </div>
+
+                  {/* Recommendation */}
+                  <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                    <h4 className="text-sm font-semibold text-primary mb-2">Recommendation</h4>
+                    <p className="text-sm text-foreground">{claimTestResult.analysis.recommendation}</p>
+                  </div>
+
+                  {/* Processing Info */}
+                  <div className="text-xs text-muted-foreground text-center pt-4 border-t border-border">
+                    Processed in {(claimTestResult.processingTime / 1000).toFixed(1)}s •{' '}
+                    {new Date(claimTestResult.testedAt).toLocaleString()}
+                  </div>
+                </div>
+              ) : (
+                /* Error/Empty State */
+                <div className="flex flex-col items-center justify-center py-12">
+                  <AlertTriangle className="h-10 w-10 text-amber-500 mb-4" />
+                  <p className="text-foreground font-medium">Unable to complete verification</p>
+                  <p className="text-sm text-muted-foreground mt-1">Please try again later</p>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="sticky bottom-0 bg-background border-t border-border p-4 flex justify-end">
+              <Button onClick={closeTestModal}>Close</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
