@@ -89,16 +89,21 @@ IMPORTANT: NO appeals to authority. Evaluate EVIDENCE not SOURCES.
 - A blog post gets full credit if it cites rigorous primary sources
 - Focus on argument quality, not author credentials
 
-IMPORTANT: Return ONLY this exact JSON structure:
+IMPORTANT: Return ONLY this exact JSON structure with RATIONALE for each score:
 {
   "evidenceQuality": 25,
+  "evidenceRationale": "1-2 sentence explanation of why this evidence score was given, citing specific sources or lack thereof",
   "methodologyRigor": 15,
+  "methodologyRationale": "1-2 sentence explanation of methodology assessment, noting specific strengths or weaknesses",
   "logicalStructure": 12,
+  "logicalRationale": "1-2 sentence explanation of logical coherence, noting any fallacies or valid reasoning",
   "manipulationAbsence": 10,
+  "manipulationRationale": "1-2 sentence explanation of manipulation findings, citing specific instances if found",
   "credibility": "moderate",
   "whatAiThinks": "Your candid assessment of the article's credibility in 2-3 sentences."
 }
 
+Each rationale MUST explain WHY the score is what it is - not just restate the number.
 Ensure all numeric fields are numbers (not strings). Return ONLY valid JSON. No markdown code blocks, no explanations.`
 
   const userPrompt = `Synthesize this analysis and calculate the Truth Score:
@@ -221,6 +226,16 @@ Return JSON with these exact fields:
 
   const truthScore = evidenceQuality + methodologyRigor + logicalStructure + manipulationAbsence
 
+  // Get rationale text fields with fallbacks
+  const evidenceRationale = data?.evidenceRationale || data?.evidence_rationale ||
+    'Evidence assessment based on source quality and verification.'
+  const methodologyRationale = data?.methodologyRationale || data?.methodology_rationale ||
+    'Methodology assessment based on study design and rigor.'
+  const logicalRationale = data?.logicalRationale || data?.logical_rationale || data?.logic_rationale ||
+    'Logic assessment based on argument validity and coherence.'
+  const manipulationRationale = data?.manipulationRationale || data?.manipulation_rationale ||
+    'Manipulation assessment based on detected deception and framing techniques.'
+
   // Get text fields with fallbacks
   const whatAiThinks = data?.whatAiThinks || data?.what_ai_thinks || data?.assessment ||
     'This article presents information that warrants careful evaluation. Readers should verify claims against primary sources.'
@@ -245,9 +260,13 @@ Return JSON with these exact fields:
     truthScore,
     breakdown: {
       evidenceQuality,
+      evidenceRationale,
       methodologyRigor,
+      methodologyRationale,
       logicalStructure,
+      logicalRationale,
       manipulationAbsence,
+      manipulationRationale,
     },
     whatAiThinks,
     credibility,

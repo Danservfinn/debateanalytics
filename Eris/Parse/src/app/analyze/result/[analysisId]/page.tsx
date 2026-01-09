@@ -244,23 +244,43 @@ export default function AnalysisResultPage({ params }: PageProps) {
                 </Badge>
               </div>
 
-              {/* Key Metrics */}
-              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="text-center p-3 bg-background rounded-lg">
-                  <div className="text-xl font-bold text-foreground">{scoreBreakdown.evidenceQuality}</div>
-                  <div className="text-xs text-muted-foreground">Evidence /40</div>
+              {/* Key Metrics with Rationales */}
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-background rounded-lg border border-border">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-muted-foreground">Evidence Quality</span>
+                    <span className="text-xl font-bold text-foreground">{scoreBreakdown.evidenceQuality}<span className="text-sm font-normal text-muted-foreground">/40</span></span>
+                  </div>
+                  {scoreBreakdown.evidenceRationale && (
+                    <p className="text-xs text-muted-foreground leading-relaxed">{scoreBreakdown.evidenceRationale}</p>
+                  )}
                 </div>
-                <div className="text-center p-3 bg-background rounded-lg">
-                  <div className="text-xl font-bold text-foreground">{scoreBreakdown.methodologyRigor}</div>
-                  <div className="text-xs text-muted-foreground">Methodology /25</div>
+                <div className="p-4 bg-background rounded-lg border border-border">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-muted-foreground">Methodology Rigor</span>
+                    <span className="text-xl font-bold text-foreground">{scoreBreakdown.methodologyRigor}<span className="text-sm font-normal text-muted-foreground">/25</span></span>
+                  </div>
+                  {scoreBreakdown.methodologyRationale && (
+                    <p className="text-xs text-muted-foreground leading-relaxed">{scoreBreakdown.methodologyRationale}</p>
+                  )}
                 </div>
-                <div className="text-center p-3 bg-background rounded-lg">
-                  <div className="text-xl font-bold text-foreground">{scoreBreakdown.logicalStructure}</div>
-                  <div className="text-xs text-muted-foreground">Logic /20</div>
+                <div className="p-4 bg-background rounded-lg border border-border">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-muted-foreground">Logical Structure</span>
+                    <span className="text-xl font-bold text-foreground">{scoreBreakdown.logicalStructure}<span className="text-sm font-normal text-muted-foreground">/20</span></span>
+                  </div>
+                  {scoreBreakdown.logicalRationale && (
+                    <p className="text-xs text-muted-foreground leading-relaxed">{scoreBreakdown.logicalRationale}</p>
+                  )}
                 </div>
-                <div className="text-center p-3 bg-background rounded-lg">
-                  <div className="text-xl font-bold text-foreground">{scoreBreakdown.manipulationAbsence}</div>
-                  <div className="text-xs text-muted-foreground">No Manipulation /15</div>
+                <div className="p-4 bg-background rounded-lg border border-border">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-muted-foreground">Manipulation Absence</span>
+                    <span className="text-xl font-bold text-foreground">{scoreBreakdown.manipulationAbsence}<span className="text-sm font-normal text-muted-foreground">/15</span></span>
+                  </div>
+                  {scoreBreakdown.manipulationRationale && (
+                    <p className="text-xs text-muted-foreground leading-relaxed">{scoreBreakdown.manipulationRationale}</p>
+                  )}
                 </div>
               </div>
             </div>
