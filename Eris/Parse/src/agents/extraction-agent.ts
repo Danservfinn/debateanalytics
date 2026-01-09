@@ -53,6 +53,108 @@ async function fetchDirect(url: string): Promise<string> {
 }
 
 /**
+ * Pre-extract metadata from HTML using regex (fallback when GLM fails)
+ */
+function preExtractFromHTML(html: string, url: string): {
+  title: string | null
+  authors: string[]
+  publication: string | null
+  publishDate: string | null
+  description: string | null
+  cleanedContent: string
+} {
+  // Decode HTML entities
+  const decodeEntities = (str: string) => str
+    .replace(/&#x27;/g, "'")
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#(\d+);/g, (_, num) => String.fromCharCode(parseInt(num)))
+
+  // Extract title from multiple sources
+  let title: string | null = null
+  const ogTitleMatch = html.match(/<meta[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["']/i) ||
+                       html.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:title["']/i)
+  if (ogTitleMatch) title = decodeEntities(ogTitleMatch[1])
+
+  if (!title) {
+    const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i)
+    if (titleMatch) {
+      title = decodeEntities(titleMatch[1])
+      // Remove site name suffix (e.g., "Article Title | Fox News")
+      title = title.replace(/\s*[|\-–—]\s*[^|\-–—]+$/, '').trim()
+    }
+  }
+
+  if (!title) {
+    const h1Match = html.match(/<h1[^>]*>([^<]+)<\/h1>/i)
+    if (h1Match) title = decodeEntities(h1Match[1])
+  }
+
+  // Extract authors
+  const authors: string[] = []
+  const authorMeta = html.match(/<meta[^>]*name=["']author["'][^>]*content=["']([^"']+)["']/i)
+  if (authorMeta) authors.push(decodeEntities(authorMeta[1]))
+
+  // Try article:author
+  const articleAuthor = html.match(/<meta[^>]*property=["']article:author["'][^>]*content=["']([^"']+)["']/i)
+  if (articleAuthor && !authors.includes(decodeEntities(articleAuthor[1]))) {
+    authors.push(decodeEntities(articleAuthor[1]))
+  }
+
+  // Extract publication from og:site_name
+  let publication: string | null = null
+  const siteNameMatch = html.match(/<meta[^>]*property=["']og:site_name["'][^>]*content=["']([^"']+)["']/i)
+  if (siteNameMatch) publication = decodeEntities(siteNameMatch[1])
+
+  // Fallback: extract from URL
+  if (!publication) {
+    try {
+      const urlObj = new URL(url)
+      publication = urlObj.hostname.replace(/^www\./, '').split('.')[0]
+      publication = publication.charAt(0).toUpperCase() + publication.slice(1)
+    } catch { /* ignore */ }
+  }
+
+  // Extract publish date
+  let publishDate: string | null = null
+  const dateMatch = html.match(/<meta[^>]*property=["']article:published_time["'][^>]*content=["']([^"']+)["']/i) ||
+                    html.match(/<time[^>]*datetime=["']([^"']+)["']/i)
+  if (dateMatch) publishDate = dateMatch[1]
+
+  // Extract description
+  let description: string | null = null
+  const descMatch = html.match(/<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["']/i) ||
+                    html.match(/<meta[^>]*property=["']og:description["'][^>]*content=["']([^"']+)["']/i)
+  if (descMatch) description = decodeEntities(descMatch[1])
+
+  // Clean HTML for GLM: remove scripts, styles, ads, navigation
+  let cleanedContent = html
+    // Remove script tags and content
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    // Remove style tags and content
+    .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+    // Remove comments
+    .replace(/<!--[\s\S]*?-->/g, '')
+    // Remove nav, header, footer, aside
+    .replace(/<(nav|header|footer|aside)\b[^>]*>[\s\S]*?<\/\1>/gi, '')
+    // Remove common ad/tracking elements
+    .replace(/<div[^>]*(ad-|advertisement|sponsored|tracking|social-share)[^>]*>[\s\S]*?<\/div>/gi, '')
+    // Simplify to just text-containing elements
+    .replace(/<[^>]+>/g, ' ')
+    // Collapse whitespace
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  // Truncate to reasonable size for GLM
+  cleanedContent = cleanedContent.substring(0, 50000)
+
+  return { title, authors, publication, publishDate, description, cleanedContent }
+}
+
+/**
  * Extract structured article data from URL
  */
 export async function extractArticle(input: ExtractionInput): Promise<ExtractedArticle> {
@@ -61,6 +163,7 @@ export async function extractArticle(input: ExtractionInput): Promise<ExtractedA
   // Step 1: Fetch article content if not provided
   let articleContent = html
   let isMarkdown = false
+  let preExtracted: ReturnType<typeof preExtractFromHTML> | null = null
 
   if (!articleContent) {
     try {
@@ -73,8 +176,19 @@ export async function extractArticle(input: ExtractionInput): Promise<ExtractedA
       console.log('Jina Reader failed, falling back to direct fetch:', jinaError)
       try {
         // Fallback to direct fetch
-        articleContent = await fetchDirect(url)
+        const rawHtml = await fetchDirect(url)
         isMarkdown = false
+
+        // Pre-extract metadata from HTML for fallback
+        preExtracted = preExtractFromHTML(rawHtml, url)
+        console.log('Pre-extracted metadata:', {
+          title: preExtracted.title,
+          publication: preExtracted.publication,
+          contentLength: preExtracted.cleanedContent.length
+        })
+
+        // Use cleaned content instead of raw HTML
+        articleContent = preExtracted.cleanedContent
       } catch (directError) {
         throw new Error(`Failed to fetch article from URL: ${directError instanceof Error ? directError.message : 'Unknown error'}`)
       }
@@ -82,7 +196,7 @@ export async function extractArticle(input: ExtractionInput): Promise<ExtractedA
   }
 
   // Step 2: Use GLM-4.5 to extract structured data
-  const contentType = isMarkdown ? 'markdown/text' : 'HTML'
+  const contentType = isMarkdown ? 'markdown/text' : 'cleaned text'
   const systemPrompt = `You are an expert article extraction system. Your task is to parse article content and extract structured information.
 
 The content will be provided as ${contentType}. Extract all available information.
@@ -157,19 +271,45 @@ No markdown code blocks, no explanations, just the raw JSON.`
     bodyText = extractedData.content.body
   }
 
+  // Use pre-extracted metadata as fallback when GLM returns empty/default values
+  const glmTitle = extractedData.title
+  const needsTitleFallback = !glmTitle || glmTitle === 'Untitled Article' || glmTitle.trim() === ''
+
+  // Determine final values with fallback chain
+  const finalTitle = needsTitleFallback && preExtracted?.title
+    ? preExtracted.title
+    : (glmTitle || 'Untitled Article')
+
+  const finalAuthors = (extractedData.authors && extractedData.authors.length > 0)
+    ? extractedData.authors
+    : (preExtracted?.authors || [])
+
+  const finalPublication = extractedData.publication && extractedData.publication !== 'Unknown Publication'
+    ? extractedData.publication
+    : (preExtracted?.publication || 'Unknown Publication')
+
+  const finalPublishDate = extractedData.publishDate
+    ? extractedData.publishDate
+    : (preExtracted?.publishDate || new Date().toISOString().split('T')[0])
+
+  // Log fallback usage
+  if (needsTitleFallback && preExtracted?.title) {
+    console.log('Using pre-extracted title as fallback:', preExtracted.title)
+  }
+
   const article: ExtractedArticle = {
     id: crypto.randomUUID(),
     url,
-    title: extractedData.title || 'Untitled Article',
-    authors: extractedData.authors || [],
-    publication: extractedData.publication || 'Unknown Publication',
-    publishDate: extractedData.publishDate || new Date().toISOString().split('T')[0],
+    title: finalTitle,
+    authors: finalAuthors,
+    publication: finalPublication,
+    publishDate: finalPublishDate,
     articleType: extractedData.articleType || 'news',
     content: {
-      headline: extractedData.content?.headline || extractedData.title || '',
+      headline: extractedData.content?.headline || finalTitle || '',
       subhead: extractedData.content?.subhead || null,
-      lede: extractedData.content?.lede || '',
-      body: bodyText,
+      lede: extractedData.content?.lede || preExtracted?.description || '',
+      body: bodyText || preExtracted?.cleanedContent || '',
       sections: extractedData.content?.sections || [],
     },
     claims: validateClaims(Array.isArray(extractedData.claims) ? extractedData.claims : []),
