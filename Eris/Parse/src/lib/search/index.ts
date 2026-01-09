@@ -105,10 +105,40 @@ export const BraveSearchProvider: SearchProvider = {
 // DuckDuckGo Provider (Fallback - often blocked by CAPTCHA)
 // ============================================================================
 
+// Rate limiting state for DuckDuckGo
+let ddgLastRequestTime = 0;
+const DDG_MIN_DELAY_MS = 2000; // Minimum 2 seconds between requests
+let ddgRequestCount = 0;
+let ddgBlockedUntil = 0;
+
 export const DuckDuckGoProvider: SearchProvider = {
   name: 'DuckDuckGo',
 
   async search(query: string, options: SearchOptions = {}): Promise<SearchResult[]> {
+    // Check if we're in a cooldown period after being blocked
+    if (ddgBlockedUntil > Date.now()) {
+      const waitSecs = Math.ceil((ddgBlockedUntil - Date.now()) / 1000);
+      throw new Error(`DuckDuckGo in cooldown for ${waitSecs}s after CAPTCHA block`);
+    }
+
+    // Rate limiting: wait if we made a request too recently
+    const timeSinceLastRequest = Date.now() - ddgLastRequestTime;
+    if (timeSinceLastRequest < DDG_MIN_DELAY_MS && ddgLastRequestTime > 0) {
+      const delayNeeded = DDG_MIN_DELAY_MS - timeSinceLastRequest;
+      console.log(`[DuckDuckGo] Rate limiting: waiting ${delayNeeded}ms...`);
+      await new Promise(resolve => setTimeout(resolve, delayNeeded));
+    }
+
+    // Exponential backoff after multiple requests
+    ddgRequestCount++;
+    if (ddgRequestCount > 3) {
+      const extraDelay = Math.min(ddgRequestCount * 500, 5000); // Up to 5s extra delay
+      console.log(`[DuckDuckGo] Backoff: waiting ${extraDelay}ms (request #${ddgRequestCount})...`);
+      await new Promise(resolve => setTimeout(resolve, extraDelay));
+    }
+
+    ddgLastRequestTime = Date.now();
+
     try {
       const limit = options.limit || 10;
 
@@ -117,6 +147,14 @@ export const DuckDuckGoProvider: SearchProvider = {
       if (options.site) {
         searchQuery = `${query} site:${options.site}`;
       }
+
+      // Rotate user agents to reduce bot detection
+      const userAgents = [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0',
+      ];
+      const userAgent = userAgents[ddgRequestCount % userAgents.length];
 
       // Use DuckDuckGo HTML search (more reliable than Instant Answer API)
       const params = new URLSearchParams({
@@ -128,8 +166,10 @@ export const DuckDuckGoProvider: SearchProvider = {
         `https://html.duckduckgo.com/html/?${params.toString()}`,
         {
           headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-            'Accept': 'text/html,application/xhtml+xml',
+            'User-Agent': userAgent,
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Connection': 'keep-alive',
           },
         }
       );
@@ -144,7 +184,10 @@ export const DuckDuckGoProvider: SearchProvider = {
       if (html.includes('Unfortunately, bots use DuckDuckGo too') ||
           html.includes('anomaly-modal') ||
           html.includes('Select all squares containing')) {
-        throw new Error('DuckDuckGo blocked by CAPTCHA - bot detection triggered');
+        // Set cooldown for 60 seconds after being blocked
+        ddgBlockedUntil = Date.now() + 60000;
+        ddgRequestCount = 0; // Reset counter
+        throw new Error('DuckDuckGo blocked by CAPTCHA - bot detection triggered (60s cooldown started)');
       }
 
       // Parse HTML results using regex (lightweight, no DOM parser needed)

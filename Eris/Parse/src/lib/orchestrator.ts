@@ -338,17 +338,29 @@ function computeEnhancedClaims(
  * Calculate confidence interval based on data quality factors
  */
 function calculateConfidenceInterval(
-  factCheckResults: { confidence: number }[],
+  factCheckResults: { confidence: number; searchAvailable?: boolean }[],
   sources: any[],
   claims: { verifiability: string }[]
 ): { confidence: number; marginOfError: number } {
   // Base factors for confidence
   let confidenceFactors: number[] = []
 
+  // Check if search was unavailable
+  const searchUnavailableResults = factCheckResults.filter(r => r.searchAvailable === false)
+  const allSearchesUnavailable = factCheckResults.length > 0 && searchUnavailableResults.length === factCheckResults.length
+  const someSearchesUnavailable = searchUnavailableResults.length > 0
+
   // Factor 1: Fact-check consistency (if multiple fact-checks)
   if (factCheckResults.length > 0) {
-    const avgFactCheckConfidence = factCheckResults.reduce((sum, fc) => sum + fc.confidence, 0) / factCheckResults.length / 100
-    confidenceFactors.push(avgFactCheckConfidence)
+    // Only consider results where search was available
+    const validResults = factCheckResults.filter(r => r.searchAvailable !== false)
+    if (validResults.length > 0) {
+      const avgFactCheckConfidence = validResults.reduce((sum, fc) => sum + fc.confidence, 0) / validResults.length / 100
+      confidenceFactors.push(avgFactCheckConfidence)
+    } else {
+      // All searches failed - use low confidence factor
+      confidenceFactors.push(0.3)
+    }
   }
 
   // Factor 2: Source diversity and quality
@@ -367,13 +379,29 @@ function calculateConfidenceInterval(
   const urlRatio = sources.length > 0 ? sourcesWithUrls / sources.length : 0.3
   confidenceFactors.push(0.5 + urlRatio * 0.4)
 
+  // Factor 5: Search availability penalty (NEW)
+  if (allSearchesUnavailable) {
+    // Severe penalty - external verification was impossible
+    confidenceFactors.push(0.2)
+  } else if (someSearchesUnavailable) {
+    // Moderate penalty - partial verification possible
+    const searchSuccessRatio = 1 - (searchUnavailableResults.length / factCheckResults.length)
+    confidenceFactors.push(0.4 + searchSuccessRatio * 0.4)
+  }
+
   // Calculate weighted average confidence
   const avgConfidence = confidenceFactors.length > 0
     ? confidenceFactors.reduce((sum, f) => sum + f, 0) / confidenceFactors.length
     : 0.5
 
   // Margin of error inversely related to confidence
-  const marginOfError = Math.round((1 - avgConfidence) * 15) // 0-15% margin
+  // Increase margin of error if search was unavailable
+  let marginOfError = Math.round((1 - avgConfidence) * 15) // 0-15% margin
+  if (allSearchesUnavailable) {
+    marginOfError = Math.min(25, marginOfError + 10) // Increase by 10%, cap at 25%
+  } else if (someSearchesUnavailable) {
+    marginOfError = Math.min(20, marginOfError + 5) // Increase by 5%, cap at 20%
+  }
 
   return {
     confidence: Math.round(avgConfidence * 100) / 100,
@@ -391,14 +419,38 @@ function calculateConfidenceInterval(
  */
 function computeFactualReliabilityScore(
   synthesis: { truthScore: number; breakdown: { evidenceQuality: number; methodologyRigor: number } },
-  factCheckResults: { verification: string; confidence: number }[],
+  factCheckResults: { verification: string; confidence: number; searchAvailable?: boolean }[],
   statistics: { isBaselineProvided: boolean }[]
 ): FactualReliabilityScore {
+  // Check if search was unavailable for any fact-checks
+  const searchUnavailableResults = factCheckResults.filter(r => r.searchAvailable === false)
+  const searchWasUnavailable = searchUnavailableResults.length > 0
+  const allSearchesUnavailable = factCheckResults.length > 0 && searchUnavailableResults.length === factCheckResults.length
+
   // Claim verification rate (40 points max)
   const verifiedClaims = factCheckResults.filter(r => r.verification === 'supported' || r.verification === 'partially_supported')
-  const claimVerificationRate = factCheckResults.length > 0
-    ? Math.round((verifiedClaims.length / factCheckResults.length) * 40)
-    : 20 // neutral if no claims to verify
+  let claimVerificationRate: number
+  let claimVerificationDetails: string
+
+  if (allSearchesUnavailable) {
+    // All searches failed - give neutral score, not penalize
+    claimVerificationRate = 20 // neutral
+    claimVerificationDetails = `0/${factCheckResults.length} claims verifiable (search unavailable)`
+  } else if (searchWasUnavailable) {
+    // Some searches failed - calculate based on successful searches only
+    const successfulSearches = factCheckResults.filter(r => r.searchAvailable !== false)
+    const verifiedFromSuccessful = successfulSearches.filter(r => r.verification === 'supported' || r.verification === 'partially_supported')
+    claimVerificationRate = successfulSearches.length > 0
+      ? Math.round((verifiedFromSuccessful.length / successfulSearches.length) * 40)
+      : 20
+    claimVerificationDetails = `${verifiedFromSuccessful.length}/${successfulSearches.length} claims verified (${searchUnavailableResults.length} search failures)`
+  } else {
+    // Normal case - all searches successful
+    claimVerificationRate = factCheckResults.length > 0
+      ? Math.round((verifiedClaims.length / factCheckResults.length) * 40)
+      : 20 // neutral if no claims to verify
+    claimVerificationDetails = `${verifiedClaims.length}/${factCheckResults.length} claims verified`
+  }
 
   // Source documentation (25 points max) - derived from evidence quality
   const sourceDocumentation = Math.round((synthesis.breakdown.evidenceQuality / 40) * 25)
@@ -420,7 +472,7 @@ function computeFactualReliabilityScore(
     confidence: 0.7, // Will be updated by dynamic calculation in main function
     label: getFactualReliabilityLabel(totalScore),
     breakdown: [
-      { component: 'Claim Verification Rate', score: claimVerificationRate, max: 40, details: `${verifiedClaims.length}/${factCheckResults.length} claims verified` },
+      { component: 'Claim Verification Rate', score: claimVerificationRate, max: 40, details: claimVerificationDetails },
       { component: 'Source Documentation', score: sourceDocumentation, max: 25, details: 'Based on evidence quality assessment' },
       { component: 'Contested Fact Resolution', score: contestedFactResolution, max: 20, details: 'Based on methodology rigor' },
       { component: 'Statistical Validity', score: statisticalValidity, max: 15, details: `${statsWithBaseline}/${statistics.length} stats with baseline` },

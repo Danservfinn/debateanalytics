@@ -83,6 +83,7 @@ async function verifyClaim(claim: any, article: ExtractedArticle): Promise<FactC
       methodologyScore: 0,
       evidenceHierarchy: 'tertiary',
       reasoning: 'Unable to find independent sources to verify this claim. Search returned no results.',
+      searchAvailable: false, // Mark that search was not available
     }
   }
 
@@ -152,6 +153,7 @@ Return ONLY valid JSON. No markdown code blocks, no explanations.`
       methodologyScore: 0,
       evidenceHierarchy: 'tertiary' as const,
       reasoning: `GLM analysis failed: ${result.error}`,
+      searchAvailable: true, // Search was available (results found) but GLM analysis failed
     }
   }
 
@@ -181,6 +183,7 @@ Return ONLY valid JSON. No markdown code blocks, no explanations.`
       methodologyScore: 0,
       evidenceHierarchy: 'tertiary' as const,
       reasoning: 'Unable to parse GLM response. Sources were found but verification inconclusive.',
+      searchAvailable: true, // Search was available (results found) but GLM parsing failed
     }
   }
 
@@ -195,6 +198,7 @@ Return ONLY valid JSON. No markdown code blocks, no explanations.`
     methodologyScore: data.methodologyScore || 0,
     evidenceHierarchy: data.evidenceHierarchy || 'tertiary',
     reasoning: data.reasoning || '',
+    searchAvailable: true, // Search was available and used
   }
 }
 

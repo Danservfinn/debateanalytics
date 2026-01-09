@@ -214,6 +214,8 @@ export interface FactCheckResult {
   methodologyScore: number // 0-25
   evidenceHierarchy: 'primary' | 'secondary' | 'tertiary'
   reasoning: string
+  /** Was search available when this claim was verified? False means search was blocked/unavailable */
+  searchAvailable?: boolean
 }
 
 // ============================================================================
