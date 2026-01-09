@@ -5,22 +5,54 @@
 
 'use client';
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { Loader2, Check } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { ArticleUploader } from "@/components/article/ArticleUploader";
 import type { ExtractedArticle } from "@/types";
 
 // Inner component that uses useSearchParams (needs Suspense boundary)
+// Agent configuration with estimated completion times (ms)
+const AGENTS = [
+  { name: 'Extraction', desc: 'Parsing article structure', duration: 8000 },
+  { name: 'Steel-Man', desc: 'Analyzing perspectives', duration: 15000 },
+  { name: 'Deception', desc: 'Detecting manipulation', duration: 20000 },
+  { name: 'Persuasion', desc: 'Detecting opinion influence', duration: 25000 },
+  { name: 'Fact-Check', desc: 'Verifying claims', duration: 35000 },
+  { name: 'Synthesis', desc: 'Generating insights', duration: 45000 },
+];
+
 function AnalyzePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { data: session, status } = useSession();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [completedAgents, setCompletedAgents] = useState<Set<string>>(new Set());
 
   // Get URL from query params (for re-analyze functionality)
   const initialUrl = searchParams.get('url') || '';
+
+  // Animate agent completion when analyzing
+  useEffect(() => {
+    if (!isAnalyzing) {
+      setCompletedAgents(new Set());
+      return;
+    }
+
+    const timers: NodeJS.Timeout[] = [];
+
+    AGENTS.forEach((agent) => {
+      const timer = setTimeout(() => {
+        setCompletedAgents(prev => new Set([...prev, agent.name]));
+      }, agent.duration);
+      timers.push(timer);
+    });
+
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+    };
+  }, [isAnalyzing]);
 
   const handleExtract = async (url: string): Promise<ExtractedArticle> => {
     const response = await fetch("/api/article/extract", {
@@ -138,30 +170,42 @@ function AnalyzePageContent() {
             <div className="space-y-3">
               <p className="font-section text-xs text-muted-foreground tracking-wider">ACTIVE AGENTS</p>
               <div className="space-y-2">
-                {[
-                  { name: 'Extraction', desc: 'Parsing article structure' },
-                  { name: 'Steel-Man', desc: 'Analyzing perspectives' },
-                  { name: 'Deception', desc: 'Detecting manipulation' },
-                  { name: 'Persuasion', desc: 'Detecting opinion influence' },
-                  { name: 'Fact-Check', desc: 'Verifying claims' },
-                  { name: 'Synthesis', desc: 'Generating insights' },
-                ].map((agent, i) => (
-                  <div
-                    key={agent.name}
-                    className="flex items-center gap-3 py-2 px-3 bg-muted/30 border-l-2 border-primary/50"
-                    style={{
-                      animationDelay: `${i * 200}ms`,
-                      opacity: 0.6 + (i * 0.08)
-                    }}
-                  >
-                    <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"
-                         style={{ animationDelay: `${i * 150}ms` }} />
-                    <div className="flex-1 min-w-0">
-                      <p className="font-body text-sm text-foreground">{agent.name}</p>
-                      <p className="font-body text-xs text-muted-foreground truncate">{agent.desc}</p>
+                {AGENTS.map((agent, i) => {
+                  const isCompleted = completedAgents.has(agent.name);
+                  return (
+                    <div
+                      key={agent.name}
+                      className={`flex items-center gap-3 py-2 px-3 border-l-2 transition-all duration-500 ${
+                        isCompleted
+                          ? 'bg-emerald-50 border-emerald-500'
+                          : 'bg-muted/30 border-primary/50'
+                      }`}
+                    >
+                      {isCompleted ? (
+                        <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
+                          <Check className="w-3 h-3 text-white" />
+                        </div>
+                      ) : (
+                        <div
+                          className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"
+                          style={{ animationDelay: `${i * 150}ms` }}
+                        />
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <p className={`font-body text-sm transition-colors duration-300 ${
+                          isCompleted ? 'text-emerald-700' : 'text-foreground'
+                        }`}>
+                          {agent.name}
+                        </p>
+                        <p className={`font-body text-xs truncate transition-colors duration-300 ${
+                          isCompleted ? 'text-emerald-600' : 'text-muted-foreground'
+                        }`}>
+                          {isCompleted ? 'Complete' : agent.desc}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
