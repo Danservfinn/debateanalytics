@@ -8,6 +8,10 @@ import { auth } from "@/lib/auth"
 import { runFullAnalysis } from "@/lib/orchestrator"
 import type { AnalyzeResponse } from "@/types"
 
+// Extend function timeout for LLM analysis (up to 60s on Pro, 300s on Enterprise)
+// Hobby plan is limited to 10s regardless of this setting
+export const maxDuration = 60
+
 export async function POST(request: NextRequest) {
   try {
     // Check authentication

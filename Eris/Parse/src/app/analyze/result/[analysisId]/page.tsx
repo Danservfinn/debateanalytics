@@ -6,7 +6,7 @@
 
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,26 +15,43 @@ import { Loader2 } from "lucide-react";
 import { getCredibilityLabel, getCredibilityColor, type ParseAnalysis, type TruthScoreBreakdown, type SteelMannedPerspective, type DeceptionInstance } from "@/types";
 
 interface PageProps {
-  params: { analysisId: string };
+  params: Promise<{ analysisId: string }>;
 }
 
 export default function AnalysisResultPage({ params }: PageProps) {
+  // Next.js 15+ requires params to be unwrapped with use()
+  const { analysisId } = use(params);
   const router = useRouter();
   const [analysis, setAnalysis] = useState<ParseAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
+  const [debugInfo, setDebugInfo] = useState<string>('');
 
   useEffect(() => {
+    // Debug: Log what we're looking for
+    const storageKey = `analysis_${analysisId}`;
+    console.log('Looking for sessionStorage key:', storageKey);
+
     // Try to get analysis from sessionStorage
-    const stored = sessionStorage.getItem(`analysis_${params.analysisId}`);
+    const stored = sessionStorage.getItem(storageKey);
+    console.log('Found stored data:', stored ? 'yes' : 'no');
+
     if (stored) {
       try {
-        setAnalysis(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+        console.log('Parsed analysis ID:', parsed.id);
+        setAnalysis(parsed);
       } catch (e) {
         console.error('Failed to parse stored analysis:', e);
+        setDebugInfo(`Parse error: ${e}`);
       }
+    } else {
+      // Debug: List all sessionStorage keys
+      const allKeys = Object.keys(sessionStorage);
+      console.log('All sessionStorage keys:', allKeys);
+      setDebugInfo(`No data found for ${storageKey}. Available keys: ${allKeys.join(', ') || 'none'}`);
     }
     setLoading(false);
-  }, [params.analysisId]);
+  }, [analysisId]);
 
   if (loading) {
     return (
@@ -52,6 +69,11 @@ export default function AnalysisResultPage({ params }: PageProps) {
           <p className="text-muted-foreground">
             The analysis may have expired or the link is invalid.
           </p>
+          {debugInfo && (
+            <p className="text-xs text-muted-foreground bg-muted p-2 rounded max-w-md">
+              Debug: {debugInfo}
+            </p>
+          )}
           <Button onClick={() => router.push('/analyze')}>
             Analyze New Article
           </Button>

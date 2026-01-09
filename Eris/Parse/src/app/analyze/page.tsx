@@ -38,6 +38,7 @@ export default function AnalyzePage() {
 
     try {
       // Run the analysis directly with URL (MVP: no database save)
+      console.log('Starting analysis for:', article.url);
       const analyzeResponse = await fetch("/api/article/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,20 +48,32 @@ export default function AnalyzePage() {
         }),
       });
 
+      console.log('Response status:', analyzeResponse.status);
       const analyzeData = await analyzeResponse.json();
+      console.log('Response data:', analyzeData);
 
       if (!analyzeData.success) {
         throw new Error(analyzeData.error || "Failed to analyze article");
       }
 
       // Navigate to results page with analysis data in state
-      if (analyzeData.data.id) {
+      if (analyzeData.data?.id) {
         // Store analysis in sessionStorage for the results page
-        sessionStorage.setItem(`analysis_${analyzeData.data.id}`, JSON.stringify(analyzeData.data));
+        const storageKey = `analysis_${analyzeData.data.id}`;
+        console.log('Storing analysis with key:', storageKey);
+        sessionStorage.setItem(storageKey, JSON.stringify(analyzeData.data));
+
+        // Verify storage worked
+        const stored = sessionStorage.getItem(storageKey);
+        console.log('Verified storage:', stored ? 'success' : 'FAILED');
+
         router.push(`/analyze/result/${analyzeData.data.id}`);
-      } else if (analyzeData.data.jobId) {
+      } else if (analyzeData.data?.jobId) {
         // If queued, show queue status
         router.push(`/analyze/queue/${analyzeData.data.jobId}`);
+      } else {
+        console.error('No id or jobId in response:', analyzeData);
+        throw new Error('Analysis completed but no result ID was returned');
       }
     } catch (error) {
       console.error('Analysis error:', error);
