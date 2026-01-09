@@ -24,9 +24,10 @@ export async function factCheckArticle(input: FactCheckInput): Promise<FactCheck
   const { article } = input
 
   // Step 1: Identify claims to verify (prioritize testable claims)
+  // Limit to 5 claims to reduce API usage while maintaining quality
   const testableClaims = article.claims.filter(
     claim => claim.verifiability === 'testable' || claim.verifiability === 'partially_testable'
-  ).slice(0, 10) // Limit to 10 most important claims
+  ).slice(0, 5) // Limit to 5 most important claims (reduced from 10 for API efficiency)
 
   if (testableClaims.length === 0) {
     return []

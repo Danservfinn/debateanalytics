@@ -343,7 +343,7 @@ export const MockSearchProvider: SearchProvider = {
 };
 
 // ============================================================================
-// Search Manager (Automatic Fallback)
+// Search Manager (Automatic Fallback with Caching)
 // ============================================================================
 
 class SearchManager {
@@ -354,13 +354,57 @@ class SearchManager {
     MockSearchProvider,   // Fallback - returns generic sources
   ];
 
+  // Simple in-memory cache to avoid duplicate API calls within same session
+  // Cache entries expire after 5 minutes
+  private cache = new Map<string, { results: SearchResult[]; provider: string; timestamp: number }>();
+  private readonly CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+  private getCacheKey(query: string, options?: SearchOptions): string {
+    return `${query}|${options?.limit || 10}|${options?.site || ''}`;
+  }
+
+  private getFromCache(key: string): { results: SearchResult[]; provider: string } | null {
+    const entry = this.cache.get(key);
+    if (!entry) return null;
+
+    // Check if expired
+    if (Date.now() - entry.timestamp > this.CACHE_TTL_MS) {
+      this.cache.delete(key);
+      return null;
+    }
+
+    console.log(`[SearchManager] Cache hit for: ${key.substring(0, 50)}...`);
+    return { results: entry.results, provider: entry.provider };
+  }
+
+  private setCache(key: string, results: SearchResult[], provider: string): void {
+    this.cache.set(key, { results, provider, timestamp: Date.now() });
+
+    // Clean up old entries if cache gets too large
+    if (this.cache.size > 100) {
+      const now = Date.now();
+      for (const [k, v] of this.cache.entries()) {
+        if (now - v.timestamp > this.CACHE_TTL_MS) {
+          this.cache.delete(k);
+        }
+      }
+    }
+  }
+
   /**
-   * Search with automatic provider fallback
+   * Search with automatic provider fallback and caching
    */
   async search(
     query: string,
     options?: SearchOptions
   ): Promise<{ results: SearchResult[]; provider: string }> {
+    // Check cache first
+    const cacheKey = this.getCacheKey(query, options);
+    const cached = this.getFromCache(cacheKey);
+    if (cached) {
+      return cached;
+    }
+
     let lastError: Error | null = null;
 
     for (const provider of this.providers) {
@@ -376,6 +420,9 @@ class SearchManager {
         const results = await provider.search(query, options);
 
         console.log(`${provider.name} returned ${results.length} results`);
+
+        // Cache the result
+        this.setCache(cacheKey, results, provider.name);
 
         return {
           results,
