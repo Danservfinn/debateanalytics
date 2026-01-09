@@ -134,17 +134,53 @@ Return ONLY valid JSON. No markdown code blocks, no explanations.`
     systemPrompt,
     model: 'glm-4.7',
     maxTokens: 2000,
-    temperature: 0.5,
+    temperature: 0.3, // Lower temperature for more deterministic JSON output
   })
 
   if (!result.success) {
-    throw new Error(`GLM fact-check failed: ${result.error}`)
+    console.log(`[FactCheck] GLM call failed: ${result.error}`)
+    // Return inconclusive result instead of throwing
+    return {
+      id: crypto.randomUUID(),
+      claimId: claim.id,
+      claim: claim.text,
+      verification: 'inconclusive' as const,
+      confidence: 20,
+      sources: [],
+      methodology: 'glm_error',
+      methodologyScore: 0,
+      evidenceHierarchy: 'tertiary' as const,
+      reasoning: `GLM analysis failed: ${result.error}`,
+    }
   }
 
-  const data = extractJSON(result.text)
+  const data = extractJSON(result.text, false) // Pass debug=false normally
 
   if (!data) {
-    throw new Error('Failed to parse GLM response as JSON')
+    console.log(`[FactCheck] JSON parsing failed. Raw response (first 500 chars):`)
+    console.log(result.text.substring(0, 500))
+    // Return inconclusive result instead of throwing
+    // Map search results to ExternalSource format
+    const fallbackSources = searchResults.slice(0, 3).map(r => ({
+      type: 'news_article' as const,
+      title: r.title,
+      url: r.url,
+      credibility: r.credibility || 'medium' as const,
+      relevantFindings: r.snippet || 'N/A',
+      methodology: 'web_search',
+    }))
+    return {
+      id: crypto.randomUUID(),
+      claimId: claim.id,
+      claim: claim.text,
+      verification: 'inconclusive' as const,
+      confidence: 30,
+      sources: fallbackSources,
+      methodology: 'json_parse_failed',
+      methodologyScore: 0,
+      evidenceHierarchy: 'tertiary' as const,
+      reasoning: 'Unable to parse GLM response. Sources were found but verification inconclusive.',
+    }
   }
 
   return {
