@@ -10,7 +10,26 @@ import { factCheckArticle } from "@/agents/critical-fact-check-agent"
 import { detectFallacies } from "@/agents/fallacy-agent"
 import { auditContext } from "@/agents/context-audit-agent"
 import { synthesizeAnalysis } from "@/agents/synthesis-agent"
-import type { ParseAnalysis } from "@/types"
+import { generateAIAssessment } from "@/agents/ai-assessment-agent"
+import type {
+  ParseAnalysis,
+  DualScores,
+  FactualReliabilityScore,
+  RhetoricalNeutralityScore,
+  BreakingNewsContext,
+  ReaderGuidance,
+  SourceCredibility,
+  EnhancedClaim,
+  EnhancedStatistic,
+  ContestedFact,
+  AgreedFact,
+  MissingPerspective,
+} from "@/types"
+import {
+  getFactualReliabilityLabel,
+  getRhetoricalNeutralityLabel,
+  detectBreakingNews,
+} from "@/types"
 
 /**
  * Run full analysis on an article (MVP: in-memory only, no database)
@@ -48,6 +67,19 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
       contextAudit,
     })
 
+    // Step 4: Generate comprehensive AI assessment (runs after synthesis has all context)
+    const aiAssessment = await generateAIAssessment({
+      article,
+      truthScore: synthesis.truthScore,
+      credibility: synthesis.credibility,
+      scoreBreakdown: synthesis.breakdown,
+      steelMannedPerspectives,
+      deceptionDetected: deceptionResult.instances,
+      fallacies,
+      factCheckResults,
+      contextAudit,
+    })
+
     // Calculate manipulation breakdown from deception instances
     const manipulationBreakdown = {
       emotional: deceptionResult.instances.filter(i => i.category === 'emotional').length * 20,
@@ -82,7 +114,7 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
         : 'Weak evidence. Most claims lack proper sourcing or documentation.',
     }
 
-    // Step 4: Build final analysis
+    // Step 5: Build final analysis
     const analysis: ParseAnalysis = {
       id: crypto.randomUUID(),
       articleId,
@@ -133,6 +165,7 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
       fallacies,
       factCheckResults,
       whatAiThinks: synthesis.whatAiThinks,
+      aiAssessment,
       analysisDuration: (Date.now() - startTime) / 1000,
       agentsUsed: [
         'ExtractionAgent',
@@ -142,6 +175,7 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
         'FallacyAgent',
         'ContextAuditAgent',
         'SynthesisAgent',
+        'AIAssessmentAgent',
       ],
       modelVersion: 'glm-4.7',
     }

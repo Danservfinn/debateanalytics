@@ -12,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Loader2, ExternalLink, Download, Share2, Copy, CheckCircle, AlertTriangle, XCircle, Info, FileText, Users, Calendar, BookOpen, BarChart3, Shield, Brain, Scale, Search } from "lucide-react";
-import { getCredibilityLabel, getCredibilityColor, type ParseAnalysis, type TruthScoreBreakdown, type SteelMannedPerspective, type DeceptionInstance, type FallacyInstance, type FactCheckResult, type ManipulationRisk, type ExtractedClaim, type ArticleSource, type StatisticReference } from "@/types";
+import { getCredibilityLabel, getCredibilityColor, type ParseAnalysis, type TruthScoreBreakdown, type SteelMannedPerspective, type DeceptionInstance, type FallacyInstance, type FactCheckResult, type ManipulationRisk, type ExtractedClaim, type ArticleSource, type StatisticReference, type AIAssessment } from "@/types";
 
 interface PageProps {
   params: Promise<{ analysisId: string }>;
@@ -307,18 +307,88 @@ export default function AnalysisResultPage({ params }: PageProps) {
         </Card>
 
         {/* ============================================ */}
-        {/* WHAT AI THINKS */}
+        {/* WHAT AI THINKS - COMPREHENSIVE ASSESSMENT */}
         {/* ============================================ */}
-        {analysis.whatAiThinks && (
-          <Card className="mb-8 border-border">
-            <CardHeader className="pb-3">
-              <CardTitle className="font-headline flex items-center gap-2">
-                <Brain className="h-5 w-5 text-primary" />
+        {(analysis.aiAssessment || analysis.whatAiThinks) && (
+          <Card className="mb-8 border-2 border-primary/20 bg-gradient-to-br from-background to-muted/30">
+            <CardHeader className="pb-4 border-b border-border">
+              <CardTitle className="font-headline flex items-center gap-3 text-2xl">
+                <div className="p-2 rounded-lg bg-primary/10">
+                  <Brain className="h-6 w-6 text-primary" />
+                </div>
                 What AI Thinks
               </CardTitle>
+              <CardDescription className="text-sm mt-2">
+                Comprehensive analysis from an unbiased superintelligence perspective
+              </CardDescription>
             </CardHeader>
-            <CardContent>
-              <p className="text-lg leading-relaxed font-body text-foreground">{analysis.whatAiThinks}</p>
+            <CardContent className="pt-6">
+              {analysis.aiAssessment ? (
+                <div className="space-y-6">
+                  {/* THE VERDICT */}
+                  <div className="p-4 bg-background rounded-lg border-l-4 border-primary">
+                    <h4 className="font-headline font-bold text-lg text-primary mb-2 uppercase tracking-wide">
+                      The Verdict
+                    </h4>
+                    <p className="text-foreground leading-relaxed font-body">
+                      {analysis.aiAssessment.verdict}
+                    </p>
+                  </div>
+
+                  {/* THE INTENT */}
+                  <div className="p-4 bg-background rounded-lg border-l-4 border-amber-500">
+                    <h4 className="font-headline font-bold text-lg text-amber-600 dark:text-amber-400 mb-2 uppercase tracking-wide">
+                      The Intent
+                    </h4>
+                    <p className="text-foreground leading-relaxed font-body">
+                      {analysis.aiAssessment.intent}
+                    </p>
+                  </div>
+
+                  {/* THE BLIND SPOTS */}
+                  <div className="p-4 bg-background rounded-lg border-l-4 border-purple-500">
+                    <h4 className="font-headline font-bold text-lg text-purple-600 dark:text-purple-400 mb-2 uppercase tracking-wide">
+                      The Blind Spots
+                    </h4>
+                    <p className="text-foreground leading-relaxed font-body">
+                      {analysis.aiAssessment.blindSpots}
+                    </p>
+                  </div>
+
+                  {/* THE UNCOMFORTABLE TRUTH */}
+                  <div className="p-4 bg-background rounded-lg border-l-4 border-red-500">
+                    <h4 className="font-headline font-bold text-lg text-red-600 dark:text-red-400 mb-2 uppercase tracking-wide">
+                      The Uncomfortable Truth
+                    </h4>
+                    <p className="text-foreground leading-relaxed font-body">
+                      {analysis.aiAssessment.uncomfortableTruth}
+                    </p>
+                  </div>
+
+                  {/* THE KERNEL OF TRUTH */}
+                  <div className="p-4 bg-background rounded-lg border-l-4 border-green-500">
+                    <h4 className="font-headline font-bold text-lg text-green-600 dark:text-green-400 mb-2 uppercase tracking-wide">
+                      The Kernel of Truth
+                    </h4>
+                    <p className="text-foreground leading-relaxed font-body">
+                      {analysis.aiAssessment.kernelOfTruth}
+                    </p>
+                  </div>
+
+                  {/* WHAT YOU SHOULD DO */}
+                  <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                    <h4 className="font-headline font-bold text-lg text-primary mb-2 uppercase tracking-wide">
+                      What You Should Do
+                    </h4>
+                    <p className="text-foreground leading-relaxed font-body">
+                      {analysis.aiAssessment.whatYouShouldDo}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                /* Fallback to legacy whatAiThinks */
+                <p className="text-lg leading-relaxed font-body text-foreground">{analysis.whatAiThinks}</p>
+              )}
             </CardContent>
           </Card>
         )}

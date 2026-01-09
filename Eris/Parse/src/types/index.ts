@@ -238,6 +238,30 @@ export interface CredibilityRating {
 }
 
 // ============================================================================
+// AI Assessment (Comprehensive Superintelligence Perspective)
+// ============================================================================
+
+export interface AIAssessment {
+  /** Bold, unhedged assessment of the article's relationship to truth */
+  verdict: string
+
+  /** What is the author/publication actually trying to accomplish? */
+  intent: string
+
+  /** What does this article want you to NOT think about? */
+  blindSpots: string
+
+  /** The thing that challenges readers on ALL sides */
+  uncomfortableTruth: string
+
+  /** Even in flawed pieces, what's the valid underlying concern? */
+  kernelOfTruth: string
+
+  /** Guidance for the reader - what should they do with this information? */
+  whatYouShouldDo: string
+}
+
+// ============================================================================
 // Full Analysis Result
 // ============================================================================
 
@@ -260,16 +284,62 @@ export interface ParseAnalysis {
     emotionalLanguageDensity: number // 0-1
   }
 
+  // ========================================================================
+  // Phase 1 & 2: Enhanced Metadata
+  // ========================================================================
+  enhancedMetadata?: EnhancedArticleMetadata
+
+  // ========================================================================
+  // Phase 1: Dual-Score System (NEW)
+  // ========================================================================
+  dualScores?: DualScores
+
+  // ========================================================================
+  // Phase 1: Breaking News Context (NEW)
+  // ========================================================================
+  breakingNewsContext?: BreakingNewsContext
+
   // Extracted Claims (from extraction)
   extractedClaims?: ExtractedClaim[]
+
+  // ========================================================================
+  // Phase 2: Enhanced Claims with Verification (NEW)
+  // ========================================================================
+  enhancedClaims?: EnhancedClaim[]
 
   // Sources Cited (from extraction)
   sourcesCited?: ArticleSource[]
 
+  // ========================================================================
+  // Phase 2: Source Credibility Assessment (NEW)
+  // ========================================================================
+  sourceCredibility?: SourceCredibility[]
+
   // Statistics (from extraction)
   statistics?: StatisticReference[]
 
-  // Truth Assessment
+  // ========================================================================
+  // Phase 2: Enhanced Statistics (NEW)
+  // ========================================================================
+  enhancedStatistics?: EnhancedStatistic[]
+
+  // ========================================================================
+  // Phase 2: Contested Facts Matrix (NEW)
+  // ========================================================================
+  contestedFacts?: ContestedFact[]
+  agreedFacts?: AgreedFact[]
+
+  // ========================================================================
+  // Phase 2: Missing Perspectives Detection (NEW)
+  // ========================================================================
+  missingPerspectives?: MissingPerspective[]
+
+  // ========================================================================
+  // Phase 2: Reader Guidance (NEW)
+  // ========================================================================
+  readerGuidance?: ReaderGuidance
+
+  // Truth Assessment (legacy - still computed for backwards compatibility)
   truthScore: number // 0-100
   credibility: 'high' | 'moderate' | 'low' | 'very_low'
   scoreBreakdown: TruthScoreBreakdown
@@ -300,8 +370,11 @@ export interface ParseAnalysis {
   // Fact-Checking
   factCheckResults: FactCheckResult[]
 
-  // What AI Thinks
-  whatAiThinks: string // 2-4 sentences, candid assessment
+  // What AI Thinks (legacy field for backwards compatibility)
+  whatAiThinks: string
+
+  // Comprehensive AI Assessment
+  aiAssessment?: AIAssessment
 
   // Meta
   analysisDuration: number // seconds
@@ -392,6 +465,143 @@ export function getSeverityColor(severity: 'low' | 'medium' | 'high'): string {
   return colors[severity]
 }
 
+// ============================================================================
+// Phase 1 & 2 Helper Functions
+// ============================================================================
+
+export function getFactualReliabilityLabel(score: number): 'VERIFIED' | 'MOSTLY_VERIFIED' | 'PARTIALLY_VERIFIED' | 'UNVERIFIED' | 'CONTAINS_FALSE_CLAIMS' {
+  if (score >= 80) return 'VERIFIED'
+  if (score >= 60) return 'MOSTLY_VERIFIED'
+  if (score >= 40) return 'PARTIALLY_VERIFIED'
+  if (score >= 20) return 'UNVERIFIED'
+  return 'CONTAINS_FALSE_CLAIMS'
+}
+
+export function getRhetoricalNeutralityLabel(score: number): 'NEUTRAL' | 'SLIGHTLY_BIASED' | 'MODERATELY_BIASED' | 'HIGHLY_BIASED' | 'PROPAGANDA' {
+  if (score >= 80) return 'NEUTRAL'
+  if (score >= 60) return 'SLIGHTLY_BIASED'
+  if (score >= 40) return 'MODERATELY_BIASED'
+  if (score >= 20) return 'HIGHLY_BIASED'
+  return 'PROPAGANDA'
+}
+
+export function getFactualReliabilityColor(label: string): string {
+  const colors: Record<string, string> = {
+    VERIFIED: '#22c55e',           // green
+    MOSTLY_VERIFIED: '#84cc16',    // lime
+    PARTIALLY_VERIFIED: '#f59e0b', // amber
+    UNVERIFIED: '#f97316',         // orange
+    CONTAINS_FALSE_CLAIMS: '#ef4444' // red
+  }
+  return colors[label] || '#6b7280'
+}
+
+export function getRhetoricalNeutralityColor(label: string): string {
+  const colors: Record<string, string> = {
+    NEUTRAL: '#22c55e',           // green
+    SLIGHTLY_BIASED: '#84cc16',   // lime
+    MODERATELY_BIASED: '#f59e0b', // amber
+    HIGHLY_BIASED: '#f97316',     // orange
+    PROPAGANDA: '#ef4444'         // red
+  }
+  return colors[label] || '#6b7280'
+}
+
+export function getSourceCredibilityColor(score: number): string {
+  if (score >= 8) return '#22c55e'  // green
+  if (score >= 6) return '#84cc16'  // lime
+  if (score >= 4) return '#f59e0b'  // amber
+  if (score >= 2) return '#f97316'  // orange
+  return '#ef4444'                   // red
+}
+
+export function getBiasRiskColor(risk: 'HIGH' | 'MEDIUM' | 'LOW'): string {
+  const colors = {
+    HIGH: '#ef4444',
+    MEDIUM: '#f59e0b',
+    LOW: '#22c55e'
+  }
+  return colors[risk]
+}
+
+export function getContestedFactStatusColor(status: 'DISPUTED' | 'LIKELY_TRUE' | 'LIKELY_FALSE' | 'UNKNOWN'): string {
+  const colors = {
+    DISPUTED: '#f59e0b',    // amber
+    LIKELY_TRUE: '#84cc16', // lime
+    LIKELY_FALSE: '#f97316', // orange
+    UNKNOWN: '#6b7280'       // gray
+  }
+  return colors[status]
+}
+
+export function getClaimVerificationColor(status: string): string {
+  const colors: Record<string, string> = {
+    VERIFIED: '#22c55e',
+    LIKELY_TRUE: '#84cc16',
+    DISPUTED: '#f59e0b',
+    LIKELY_FALSE: '#f97316',
+    FALSE: '#ef4444',
+    UNVERIFIABLE: '#6b7280'
+  }
+  return colors[status] || '#6b7280'
+}
+
+export function getMissingPerspectiveColor(importance: 'CRITICAL' | 'SIGNIFICANT' | 'NOTABLE'): string {
+  const colors = {
+    CRITICAL: '#ef4444',
+    SIGNIFICANT: '#f59e0b',
+    NOTABLE: '#6b7280'
+  }
+  return colors[importance]
+}
+
+export function getConfidenceLevelColor(level: 'HIGH' | 'MODERATE' | 'LOW'): string {
+  const colors = {
+    HIGH: '#22c55e',
+    MODERATE: '#f59e0b',
+    LOW: '#ef4444'
+  }
+  return colors[level]
+}
+
+/**
+ * Detects if an article is breaking news based on publish date
+ * @param publishDate The article's publish date
+ * @param eventDate Optional event date (defaults to publish date)
+ * @returns BreakingNewsContext object
+ */
+export function detectBreakingNews(publishDate: string, eventDate?: string): BreakingNewsContext {
+  const articleDate = new Date(publishDate)
+  const eventDateTime = eventDate ? new Date(eventDate) : articleDate
+  const now = new Date()
+
+  const hoursAfterEvent = Math.floor((articleDate.getTime() - eventDateTime.getTime()) / (1000 * 60 * 60))
+  const hoursSincePublish = Math.floor((now.getTime() - articleDate.getTime()) / (1000 * 60 * 60))
+
+  const isBreakingNews = hoursAfterEvent < 48 || hoursSincePublish < 72
+
+  const warnings: string[] = []
+  if (hoursAfterEvent < 24) {
+    warnings.push('Article published within 24 hours of event - facts may be incomplete or inaccurate')
+  }
+  if (hoursAfterEvent < 48) {
+    warnings.push('Early reporting typically relies heavily on official statements')
+  }
+  if (hoursSincePublish < 72) {
+    warnings.push('Breaking news - independent investigation may not have occurred')
+  }
+
+  // Recommend reanalysis 72 hours after event
+  const recommendDate = new Date(eventDateTime.getTime() + (72 * 60 * 60 * 1000))
+
+  return {
+    isBreakingNews,
+    hoursAfterEvent: hoursAfterEvent >= 0 ? hoursAfterEvent : 0,
+    warnings,
+    recommendReanalysisAfter: recommendDate.toISOString()
+  }
+}
+
 export function getDeceptionTypeLabel(type: DeceptionType): string {
   const labels: Record<DeceptionType, string> = {
     fear_appeal: 'Fear Appeal',
@@ -415,6 +625,212 @@ export function getDeceptionTypeLabel(type: DeceptionType): string {
     authority_without_evidence: 'Authority Without Evidence'
   }
   return labels[type]
+}
+
+// ============================================================================
+// Phase 1 & 2: Dual-Score Architecture
+// ============================================================================
+
+export interface ScoreWithBreakdown {
+  score: number
+  max: number
+  confidence: number // 0-1, how confident is the AI in this score
+  label: string
+  breakdown: Array<{
+    component: string
+    score: number
+    max: number
+    details: string
+  }>
+}
+
+export interface FactualReliabilityScore extends ScoreWithBreakdown {
+  label: 'VERIFIED' | 'MOSTLY_VERIFIED' | 'PARTIALLY_VERIFIED' | 'UNVERIFIED' | 'CONTAINS_FALSE_CLAIMS'
+}
+
+export interface RhetoricalNeutralityScore extends ScoreWithBreakdown {
+  label: 'NEUTRAL' | 'SLIGHTLY_BIASED' | 'MODERATELY_BIASED' | 'HIGHLY_BIASED' | 'PROPAGANDA'
+}
+
+export interface DualScores {
+  factualReliability: FactualReliabilityScore
+  rhetoricalNeutrality: RhetoricalNeutralityScore
+  overallConfidence: number // 0-1
+}
+
+// ============================================================================
+// Phase 2: Source Credibility Assessment
+// ============================================================================
+
+export interface SourceCredibilityFactor {
+  score: number // 0-10
+  max: number // 10
+  reasoning: string
+}
+
+export interface SourceCredibility {
+  id: string
+  name: string
+  type: 'GOVERNMENT' | 'ORGANIZATION' | 'EXPERT' | 'EYEWITNESS' | 'MEDIA' | 'DOCUMENT' | 'ANONYMOUS'
+  role: 'PRIMARY_PARTY' | 'THIRD_PARTY' | 'DIRECT_OBSERVER' | 'ANALYST'
+
+  factors: {
+    authority: SourceCredibilityFactor
+    independence: SourceCredibilityFactor
+    trackRecord: SourceCredibilityFactor
+    proximity: SourceCredibilityFactor
+  }
+
+  overallScore: number // Weighted average 0-10
+  biasRisk: 'HIGH' | 'MEDIUM' | 'LOW'
+  biasDirection?: string // e.g., "Pro-law enforcement", "Anti-administration"
+
+  warnings: string[] // Specific credibility concerns
+  claimsAttributed: string[] // IDs of claims from this source
+}
+
+// ============================================================================
+// Phase 2: Contested Facts Matrix
+// ============================================================================
+
+export interface ContestedFactAccount {
+  position: 'YES' | 'NO' | 'PARTIAL'
+  sources: string[]
+  sourceCredibility: number // 0-10
+  claims: string[]
+  motivationToDistort: 'HIGH' | 'MEDIUM' | 'LOW'
+  motivationReason: string
+}
+
+export interface ContestedFact {
+  id: string
+  question: string // e.g., "Did Good attempt to run over the officer?"
+  status: 'DISPUTED' | 'LIKELY_TRUE' | 'LIKELY_FALSE' | 'UNKNOWN'
+  confidence: number // 0-1
+
+  accounts: ContestedFactAccount[]
+
+  resolutionEvidence: string[] // What evidence would resolve this?
+
+  assessment?: {
+    likelyTruth: string
+    confidence: number
+    reasoning: string
+  }
+}
+
+export interface AgreedFact {
+  id: string
+  statement: string
+  sources: string[] // Multiple sources agree
+  confidence: number // 0-1
+}
+
+// ============================================================================
+// Phase 2: Enhanced Claims Verification
+// ============================================================================
+
+export interface EnhancedClaim {
+  id: string
+  text: string
+  type: 'FACTUAL' | 'OPINION' | 'NORMATIVE' | 'CAUSAL' | 'STATISTICAL'
+  verifiability: 'OBJECTIVE' | 'SUBJECTIVE'
+  source: string
+  sourceCredibility: number // 0-10
+
+  verification: {
+    status: 'VERIFIED' | 'LIKELY_TRUE' | 'DISPUTED' | 'LIKELY_FALSE' | 'FALSE' | 'UNVERIFIABLE'
+    confidence: number // 0-1
+    supportingEvidence: string[]
+    contradictingEvidence: string[]
+    verificationMethod?: string
+  }
+
+  readerNote?: string // Additional context for the reader
+}
+
+// ============================================================================
+// Phase 2: Enhanced Statistics
+// ============================================================================
+
+export interface EnhancedStatistic {
+  id: string
+  value: string
+  context: string
+  source: string
+
+  validation: {
+    hasBaseline: boolean
+    baselineValue?: string
+    hasTimePeriod: boolean
+    timePeriod?: string
+    hasDefinition: boolean
+    definition?: string
+    isVerifiable: boolean
+  }
+
+  interpretation: {
+    possibleMeanings: string[] // e.g., "Could mean 1→11 or 100→1100"
+    misrepresentationRisk: 'HIGH' | 'MEDIUM' | 'LOW'
+    whatWouldClarify: string
+  }
+}
+
+// ============================================================================
+// Phase 2: Missing Perspectives Detection
+// ============================================================================
+
+export interface MissingPerspective {
+  id: string
+  perspective: string
+  importance: 'CRITICAL' | 'SIGNIFICANT' | 'NOTABLE'
+  reason: string
+  whatWeAreMissing: string[]
+  howToFind: string[]
+}
+
+// ============================================================================
+// Phase 1: Breaking News Detection
+// ============================================================================
+
+export interface BreakingNewsContext {
+  isBreakingNews: boolean
+  hoursAfterEvent?: number
+  warnings: string[]
+  recommendReanalysisAfter?: string // ISO date
+}
+
+// ============================================================================
+// Phase 2: Reader Guidance
+// ============================================================================
+
+export interface ReaderGuidance {
+  summary: string
+  additionalSourcesRecommended: string[]
+  keyQuestionsToResearch: string[]
+  waitForInformation: string[]
+  confidenceLevel: 'HIGH' | 'MODERATE' | 'LOW'
+  confidenceReasoning: string
+}
+
+// ============================================================================
+// Enhanced Article Metadata
+// ============================================================================
+
+export interface EnhancedArticleMetadata {
+  title: string
+  authors: string[]
+  publication: string
+  publishDate: string
+  articleType: 'NEWS' | 'OPINION' | 'ANALYSIS' | 'INVESTIGATION'
+  headline: string
+  subhead: string | null
+  lede: string
+  emotionalLanguageDensity: number // 0-1
+
+  // Phase 1 additions
+  publicationBias?: 'LEFT' | 'CENTER_LEFT' | 'CENTER' | 'CENTER_RIGHT' | 'RIGHT'
+  breakingNews: BreakingNewsContext
 }
 
 // ============================================================================
