@@ -535,6 +535,35 @@ function generateReaderGuidance(
 }
 
 /**
+ * Validate extraction results to detect failed/empty extractions
+ */
+function validateExtraction(article: any): { valid: boolean; error?: string } {
+  // Check for missing or empty title
+  if (!article.title || article.title === 'Untitled Article' || article.title.trim() === '') {
+    return { valid: false, error: 'Failed to extract article title' }
+  }
+
+  // Check for missing or empty content
+  const hasContent = article.content?.body && article.content.body.trim().length > 100
+  if (!hasContent) {
+    return { valid: false, error: 'Failed to extract article content (empty or too short)' }
+  }
+
+  // Check for unknown publication (might indicate extraction failure)
+  if (article.publication === 'Unknown Publication' && (!article.claims || article.claims.length === 0)) {
+    return { valid: false, error: 'Extraction failed: unknown publication with no claims extracted' }
+  }
+
+  // Minimum content threshold: at least 100 characters of actual text
+  const textLength = article.content?.body?.length || 0
+  if (textLength < 100) {
+    return { valid: false, error: `Article content too short (${textLength} chars). Minimum 100 required.` }
+  }
+
+  return { valid: true }
+}
+
+/**
  * Run full analysis on an article (MVP: in-memory only, no database)
  */
 export async function runFullAnalysis(articleUrl: string, userId: string): Promise<ParseAnalysis> {
@@ -544,6 +573,12 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
   try {
     // Step 1: Extract article
     const article = await extractArticle({ url: articleUrl })
+
+    // Step 1.5: Validate extraction - abort if content is empty/failed
+    const extractionValidation = validateExtraction(article)
+    if (!extractionValidation.valid) {
+      throw new Error(`Extraction failed: ${extractionValidation.error}. Cannot proceed with analysis.`)
+    }
 
     // Step 2: Run all 5 agents in parallel (for speed)
     const [
@@ -766,6 +801,12 @@ export async function runQuickAnalysis(articleUrl: string, userId: string): Prom
   try {
     // Step 1: Extract article
     const article = await extractArticle({ url: articleUrl })
+
+    // Step 1.5: Validate extraction - abort if content is empty/failed
+    const extractionValidation = validateExtraction(article)
+    if (!extractionValidation.valid) {
+      throw new Error(`Extraction failed: ${extractionValidation.error}. Cannot proceed with analysis.`)
+    }
 
     // Step 2: Run only deception detection (most important agent)
     const deceptionResult = await detectDeception({ article })

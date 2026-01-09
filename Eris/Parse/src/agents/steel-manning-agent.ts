@@ -14,11 +14,45 @@ interface SteelManningInput {
 }
 
 /**
+ * Validate that the article has enough content to steel-man
+ */
+function hasValidContent(article: ExtractedArticle): boolean {
+  // Must have a real title (not "Untitled Article")
+  if (!article.title || article.title === 'Untitled Article') {
+    return false
+  }
+
+  // Must have actual content (at least 50 characters)
+  const contentLength = article.content?.body?.length || 0
+  if (contentLength < 50) {
+    return false
+  }
+
+  // Must have publication info or at least some claims/sources
+  const hasPublication = article.publication && article.publication !== 'Unknown Publication'
+  const hasClaims = article.claims && article.claims.length > 0
+  const hasSources = article.sources && article.sources.length > 0
+
+  if (!hasPublication && !hasClaims && !hasSources) {
+    return false
+  }
+
+  return true
+}
+
+/**
  * Identify and steel-man all perspectives in the article
  * Enhanced: Always generates at least 2 perspectives (article's view + strongest counter-view)
+ * Guardrail: Returns empty array if input is empty/invalid to prevent hallucination
  */
 export async function steelManArticle(input: SteelManningInput): Promise<SteelMannedPerspective[]> {
   const { article } = input
+
+  // CRITICAL GUARDRAIL: Prevent hallucination on empty input
+  if (!hasValidContent(article)) {
+    console.warn('Steel-manning aborted: article content is empty or invalid. Returning empty perspectives to prevent hallucination.')
+    return []
+  }
 
   const systemPrompt = `You are an expert at steel-manning arguments - constructing the strongest possible version of each perspective.
 
