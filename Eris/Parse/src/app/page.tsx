@@ -55,7 +55,7 @@ export default function HomePage() {
             </svg>
           </Link>
           <Link
-            href="#methodology"
+            href="/methodology"
             className="btn-editorial-outline inline-flex items-center justify-center"
           >
             Our Methodology
@@ -66,7 +66,7 @@ export default function HomePage() {
         <div className="flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-primary" />
-            <span className="font-byline">7-Agent AI Analysis</span>
+            <span className="font-byline">8-Agent AI Analysis</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-foreground/30" />
@@ -173,7 +173,7 @@ export default function HomePage() {
             {
               step: "03",
               title: "Analyze",
-              desc: "Seven specialized agents evaluate from multiple angles: logic, evidence, bias, and manipulation."
+              desc: "Eight specialized agents evaluate from multiple angles: logic, evidence, bias, and manipulation."
             },
             {
               step: "04",
@@ -217,7 +217,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto text-center">
             <div>
-              <div className="score-editorial text-background/90">7</div>
+              <div className="score-editorial text-background/90">8</div>
               <div className="metric-label text-background/60 mt-2">AI Agents</div>
             </div>
             <div>
