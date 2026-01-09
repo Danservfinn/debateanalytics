@@ -1,7 +1,7 @@
 /**
  * Analysis Results Page
  * Displays full analysis results with all sections from design.md
- * MVP: Reads from sessionStorage (no database)
+ * Loads from database API, with sessionStorage fallback for fresh analyses
  */
 
 'use client';
@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Loader2, ExternalLink, Download, Share2, Copy, CheckCircle, AlertTriangle, XCircle, Info, FileText, Users, Calendar, BookOpen, BarChart3, Shield, Brain, Scale, Search } from "lucide-react";
+import { Loader2, ExternalLink, Download, Share2, Copy, CheckCircle, AlertTriangle, XCircle, Info, FileText, Users, Calendar, BookOpen, BarChart3, Shield, Brain, Scale, Search, History } from "lucide-react";
 import {
   getCredibilityLabel,
   getCredibilityColor,
@@ -81,33 +81,82 @@ export default function AnalysisResultPage({ params }: PageProps) {
   const [loading, setLoading] = useState(true);
   const [debugInfo, setDebugInfo] = useState<string>('');
   const [copied, setCopied] = useState(false);
+  const [isFromDatabase, setIsFromDatabase] = useState(false);
   const parseCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Debug: Log what we're looking for
-    const storageKey = `analysis_${analysisId}`;
-    console.log('Looking for sessionStorage key:', storageKey);
-
-    // Try to get analysis from sessionStorage
-    const stored = sessionStorage.getItem(storageKey);
-    console.log('Found stored data:', stored ? 'yes' : 'no');
-
-    if (stored) {
+    const fetchAnalysis = async () => {
+      // First try to load from database API
       try {
-        const parsed = JSON.parse(stored);
-        console.log('Parsed analysis ID:', parsed.id);
-        setAnalysis(parsed);
-      } catch (e) {
-        console.error('Failed to parse stored analysis:', e);
-        setDebugInfo(`Parse error: ${e}`);
+        const response = await fetch(`/api/analyses/${analysisId}`);
+        const result = await response.json();
+
+        if (result.success && result.data) {
+          console.log('Loaded analysis from database');
+          // Transform API response to match ParseAnalysis format
+          const apiData = result.data;
+          const analysisData: ParseAnalysis = {
+            id: apiData.id,
+            articleId: apiData.id, // Use analysis ID as articleId for shared view
+            url: apiData.url,
+            truthScore: apiData.truthScore,
+            credibility: apiData.credibility,
+            scoreBreakdown: apiData.scoreBreakdown,
+            steelMannedPerspectives: apiData.steelMannedPerspectives || [],
+            manipulationRisk: apiData.manipulationRisk,
+            deceptionDetected: apiData.deceptionDetected || [],
+            fallacies: apiData.fallacies || [],
+            factCheckResults: apiData.factCheckResults || [],
+            whatAiThinks: apiData.whatAiThinks,
+            aiAssessment: apiData.aiAssessment,
+            analysisDuration: apiData.analysisDuration,
+            agentsUsed: apiData.agentsUsed || [],
+            modelVersion: apiData.modelVersion,
+            analyzedAt: apiData.createdAt,
+            articleMetadata: apiData.articleMetadata,
+            extractedClaims: apiData.extractedClaims || [],
+            sourcesCited: apiData.sourcesCited || [],
+            statistics: apiData.statistics || [],
+            evidenceAssessment: apiData.evidenceAssessment,
+            dualScores: apiData.dualScores,
+            breakingNewsContext: apiData.breakingNewsContext,
+            readerGuidance: apiData.readerGuidance,
+          };
+          setAnalysis(analysisData);
+          setIsFromDatabase(true);
+          setLoading(false);
+          return;
+        }
+      } catch (apiError) {
+        console.log('API fetch failed, falling back to sessionStorage:', apiError);
       }
-    } else {
-      // Debug: List all sessionStorage keys
-      const allKeys = Object.keys(sessionStorage);
-      console.log('All sessionStorage keys:', allKeys);
-      setDebugInfo(`No data found for ${storageKey}. Available keys: ${allKeys.join(', ') || 'none'}`);
-    }
-    setLoading(false);
+
+      // Fall back to sessionStorage for fresh analyses
+      const storageKey = `analysis_${analysisId}`;
+      console.log('Looking for sessionStorage key:', storageKey);
+      const stored = sessionStorage.getItem(storageKey);
+      console.log('Found stored data:', stored ? 'yes' : 'no');
+
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          console.log('Parsed analysis ID:', parsed.id);
+          setAnalysis(parsed);
+          setIsFromDatabase(false);
+        } catch (e) {
+          console.error('Failed to parse stored analysis:', e);
+          setDebugInfo(`Parse error: ${e}`);
+        }
+      } else {
+        // Debug: List all sessionStorage keys
+        const allKeys = Object.keys(sessionStorage);
+        console.log('All sessionStorage keys:', allKeys);
+        setDebugInfo(`No data found for ${storageKey}. Available keys: ${allKeys.join(', ') || 'none'}`);
+      }
+      setLoading(false);
+    };
+
+    fetchAnalysis();
   }, [analysisId]);
 
   const handleCopyLink = () => {
@@ -1242,24 +1291,64 @@ export default function AnalysisResultPage({ params }: PageProps) {
         </Card>
 
         {/* ============================================ */}
-        {/* ACTIONS */}
+        {/* SHARE & ACTIONS */}
         {/* ============================================ */}
         <Card className="border-border">
           <CardHeader>
-            <CardTitle className="font-headline">Actions</CardTitle>
+            <CardTitle className="font-headline flex items-center gap-2">
+              <Share2 className="h-5 w-5 text-primary" />
+              Share & Actions
+            </CardTitle>
+            <CardDescription>
+              Share this analysis or explore more
+            </CardDescription>
           </CardHeader>
           <CardContent>
+            {/* Prominent Share Section */}
+            <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 mb-4">
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <div className="flex-1">
+                  <h4 className="font-semibold text-foreground mb-1">Share This Analysis</h4>
+                  <p className="text-sm text-muted-foreground">
+                    {isFromDatabase
+                      ? "This analysis is saved and can be shared with anyone"
+                      : "Copy the link to share this analysis"
+                    }
+                  </p>
+                </div>
+                <Button
+                  onClick={handleCopyLink}
+                  className="min-w-[140px]"
+                  variant={copied ? "secondary" : "default"}
+                >
+                  {copied ? (
+                    <>
+                      <CheckCircle className="h-4 w-4 mr-2" />
+                      Link Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-4 w-4 mr-2" />
+                      Copy Share Link
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
+
+            {/* Other Actions */}
             <div className="flex gap-2 flex-wrap">
-              <Button variant="outline" onClick={handleCopyLink}>
-                {copied ? <CheckCircle className="h-4 w-4 mr-2" /> : <Copy className="h-4 w-4 mr-2" />}
-                {copied ? 'Copied!' : 'Copy Link'}
-              </Button>
               <Button variant="outline" onClick={() => window.print()}>
                 <Download className="h-4 w-4 mr-2" />
                 Export PDF
               </Button>
               <Button variant="outline" onClick={() => router.push('/analyze')}>
-                Analyze Another Article
+                <FileText className="h-4 w-4 mr-2" />
+                Analyze Another
+              </Button>
+              <Button variant="outline" onClick={() => router.push('/history')}>
+                <History className="h-4 w-4 mr-2" />
+                View History
               </Button>
             </div>
           </CardContent>

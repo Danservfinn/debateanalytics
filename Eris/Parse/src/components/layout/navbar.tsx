@@ -10,7 +10,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { useSession, signOut } from "next-auth/react"
-import { Menu, X, Coins } from "lucide-react"
+import { Menu, X, Coins, History } from "lucide-react"
 
 export function Navbar() {
   const pathname = usePathname()
@@ -56,14 +56,24 @@ export function Navbar() {
               Pricing
             </Link>
             {session && (
-              <Link
-                href="/dashboard"
-                className={`nav-section transition-colors ${
-                  pathname === "/dashboard" ? "active" : ""
-                }`}
-              >
-                Dashboard
-              </Link>
+              <>
+                <Link
+                  href="/history"
+                  className={`nav-section transition-colors ${
+                    pathname === "/history" ? "active" : ""
+                  }`}
+                >
+                  History
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className={`nav-section transition-colors ${
+                    pathname === "/dashboard" ? "active" : ""
+                  }`}
+                >
+                  Dashboard
+                </Link>
+              </>
             )}
           </nav>
 
@@ -174,15 +184,26 @@ export function Navbar() {
                 PRICING
               </Link>
               {session && (
-                <Link
-                  href="/dashboard"
-                  className={`py-3 px-2 font-byline transition-colors ${
-                    pathname === "/dashboard" ? "text-primary bg-muted/50" : "text-foreground hover:bg-muted/30"
-                  }`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  DASHBOARD
-                </Link>
+                <>
+                  <Link
+                    href="/history"
+                    className={`py-3 px-2 font-byline transition-colors ${
+                      pathname === "/history" ? "text-primary bg-muted/50" : "text-foreground hover:bg-muted/30"
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    HISTORY
+                  </Link>
+                  <Link
+                    href="/dashboard"
+                    className={`py-3 px-2 font-byline transition-colors ${
+                      pathname === "/dashboard" ? "text-primary bg-muted/50" : "text-foreground hover:bg-muted/30"
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    DASHBOARD
+                  </Link>
+                </>
               )}
 
               {/* Mobile Auth Section */}
