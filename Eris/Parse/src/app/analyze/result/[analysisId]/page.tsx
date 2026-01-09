@@ -12,7 +12,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Loader2, ExternalLink, Download, Share2, Copy, CheckCircle, AlertTriangle, XCircle, Info, FileText, Users, Calendar, BookOpen, BarChart3, Shield, Brain, Scale, Search } from "lucide-react";
-import { getCredibilityLabel, getCredibilityColor, type ParseAnalysis, type TruthScoreBreakdown, type SteelMannedPerspective, type DeceptionInstance, type FallacyInstance, type FactCheckResult, type ManipulationRisk, type ExtractedClaim, type ArticleSource, type StatisticReference, type AIAssessment } from "@/types";
+import {
+  getCredibilityLabel,
+  getCredibilityColor,
+  getFactualReliabilityColor,
+  getRhetoricalNeutralityColor,
+  getConfidenceLevelColor,
+  type ParseAnalysis,
+  type TruthScoreBreakdown,
+  type SteelMannedPerspective,
+  type DeceptionInstance,
+  type FallacyInstance,
+  type FactCheckResult,
+  type ManipulationRisk,
+  type ExtractedClaim,
+  type ArticleSource,
+  type StatisticReference,
+  type AIAssessment,
+  type DualScores,
+  type BreakingNewsContext,
+  type ReaderGuidance,
+} from "@/types";
 
 interface PageProps {
   params: Promise<{ analysisId: string }>;
@@ -147,6 +167,11 @@ export default function AnalysisResultPage({ params }: PageProps) {
   const factChecks: FactCheckResult[] = analysis.factCheckResults || [];
   const manipulationRisk: ManipulationRisk | undefined = analysis.manipulationRisk;
 
+  // Phase 1 & 2 enhanced fields
+  const dualScores: DualScores | undefined = analysis.dualScores;
+  const breakingNewsContext: BreakingNewsContext | undefined = analysis.breakingNewsContext;
+  const readerGuidance: ReaderGuidance | undefined = analysis.readerGuidance;
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 max-w-5xl">
@@ -220,6 +245,165 @@ export default function AnalysisResultPage({ params }: PageProps) {
               </div>
             )}
           </div>
+        )}
+
+        {/* ============================================ */}
+        {/* BREAKING NEWS WARNING (Phase 1) */}
+        {/* ============================================ */}
+        {breakingNewsContext?.isBreakingNews && (
+          <Card className="mb-6 border-2 border-amber-500/50 bg-amber-50/50 dark:bg-amber-950/20">
+            <CardContent className="pt-4 pb-4">
+              <div className="flex items-start gap-3">
+                <div className="p-2 rounded-lg bg-amber-500/20">
+                  <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                </div>
+                <div>
+                  <h3 className="font-headline font-semibold text-amber-700 dark:text-amber-400 mb-1">
+                    Breaking News Analysis
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    This article was published {breakingNewsContext.hoursAfterEvent !== undefined ?
+                      `${breakingNewsContext.hoursAfterEvent} hours after the event` : 'recently'}.
+                    Early reporting often contains errors or relies heavily on official statements.
+                  </p>
+                  {breakingNewsContext.warnings && breakingNewsContext.warnings.length > 0 && (
+                    <ul className="text-xs text-amber-700 dark:text-amber-500 space-y-1">
+                      {breakingNewsContext.warnings.map((warning, i) => (
+                        <li key={i} className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                          {warning}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {breakingNewsContext.recommendReanalysisAfter && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Recommend re-analysis after: {new Date(breakingNewsContext.recommendReanalysisAfter).toLocaleDateString()}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* DUAL SCORES (Phase 1) */}
+        {/* ============================================ */}
+        {dualScores && (
+          <Card className="mb-6 border-border">
+            <CardHeader className="pb-4">
+              <CardTitle className="font-headline flex items-center gap-2">
+                <Scale className="h-5 w-5 text-primary" />
+                Dual-Score Analysis
+              </CardTitle>
+              <CardDescription>
+                Separate assessment of factual accuracy and rhetorical techniques
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Factual Reliability Score */}
+                <div className="p-4 rounded-lg border border-border bg-background">
+                  <div className="flex justify-between items-center mb-3">
+                    <h4 className="font-semibold text-foreground">Factual Reliability</h4>
+                    <Badge
+                      className="text-sm"
+                      style={{
+                        backgroundColor: getFactualReliabilityColor(dualScores.factualReliability.label),
+                        color: 'white'
+                      }}
+                    >
+                      {dualScores.factualReliability.label.replace(/_/g, ' ')}
+                    </Badge>
+                  </div>
+                  <div className="text-center mb-4">
+                    <div
+                      className="text-4xl font-bold font-masthead"
+                      style={{ color: getFactualReliabilityColor(dualScores.factualReliability.label) }}
+                    >
+                      {dualScores.factualReliability.score}
+                    </div>
+                    <div className="text-sm text-muted-foreground">/ 100</div>
+                  </div>
+                  {/* Breakdown */}
+                  <div className="space-y-2">
+                    {dualScores.factualReliability.breakdown.map((item, i) => (
+                      <div key={i} className="text-sm">
+                        <div className="flex justify-between mb-1">
+                          <span className="text-muted-foreground">{item.component}</span>
+                          <span className="text-foreground font-medium">{item.score}/{item.max}</span>
+                        </div>
+                        <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all"
+                            style={{
+                              width: `${(item.score / item.max) * 100}%`,
+                              backgroundColor: getFactualReliabilityColor(dualScores.factualReliability.label)
+                            }}
+                          />
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-0.5">{item.details}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Rhetorical Neutrality Score */}
+                <div className="p-4 rounded-lg border border-border bg-background">
+                  <div className="flex justify-between items-center mb-3">
+                    <h4 className="font-semibold text-foreground">Rhetorical Neutrality</h4>
+                    <Badge
+                      className="text-sm"
+                      style={{
+                        backgroundColor: getRhetoricalNeutralityColor(dualScores.rhetoricalNeutrality.label),
+                        color: 'white'
+                      }}
+                    >
+                      {dualScores.rhetoricalNeutrality.label.replace(/_/g, ' ')}
+                    </Badge>
+                  </div>
+                  <div className="text-center mb-4">
+                    <div
+                      className="text-4xl font-bold font-masthead"
+                      style={{ color: getRhetoricalNeutralityColor(dualScores.rhetoricalNeutrality.label) }}
+                    >
+                      {dualScores.rhetoricalNeutrality.score}
+                    </div>
+                    <div className="text-sm text-muted-foreground">/ 100</div>
+                  </div>
+                  {/* Breakdown */}
+                  <div className="space-y-2">
+                    {dualScores.rhetoricalNeutrality.breakdown.map((item, i) => (
+                      <div key={i} className="text-sm">
+                        <div className="flex justify-between mb-1">
+                          <span className="text-muted-foreground">{item.component}</span>
+                          <span className="text-foreground font-medium">{item.score}/{item.max}</span>
+                        </div>
+                        <div className="h-1.5 bg-muted rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full transition-all"
+                            style={{
+                              width: `${(item.score / item.max) * 100}%`,
+                              backgroundColor: getRhetoricalNeutralityColor(dualScores.rhetoricalNeutrality.label)
+                            }}
+                          />
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-0.5">{item.details}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Overall Confidence */}
+              <div className="mt-4 pt-4 border-t border-border text-center">
+                <span className="text-sm text-muted-foreground">
+                  Analysis Confidence: <strong className="text-foreground">{Math.round(dualScores.overallConfidence * 100)}%</strong>
+                </span>
+              </div>
+            </CardContent>
+          </Card>
         )}
 
         {/* ============================================ */}
@@ -928,6 +1112,98 @@ export default function AnalysisResultPage({ params }: PageProps) {
                     </div>
                   </div>
                 ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* READER GUIDANCE (Phase 2) */}
+        {/* ============================================ */}
+        {readerGuidance && (
+          <Card className="mb-8 border-2 border-primary/20 bg-gradient-to-br from-background to-muted/10">
+            <CardHeader>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-primary" />
+                Reader Guidance
+              </CardTitle>
+              <CardDescription>
+                Recommendations for forming an informed opinion
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* Summary */}
+              <div className="p-4 bg-background rounded-lg border border-border mb-4">
+                <p className="text-foreground leading-relaxed">{readerGuidance.summary}</p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Additional Sources Recommended */}
+                <div>
+                  <h4 className="font-semibold text-sm text-foreground mb-2 flex items-center gap-1">
+                    <Search className="h-4 w-4 text-primary" />
+                    Recommended Additional Sources
+                  </h4>
+                  <ul className="space-y-1">
+                    {readerGuidance.additionalSourcesRecommended.map((source, i) => (
+                      <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                        {source}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Key Questions to Research */}
+                <div>
+                  <h4 className="font-semibold text-sm text-foreground mb-2 flex items-center gap-1">
+                    <Info className="h-4 w-4 text-amber-500" />
+                    Key Questions to Research
+                  </h4>
+                  <ul className="space-y-1">
+                    {readerGuidance.keyQuestionsToResearch.map((question, i) => (
+                      <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5 flex-shrink-0" />
+                        {question}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Wait for Information (if breaking news) */}
+              {readerGuidance.waitForInformation && readerGuidance.waitForInformation.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-border">
+                  <h4 className="font-semibold text-sm text-foreground mb-2 flex items-center gap-1">
+                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                    Information to Wait For
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {readerGuidance.waitForInformation.map((info, i) => (
+                      <Badge key={i} variant="outline" className="text-xs">
+                        {info}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Confidence Level */}
+              <div className="mt-4 pt-4 border-t border-border">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-muted-foreground">Analysis Confidence:</span>
+                  <Badge
+                    style={{
+                      backgroundColor: getConfidenceLevelColor(readerGuidance.confidenceLevel),
+                      color: 'white'
+                    }}
+                  >
+                    {readerGuidance.confidenceLevel}
+                  </Badge>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  {readerGuidance.confidenceReasoning}
+                </p>
               </div>
             </CardContent>
           </Card>

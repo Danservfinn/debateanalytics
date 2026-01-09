@@ -31,6 +31,136 @@ import {
   detectBreakingNews,
 } from "@/types"
 
+// ============================================================================
+// Phase 1 & 2: Dual Score Computation
+// ============================================================================
+
+/**
+ * Compute Factual Reliability Score (0-100)
+ * Based on: claim verification rate, source documentation, contested fact resolution, statistical validity
+ */
+function computeFactualReliabilityScore(
+  synthesis: { truthScore: number; breakdown: { evidenceQuality: number; methodologyRigor: number } },
+  factCheckResults: { verification: string; confidence: number }[],
+  statistics: { isBaselineProvided: boolean }[]
+): FactualReliabilityScore {
+  // Claim verification rate (40 points max)
+  const verifiedClaims = factCheckResults.filter(r => r.verification === 'supported' || r.verification === 'partially_supported')
+  const claimVerificationRate = factCheckResults.length > 0
+    ? Math.round((verifiedClaims.length / factCheckResults.length) * 40)
+    : 20 // neutral if no claims to verify
+
+  // Source documentation (25 points max) - derived from evidence quality
+  const sourceDocumentation = Math.round((synthesis.breakdown.evidenceQuality / 40) * 25)
+
+  // Contested fact resolution (20 points max) - derived from methodology rigor
+  const contestedFactResolution = Math.round((synthesis.breakdown.methodologyRigor / 25) * 20)
+
+  // Statistical validity (15 points max)
+  const statsWithBaseline = statistics.filter(s => s.isBaselineProvided).length
+  const statisticalValidity = statistics.length > 0
+    ? Math.round((statsWithBaseline / statistics.length) * 15)
+    : 10 // neutral if no statistics
+
+  const totalScore = Math.min(100, claimVerificationRate + sourceDocumentation + contestedFactResolution + statisticalValidity)
+
+  return {
+    score: totalScore,
+    max: 100,
+    confidence: 0.7, // Default confidence
+    label: getFactualReliabilityLabel(totalScore),
+    breakdown: [
+      { component: 'Claim Verification Rate', score: claimVerificationRate, max: 40, details: `${verifiedClaims.length}/${factCheckResults.length} claims verified` },
+      { component: 'Source Documentation', score: sourceDocumentation, max: 25, details: 'Based on evidence quality assessment' },
+      { component: 'Contested Fact Resolution', score: contestedFactResolution, max: 20, details: 'Based on methodology rigor' },
+      { component: 'Statistical Validity', score: statisticalValidity, max: 15, details: `${statsWithBaseline}/${statistics.length} stats with baseline` },
+    ],
+  }
+}
+
+/**
+ * Compute Rhetorical Neutrality Score (0-100)
+ * Based on: language neutrality, framing balance, omission absence, logical validity
+ */
+function computeRhetoricalNeutralityScore(
+  deceptionResult: { instances: { category: string; severity: string }[]; score: number },
+  fallacies: { severity: string }[],
+  contextAudit: { omissions: unknown[]; framing: unknown[]; overallScore: number },
+  emotionalLanguageDensity: number
+): RhetoricalNeutralityScore {
+  // Language neutrality (35 points max) - inverse of emotional language + emotional deception
+  const emotionalDeceptions = deceptionResult.instances.filter(i => i.category === 'emotional')
+  const languageNeutrality = Math.max(0, 35 - Math.round(emotionalLanguageDensity * 20) - (emotionalDeceptions.length * 5))
+
+  // Framing balance (25 points max) - inverse of framing techniques detected
+  const framingTechniques = deceptionResult.instances.filter(i => i.category === 'framing')
+  const framingBalance = Math.max(0, 25 - (framingTechniques.length * 5) - (contextAudit.framing?.length || 0) * 3)
+
+  // Omission absence (25 points max) - inverse of omissions detected
+  const omissionAbsence = Math.max(0, 25 - (contextAudit.omissions?.length || 0) * 4)
+
+  // Logical validity (15 points max) - inverse of fallacies
+  const highSeverityFallacies = fallacies.filter(f => f.severity === 'high').length
+  const mediumSeverityFallacies = fallacies.filter(f => f.severity === 'medium').length
+  const logicalValidity = Math.max(0, 15 - (highSeverityFallacies * 5) - (mediumSeverityFallacies * 3))
+
+  const totalScore = Math.min(100, languageNeutrality + framingBalance + omissionAbsence + logicalValidity)
+
+  return {
+    score: totalScore,
+    max: 100,
+    confidence: 0.75,
+    label: getRhetoricalNeutralityLabel(totalScore),
+    breakdown: [
+      { component: 'Language Neutrality', score: languageNeutrality, max: 35, details: `${emotionalDeceptions.length} emotional manipulation instances` },
+      { component: 'Framing Balance', score: framingBalance, max: 25, details: `${framingTechniques.length} framing techniques detected` },
+      { component: 'Omission Absence', score: omissionAbsence, max: 25, details: `${contextAudit.omissions?.length || 0} omissions detected` },
+      { component: 'Logical Validity', score: logicalValidity, max: 15, details: `${fallacies.length} fallacies detected` },
+    ],
+  }
+}
+
+/**
+ * Generate reader guidance based on analysis results
+ */
+function generateReaderGuidance(
+  synthesis: { truthScore: number; credibility: string },
+  breakingNews: BreakingNewsContext,
+  factCheckResults: { claim: string; verification: string }[]
+): ReaderGuidance {
+  const unverifiedClaims = factCheckResults.filter(r => r.verification === 'inconclusive' || r.verification === 'not_supported')
+
+  const keyQuestions = unverifiedClaims.slice(0, 5).map(c => `Is "${c.claim.slice(0, 50)}..." accurate?`)
+
+  const confidenceLevel = synthesis.truthScore >= 60 ? 'HIGH' as const :
+    synthesis.truthScore >= 40 ? 'MODERATE' as const : 'LOW' as const
+
+  return {
+    summary: synthesis.truthScore >= 60
+      ? 'This article has moderate to high factual reliability. Key claims are supported by evidence.'
+      : synthesis.truthScore >= 40
+        ? 'This article has mixed reliability. Some claims are supported but others require verification.'
+        : 'This article has significant reliability concerns. Many claims lack proper sourcing or are disputed.',
+    additionalSourcesRecommended: [
+      'AP or Reuters wire coverage for neutral comparison',
+      'Local news outlet coverage for additional perspective',
+      'Primary source documents cited in the article',
+    ],
+    keyQuestionsToResearch: keyQuestions.length > 0 ? keyQuestions : ['What primary sources are available to verify key claims?'],
+    waitForInformation: breakingNews.isBreakingNews
+      ? ['Investigation findings', 'Official reports', 'Witness interviews', 'Documentary evidence']
+      : [],
+    confidenceLevel,
+    confidenceReasoning: breakingNews.isBreakingNews
+      ? 'Breaking news analysis has inherent uncertainty. Facts may change as more information emerges.'
+      : confidenceLevel === 'HIGH'
+        ? 'Analysis based on well-documented sources with verifiable claims.'
+        : confidenceLevel === 'MODERATE'
+          ? 'Some claims could be verified but key facts remain uncertain.'
+          : 'Significant gaps in evidence make definitive assessment difficult.',
+  }
+}
+
 /**
  * Run full analysis on an article (MVP: in-memory only, no database)
  */
@@ -114,6 +244,31 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
         : 'Weak evidence. Most claims lack proper sourcing or documentation.',
     }
 
+    // Phase 1: Detect breaking news
+    const breakingNewsContext = detectBreakingNews(article.publishDate)
+
+    // Phase 1: Compute dual scores
+    const factualReliability = computeFactualReliabilityScore(
+      synthesis,
+      factCheckResults,
+      article.statistics || []
+    )
+    const rhetoricalNeutrality = computeRhetoricalNeutralityScore(
+      deceptionResult,
+      fallacies,
+      contextAudit,
+      article.emotionalLanguageDensity
+    )
+
+    const dualScores: DualScores = {
+      factualReliability,
+      rhetoricalNeutrality,
+      overallConfidence: (factualReliability.confidence + rhetoricalNeutrality.confidence) / 2,
+    }
+
+    // Phase 2: Generate reader guidance
+    const readerGuidance = generateReaderGuidance(synthesis, breakingNewsContext, factCheckResults)
+
     // Step 5: Build final analysis
     const analysis: ParseAnalysis = {
       id: crypto.randomUUID(),
@@ -134,6 +289,16 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
         emotionalLanguageDensity: article.emotionalLanguageDensity,
       },
 
+      // ========================================================================
+      // Phase 1: Dual-Score System (NEW)
+      // ========================================================================
+      dualScores,
+
+      // ========================================================================
+      // Phase 1: Breaking News Context (NEW)
+      // ========================================================================
+      breakingNewsContext,
+
       // Include extracted claims
       extractedClaims: article.claims,
 
@@ -142,6 +307,11 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
 
       // Include statistics
       statistics: article.statistics,
+
+      // ========================================================================
+      // Phase 2: Reader Guidance (NEW)
+      // ========================================================================
+      readerGuidance,
 
       truthScore: synthesis.truthScore,
       credibility: synthesis.credibility,
