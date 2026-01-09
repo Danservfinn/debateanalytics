@@ -106,26 +106,67 @@ export default function AnalyzePage() {
 
   if (isAnalyzing) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center space-y-6">
-          {/* Loading Animation - Editorial Style */}
-          <div className="relative">
-            <div className="w-16 h-16 border-2 border-border mx-auto flex items-center justify-center">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="max-w-md w-full mx-4">
+          {/* Main Card */}
+          <div className="border border-border bg-card p-8 space-y-8">
+            {/* Header with Spinner */}
+            <div className="text-center space-y-4">
+              <div className="relative inline-block">
+                <div className="w-20 h-20 border border-border flex items-center justify-center">
+                  <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary animate-pulse" />
+              </div>
+              <div>
+                <p className="font-headline text-2xl text-foreground">Analysis in Progress</p>
+                <p className="font-body text-sm text-muted-foreground mt-1">
+                  This typically takes a few minutes
+                </p>
+              </div>
             </div>
-          </div>
-          <div>
-            <p className="font-headline text-2xl text-foreground mb-2">Analysis in Progress</p>
-            <p className="font-body text-muted-foreground">
-              Our seven-agent system is evaluating your article.<br />
-              This typically takes 30-60 seconds.
-            </p>
-          </div>
-          {/* Progress Indicators */}
-          <div className="flex justify-center gap-2">
-            <div className="w-2 h-2 bg-primary animate-pulse" style={{ animationDelay: '0ms' }} />
-            <div className="w-2 h-2 bg-primary animate-pulse" style={{ animationDelay: '150ms' }} />
-            <div className="w-2 h-2 bg-primary animate-pulse" style={{ animationDelay: '300ms' }} />
+
+            {/* Divider */}
+            <div className="border-t border-border" />
+
+            {/* Agent Steps */}
+            <div className="space-y-3">
+              <p className="font-section text-xs text-muted-foreground tracking-wider">ACTIVE AGENTS</p>
+              <div className="space-y-2">
+                {[
+                  { name: 'Extraction', desc: 'Parsing article structure' },
+                  { name: 'Steel-Man', desc: 'Analyzing perspectives' },
+                  { name: 'Deception', desc: 'Detecting manipulation' },
+                  { name: 'Persuasion', desc: 'Detecting opinion influence' },
+                  { name: 'Fact-Check', desc: 'Verifying claims' },
+                  { name: 'Synthesis', desc: 'Generating insights' },
+                ].map((agent, i) => (
+                  <div
+                    key={agent.name}
+                    className="flex items-center gap-3 py-2 px-3 bg-muted/30 border-l-2 border-primary/50"
+                    style={{
+                      animationDelay: `${i * 200}ms`,
+                      opacity: 0.6 + (i * 0.08)
+                    }}
+                  >
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"
+                         style={{ animationDelay: `${i * 150}ms` }} />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-body text-sm text-foreground">{agent.name}</p>
+                      <p className="font-body text-xs text-muted-foreground truncate">{agent.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Footer Note */}
+            <div className="pt-4 border-t border-border">
+              <p className="font-body text-xs text-muted-foreground text-center leading-relaxed">
+                Nine specialized AI agents are evaluating your article for accuracy,
+                bias, persuasion intent, and rhetorical techniques.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -171,7 +212,7 @@ export default function AnalyzePage() {
                 <div className="font-masthead text-4xl text-primary/30 mb-3">2</div>
                 <h3 className="font-headline text-lg text-foreground mb-2">Analysis</h3>
                 <p className="text-sm text-muted-foreground">
-                  Seven specialized AI agents evaluate evidence, logic, bias, and manipulation.
+                  Nine specialized AI agents evaluate evidence, logic, bias, persuasion intent, and manipulation.
                 </p>
               </div>
               <div className="text-center">

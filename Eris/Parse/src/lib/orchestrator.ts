@@ -11,6 +11,7 @@ import { detectFallacies } from "@/agents/fallacy-agent"
 import { auditContext } from "@/agents/context-audit-agent"
 import { synthesizeAnalysis } from "@/agents/synthesis-agent"
 import { generateAIAssessment } from "@/agents/ai-assessment-agent"
+import { analyzePersuasionIntent } from "@/agents/persuasion-intent-agent"
 import type {
   ParseAnalysis,
   DualScores,
@@ -24,6 +25,7 @@ import type {
   ContestedFact,
   AgreedFact,
   MissingPerspective,
+  PersuasionIntentResult,
 } from "@/types"
 import {
   getFactualReliabilityLabel,
@@ -580,19 +582,21 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
       throw new Error(`Extraction failed: ${extractionValidation.error}. Cannot proceed with analysis.`)
     }
 
-    // Step 2: Run all 5 agents in parallel (for speed)
+    // Step 2: Run all 6 agents in parallel (for speed)
     const [
       steelMannedPerspectives,
       deceptionResult,
       factCheckResults,
       fallacies,
       contextAudit,
+      persuasionIntent,
     ] = await Promise.all([
       steelManArticle({ article }),
       detectDeception({ article }),
       factCheckArticle({ article }),
       detectFallacies({ article }),
       auditContext({ article }),
+      analyzePersuasionIntent({ article }),
     ])
 
     // Step 3: Synthesize results
@@ -769,6 +773,7 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
       factCheckResults,
       whatAiThinks: synthesis.whatAiThinks,
       aiAssessment,
+      persuasionIntent,
       analysisDuration: (Date.now() - startTime) / 1000,
       agentsUsed: [
         'ExtractionAgent',
@@ -777,6 +782,7 @@ export async function runFullAnalysis(articleUrl: string, userId: string): Promi
         'CriticalFactCheckAgent',
         'FallacyAgent',
         'ContextAuditAgent',
+        'PersuasionIntentAgent',
         'SynthesisAgent',
         'AIAssessmentAgent',
       ],

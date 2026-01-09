@@ -376,6 +376,9 @@ export interface ParseAnalysis {
   // Comprehensive AI Assessment
   aiAssessment?: AIAssessment
 
+  // Persuasion Intent Analysis
+  persuasionIntent?: PersuasionIntentResult
+
   // Meta
   analysisDuration: number // seconds
   agentsUsed: string[]
@@ -831,6 +834,95 @@ export interface EnhancedArticleMetadata {
   // Phase 1 additions
   publicationBias?: 'LEFT' | 'CENTER_LEFT' | 'CENTER' | 'CENTER_RIGHT' | 'RIGHT'
   breakingNews: BreakingNewsContext
+}
+
+// ============================================================================
+// Persuasion Intent Detection Types
+// ============================================================================
+
+export type PersuasionTechnique =
+  | 'emotional_manipulation'
+  | 'tribal_framing'
+  | 'enemy_construction'
+  | 'moral_outrage'
+  | 'fear_mongering'
+  | 'urgency_manufacturing'
+  | 'authority_exploitation'
+  | 'oversimplification'
+  | 'false_consensus'
+  | 'victimhood_narrative'
+  | 'call_to_action'
+  | 'identity_appeal'
+
+export interface PersuasionInstance {
+  id: string
+  technique: PersuasionTechnique
+  quote: string
+  context: string
+  severity: 'low' | 'medium' | 'high'
+  explanation: string
+  targetedEmotion?: string // e.g., "fear", "anger", "pride", "belonging"
+}
+
+export interface ProjectedOpinion {
+  /** The opinion/belief the article wants readers to adopt */
+  statement: string
+  /** How strongly the article pushes this opinion (0-100) */
+  intensity: number
+  /** Techniques used to promote this opinion */
+  supportingTechniques: string[]
+  /** Who benefits if readers adopt this opinion */
+  beneficiaries?: string[]
+}
+
+export interface PersuasionIntentResult {
+  /** Overall persuasion intensity (0-100, higher = more persuasive) */
+  persuasionScore: number
+
+  /** Risk level for radicalization potential */
+  radicalizationRisk: 'minimal' | 'low' | 'moderate' | 'high' | 'severe'
+
+  /** Article intent classification */
+  articleIntent: {
+    /** Primary classification of article intent */
+    classification: 'hit_piece' | 'fluff_piece' | 'advocacy' | 'neutral'
+    /** Confidence in this classification (0-100) */
+    confidence: number
+    /** The subject being attacked or promoted (if hit/fluff piece) */
+    targetSubject?: string
+    /** Evidence supporting this classification */
+    indicators: string[]
+  }
+
+  /** What opinions the article is trying to impart */
+  projectedOpinions: ProjectedOpinion[]
+
+  /** Specific persuasion techniques detected */
+  techniques: PersuasionInstance[]
+
+  /** Who or what is positioned as the "enemy" or "other" */
+  enemyConstruction?: {
+    target: string
+    characterization: string
+    dehumanizationLevel: 'none' | 'mild' | 'moderate' | 'severe'
+  }
+
+  /** The "tribe" or in-group the article appeals to */
+  tribalAppeal?: {
+    targetAudience: string
+    identityMarkers: string[]
+    exclusionaryLanguage: boolean
+  }
+
+  /** Call to action analysis */
+  callToAction?: {
+    explicit: string[]
+    implicit: string[]
+    urgencyLevel: 'none' | 'low' | 'medium' | 'high'
+  }
+
+  /** Summary assessment */
+  summary: string
 }
 
 // ============================================================================
