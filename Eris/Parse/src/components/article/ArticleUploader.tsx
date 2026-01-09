@@ -21,17 +21,25 @@ const LOADING_STAGES = [
 interface ArticleUploaderProps {
   onExtract: (url: string) => Promise<any>;
   onConfirm: (article: ExtractedArticle, analysisType: 'free' | 'full') => void;
+  initialUrl?: string;
 }
 
-export function ArticleUploader({ onExtract, onConfirm }: ArticleUploaderProps) {
+export function ArticleUploader({ onExtract, onConfirm, initialUrl = '' }: ArticleUploaderProps) {
   const { data: session } = useSession();
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState(initialUrl);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [extractedArticle, setExtractedArticle] = useState<any>(null);
   const [selectedAnalysis, setSelectedAnalysis] = useState<'free' | 'full'>('full');
   const [loadingStage, setLoadingStage] = useState(0);
   const [progress, setProgress] = useState(0);
+
+  // Update URL when initialUrl prop changes (for re-analyze)
+  useEffect(() => {
+    if (initialUrl) {
+      setUrl(initialUrl);
+    }
+  }, [initialUrl]);
 
   // Animate progress bar through stages while loading
   useEffect(() => {

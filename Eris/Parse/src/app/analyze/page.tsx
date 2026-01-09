@@ -5,17 +5,22 @@
 
 'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { ArticleUploader } from "@/components/article/ArticleUploader";
 import type { ExtractedArticle } from "@/types";
 
-export default function AnalyzePage() {
+// Inner component that uses useSearchParams (needs Suspense boundary)
+function AnalyzePageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { data: session, status } = useSession();
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  // Get URL from query params (for re-analyze functionality)
+  const initialUrl = searchParams.get('url') || '';
 
   const handleExtract = async (url: string): Promise<ExtractedArticle> => {
     const response = await fetch("/api/article/extract", {
@@ -195,7 +200,11 @@ export default function AnalyzePage() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <ArticleUploader onExtract={handleExtract} onConfirm={handleConfirm} />
+          <ArticleUploader
+            onExtract={handleExtract}
+            onConfirm={handleConfirm}
+            initialUrl={initialUrl}
+          />
 
           {/* How It Works - Miller's Law: 3 steps shown */}
           <div className="mt-16 pt-12 border-t border-border">
@@ -227,5 +236,18 @@ export default function AnalyzePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Main export wrapped in Suspense for useSearchParams
+export default function AnalyzePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-foreground" />
+      </div>
+    }>
+      <AnalyzePageContent />
+    </Suspense>
   );
 }

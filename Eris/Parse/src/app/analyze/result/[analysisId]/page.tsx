@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Loader2, ExternalLink, Download, Share2, Copy, CheckCircle, AlertTriangle, XCircle, Info, FileText, Users, Calendar, BookOpen, BarChart3, Shield, Brain, Scale, Search, History } from "lucide-react";
+import { Loader2, ExternalLink, Download, Share2, Copy, CheckCircle, AlertTriangle, XCircle, Info, FileText, Users, Calendar, BookOpen, BarChart3, Shield, Brain, Scale, Search, History, RefreshCw } from "lucide-react";
 import {
   getCredibilityLabel,
   getCredibilityColor,
@@ -165,6 +165,15 @@ export default function AnalysisResultPage({ params }: PageProps) {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleReAnalyze = () => {
+    if (analysis?.url) {
+      // Navigate to analyze page with URL pre-filled
+      router.push(`/analyze?url=${encodeURIComponent(analysis.url)}`);
+    } else {
+      router.push('/analyze');
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -224,6 +233,26 @@ export default function AnalysisResultPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 max-w-5xl">
+
+        {/* ============================================ */}
+        {/* TOP ACTION BAR */}
+        {/* ============================================ */}
+        <div className="flex justify-between items-center mb-6">
+          <Button
+            variant="outline"
+            onClick={() => router.back()}
+            className="text-muted-foreground"
+          >
+            ← Back
+          </Button>
+          <Button
+            onClick={handleReAnalyze}
+            className="bg-primary hover:bg-primary/90"
+          >
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Re-Analyze
+          </Button>
+        </div>
 
         {/* ============================================ */}
         {/* ARTICLE HEADER */}
