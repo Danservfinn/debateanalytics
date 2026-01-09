@@ -15,12 +15,15 @@ import type { ExtractedArticle } from "@/types";
 // Inner component that uses useSearchParams (needs Suspense boundary)
 // Agent configuration with estimated completion times (ms)
 const AGENTS = [
-  { name: 'Extraction', desc: 'Parsing article structure', duration: 8000 },
-  { name: 'Steel-Man', desc: 'Analyzing perspectives', duration: 15000 },
-  { name: 'Deception', desc: 'Detecting manipulation', duration: 20000 },
-  { name: 'Persuasion', desc: 'Detecting opinion influence', duration: 25000 },
-  { name: 'Fact-Check', desc: 'Verifying claims', duration: 35000 },
-  { name: 'Synthesis', desc: 'Generating insights', duration: 45000 },
+  { name: 'Extraction', desc: 'Parsing article structure', duration: 5000 },
+  { name: 'Steel-Man', desc: 'Analyzing perspectives', duration: 10000 },
+  { name: 'Deception', desc: 'Detecting manipulation', duration: 15000 },
+  { name: 'Fallacy', desc: 'Identifying logical errors', duration: 20000 },
+  { name: 'Context Audit', desc: 'Evaluating missing context', duration: 25000 },
+  { name: 'Fact-Check', desc: 'Verifying claims', duration: 30000 },
+  { name: 'Persuasion', desc: 'Detecting opinion influence', duration: 35000 },
+  { name: 'AI Assessment', desc: 'Generating trust scores', duration: 40000 },
+  { name: 'Synthesis', desc: 'Compiling final report', duration: 45000 },
 ];
 
 function AnalyzePageContent() {
