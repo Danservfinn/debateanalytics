@@ -32,6 +32,7 @@ import {
   type DualScores,
   type BreakingNewsContext,
   type ReaderGuidance,
+  type PersuasionIntentResult,
 } from "@/types";
 
 interface PageProps {
@@ -121,6 +122,7 @@ export default function AnalysisResultPage({ params }: PageProps) {
             dualScores: apiData.dualScores,
             breakingNewsContext: apiData.breakingNewsContext,
             readerGuidance: apiData.readerGuidance,
+            persuasionIntent: apiData.persuasionIntent,
           };
           setAnalysis(analysisData);
           setIsFromDatabase(true);
@@ -229,6 +231,7 @@ export default function AnalysisResultPage({ params }: PageProps) {
   const dualScores: DualScores | undefined = analysis.dualScores;
   const breakingNewsContext: BreakingNewsContext | undefined = analysis.breakingNewsContext;
   const readerGuidance: ReaderGuidance | undefined = analysis.readerGuidance;
+  const persuasionIntent: PersuasionIntentResult | undefined = analysis.persuasionIntent;
 
   return (
     <div className="min-h-screen bg-background">
@@ -651,6 +654,289 @@ export default function AnalysisResultPage({ params }: PageProps) {
                 /* Fallback to legacy whatAiThinks */
                 <p className="text-lg leading-relaxed font-body text-foreground">{analysis.whatAiThinks}</p>
               )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* PERSUASION INTENT ANALYSIS */}
+        {/* ============================================ */}
+        {persuasionIntent && (
+          <Card className="mb-8 border-2 border-orange-500/20 bg-gradient-to-br from-background to-orange-50/10 dark:to-orange-950/10">
+            <CardHeader className="pb-4 border-b border-border">
+              <CardTitle className="font-headline flex items-center gap-3 text-2xl">
+                <div className="p-2 rounded-lg bg-orange-500/10">
+                  <AlertTriangle className="h-6 w-6 text-orange-500" />
+                </div>
+                Persuasion Intent Analysis
+              </CardTitle>
+              <CardDescription className="text-sm mt-2">
+                What opinion is this article trying to make you adopt?
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="pt-6">
+              <div className="space-y-6">
+
+                {/* ARTICLE INTENT CLASSIFICATION */}
+                <div className="p-4 bg-background rounded-lg border-l-4 border-orange-500">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-headline font-bold text-lg text-orange-600 dark:text-orange-400 uppercase tracking-wide">
+                      Article Classification
+                    </h4>
+                    <Badge
+                      className="text-sm px-3 py-1"
+                      style={{
+                        backgroundColor:
+                          persuasionIntent.articleIntent.classification === 'hit_piece' ? '#ef4444' :
+                          persuasionIntent.articleIntent.classification === 'fluff_piece' ? '#f59e0b' :
+                          persuasionIntent.articleIntent.classification === 'advocacy' ? '#8b5cf6' :
+                          '#22c55e',
+                        color: 'white'
+                      }}
+                    >
+                      {persuasionIntent.articleIntent.classification === 'hit_piece' ? 'HIT PIECE' :
+                       persuasionIntent.articleIntent.classification === 'fluff_piece' ? 'FLUFF PIECE' :
+                       persuasionIntent.articleIntent.classification === 'advocacy' ? 'ADVOCACY' :
+                       'NEUTRAL REPORTING'}
+                    </Badge>
+                  </div>
+                  {persuasionIntent.articleIntent.targetSubject && (
+                    <p className="text-foreground mb-2">
+                      <span className="text-muted-foreground">Target Subject:</span>{' '}
+                      <strong>{persuasionIntent.articleIntent.targetSubject}</strong>
+                    </p>
+                  )}
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm text-muted-foreground">Confidence:</span>
+                    <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden max-w-[200px]">
+                      <div
+                        className="h-full bg-orange-500 rounded-full"
+                        style={{ width: `${persuasionIntent.articleIntent.confidence}%` }}
+                      />
+                    </div>
+                    <span className="text-sm font-medium">{persuasionIntent.articleIntent.confidence}%</span>
+                  </div>
+                  {persuasionIntent.articleIntent.indicators.length > 0 && (
+                    <div className="mt-3">
+                      <span className="text-xs text-muted-foreground">Indicators:</span>
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {persuasionIntent.articleIntent.indicators.map((indicator, i) => (
+                          <Badge key={i} variant="outline" className="text-xs">
+                            {indicator}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* PROJECTED OPINIONS - THE KEY SECTION */}
+                {persuasionIntent.projectedOpinions.length > 0 && (
+                  <div className="p-4 bg-background rounded-lg border-l-4 border-red-500">
+                    <h4 className="font-headline font-bold text-lg text-red-600 dark:text-red-400 mb-4 uppercase tracking-wide">
+                      What This Article Wants You to Believe
+                    </h4>
+                    <div className="space-y-4">
+                      {persuasionIntent.projectedOpinions.map((opinion, i) => (
+                        <div key={i} className="p-3 bg-muted/30 rounded-lg border border-border">
+                          <div className="flex items-start justify-between gap-3 mb-2">
+                            <p className="text-foreground font-medium flex-1">
+                              "{opinion.statement}"
+                            </p>
+                            <div className="flex flex-col items-end gap-1">
+                              <Badge
+                                style={{
+                                  backgroundColor:
+                                    opinion.intensity >= 80 ? '#ef4444' :
+                                    opinion.intensity >= 60 ? '#f59e0b' :
+                                    opinion.intensity >= 40 ? '#eab308' :
+                                    '#22c55e',
+                                  color: 'white'
+                                }}
+                              >
+                                {opinion.intensity}% intensity
+                              </Badge>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs text-muted-foreground">Persuasion Strength:</span>
+                            <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden max-w-[150px]">
+                              <div
+                                className="h-full rounded-full"
+                                style={{
+                                  width: `${opinion.intensity}%`,
+                                  backgroundColor:
+                                    opinion.intensity >= 80 ? '#ef4444' :
+                                    opinion.intensity >= 60 ? '#f59e0b' :
+                                    opinion.intensity >= 40 ? '#eab308' :
+                                    '#22c55e'
+                                }}
+                              />
+                            </div>
+                          </div>
+                          {opinion.supportingTechniques && opinion.supportingTechniques.length > 0 && (
+                            <div className="mt-2 pt-2 border-t border-border">
+                              <span className="text-xs text-muted-foreground">Techniques used:</span>
+                              <div className="flex flex-wrap gap-1 mt-1">
+                                {opinion.supportingTechniques.map((technique, j) => (
+                                  <Badge key={j} variant="outline" className="text-xs capitalize">
+                                    {technique.replace(/_/g, ' ')}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {opinion.beneficiaries && opinion.beneficiaries.length > 0 && (
+                            <div className="mt-2 text-xs text-muted-foreground">
+                              <span>Who benefits: </span>
+                              <span className="text-foreground">{opinion.beneficiaries.join(', ')}</span>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* RADICALIZATION RISK */}
+                <div className="p-4 bg-background rounded-lg border-l-4 border-purple-500">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-headline font-bold text-lg text-purple-600 dark:text-purple-400 uppercase tracking-wide">
+                      Radicalization Risk
+                    </h4>
+                    <Badge
+                      className="text-sm px-3 py-1"
+                      style={{
+                        backgroundColor:
+                          persuasionIntent.radicalizationRisk === 'severe' ? '#7f1d1d' :
+                          persuasionIntent.radicalizationRisk === 'high' ? '#ef4444' :
+                          persuasionIntent.radicalizationRisk === 'moderate' ? '#f59e0b' :
+                          persuasionIntent.radicalizationRisk === 'low' ? '#84cc16' :
+                          '#22c55e',
+                        color: 'white'
+                      }}
+                    >
+                      {persuasionIntent.radicalizationRisk.toUpperCase()}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-sm text-muted-foreground">Persuasion Score:</span>
+                    <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden max-w-[200px]">
+                      <div
+                        className="h-full rounded-full"
+                        style={{
+                          width: `${persuasionIntent.persuasionScore}%`,
+                          backgroundColor:
+                            persuasionIntent.persuasionScore >= 80 ? '#ef4444' :
+                            persuasionIntent.persuasionScore >= 60 ? '#f59e0b' :
+                            persuasionIntent.persuasionScore >= 40 ? '#eab308' :
+                            '#22c55e'
+                        }}
+                      />
+                    </div>
+                    <span className="text-sm font-medium">{persuasionIntent.persuasionScore}/100</span>
+                  </div>
+                </div>
+
+                {/* ENEMY CONSTRUCTION (if present) */}
+                {persuasionIntent.enemyConstruction && (
+                  <div className="p-4 bg-red-50/50 dark:bg-red-950/20 rounded-lg border border-red-200 dark:border-red-900">
+                    <h4 className="font-headline font-bold text-sm text-red-700 dark:text-red-400 mb-2 uppercase tracking-wide">
+                      ⚠️ Enemy Construction Detected
+                    </h4>
+                    <p className="text-foreground mb-2">
+                      <span className="text-muted-foreground">Target:</span>{' '}
+                      <strong>{persuasionIntent.enemyConstruction.target}</strong>
+                    </p>
+                    <p className="text-sm text-foreground mb-2">
+                      {persuasionIntent.enemyConstruction.characterization}
+                    </p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="text-xs text-muted-foreground">Dehumanization Level:</span>
+                      <Badge
+                        className="text-xs"
+                        style={{
+                          backgroundColor:
+                            persuasionIntent.enemyConstruction.dehumanizationLevel === 'severe' ? '#7f1d1d' :
+                            persuasionIntent.enemyConstruction.dehumanizationLevel === 'moderate' ? '#ef4444' :
+                            persuasionIntent.enemyConstruction.dehumanizationLevel === 'mild' ? '#f59e0b' :
+                            '#22c55e',
+                          color: 'white'
+                        }}
+                      >
+                        {persuasionIntent.enemyConstruction.dehumanizationLevel.toUpperCase()}
+                      </Badge>
+                    </div>
+                  </div>
+                )}
+
+                {/* TRIBAL APPEAL (if present) */}
+                {persuasionIntent.tribalAppeal && (
+                  <div className="p-4 bg-amber-50/50 dark:bg-amber-950/20 rounded-lg border border-amber-200 dark:border-amber-900">
+                    <h4 className="font-headline font-bold text-sm text-amber-700 dark:text-amber-400 mb-2 uppercase tracking-wide">
+                      Tribal Appeal Detected
+                    </h4>
+                    <p className="text-foreground mb-2">
+                      <span className="text-muted-foreground">Target Audience:</span>{' '}
+                      <strong>{persuasionIntent.tribalAppeal.targetAudience}</strong>
+                    </p>
+                    {persuasionIntent.tribalAppeal.exclusionaryLanguage && (
+                      <Badge variant="destructive" className="text-xs mb-2">
+                        Uses Exclusionary Language
+                      </Badge>
+                    )}
+                    {persuasionIntent.tribalAppeal.identityMarkers && persuasionIntent.tribalAppeal.identityMarkers.length > 0 && (
+                      <div className="mt-2">
+                        <span className="text-xs text-muted-foreground">Identity Markers:</span>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {persuasionIntent.tribalAppeal.identityMarkers.map((marker, i) => (
+                            <Badge key={i} variant="outline" className="text-xs bg-amber-100 dark:bg-amber-900/30">
+                              {marker}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* PERSUASION TECHNIQUES */}
+                {persuasionIntent.techniques && persuasionIntent.techniques.length > 0 && (
+                  <div className="p-4 bg-background rounded-lg border border-border">
+                    <h4 className="font-headline font-bold text-sm text-muted-foreground mb-3 uppercase tracking-wide">
+                      Persuasion Techniques Used ({persuasionIntent.techniques.length})
+                    </h4>
+                    <div className="space-y-2">
+                      {persuasionIntent.techniques.slice(0, 5).map((technique, i) => (
+                        <div key={i} className="flex items-start gap-3 p-2 bg-muted/30 rounded">
+                          <Badge variant="outline" className="text-xs capitalize shrink-0">
+                            {technique.technique.replace(/_/g, ' ')}
+                          </Badge>
+                          <p className="text-xs text-foreground italic flex-1">
+                            "{technique.quote.substring(0, 80)}{technique.quote.length > 80 ? '...' : ''}"
+                          </p>
+                        </div>
+                      ))}
+                      {persuasionIntent.techniques.length > 5 && (
+                        <p className="text-xs text-muted-foreground text-center pt-2">
+                          + {persuasionIntent.techniques.length - 5} more techniques detected
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* SUMMARY */}
+                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                  <h4 className="font-headline font-bold text-sm text-primary mb-2 uppercase tracking-wide">
+                    Summary
+                  </h4>
+                  <p className="text-foreground leading-relaxed font-body">
+                    {persuasionIntent.summary}
+                  </p>
+                </div>
+
+              </div>
             </CardContent>
           </Card>
         )}
