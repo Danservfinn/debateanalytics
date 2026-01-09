@@ -7,14 +7,16 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 // Mock the zai module
 vi.mock('@/lib/zai', () => ({
   callGLM: vi.fn(),
+  callGLMWithRetry: vi.fn(),
   extractJSON: vi.fn(),
 }))
 
 import { synthesizeAnalysis, createShareableCard } from '../synthesis-agent'
-import { callGLM, extractJSON } from '@/lib/zai'
+import { callGLM, callGLMWithRetry, extractJSON } from '@/lib/zai'
 import type { ParseAnalysis } from '@/types'
 
 const mockedCallGLM = vi.mocked(callGLM)
+const mockedCallGLMWithRetry = vi.mocked(callGLMWithRetry)
 const mockedExtractJSON = vi.mocked(extractJSON)
 
 describe('SynthesisAgent', () => {
@@ -61,7 +63,7 @@ describe('SynthesisAgent', () => {
 
   describe('synthesizeAnalysis', () => {
     it('should calculate truth score from GLM response', async () => {
-      mockedCallGLM.mockResolvedValueOnce({
+      mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: true,
         text: '{}',
         model: 'glm-4.7',
@@ -90,7 +92,7 @@ describe('SynthesisAgent', () => {
     })
 
     it('should clamp scores to valid ranges', async () => {
-      mockedCallGLM.mockResolvedValueOnce({
+      mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: true,
         text: '{}',
         model: 'glm-4.7',
@@ -117,7 +119,7 @@ describe('SynthesisAgent', () => {
     })
 
     it('should handle negative scores by clamping to 0', async () => {
-      mockedCallGLM.mockResolvedValueOnce({
+      mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: true,
         text: '{}',
         model: 'glm-4.7',
@@ -143,7 +145,7 @@ describe('SynthesisAgent', () => {
     })
 
     it('should handle missing scores with defaults', async () => {
-      mockedCallGLM.mockResolvedValueOnce({
+      mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: true,
         text: '{}',
         model: 'glm-4.7',
@@ -163,7 +165,7 @@ describe('SynthesisAgent', () => {
     })
 
     it('should throw error on GLM failure', async () => {
-      mockedCallGLM.mockResolvedValueOnce({
+      mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: false,
         error: 'API unavailable',
         text: '',
@@ -177,7 +179,7 @@ describe('SynthesisAgent', () => {
     })
 
     it('should throw error on invalid JSON response', async () => {
-      mockedCallGLM.mockResolvedValueOnce({
+      mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: true,
         text: 'not json',
         model: 'glm-4.7',
@@ -192,7 +194,7 @@ describe('SynthesisAgent', () => {
     })
 
     it('should default credibility to moderate if not provided', async () => {
-      mockedCallGLM.mockResolvedValueOnce({
+      mockedCallGLMWithRetry.mockResolvedValueOnce({
         success: true,
         text: '{}',
         model: 'glm-4.7',
