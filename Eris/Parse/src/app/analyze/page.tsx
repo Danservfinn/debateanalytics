@@ -49,6 +49,15 @@ export default function AnalyzePage() {
       });
 
       console.log('Response status:', analyzeResponse.status);
+
+      // Handle non-JSON responses (timeouts, server errors)
+      const contentType = analyzeResponse.headers.get('content-type');
+      if (!contentType?.includes('application/json')) {
+        const text = await analyzeResponse.text();
+        console.error('Non-JSON response:', text.substring(0, 200));
+        throw new Error(`Server error (${analyzeResponse.status}): The analysis may have timed out. Try a shorter article.`);
+      }
+
       const analyzeData = await analyzeResponse.json();
       console.log('Response data:', analyzeData);
 

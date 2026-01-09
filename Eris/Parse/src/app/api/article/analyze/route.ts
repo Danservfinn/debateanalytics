@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
 
     const userId = session.user.id
 
-    // Run analysis (MVP: no credit checks, no database)
+    // Run full analysis
     const analysis = await runFullAnalysis(url, userId)
 
     const response: AnalyzeResponse = {

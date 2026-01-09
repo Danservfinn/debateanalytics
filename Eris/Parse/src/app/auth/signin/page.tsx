@@ -4,7 +4,7 @@
 
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,6 +12,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function SignInPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isDev, setIsDev] = useState(false)
+
+  useEffect(() => {
+    // Check if we're on localhost (development)
+    setIsDev(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  }, [])
 
   const handleOAuthSignIn = async (provider: string) => {
     setIsLoading(true)
@@ -76,6 +82,31 @@ export default function SignInPage() {
               </svg>
               Continue with Facebook
             </Button>
+
+            {/* Dev Login - Only visible on localhost */}
+            {isDev && (
+              <>
+                <div className="relative my-4">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-primary/20" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">Dev Only</span>
+                  </div>
+                </div>
+                <Button
+                  variant="outline"
+                  className="w-full border-green-500/30 hover:border-green-500/50 hover:bg-green-500/5 text-green-600"
+                  onClick={() => signIn("dev-login", { callbackUrl: "/analyze", email: "test@example.com" })}
+                  disabled={isLoading}
+                >
+                  <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                  Dev Login (Test User)
+                </Button>
+              </>
+            )}
 
           </div>
 

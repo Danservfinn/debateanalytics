@@ -1,21 +1,56 @@
 /**
  * Analysis Results Page
- * Displays full analysis results with truth score, steel-manned perspectives, deception detection, etc.
+ * Displays full analysis results with all sections from design.md
  * MVP: Reads from sessionStorage (no database)
  */
 
 'use client';
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useState, use, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { getCredibilityLabel, getCredibilityColor, type ParseAnalysis, type TruthScoreBreakdown, type SteelMannedPerspective, type DeceptionInstance } from "@/types";
+import { Loader2, ExternalLink, Download, Share2, Copy, CheckCircle, AlertTriangle, XCircle, Info, FileText, Users, Calendar, BookOpen, BarChart3, Shield, Brain, Scale, Search } from "lucide-react";
+import { getCredibilityLabel, getCredibilityColor, type ParseAnalysis, type TruthScoreBreakdown, type SteelMannedPerspective, type DeceptionInstance, type FallacyInstance, type FactCheckResult, type ManipulationRisk, type ExtractedClaim, type ArticleSource, type StatisticReference } from "@/types";
 
 interface PageProps {
   params: Promise<{ analysisId: string }>;
+}
+
+// Helper function for article type labels
+function getArticleTypeLabel(type: string): string {
+  const labels: Record<string, string> = {
+    news: 'News Article',
+    op_ed: 'Opinion / Editorial',
+    blog_post: 'Blog Post',
+    analysis: 'Analysis',
+  };
+  return labels[type] || type;
+}
+
+// Helper function for claim type colors
+function getClaimTypeColor(type: string): string {
+  const colors: Record<string, string> = {
+    factual: '#3b82f6',      // blue
+    causal: '#8b5cf6',       // purple
+    predictive: '#f59e0b',   // amber
+    normative: '#10b981',    // emerald
+    opinion: '#6b7280',      // gray
+  };
+  return colors[type] || '#6b7280';
+}
+
+// Helper function for verification colors
+function getVerificationColor(verification: string): string {
+  const colors: Record<string, string> = {
+    supported: '#22c55e',
+    partially_supported: '#f59e0b',
+    not_supported: '#f97316',
+    refuted: '#ef4444',
+    inconclusive: '#6b7280',
+  };
+  return colors[verification] || '#6b7280';
 }
 
 export default function AnalysisResultPage({ params }: PageProps) {
@@ -25,6 +60,8 @@ export default function AnalysisResultPage({ params }: PageProps) {
   const [analysis, setAnalysis] = useState<ParseAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
   const [debugInfo, setDebugInfo] = useState<string>('');
+  const [copied, setCopied] = useState(false);
+  const parseCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Debug: Log what we're looking for
@@ -52,6 +89,12 @@ export default function AnalysisResultPage({ params }: PageProps) {
     }
     setLoading(false);
   }, [analysisId]);
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   if (loading) {
     return (
@@ -85,7 +128,7 @@ export default function AnalysisResultPage({ params }: PageProps) {
   const credibilityLabel = getCredibilityLabel(analysis.truthScore);
   const credibilityColor = getCredibilityColor(credibilityLabel);
 
-  // Parse fields
+  // Parse fields with defaults
   const scoreBreakdown: TruthScoreBreakdown = analysis.scoreBreakdown || {
     evidenceQuality: 0,
     methodologyRigor: 0,
@@ -93,76 +136,166 @@ export default function AnalysisResultPage({ params }: PageProps) {
     manipulationAbsence: 0,
   };
 
+  const articleMetadata = analysis.articleMetadata;
+  const extractedClaims: ExtractedClaim[] = analysis.extractedClaims || [];
+  const sourcesCited: ArticleSource[] = analysis.sourcesCited || [];
+  const statistics: StatisticReference[] = analysis.statistics || [];
+  const evidenceAssessment = analysis.evidenceAssessment;
   const steelMannedPerspectives: SteelMannedPerspective[] = analysis.steelMannedPerspectives || [];
   const deceptions: DeceptionInstance[] = analysis.deceptionDetected || [];
-  const fallacies = analysis.fallacies || [];
+  const fallacies: FallacyInstance[] = analysis.fallacies || [];
+  const factChecks: FactCheckResult[] = analysis.factCheckResults || [];
+  const manipulationRisk: ManipulationRisk | undefined = analysis.manipulationRisk;
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        {/* Truth Score Card */}
-        <Card className="mb-8 border-border">
-          <CardHeader>
-            <CardTitle className="font-headline">Truth Score</CardTitle>
-            <CardDescription>Assessment of {analysis.url}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center justify-center">
+      <div className="container mx-auto px-4 py-8 max-w-5xl">
+
+        {/* ============================================ */}
+        {/* ARTICLE HEADER */}
+        {/* ============================================ */}
+        {articleMetadata && (
+          <div className="mb-8">
+            {/* Article Type Badge */}
+            <div className="flex items-center gap-2 mb-3">
+              <Badge variant="outline" className="text-xs">
+                {getArticleTypeLabel(articleMetadata.articleType)}
+              </Badge>
+              {articleMetadata.emotionalLanguageDensity > 0.5 && (
+                <Badge variant="destructive" className="text-xs">
+                  High Emotional Content
+                </Badge>
+              )}
+            </div>
+
+            {/* Title */}
+            <h1 className="font-headline text-3xl md:text-4xl text-foreground mb-3 leading-tight">
+              {articleMetadata.title || articleMetadata.headline}
+            </h1>
+
+            {/* Subhead */}
+            {articleMetadata.subhead && (
+              <p className="text-lg text-muted-foreground mb-4 font-body">
+                {articleMetadata.subhead}
+              </p>
+            )}
+
+            {/* Meta row */}
+            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+              {articleMetadata.publication && (
+                <span className="flex items-center gap-1">
+                  <BookOpen className="h-4 w-4" />
+                  {articleMetadata.publication}
+                </span>
+              )}
+              {articleMetadata.authors?.length > 0 && (
+                <span className="flex items-center gap-1">
+                  <Users className="h-4 w-4" />
+                  {articleMetadata.authors.join(', ')}
+                </span>
+              )}
+              {articleMetadata.publishDate && (
+                <span className="flex items-center gap-1">
+                  <Calendar className="h-4 w-4" />
+                  {new Date(articleMetadata.publishDate).toLocaleDateString()}
+                </span>
+              )}
+              <a
+                href={analysis.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-primary hover:underline"
+              >
+                <ExternalLink className="h-4 w-4" />
+                View Original
+              </a>
+            </div>
+
+            {/* Lede */}
+            {articleMetadata.lede && (
+              <div className="mt-4 p-4 bg-muted/30 border-l-4 border-primary rounded-r">
+                <p className="text-foreground font-body italic">
+                  {articleMetadata.lede}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ============================================ */}
+        {/* PARSE CARD (Shareable Summary) */}
+        {/* ============================================ */}
+        <Card ref={parseCardRef} className="mb-8 border-2 border-primary/20 bg-gradient-to-br from-background to-muted/30">
+          <CardContent className="pt-6">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              {/* Score Circle */}
               <div className="text-center">
                 <div
-                  className="text-7xl font-bold mb-2 font-masthead"
+                  className="text-6xl md:text-7xl font-bold font-masthead"
                   style={{ color: credibilityColor }}
                 >
                   {analysis.truthScore}
                 </div>
                 <Badge
-                  className="text-lg px-4 py-1"
+                  className="text-sm px-4 py-1 mt-2"
                   style={{ backgroundColor: credibilityColor, color: 'white' }}
                 >
-                  {credibilityLabel.toUpperCase()}
+                  {credibilityLabel.toUpperCase()} CREDIBILITY
                 </Badge>
+              </div>
+
+              {/* Key Metrics */}
+              <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center p-3 bg-background rounded-lg">
+                  <div className="text-xl font-bold text-foreground">{scoreBreakdown.evidenceQuality}</div>
+                  <div className="text-xs text-muted-foreground">Evidence /40</div>
+                </div>
+                <div className="text-center p-3 bg-background rounded-lg">
+                  <div className="text-xl font-bold text-foreground">{scoreBreakdown.methodologyRigor}</div>
+                  <div className="text-xs text-muted-foreground">Methodology /25</div>
+                </div>
+                <div className="text-center p-3 bg-background rounded-lg">
+                  <div className="text-xl font-bold text-foreground">{scoreBreakdown.logicalStructure}</div>
+                  <div className="text-xs text-muted-foreground">Logic /20</div>
+                </div>
+                <div className="text-center p-3 bg-background rounded-lg">
+                  <div className="text-xl font-bold text-foreground">{scoreBreakdown.manipulationAbsence}</div>
+                  <div className="text-xs text-muted-foreground">No Manipulation /15</div>
+                </div>
               </div>
             </div>
 
-            {/* Score Breakdown */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">
-                  {scoreBreakdown.evidenceQuality || 0}
-                </div>
-                <div className="text-sm text-muted-foreground">Evidence</div>
-                <div className="text-xs text-muted-foreground">/40</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">
-                  {scoreBreakdown.methodologyRigor || 0}
-                </div>
-                <div className="text-sm text-muted-foreground">Methodology</div>
-                <div className="text-xs text-muted-foreground">/25</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">
-                  {scoreBreakdown.logicalStructure || 0}
-                </div>
-                <div className="text-sm text-muted-foreground">Logic</div>
-                <div className="text-xs text-muted-foreground">/20</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-foreground">
-                  {scoreBreakdown.manipulationAbsence || 0}
-                </div>
-                <div className="text-sm text-muted-foreground">No Manipulation</div>
-                <div className="text-xs text-muted-foreground">/15</div>
-              </div>
+            {/* Quick Stats */}
+            <div className="flex flex-wrap gap-4 mt-6 pt-4 border-t border-border justify-center">
+              <span className="text-sm text-muted-foreground">
+                <strong className="text-foreground">{steelMannedPerspectives.length}</strong> Perspectives
+              </span>
+              <span className="text-sm text-muted-foreground">
+                <strong className="text-foreground">{deceptions.length}</strong> Deceptions
+              </span>
+              <span className="text-sm text-muted-foreground">
+                <strong className="text-foreground">{fallacies.length}</strong> Fallacies
+              </span>
+              <span className="text-sm text-muted-foreground">
+                <strong className="text-foreground">{factChecks.length}</strong> Fact Checks
+              </span>
+              <span className="text-sm text-muted-foreground">
+                <strong className="text-foreground">{extractedClaims.length}</strong> Claims
+              </span>
             </div>
           </CardContent>
         </Card>
 
-        {/* What AI Thinks */}
+        {/* ============================================ */}
+        {/* WHAT AI THINKS */}
+        {/* ============================================ */}
         {analysis.whatAiThinks && (
           <Card className="mb-8 border-border">
-            <CardHeader>
-              <CardTitle className="font-headline">What AI Thinks</CardTitle>
+            <CardHeader className="pb-3">
+              <CardTitle className="font-headline flex items-center gap-2">
+                <Brain className="h-5 w-5 text-primary" />
+                What AI Thinks
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-lg leading-relaxed font-body text-foreground">{analysis.whatAiThinks}</p>
@@ -170,24 +303,170 @@ export default function AnalysisResultPage({ params }: PageProps) {
           </Card>
         )}
 
-        {/* Steel-Manned Perspectives */}
-        {steelMannedPerspectives.length > 0 && (
+        {/* ============================================ */}
+        {/* EVIDENCE QUALITY ASSESSMENT */}
+        {/* ============================================ */}
+        {evidenceAssessment && (
           <Card className="mb-8 border-border">
             <CardHeader>
-              <CardTitle className="font-headline">Steel-Manned Perspectives</CardTitle>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <Scale className="h-5 w-5 text-primary" />
+                Evidence Quality Assessment
+              </CardTitle>
               <CardDescription>
-                Strongest possible versions of each viewpoint
+                Detailed breakdown of source quality and evidence strength
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/30 rounded-lg">
+                  <div className="text-2xl font-bold text-blue-600">{evidenceAssessment.primarySourceCount}</div>
+                  <div className="text-xs text-muted-foreground">Primary Sources</div>
+                  <div className="text-xs text-blue-600 mt-1">Studies, Data</div>
+                </div>
+                <div className="text-center p-4 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                  <div className="text-2xl font-bold text-purple-600">{evidenceAssessment.secondarySourceCount}</div>
+                  <div className="text-xs text-muted-foreground">Secondary Sources</div>
+                  <div className="text-xs text-purple-600 mt-1">Experts, Orgs</div>
+                </div>
+                <div className="text-center p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
+                  <div className="text-2xl font-bold text-amber-600">{evidenceAssessment.tertiarySourceCount}</div>
+                  <div className="text-xs text-muted-foreground">Tertiary Sources</div>
+                  <div className="text-xs text-amber-600 mt-1">Documents</div>
+                </div>
+                <div className="text-center p-4 bg-green-50 dark:bg-green-950/30 rounded-lg">
+                  <div className="text-2xl font-bold" style={{ color: credibilityColor }}>{evidenceAssessment.overallScore}/40</div>
+                  <div className="text-xs text-muted-foreground">Evidence Score</div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+                <div className="flex items-center gap-2 text-sm">
+                  {evidenceAssessment.hasStatisticsWithBaseline ? (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <XCircle className="h-4 w-4 text-red-500" />
+                  )}
+                  <span className="text-muted-foreground">Stats with Baseline</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  {evidenceAssessment.hasDirectQuotesInContext ? (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <XCircle className="h-4 w-4 text-red-500" />
+                  )}
+                  <span className="text-muted-foreground">Linked Sources</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  {evidenceAssessment.dataReproducibility ? (
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <XCircle className="h-4 w-4 text-red-500" />
+                  )}
+                  <span className="text-muted-foreground">Reproducible Data</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Badge variant={evidenceAssessment.sourceDiversity === 'high' ? 'default' : 'outline'}>
+                    {evidenceAssessment.sourceDiversity} diversity
+                  </Badge>
+                </div>
+              </div>
+
+              <p className="text-sm text-muted-foreground bg-muted/50 p-3 rounded">
+                {evidenceAssessment.assessment}
+              </p>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* STEEL-MANNED PERSPECTIVES */}
+        {/* ============================================ */}
+        {steelMannedPerspectives.length > 0 && (
+          <Card className="mb-8 border-border">
+            <CardHeader>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                Steel-Manned Perspectives
+              </CardTitle>
+              <CardDescription>
+                Strongest possible versions of each viewpoint, with supporting arguments and evidence
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
                 {steelMannedPerspectives.map((perspective) => (
                   <div key={perspective.id} className="border border-border p-4 rounded-lg">
-                    <h3 className="font-semibold mb-2 text-foreground">{perspective.label}</h3>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Quality Score: {perspective.steelMannedVersion.qualityScore}/100
-                    </p>
-                    <p className="text-sm text-foreground">{perspective.steelMannedVersion.coreClaim}</p>
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="font-semibold text-lg text-foreground">{perspective.label}</h3>
+                      <div className="flex gap-2">
+                        <Badge variant="outline">
+                          Original: {perspective.originalStrength}
+                        </Badge>
+                        <Badge style={{ backgroundColor: perspective.steelMannedVersion.qualityScore >= 80 ? '#22c55e' : perspective.steelMannedVersion.qualityScore >= 60 ? '#f59e0b' : '#ef4444', color: 'white' }}>
+                          {perspective.steelMannedVersion.qualityScore}/100
+                        </Badge>
+                      </div>
+                    </div>
+
+                    {/* Core Claim */}
+                    <div className="mb-4">
+                      <h4 className="text-sm font-medium text-muted-foreground mb-1">Core Claim</h4>
+                      <p className="text-foreground">{perspective.steelMannedVersion.coreClaim}</p>
+                    </div>
+
+                    {/* Logical Structure */}
+                    {perspective.steelMannedVersion.logicalStructure && (
+                      <div className="mb-4">
+                        <h4 className="text-sm font-medium text-muted-foreground mb-1">Logical Structure</h4>
+                        <p className="text-sm text-foreground bg-muted/50 p-2 rounded">{perspective.steelMannedVersion.logicalStructure}</p>
+                      </div>
+                    )}
+
+                    {/* Strongest Arguments */}
+                    {perspective.steelMannedVersion.strongestArguments?.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="text-sm font-medium text-muted-foreground mb-2">Strongest Arguments</h4>
+                        <ul className="list-disc list-inside space-y-1">
+                          {perspective.steelMannedVersion.strongestArguments.map((arg, i) => (
+                            <li key={i} className="text-sm text-foreground">{arg}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Best Evidence */}
+                    {perspective.steelMannedVersion.bestEvidence?.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="text-sm font-medium text-muted-foreground mb-2">Best Evidence</h4>
+                        <ul className="list-disc list-inside space-y-1">
+                          {perspective.steelMannedVersion.bestEvidence.map((evidence, i) => (
+                            <li key={i} className="text-sm text-foreground">{evidence}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Anticipated Counterarguments */}
+                    {perspective.steelMannedVersion.anticipatedCounterarguments?.length > 0 && (
+                      <div className="mb-2">
+                        <h4 className="text-sm font-medium text-muted-foreground mb-2">Anticipated Counterarguments</h4>
+                        <ul className="list-disc list-inside space-y-1">
+                          {perspective.steelMannedVersion.anticipatedCounterarguments.map((counter, i) => (
+                            <li key={i} className="text-sm text-muted-foreground italic">{counter}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Source in Article */}
+                    {perspective.sourceInArticle?.length > 0 && (
+                      <div className="mt-3 pt-3 border-t border-border">
+                        <span className="text-xs text-muted-foreground">
+                          Source quotes: {perspective.sourceInArticle.slice(0, 2).map(s => `"${s.substring(0, 50)}..."`).join(', ')}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -195,22 +474,34 @@ export default function AnalysisResultPage({ params }: PageProps) {
           </Card>
         )}
 
-        {/* Deception Detection */}
+        {/* ============================================ */}
+        {/* DECEPTION DETECTION */}
+        {/* ============================================ */}
         {deceptions.length > 0 && (
           <Card className="mb-8 border-border">
             <CardHeader>
-              <CardTitle className="font-headline">Deception Detected</CardTitle>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5 text-destructive" />
+                Deception Detected
+              </CardTitle>
               <CardDescription>
-                Manipulation techniques and propaganda patterns
+                Manipulation techniques and propaganda patterns ({deceptions.length} found)
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
                 {deceptions.map((deception) => (
-                  <div key={deception.id} className="border-l-4 border-primary pl-4 py-2">
+                  <div key={deception.id} className="border-l-4 border-destructive pl-4 py-2">
                     <div className="flex items-start justify-between">
-                      <div>
-                        <Badge className="mb-1">{deception.type}</Badge>
+                      <div className="flex-1">
+                        <div className="flex gap-2 mb-1">
+                          <Badge className="bg-destructive/10 text-destructive border-destructive">
+                            {deception.type}
+                          </Badge>
+                          <Badge variant="outline" className="text-xs">
+                            {deception.category}
+                          </Badge>
+                        </div>
                         <p className="text-sm italic text-foreground">"{deception.quote}"</p>
                         <p className="text-sm text-muted-foreground mt-1">
                           {deception.explanation}
@@ -235,16 +526,338 @@ export default function AnalysisResultPage({ params }: PageProps) {
           </Card>
         )}
 
-        {/* Analysis Metadata */}
+        {/* ============================================ */}
+        {/* LOGICAL FALLACIES */}
+        {/* ============================================ */}
+        {fallacies.length > 0 && (
+          <Card className="mb-8 border-border">
+            <CardHeader>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <XCircle className="h-5 w-5 text-amber-500" />
+                Logical Fallacies Detected
+              </CardTitle>
+              <CardDescription>
+                Errors in reasoning and argumentation ({fallacies.length} found)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {fallacies.map((fallacy) => (
+                  <div key={fallacy.id} className="border-l-4 border-amber-500 pl-4 py-2">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex gap-2 mb-1">
+                          <Badge variant="outline">{fallacy.name || fallacy.type}</Badge>
+                          {fallacy.deduction > 0 && (
+                            <Badge variant="secondary">-{fallacy.deduction} pts</Badge>
+                          )}
+                        </div>
+                        <p className="text-sm italic text-foreground">"{fallacy.quote}"</p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {fallacy.explanation}
+                        </p>
+                        {fallacy.context && (
+                          <p className="text-xs text-muted-foreground mt-1 bg-muted/50 p-2 rounded">
+                            Context: {fallacy.context}
+                          </p>
+                        )}
+                      </div>
+                      <Badge
+                        variant={
+                          fallacy.severity === "high"
+                            ? "destructive"
+                            : fallacy.severity === "medium"
+                            ? "default"
+                            : "secondary"
+                        }
+                      >
+                        {fallacy.severity}
+                      </Badge>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* FACT CHECK RESULTS */}
+        {/* ============================================ */}
+        {factChecks.length > 0 && (
+          <Card className="mb-8 border-border">
+            <CardHeader>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <Search className="h-5 w-5 text-primary" />
+                Fact Check Results
+              </CardTitle>
+              <CardDescription>
+                Independent verification of claims ({factChecks.length} checked)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {factChecks.map((check) => (
+                  <div key={check.id} className="border border-border p-4 rounded-lg">
+                    <div className="flex justify-between items-start mb-2">
+                      <p className="font-medium text-foreground flex-1">"{check.claim}"</p>
+                      <Badge
+                        style={{
+                          backgroundColor: getVerificationColor(check.verification),
+                          color: 'white'
+                        }}
+                      >
+                        {check.verification.replace(/_/g, ' ')}
+                      </Badge>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 mb-2 text-sm">
+                      <div>
+                        <span className="text-muted-foreground">Confidence:</span>
+                        <span className="ml-2 text-foreground">{check.confidence}%</span>
+                      </div>
+                      <div>
+                        <span className="text-muted-foreground">Evidence Level:</span>
+                        <span className="ml-2 text-foreground capitalize">{check.evidenceHierarchy}</span>
+                      </div>
+                    </div>
+
+                    <p className="text-sm text-muted-foreground mb-2">{check.reasoning}</p>
+
+                    {check.sources?.length > 0 && (
+                      <div className="mt-2 pt-2 border-t border-border">
+                        <h5 className="text-xs font-medium text-muted-foreground mb-1">Sources ({check.sources.length})</h5>
+                        <ul className="text-xs space-y-1">
+                          {check.sources.slice(0, 3).map((source, i) => (
+                            <li key={i} className="text-muted-foreground">
+                              <span className="font-medium">{source.title}</span>
+                              {source.credibility && ` (${source.credibility} credibility)`}
+                              {source.methodology && ` - ${source.methodology}`}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* MANIPULATION RISK ASSESSMENT */}
+        {/* ============================================ */}
+        {manipulationRisk && (
+          <Card className="mb-8 border-border">
+            <CardHeader>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <Shield className="h-5 w-5 text-primary" />
+                Manipulation Risk Assessment
+              </CardTitle>
+              <CardDescription>
+                Overall risk level and breakdown by category
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold" style={{
+                    color: manipulationRisk.overallRisk === 'high' ? '#ef4444' :
+                           manipulationRisk.overallRisk === 'medium' ? '#f59e0b' : '#22c55e'
+                  }}>
+                    {manipulationRisk.score}/100
+                  </div>
+                  <Badge style={{
+                    backgroundColor: manipulationRisk.overallRisk === 'high' ? '#ef4444' :
+                                    manipulationRisk.overallRisk === 'medium' ? '#f59e0b' : '#22c55e',
+                    color: 'white'
+                  }}>
+                    {manipulationRisk.overallRisk.toUpperCase()} RISK
+                  </Badge>
+                </div>
+
+                <div className="flex-1 grid grid-cols-5 gap-2">
+                  {Object.entries(manipulationRisk.breakdown).map(([category, score]) => (
+                    <div key={category} className="text-center">
+                      <div className="text-sm font-medium text-foreground">{score}</div>
+                      <div className="text-xs text-muted-foreground capitalize">{category}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {manipulationRisk.severityDistribution && (
+                <div className="flex gap-4 text-sm">
+                  <span className="text-muted-foreground">
+                    Severity: <span className="text-red-500">{manipulationRisk.severityDistribution.high} high</span>,{' '}
+                    <span className="text-amber-500">{manipulationRisk.severityDistribution.medium} medium</span>,{' '}
+                    <span className="text-green-500">{manipulationRisk.severityDistribution.low} low</span>
+                  </span>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* EXTRACTED CLAIMS */}
+        {/* ============================================ */}
+        {extractedClaims.length > 0 && (
+          <Card className="mb-8 border-border">
+            <CardHeader>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <FileText className="h-5 w-5 text-primary" />
+                Extracted Claims
+              </CardTitle>
+              <CardDescription>
+                All claims identified in the article ({extractedClaims.length} total)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {extractedClaims.slice(0, 10).map((claim) => (
+                  <div key={claim.id} className="flex items-start gap-3 p-3 bg-muted/30 rounded-lg">
+                    <div className="flex flex-col gap-1">
+                      <Badge
+                        className="text-xs w-fit"
+                        style={{ backgroundColor: getClaimTypeColor(claim.type), color: 'white' }}
+                      >
+                        {claim.type}
+                      </Badge>
+                      <Badge variant="outline" className="text-xs w-fit">
+                        {claim.verifiability}
+                      </Badge>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm text-foreground">{claim.text}</p>
+                      {claim.section && (
+                        <p className="text-xs text-muted-foreground mt-1">Section: {claim.section}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                {extractedClaims.length > 10 && (
+                  <p className="text-sm text-muted-foreground text-center py-2">
+                    + {extractedClaims.length - 10} more claims
+                  </p>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* SOURCES CITED */}
+        {/* ============================================ */}
+        {sourcesCited.length > 0 && (
+          <Card className="mb-8 border-border">
+            <CardHeader>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-primary" />
+                Sources Cited
+              </CardTitle>
+              <CardDescription>
+                All sources referenced in the article ({sourcesCited.length} total)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-3 md:grid-cols-2">
+                {sourcesCited.map((source) => (
+                  <div key={source.id} className="border border-border p-3 rounded-lg">
+                    <div className="flex justify-between items-start mb-2">
+                      <span className="font-medium text-foreground text-sm">{source.name}</span>
+                      <Badge variant="outline" className="text-xs capitalize">{source.type}</Badge>
+                    </div>
+                    <div className="flex flex-wrap gap-2 text-xs">
+                      {source.credibilityIndicators?.isPeerReviewed && (
+                        <Badge className="bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-400">
+                          Peer Reviewed
+                        </Badge>
+                      )}
+                      {source.credibilityIndicators?.hasFundingDisclosed && (
+                        <Badge className="bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400">
+                          Funding Disclosed
+                        </Badge>
+                      )}
+                      {source.credibilityIndicators?.isPreprint && (
+                        <Badge className="bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400">
+                          Preprint
+                        </Badge>
+                      )}
+                    </div>
+                    {source.url && (
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-primary hover:underline mt-2 inline-flex items-center gap-1"
+                      >
+                        <ExternalLink className="h-3 w-3" />
+                        View Source
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* STATISTICS */}
+        {/* ============================================ */}
+        {statistics.length > 0 && (
+          <Card className="mb-8 border-border">
+            <CardHeader>
+              <CardTitle className="font-headline flex items-center gap-2">
+                <BarChart3 className="h-5 w-5 text-primary" />
+                Statistics & Data Points
+              </CardTitle>
+              <CardDescription>
+                Numerical claims and data cited ({statistics.length} found)
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {statistics.map((stat) => (
+                  <div key={stat.id} className="flex items-start gap-3 p-3 border border-border rounded-lg">
+                    <div className="text-2xl font-bold text-primary">{stat.value}</div>
+                    <div className="flex-1">
+                      <p className="text-sm text-foreground">{stat.context}</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        {stat.source && (
+                          <span className="text-xs text-muted-foreground">Source: {stat.source}</span>
+                        )}
+                        {stat.isBaselineProvided ? (
+                          <Badge className="bg-green-100 text-green-700 text-xs">Baseline Provided</Badge>
+                        ) : (
+                          <Badge variant="outline" className="text-xs">No Baseline</Badge>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* ============================================ */}
+        {/* ANALYSIS METADATA */}
+        {/* ============================================ */}
         <Card className="mb-8 border-border">
           <CardHeader>
-            <CardTitle className="font-headline">Analysis Details</CardTitle>
+            <CardTitle className="font-headline flex items-center gap-2">
+              <Info className="h-5 w-5 text-primary" />
+              Analysis Details
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div>
                 <span className="text-muted-foreground">Analyzed:</span>
-                <span className="ml-2 text-foreground">{new Date(analysis.analyzedAt).toLocaleString()}</span>
+                <span className="ml-2 text-foreground block md:inline">{new Date(analysis.analyzedAt).toLocaleString()}</span>
               </div>
               <div>
                 <span className="text-muted-foreground">Duration:</span>
@@ -262,18 +875,22 @@ export default function AnalysisResultPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
-        {/* Actions */}
+        {/* ============================================ */}
+        {/* ACTIONS */}
+        {/* ============================================ */}
         <Card className="border-border">
           <CardHeader>
             <CardTitle className="font-headline">Actions</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex gap-2 flex-wrap">
-              <Button variant="outline" onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                alert('Link copied!');
-              }}>
-                Copy Link
+              <Button variant="outline" onClick={handleCopyLink}>
+                {copied ? <CheckCircle className="h-4 w-4 mr-2" /> : <Copy className="h-4 w-4 mr-2" />}
+                {copied ? 'Copied!' : 'Copy Link'}
+              </Button>
+              <Button variant="outline" onClick={() => window.print()}>
+                <Download className="h-4 w-4 mr-2" />
+                Export PDF
               </Button>
               <Button variant="outline" onClick={() => router.push('/analyze')}>
                 Analyze Another Article

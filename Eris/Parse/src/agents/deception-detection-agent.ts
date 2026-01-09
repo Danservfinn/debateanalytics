@@ -69,38 +69,70 @@ Return ONLY valid JSON. No markdown code blocks, no explanations.`
     systemPrompt,
     model: 'glm-4.7',
     maxTokens: 4000,
-    temperature: 0.5,
+    temperature: 0.3, // Lower temperature for more consistent JSON output
   })
 
   if (!result.success) {
     throw new Error(`Deception detection failed: ${result.error}`)
   }
 
-  const data = extractJSON(result.text)
+  // Debug: Log raw response for troubleshooting
+  const DEBUG = process.env.DEBUG_AGENTS === 'true'
+  if (DEBUG) {
+    console.log('[DeceptionAgent] Raw response length:', result.text.length)
+    console.log('[DeceptionAgent] Raw response preview:', result.text.substring(0, 500))
+  }
+
+  // Use debug mode in extractJSON to see parsing attempts
+  const data = extractJSON(result.text, DEBUG)
 
   // Handle various response formats
   let rawInstances: any[] = []
 
   if (data) {
-    if (Array.isArray(data.instances)) {
-      // Expected format: {instances: [...]}
-      rawInstances = data.instances
-    } else if (Array.isArray(data)) {
-      // Direct array: [...]
+    // Check multiple possible keys for the instances array
+    const instanceKeys = ['instances', 'deception_instances', 'results', 'deceptions', 'items', 'findings']
+
+    for (const key of instanceKeys) {
+      if (Array.isArray(data[key])) {
+        rawInstances = data[key]
+        if (DEBUG) console.log(`[DeceptionAgent] Found instances under key: ${key}`)
+        break
+      }
+    }
+
+    // If data itself is an array (direct array response)
+    if (rawInstances.length === 0 && Array.isArray(data)) {
       rawInstances = data
-    } else if (data.deception_instances && Array.isArray(data.deception_instances)) {
-      // Alternative key name
-      rawInstances = data.deception_instances
-    } else if (data.results && Array.isArray(data.results)) {
-      // Another alternative
-      rawInstances = data.results
+      if (DEBUG) console.log('[DeceptionAgent] Found direct array response')
+    }
+
+    // If data has a nested structure like {analysis: {instances: [...]}}
+    if (rawInstances.length === 0 && !Array.isArray(data)) {
+      const objData = data as Record<string, any>
+      for (const key of Object.keys(objData)) {
+        if (typeof objData[key] === 'object' && objData[key] !== null) {
+          for (const innerKey of instanceKeys) {
+            if (Array.isArray(objData[key][innerKey])) {
+              rawInstances = objData[key][innerKey]
+              if (DEBUG) console.log(`[DeceptionAgent] Found nested instances under: ${key}.${innerKey}`)
+              break
+            }
+          }
+          if (rawInstances.length > 0) break
+        }
+      }
     }
   }
 
-  // If still no valid data, return empty result (not an error for clean articles)
+  // If still no valid data, log detailed warning and return empty result
   if (!data) {
-    console.warn('Deception detection returned no valid JSON, assuming clean article')
+    console.warn('[DeceptionAgent] JSON parsing failed - raw response:')
+    console.warn(result.text.substring(0, 1000))
     rawInstances = []
+  } else if (rawInstances.length === 0 && Object.keys(data).length > 0) {
+    // Data parsed but no instances found - might be a "clean article" response
+    if (DEBUG) console.log('[DeceptionAgent] Parsed data but no instances array found:', JSON.stringify(data).substring(0, 500))
   }
 
   const instances = validateDeceptionInstances(rawInstances)

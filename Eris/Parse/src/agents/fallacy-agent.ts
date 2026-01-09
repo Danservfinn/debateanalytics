@@ -7,7 +7,7 @@
  * - Informal fallacies: Relevance, ambiguity, presumption flaws
  */
 
-import { callGLM, extractJSON } from "@/lib/zai"
+import { callGLM, callGLMWithRetry, extractJSON } from "@/lib/zai"
 import type { ExtractedArticle, FallacyInstance } from "@/types"
 
 interface FallacyDetectionInput {
@@ -65,39 +65,102 @@ Return ONLY valid JSON. No markdown code blocks, no explanations.`
 
   const userPrompt = `Analyze this article for logical fallacies:\n\n${JSON.stringify(article, null, 2)}`
 
-  const result = await callGLM({
+  // Use retry logic to handle transient API failures (empty responses)
+  let result = await callGLMWithRetry({
     prompt: userPrompt,
     systemPrompt,
     model: 'glm-4.7',
     maxTokens: 4000,
-    temperature: 0.5,
-  })
+    temperature: 0.3, // Lower temperature for more consistent JSON output
+  }, 2) // Retry up to 2 times on failure
+
+  // Handle empty response - retry once more with different prompt structure
+  if (result.success && (!result.text || result.text.trim().length === 0)) {
+    console.warn('[FallacyAgent] Empty response received, retrying with simplified prompt...')
+
+    // Get article body text - handle both string and object content structures
+    const articleBody = typeof article.content === 'string'
+      ? article.content
+      : (article.content?.body || article.content?.headline || JSON.stringify(article.content))
+
+    const simplifiedPrompt = `Identify logical fallacies in this article. List each fallacy with type, quote, and explanation.
+
+Article title: ${article.title}
+Article content:
+${articleBody?.substring(0, 8000) || 'No content available'}
+
+Return JSON: {"fallacies": [{"type": "...", "name": "...", "quote": "...", "severity": "low|medium|high", "explanation": "..."}]}`
+
+    result = await callGLM({
+      prompt: simplifiedPrompt,
+      systemPrompt: 'You detect logical fallacies. Return only valid JSON.',
+      model: 'glm-4.7',
+      maxTokens: 3000,
+      temperature: 0.2,
+    })
+  }
 
   if (!result.success) {
     throw new Error(`Fallacy detection failed: ${result.error}`)
   }
 
-  const data = extractJSON(result.text)
+  // Debug: Log raw response for troubleshooting
+  const DEBUG = process.env.DEBUG_AGENTS === 'true'
+  if (DEBUG) {
+    console.log('[FallacyAgent] Raw response length:', result.text.length)
+    console.log('[FallacyAgent] Raw response preview:', result.text.substring(0, 500))
+  }
+
+  // Use debug mode in extractJSON to see parsing attempts
+  const data = extractJSON(result.text, DEBUG)
 
   // Handle various response formats
   let rawFallacies: any[] = []
 
   if (data) {
-    if (Array.isArray(data.fallacies)) {
-      rawFallacies = data.fallacies
-    } else if (Array.isArray(data)) {
+    // Check multiple possible keys for the fallacies array
+    const fallacyKeys = ['fallacies', 'logical_fallacies', 'results', 'items', 'findings', 'errors']
+
+    for (const key of fallacyKeys) {
+      if (Array.isArray(data[key])) {
+        rawFallacies = data[key]
+        if (DEBUG) console.log(`[FallacyAgent] Found fallacies under key: ${key}`)
+        break
+      }
+    }
+
+    // If data itself is an array (direct array response)
+    if (rawFallacies.length === 0 && Array.isArray(data)) {
       rawFallacies = data
-    } else if (data.results && Array.isArray(data.results)) {
-      rawFallacies = data.results
-    } else if (data.logical_fallacies && Array.isArray(data.logical_fallacies)) {
-      rawFallacies = data.logical_fallacies
+      if (DEBUG) console.log('[FallacyAgent] Found direct array response')
+    }
+
+    // If data has a nested structure like {analysis: {fallacies: [...]}}
+    if (rawFallacies.length === 0 && !Array.isArray(data)) {
+      const objData = data as Record<string, any>
+      for (const key of Object.keys(objData)) {
+        if (typeof objData[key] === 'object' && objData[key] !== null) {
+          for (const innerKey of fallacyKeys) {
+            if (Array.isArray(objData[key][innerKey])) {
+              rawFallacies = objData[key][innerKey]
+              if (DEBUG) console.log(`[FallacyAgent] Found nested fallacies under: ${key}.${innerKey}`)
+              break
+            }
+          }
+          if (rawFallacies.length > 0) break
+        }
+      }
     }
   }
 
-  // If no valid data, return empty array (article may have no fallacies)
+  // If still no valid data, log detailed warning and return empty result
   if (!data) {
-    console.warn('Fallacy detection returned no valid JSON, assuming clean article')
+    console.warn('[FallacyAgent] JSON parsing failed - raw response:')
+    console.warn(result.text.substring(0, 1000))
     rawFallacies = []
+  } else if (rawFallacies.length === 0 && Object.keys(data).length > 0) {
+    // Data parsed but no fallacies found - might be a "clean article" response
+    if (DEBUG) console.log('[FallacyAgent] Parsed data but no fallacies array found:', JSON.stringify(data).substring(0, 500))
   }
 
   return validateFallacies(rawFallacies)

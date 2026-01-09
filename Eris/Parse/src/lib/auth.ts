@@ -6,6 +6,10 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
+import CredentialsProvider from "next-auth/providers/credentials"
+
+// Check if we're in development mode
+const isDev = process.env.NODE_ENV === "development"
 
 // Only import Prisma-related modules if DATABASE_URL is available
 const hasDatabaseUrl = !!process.env.DATABASE_URL
@@ -39,6 +43,29 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientId: process.env.FACEBOOK_CLIENT_ID || "",
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
     }),
+
+    // Dev-only Credentials provider for local testing
+    ...(isDev ? [
+      CredentialsProvider({
+        id: "dev-login",
+        name: "Dev Login",
+        credentials: {
+          email: { label: "Email", type: "email", placeholder: "test@example.com" },
+        },
+        async authorize(credentials) {
+          // Only allow in development
+          if (!isDev) return null
+
+          // Return a test user
+          return {
+            id: "dev-user-001",
+            name: "Test User",
+            email: credentials?.email as string || "test@example.com",
+            image: null,
+          }
+        },
+      }),
+    ] : []),
   ],
   callbacks: {
     async jwt({ token, user, account, profile }) {

@@ -9,7 +9,7 @@
  * - Manipulation Absence (0-15 points): No emotional manipulation, framing, omissions
  */
 
-import { callGLM, extractJSON } from "@/lib/zai"
+import { callGLM, callGLMWithRetry, extractJSON } from "@/lib/zai"
 import type {
   ExtractedArticle,
   SteelMannedPerspective,
@@ -127,23 +127,69 @@ Calculate:
 6. Credibility rating (high/moderate/low/very_low)
 7. "What AI Thinks" - your candid, neutral assessment of the article's credibility`
 
-  const result = await callGLM({
+  // Use retry logic to handle transient API failures
+  let result = await callGLMWithRetry({
     prompt: userPrompt,
     systemPrompt,
     model: 'glm-4.7',
     maxTokens: 3000,
-    temperature: 0.5,
-  })
+    temperature: 0.3, // Lower temperature for more consistent JSON output
+  }, 2)
+
+  // Debug: Log raw response for troubleshooting
+  const DEBUG = process.env.DEBUG_AGENTS === 'true'
+
+  // Handle empty response - retry with simplified prompt
+  if (result.success && (!result.text || result.text.trim().length === 0)) {
+    console.warn('[SynthesisAgent] Empty response received, retrying with simplified prompt...')
+
+    const deceptionCount = deceptionDetected.length
+    const fallacyCount = fallacies.length
+
+    const simplifiedPrompt = `Calculate a truth score for this article analysis.
+
+Deception instances found: ${deceptionCount}
+Fallacies found: ${fallacyCount}
+Context audit score: ${contextAudit.overallScore}/100
+
+Return JSON with these exact fields:
+{
+  "evidenceQuality": (0-40),
+  "methodologyRigor": (0-25),
+  "logicalStructure": (0-20),
+  "manipulationAbsence": (0-15),
+  "credibility": "high|moderate|low|very_low",
+  "whatAiThinks": "Brief assessment"
+}`
+
+    result = await callGLM({
+      prompt: simplifiedPrompt,
+      systemPrompt: 'You calculate truth scores. Return only valid JSON with numeric values.',
+      model: 'glm-4.7',
+      maxTokens: 1000,
+      temperature: 0.2,
+    })
+  }
 
   if (!result.success) {
     throw new Error(`Synthesis failed: ${result.error}`)
   }
 
-  const data = extractJSON(result.text)
+  if (DEBUG) {
+    console.log('[SynthesisAgent] Raw response length:', result.text.length)
+    console.log('[SynthesisAgent] Raw response preview:', result.text.substring(0, 500))
+  }
+
+  // Use debug mode in extractJSON to see parsing attempts
+  const data = extractJSON(result.text, DEBUG)
 
   // Handle missing or invalid response with sensible defaults
   if (!data) {
-    console.warn('Synthesis returned no valid JSON, using default moderate scores')
+    console.warn('[SynthesisAgent] JSON parsing failed - raw response:')
+    console.warn(result.text.substring(0, 1000))
+    console.warn('[SynthesisAgent] Using default moderate scores')
+  } else if (DEBUG) {
+    console.log('[SynthesisAgent] Successfully parsed JSON:', JSON.stringify(data).substring(0, 300))
   }
 
   // Helper to extract numeric values with fallbacks
