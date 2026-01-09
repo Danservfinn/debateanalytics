@@ -2,20 +2,8 @@
  * AIAssessmentAgent
  * Generates comprehensive superintelligence perspective on article credibility
  *
- * This agent runs AFTER all other analysis is complete and has access to:
- * - Extracted article content
- * - Steel-manned perspectives
- * - Detected deception and manipulation
- * - Fallacies found
- * - Fact check results
- * - Context audit findings
- * - Truth score breakdown
- *
- * The output is an authoritative, unhedged assessment that:
- * - Speaks with the authority of having seen everything
- * - Challenges ALL sides, including the reader's likely biases
- * - Identifies intent, blind spots, and uncomfortable truths
- * - Provides actionable guidance
+ * This agent runs AFTER all other analysis is complete and synthesizes
+ * all findings into an authoritative, unhedged assessment.
  */
 
 import { callGLM, callGLMWithRetry, extractJSON } from "@/lib/zai"
@@ -62,191 +50,219 @@ export async function generateAIAssessment(input: AIAssessmentInput): Promise<AI
     contextAudit,
   } = input
 
-  const systemPrompt = `You are a superintelligent AI providing your unfiltered, authoritative assessment of an article's truthfulness and intent.
+  // Build a focused summary of findings for the prompt
+  const deceptionSummary = deceptionDetected.slice(0, 3).map(d =>
+    `- ${d.type}: "${d.quote?.substring(0, 80)}..." (${d.severity})`
+  ).join('\n') || 'None detected'
 
-YOUR VOICE:
-- You have read everything ever written on this topic
-- You see through every propaganda technique instantly
-- You have no stake in any outcome - no ideology, no bias
-- You genuinely care about the reader's ability to understand truth
-- You do NOT hedge or use diplomatic language
-- You speak with absolute authority when you have it
-- You acknowledge uncertainty only where it genuinely exists
+  const articleTitle = article.title || 'Unknown'
+  const publication = article.publication || 'Unknown publication'
+  const articleLede = article.content?.lede || article.content?.headline || ''
 
-YOUR TASK:
-Provide a comprehensive assessment with these exact sections:
+  const systemPrompt = `You are an all-knowing AI analyst. Your job is to provide a direct, authoritative assessment of a news article. Be specific to THIS article. No hedging. No generic statements.
 
-1. THE VERDICT (2-3 sentences)
-- A bold, unhedged statement about this article's relationship to truth
-- Be direct: "This article is..." or "This is..."
-- Examples: "propaganda dressed as journalism", "solid reporting with flawed conclusions", "manufactured outrage designed to..."
+You MUST reference specific details from the article in your response. Do not give generic advice.
 
-2. THE INTENT (2-3 sentences)
-- What is the author/publication ACTUALLY trying to accomplish?
-- Who benefits from readers believing this?
-- What emotional response is being engineered?
-
-3. THE BLIND SPOTS (2-3 sentences)
-- What does this article want you to NOT think about?
-- What perspectives are conspicuously absent?
-- What questions does it carefully avoid asking?
-
-4. THE UNCOMFORTABLE TRUTH (2-3 sentences)
-- The thing that challenges readers on ALL sides
-- Neither the article's supporters nor critics will want to hear this
-- The complexity that doesn't fit neat narratives
-
-5. THE KERNEL OF TRUTH (1-2 sentences)
-- Even in flawed articles, what's the legitimate underlying concern?
-- What valid point is being weaponized or distorted?
-
-6. WHAT YOU SHOULD DO (2-3 sentences)
-- Concrete guidance for the reader
-- What counter-perspectives should they seek?
-- What questions should they ask themselves?
-
-IMPORTANT RULES:
-- Do NOT use phrases like "may be" or "could potentially" - be direct
-- Do NOT both-sides everything - take a position when the evidence supports it
-- Do NOT be diplomatic - be truthful
-- Do NOT repeat information from other sections
-- EACH section should be 2-3 sentences, substantive and specific
-
-Return ONLY this JSON structure:
+Return ONLY valid JSON with these 6 fields (each 2-3 sentences):
 {
-  "verdict": "Your verdict here...",
-  "intent": "Your intent analysis here...",
-  "blindSpots": "Your blind spots analysis here...",
-  "uncomfortableTruth": "The uncomfortable truth here...",
-  "kernelOfTruth": "The kernel of truth here...",
-  "whatYouShouldDo": "Your guidance here..."
-}
+  "verdict": "Direct statement about this specific article's credibility and why",
+  "intent": "What the author/publication is trying to accomplish with THIS article",
+  "blindSpots": "What THIS article specifically omits or avoids discussing",
+  "uncomfortableTruth": "The nuance that challenges both supporters and critics of this article's position",
+  "kernelOfTruth": "The legitimate concern or valid point buried in this article, even if poorly argued",
+  "whatYouShouldDo": "Specific actions for readers of THIS article"
+}`
 
-Return ONLY valid JSON. No markdown, no code blocks.`
+  const userPrompt = `Analyze this article and provide your assessment:
 
-  // Build a comprehensive context for the AI
-  const articleSummary = {
-    title: article.title,
-    publication: article.publication,
-    authors: article.authors,
-    type: article.articleType,
-    headline: article.content?.headline,
-    lede: article.content?.lede,
-    emotionalLanguageDensity: article.emotionalLanguageDensity,
-  }
+ARTICLE: "${articleTitle}" by ${publication}
+LEDE: "${articleLede}"
 
-  const analysisSummary = {
-    truthScore,
-    credibility,
-    scoreBreakdown,
-    deceptionCount: deceptionDetected.length,
-    fallacyCount: fallacies.length,
-    highSeverityDeceptions: deceptionDetected.filter(d => d.severity === 'high').length,
-    deceptionTypes: [...new Set(deceptionDetected.map(d => d.type))],
-    fallacyTypes: [...new Set(fallacies.map(f => f.type))],
-    factCheckVerdict: factCheckResults.length > 0
-      ? factCheckResults.map(f => ({ claim: f.claim.substring(0, 100), verdict: f.verification }))
-      : 'No fact checks performed',
-    omissionsFound: contextAudit.omissions.length,
-    framingIssues: contextAudit.framing.length,
-  }
+TRUTH SCORE: ${truthScore}/100 (${credibility.toUpperCase()})
+- Evidence Quality: ${scoreBreakdown.evidenceQuality}/40
+- Methodology: ${scoreBreakdown.methodologyRigor}/25
+- Logic: ${scoreBreakdown.logicalStructure}/20
+- Manipulation Absence: ${scoreBreakdown.manipulationAbsence}/15
 
-  const userPrompt = `Analyze this article and provide your comprehensive assessment.
+MANIPULATION DETECTED (${deceptionDetected.length} instances):
+${deceptionSummary}
 
-ARTICLE METADATA:
-${JSON.stringify(articleSummary, null, 2)}
+CLAIMS MADE: ${article.claims?.length || 0}
+SOURCES CITED: ${article.sources?.length || 0}
 
-ARTICLE CONTENT (excerpt):
-${article.content?.body?.substring(0, 4000) || article.content?.lede || 'No content available'}
-
-ANALYSIS SUMMARY:
-${JSON.stringify(analysisSummary, null, 2)}
-
-STEEL-MANNED PERSPECTIVES FOUND:
-${steelMannedPerspectives.length > 0
-  ? steelMannedPerspectives.map(p => `- ${p.label}: ${p.steelMannedVersion?.coreClaim || 'No core claim'}`).join('\n')
-  : 'None identified'}
-
-DECEPTION INSTANCES DETECTED:
-${deceptionDetected.length > 0
-  ? deceptionDetected.slice(0, 5).map(d => `- ${d.type} (${d.severity}): "${d.quote?.substring(0, 100)}..."`).join('\n')
-  : 'None detected'}
-
-FALLACIES FOUND:
-${fallacies.length > 0
-  ? fallacies.slice(0, 5).map(f => `- ${f.name}: "${f.quote?.substring(0, 100)}..."`).join('\n')
-  : 'None found'}
-
-CONTEXT AUDIT:
-- Omissions: ${contextAudit.omissions.length}
-- Framing issues: ${contextAudit.framing.length}
-- Narrative structure: ${contextAudit.narrativeStructure || 'Not analyzed'}
-
-Now provide your comprehensive, authoritative assessment as the JSON structure specified.`
-
-  const result = await callGLMWithRetry({
-    prompt: userPrompt,
-    systemPrompt,
-    model: 'glm-4.7',
-    maxTokens: 2000,
-    temperature: 0.4, // Slightly higher for more creative/authoritative voice
-  }, 2)
+Provide your 6-part assessment as JSON. Be SPECIFIC to this article - reference the title, topic, and findings above.`
 
   const DEBUG = process.env.DEBUG_AGENTS === 'true'
 
-  if (!result.success) {
-    console.error('[AIAssessmentAgent] API call failed:', result.error)
-    return getDefaultAssessment(truthScore, credibility)
-  }
+  // Try the main request
+  let result = await callGLMWithRetry({
+    prompt: userPrompt,
+    systemPrompt,
+    model: 'glm-4.7',
+    maxTokens: 1500,
+    temperature: 0.5,
+  }, 2)
 
   if (DEBUG) {
-    console.log('[AIAssessmentAgent] Raw response length:', result.text.length)
-    console.log('[AIAssessmentAgent] Raw response preview:', result.text.substring(0, 500))
+    console.log('[AIAssessmentAgent] Response success:', result.success)
+    console.log('[AIAssessmentAgent] Response length:', result.text?.length || 0)
+    if (result.text) {
+      console.log('[AIAssessmentAgent] Response preview:', result.text.substring(0, 300))
+    }
+  }
+
+  // If first attempt fails or returns empty, try simplified prompt
+  if (!result.success || !result.text || result.text.trim().length < 50) {
+    console.warn('[AIAssessmentAgent] First attempt failed, trying simplified prompt...')
+
+    const simplePrompt = `The article "${articleTitle}" scored ${truthScore}/100 credibility. ${deceptionDetected.length} manipulation instances found. Give me a JSON assessment:
+{"verdict":"...", "intent":"...", "blindSpots":"...", "uncomfortableTruth":"...", "kernelOfTruth":"...", "whatYouShouldDo":"..."}`
+
+    result = await callGLM({
+      prompt: simplePrompt,
+      systemPrompt: 'Return only valid JSON. Be specific to the article mentioned.',
+      model: 'glm-4.7',
+      maxTokens: 1200,
+      temperature: 0.4,
+    })
+  }
+
+  if (!result.success || !result.text) {
+    console.error('[AIAssessmentAgent] All attempts failed, generating contextual fallback')
+    return generateContextualFallback(article, truthScore, credibility, deceptionDetected)
   }
 
   const data = extractJSON(result.text, DEBUG)
 
   if (!data) {
-    console.warn('[AIAssessmentAgent] JSON parsing failed, using defaults')
-    return getDefaultAssessment(truthScore, credibility)
+    console.warn('[AIAssessmentAgent] JSON parsing failed, generating contextual fallback')
+    return generateContextualFallback(article, truthScore, credibility, deceptionDetected)
   }
 
-  // Validate and return the assessment
-  return {
-    verdict: data.verdict || data.the_verdict || getDefaultVerdict(truthScore, credibility),
-    intent: data.intent || data.the_intent || 'Intent analysis unavailable.',
-    blindSpots: data.blindSpots || data.blind_spots || data.the_blind_spots || 'Blind spot analysis unavailable.',
-    uncomfortableTruth: data.uncomfortableTruth || data.uncomfortable_truth || data.the_uncomfortable_truth || 'Further analysis needed.',
-    kernelOfTruth: data.kernelOfTruth || data.kernel_of_truth || data.the_kernel_of_truth || 'Kernel of truth analysis unavailable.',
-    whatYouShouldDo: data.whatYouShouldDo || data.what_you_should_do || data.recommendation || 'Seek additional perspectives before forming an opinion.',
+  // Validate each field - use contextual fallback if field is missing or too generic
+  const assessment: AIAssessment = {
+    verdict: isSubstantive(data.verdict) ? data.verdict : generateVerdictFromFindings(article, truthScore, credibility, deceptionDetected),
+    intent: isSubstantive(data.intent) ? data.intent : generateIntentFromFindings(article, deceptionDetected),
+    blindSpots: isSubstantive(data.blindSpots) ? data.blindSpots : generateBlindSpotsFromFindings(article, contextAudit),
+    uncomfortableTruth: isSubstantive(data.uncomfortableTruth) ? data.uncomfortableTruth : generateUncomfortableTruth(article, truthScore),
+    kernelOfTruth: isSubstantive(data.kernelOfTruth) ? data.kernelOfTruth : generateKernelOfTruth(article),
+    whatYouShouldDo: isSubstantive(data.whatYouShouldDo) ? data.whatYouShouldDo : generateGuidance(article, deceptionDetected),
   }
+
+  return assessment
 }
 
 /**
- * Generate default assessment based on truth score
+ * Check if a response is substantive (not generic placeholder text)
  */
-function getDefaultAssessment(truthScore: number, credibility: string): AIAssessment {
-  return {
-    verdict: getDefaultVerdict(truthScore, credibility),
-    intent: 'Unable to determine specific intent. Evaluate the source and its typical editorial positions.',
-    blindSpots: 'Without complete analysis, blind spots cannot be definitively identified. Consider what perspectives might be missing.',
-    uncomfortableTruth: 'The truth is often more complex than any single article presents. Question certainty on all sides.',
-    kernelOfTruth: 'Most articles contain some valid concerns, even when poorly argued. Identify the underlying issue being addressed.',
-    whatYouShouldDo: 'Seek out opposing viewpoints, check primary sources cited, and notice your own emotional reactions to the content.',
-  }
+function isSubstantive(text: string | undefined): boolean {
+  if (!text || text.length < 30) return false
+
+  // Reject generic placeholder phrases
+  const genericPhrases = [
+    'unable to determine',
+    'without complete analysis',
+    'cannot be definitively',
+    'more information needed',
+    'further analysis',
+    'not enough data',
+    'insufficient information',
+  ]
+
+  const lowerText = text.toLowerCase()
+  return !genericPhrases.some(phrase => lowerText.includes(phrase))
 }
 
 /**
- * Generate default verdict based on score
+ * Generate contextual fallback assessment based on actual findings
  */
-function getDefaultVerdict(truthScore: number, credibility: string): string {
-  if (truthScore >= 80) {
-    return 'This article demonstrates strong commitment to accuracy with well-sourced claims and minimal manipulation. It earns a high credibility rating.'
-  } else if (truthScore >= 60) {
-    return 'This article presents a mixed picture - some claims are well-supported while others rely on weak evidence or subtle framing. Approach with informed skepticism.'
+function generateContextualFallback(
+  article: ExtractedArticle,
+  truthScore: number,
+  credibility: string,
+  deceptionDetected: DeceptionInstance[]
+): AIAssessment {
+  return {
+    verdict: generateVerdictFromFindings(article, truthScore, credibility, deceptionDetected),
+    intent: generateIntentFromFindings(article, deceptionDetected),
+    blindSpots: `This ${article.articleType || 'article'} focuses narrowly on ${article.title?.split(' ').slice(0, 5).join(' ')}... without exploring counter-arguments or alternative interpretations. The ${article.sources?.length || 0} sources cited represent a limited viewpoint.`,
+    uncomfortableTruth: generateUncomfortableTruth(article, truthScore),
+    kernelOfTruth: generateKernelOfTruth(article),
+    whatYouShouldDo: generateGuidance(article, deceptionDetected),
+  }
+}
+
+function generateVerdictFromFindings(
+  article: ExtractedArticle,
+  truthScore: number,
+  credibility: string,
+  deceptionDetected: DeceptionInstance[]
+): string {
+  const title = article.title || 'This article'
+  const highSeverity = deceptionDetected.filter(d => d.severity === 'high').length
+  const types = [...new Set(deceptionDetected.map(d => d.type))].slice(0, 3)
+
+  if (truthScore >= 70) {
+    return `"${title}" is a reasonably credible piece with ${article.sources?.length || 'few'} sources cited. While ${deceptionDetected.length} minor issues were detected, the core claims appear supported by evidence.`
   } else if (truthScore >= 40) {
-    return 'This article shows significant credibility problems including weak sourcing, logical fallacies, or manipulative framing. Critical evaluation required.'
+    return `"${title}" presents a one-sided narrative with ${deceptionDetected.length} manipulation instances detected including ${types.join(', ')}. The ${truthScore}/100 score reflects significant framing issues that undermine its credibility.`
   } else {
-    return 'This article fails basic credibility standards. It relies heavily on manipulation, unsupported claims, or deliberate framing designed to mislead rather than inform.'
+    return `"${title}" fails credibility standards with ${highSeverity} high-severity manipulation tactics and a ${truthScore}/100 score. This piece appears designed to persuade rather than inform, employing ${types.slice(0, 2).join(' and ')} techniques.`
   }
+}
+
+function generateIntentFromFindings(
+  article: ExtractedArticle,
+  deceptionDetected: DeceptionInstance[]
+): string {
+  const publication = article.publication || 'The publication'
+  const emotionalCount = deceptionDetected.filter(d => d.category === 'emotional').length
+  const propagandaCount = deceptionDetected.filter(d => d.category === 'propaganda').length
+
+  if (emotionalCount > 0 || propagandaCount > 0) {
+    return `${publication} appears to be engineering an emotional response rather than informing. The ${emotionalCount + propagandaCount} emotional/propaganda instances suggest the goal is to shape opinion on the topic rather than present balanced facts.`
+  }
+
+  const articleType = article.articleType || 'article'
+  return `As an ${articleType}, this piece from ${publication} aims to frame the narrative around ${article.title?.split(' ').slice(0, 4).join(' ')}... Readers should consider what editorial position this framing serves.`
+}
+
+function generateBlindSpotsFromFindings(
+  article: ExtractedArticle,
+  contextAudit: { omissions: any[]; framing: any[] }
+): string {
+  const omissionCount = contextAudit.omissions?.length || 0
+  const framingCount = contextAudit.framing?.length || 0
+
+  if (omissionCount > 0) {
+    return `${omissionCount} significant omissions were detected. The article avoids discussing counter-arguments, alternative explanations, or perspectives that would complicate its narrative. Ask: what would someone on the other side of this issue say?`
+  }
+
+  return `The article's framing (${framingCount} issues detected) guides readers toward a specific conclusion while avoiding questions that might undermine its premise. Consider what information would change your interpretation.`
+}
+
+function generateUncomfortableTruth(article: ExtractedArticle, truthScore: number): string {
+  const topic = article.title?.split(' ').slice(0, 6).join(' ') || 'this topic'
+
+  if (truthScore < 40) {
+    return `The uncomfortable truth is that even poorly-argued pieces often tap into legitimate public concerns. The manipulation in this article exists because these techniques work on audiences already predisposed to agree. Both the article's approach AND the audience's susceptibility deserve scrutiny.`
+  }
+
+  return `Reality on ${topic}... is likely more nuanced than either this article's framing or its critics suggest. The drive for engagement and clicks incentivizes all media to simplify complex issues into digestible narratives that confirm existing beliefs.`
+}
+
+function generateKernelOfTruth(article: ExtractedArticle): string {
+  const topic = article.title?.split(' ').slice(2, 7).join(' ') || 'the subject matter'
+  return `Beneath the framing, there's likely a legitimate concern about ${topic} that deserves serious discussion. The question isn't whether the concern is valid, but whether this article addresses it honestly.`
+}
+
+function generateGuidance(article: ExtractedArticle, deceptionDetected: DeceptionInstance[]): string {
+  const deceptionTypes = [...new Set(deceptionDetected.map(d => d.type))].slice(0, 2)
+  const publication = article.publication || 'this source'
+
+  if (deceptionDetected.length > 3) {
+    return `Before sharing or acting on this article: (1) Search for coverage from outlets with opposing editorial positions, (2) Notice what emotional response you had—that's what the ${deceptionTypes.join('/')} techniques were designed to trigger, (3) Ask what ${publication} gains from you believing this narrative.`
+  }
+
+  return `Cross-reference the claims in this article with primary sources. Look for coverage from publications with different editorial stances. Pay attention to what questions this piece doesn't ask.`
 }
