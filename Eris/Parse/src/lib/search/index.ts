@@ -351,7 +351,7 @@ class SearchManager {
     BraveSearchProvider,  // Primary - reliable free tier
     BingSearchProvider,   // Secondary - requires paid API key
     DuckDuckGoProvider,   // Tertiary - often blocked by CAPTCHA
-    MockSearchProvider,   // Fallback - returns generic sources
+    // MockSearchProvider removed - no mock data in production
   ];
 
   // Simple in-memory cache to avoid duplicate API calls within same session
