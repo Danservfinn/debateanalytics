@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { runFullAnalysis } from "@/lib/orchestrator"
 import { prisma } from "@/lib/prisma"
+import { canUserAnalyze, deductForAnalysis } from "@/lib/credits-service"
 import type { AnalyzeResponse, ParseAnalysis } from "@/types"
 
 // Extend function timeout for LLM analysis (up to 60s on Pro, 300s on Enterprise)
@@ -47,8 +48,28 @@ export async function POST(request: NextRequest) {
 
     const userId = session.user.id
 
+    // Check if user has credits available
+    const creditCheck = await canUserAnalyze(userId)
+    if (!creditCheck.canAnalyze) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: creditCheck.reason || "Insufficient credits",
+          code: "INSUFFICIENT_CREDITS",
+        },
+        { status: 402 } // Payment Required
+      )
+    }
+
     // Run full analysis
     const analysis = await runFullAnalysis(url, userId)
+
+    // Deduct credits after successful analysis
+    const deductResult = await deductForAnalysis(userId, analysis.id)
+    if (!deductResult.success) {
+      console.error("Failed to deduct credits:", deductResult.error)
+      // Don't fail the request - analysis already completed
+    }
 
     // Save to database in background (don't block response)
     saveAnalysisToDatabase(analysis, userId).catch(error => {

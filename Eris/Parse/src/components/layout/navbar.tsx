@@ -11,10 +11,12 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { useSession, signOut } from "next-auth/react"
 import { Menu, X, Coins, History } from "lucide-react"
+import { useCredits } from "@/hooks/use-credits"
 
 export function Navbar() {
   const pathname = usePathname()
   const { data: session, status } = useSession()
+  const { balance, loading: creditsLoading, isSubscriber } = useCredits()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -55,6 +57,14 @@ export function Navbar() {
             >
               Pricing
             </Link>
+            <Link
+              href="/sources"
+              className={`nav-section transition-colors ${
+                pathname === "/sources" || pathname?.startsWith("/sources") ? "active" : ""
+              }`}
+            >
+              Sources
+            </Link>
             {session && (
               <>
                 <Link
@@ -84,12 +94,18 @@ export function Navbar() {
             ) : session ? (
               <div className="flex items-center gap-4">
                 {/* Credit Balance */}
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-muted/50 border border-border">
+                <Link
+                  href="/pricing"
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-muted/50 border border-border hover:bg-muted transition-colors"
+                >
                   <Coins className="h-4 w-4 text-primary" />
                   <span className="font-byline text-sm text-foreground">
-                    25
+                    {creditsLoading ? '...' : balance}
                   </span>
-                </div>
+                  {isSubscriber && (
+                    <span className="text-[10px] bg-primary/20 text-primary px-1 rounded">PRO</span>
+                  )}
+                </Link>
                 {/* User Info */}
                 <div className="flex items-center gap-3 px-3 py-1.5 border border-border">
                   <div className="w-7 h-7 bg-foreground text-background flex items-center justify-center">
@@ -131,10 +147,15 @@ export function Navbar() {
             {session && (
               <>
                 {/* Mobile Credit Balance */}
-                <div className="flex items-center gap-1 px-2 py-1 bg-muted/50 border border-border">
+                <Link
+                  href="/pricing"
+                  className="flex items-center gap-1 px-2 py-1 bg-muted/50 border border-border"
+                >
                   <Coins className="h-3.5 w-3.5 text-primary" />
-                  <span className="font-byline text-xs text-foreground">25</span>
-                </div>
+                  <span className="font-byline text-xs text-foreground">
+                    {creditsLoading ? '...' : balance}
+                  </span>
+                </Link>
                 <div className="w-8 h-8 bg-foreground text-background flex items-center justify-center">
                   <span className="text-xs font-bold">
                     {session.user?.name?.charAt(0).toUpperCase()}
@@ -182,6 +203,15 @@ export function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 PRICING
+              </Link>
+              <Link
+                href="/sources"
+                className={`py-3 px-2 font-byline transition-colors ${
+                  pathname === "/sources" || pathname?.startsWith("/sources") ? "text-primary bg-muted/50" : "text-foreground hover:bg-muted/30"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                SOURCES
               </Link>
               {session && (
                 <>
